@@ -1,0 +1,74 @@
+<!-- ADD PRODUCT -->
+        <div id="addProduct-section" class="content-section">
+            <div class="form-container">
+                <div class="form-title">
+                    <div>
+                        <h2><i class="fas fa-plus-circle"></i> Add Product</h2>
+                        <p>Add a new product to your store inventory</p>
+                    </div>
+                </div>
+                <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="add-product-layout">
+                        <div class="image-upload-card">
+                            <h4>Product Image</h4>
+                            <div class="image-preview-box" id="imgBox">
+                                <i class="fas fa-image"></i>
+                                <p>Upload Product Image</p>
+                            </div>
+                            <input type="file" name="picture" accept="image/*" onchange="var f=this.files[0];if(f){var r=new FileReader();r.onload=function(e){var b=document.getElementById('imgBox');b.innerHTML='<img src='+e.target.result+' style=width:100%;height:100%;object-fit:cover;border-radius:14px;>';};r.readAsDataURL(f);}">
+                        </div>
+                        <div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" name="product_name" placeholder="Fresh Cow Milk">
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="product_category">
+                                        <option>Select Category</option>
+                                        <option>Dairy</option>
+                                        <option>Vegetables</option>
+                                        <option>Fruits</option>
+                                        <option>Grocery</option>
+                                        <option>Bakery</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input type="number" name="product_price">
+                                </div>
+                                <div class="form-group">
+                                    <label>Stock Quantity</label>
+                                    <input type="number" name="stock_qty">
+                                </div>
+                                <div class="form-group">
+                                    <label>Discount %</label>
+                                    <input type="number" name="discount">
+                                </div>
+                                <div class="form-group">
+                                    <label>Badge</label>
+                                    <input type="text" name="badge_text" placeholder="Bestseller">
+                                </div>
+                                <div class="form-group">
+                                    <label>Weight</label>
+                                    <input type="text" name="weight_unit" placeholder="500g / 1L">
+                                </div>
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <input type="text" name="brand" placeholder="Amul">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea rows="4" name="description"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-save"></i> Create Product
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>

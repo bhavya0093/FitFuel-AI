@@ -1,0 +1,44 @@
+/* ── PROFILE PAGE ── */
+.pgc-page-header{display:flex;align-items:center;justify-content:space-between;padding:22px 32px 18px;}
+.pgc-page-header h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.10rem;font-weight:800;color:#0c4a6e;display:flex;align-items:center;gap:10px;}
+.pgc-page-header h2 i{color:#0ea5e9;}
+.pgc-card{margin:0 28px 28px;border-radius:24px;overflow:hidden;display:grid;grid-template-columns:280px 1fr;min-height:520px;box-shadow:0 20px 60px rgba(14,165,233,0.15),0 4px 20px rgba(6,182,212,0.10);border:1px solid rgba(255,255,255,0.60);}
+.pgc-left{background:linear-gradient(165deg,#0369a1 0%,#0284c7 30%,#0ea5e9 65%,#06b6d4 100%);display:flex;flex-direction:column;align-items:center;padding:44px 28px 36px;position:relative;overflow:hidden;}
+.pgc-left::before{content:'';position:absolute;top:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,0.08);pointer-events:none;}
+.pgc-left::after{content:'';position:absolute;bottom:-80px;right:-50px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,0.06);pointer-events:none;}
+.pgc-dots{position:absolute;inset:0;z-index:0;background-image:radial-gradient(circle,rgba(255,255,255,0.15) 1.2px,transparent 1.2px);background-size:20px 20px;pointer-events:none;}
+.pgc-avatar{position:relative;z-index:2;margin-bottom:18px;}
+.pgc-avatar img{width:100px;height:100px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.92);box-shadow:0 0 0 6px rgba(255,255,255,0.18),0 16px 40px rgba(0,0,0,0.22);}
+.pgc-avatar::after{content:'';position:absolute;bottom:5px;right:5px;width:18px;height:18px;border-radius:50%;background:#4ade80;border:3px solid white;box-shadow:0 2px 8px rgba(74,222,128,0.50);}
+.pgc-left-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.12rem;font-weight:900;color:#fff;text-align:center;margin-bottom:6px;position:relative;z-index:2;letter-spacing:-0.3px;}
+.pgc-left-role{font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:2px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.30);border-radius:20px;padding:4px 14px;position:relative;z-index:2;margin-bottom:30px;}
+.pgc-left-pills{width:100%;display:flex;flex-direction:column;gap:10px;position:relative;z-index:2;}
+.pgc-pill{display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,0.16);border:1.5px solid rgba(255,255,255,0.30);border-radius:14px;padding:12px 16px;transition:background 0.18s;}
+.pgc-pill:hover{background:rgba(255,255,255,0.26);}
+.pgc-pill-top{display:flex;align-items:center;gap:7px;}
+.pgc-pill i{font-size:0.78rem;color:rgba(255,255,255,0.75);flex-shrink:0;}
+.pgc-pill-label{font-size:0.62rem;font-weight:800;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:1.2px;}
+.pgc-pill-val{font-size:0.92rem;font-weight:700;color:#fff;padding-left:4px;}
+.pgc-left-btn{width:100%;padding:13px;border-radius:14px;background:rgba(255,255,255,0.20);border:1.5px solid rgba(255,255,255,0.40);color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:800;cursor:pointer;letter-spacing:0.4px;display:flex;align-items:center;justify-content:center;gap:8px;transition:0.20s;position:relative;z-index:2;margin-top:28px;text-decoration:none;}
+.pgc-left-btn:hover{background:rgba(255,255,255,0.32);transform:translateY(-2px);}
+.pgc-right{background:rgba(255,255,255,0.70);backdrop-filter:blur(32px) saturate(160%);display:flex;flex-direction:column;padding:0;}
+.pgc-right-top{padding:28px 36px 20px;border-bottom:1px solid rgba(14,165,233,0.10);background:rgba(255,255,255,0.50);}
+.pgc-right-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.10rem;font-weight:900;color:#0c4a6e;margin-bottom:3px;}
+.pgc-right-sub{font-size:0.76rem;font-weight:500;color:#94a3b8;}
+.pgc-details{padding:28px 36px;display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;align-content:start;}
+.pgc-detail-card{background:rgba(240,249,255,0.70);border:1.5px solid rgba(186,230,253,0.60);border-radius:16px;padding:16px 20px;transition:0.20s;}
+.pgc-detail-card:hover{background:rgba(224,242,254,0.85);border-color:rgba(14,165,233,0.30);transform:translateY(-2px);}
+.pgc-detail-card-label{font-size:0.58rem;font-weight:800;color:#0ea5e9;text-transform:uppercase;letter-spacing:1.3px;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+.pgc-detail-card-val{font-size:0.96rem;font-weight:700;color:#0c4a6e;}
+.pgc-form-area{padding:24px 36px 32px;flex:1;display:flex;flex-direction:column;}
+.pgc-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;margin-bottom:26px;}
+.pgc-form-grid .pgc-fg-full{grid-column:1/-1;}
+.pgc-fg label{display:block;font-size:0.59rem;font-weight:800;color:#0ea5e9;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;}
+.pgc-fg input{width:100%;background:rgba(240,249,255,0.80);border:1.5px solid rgba(186,230,253,0.80);border-radius:12px;padding:12px 16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:600;color:#0c4a6e;outline:none;transition:all 0.18s;}
+.pgc-fg input:focus{border-color:rgba(14,165,233,0.60);background:rgba(255,255,255,0.90);box-shadow:0 0 0 3px rgba(14,165,233,0.12);}
+.pgc-fg input[readonly]{opacity:0.48;cursor:not-allowed;}
+.pgc-fg input[type="file"]{padding:10px 14px;cursor:pointer;color:#0369a1;}
+.pgc-save-btn{width:100%;padding:14px;background:linear-gradient(135deg,#0ea5e9 0%,#0284c7 100%);border:none;border-radius:14px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.90rem;font-weight:800;cursor:pointer;letter-spacing:0.4px;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 6px 24px rgba(14,165,233,0.38);transition:0.20s;}
+.pgc-save-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(14,165,233,0.48);}
+.pgc-back-btn{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.80);border:1.5px solid rgba(14,165,233,0.20);border-radius:12px;padding:9px 18px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:700;color:#0369a1;cursor:pointer;transition:0.18s;text-decoration:none;}
+.pgc-back-btn:hover{background:rgba(224,242,254,0.90);border-color:rgba(14,165,233,0.40);}

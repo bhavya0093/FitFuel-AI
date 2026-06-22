@@ -1,0 +1,23 @@
+<!-- ORDERS -->
+        <div id="orders-section" class="content-section">
+            <div class="form-container">
+                <div class="form-title">
+                    <h2><i class="fas fa-shopping-cart" style="color:#667eea;"></i> Orders Management</h2>
+                    <select style="padding:10px;border-radius:8px;border:1.5px solid rgba(59,130,246,0.14);background:rgba(255,255,255,0.60);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;color:var(--txt);outline:none;">
+                        <option>All Orders</option><option>Pending</option><option>Processing</option><option>Delivered</option>
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody>
+                            <tr><td>#ORD001</td><td>John Doe</td><td>2024-01-15</td><td>3 items</td><td>Rs.1,234</td><td><span class="status-badge status-delivered">Delivered</span></td><td><div class="table-actions"><button class="table-action-btn edit-btn"><i class="fas fa-edit"></i> Edit</button></div></td></tr>
+                            <tr><td>#ORD002</td><td>Jane Smith</td><td>2024-01-16</td><td>5 items</td><td>Rs.2,345</td><td><span class="status-badge status-processing">Processing</span></td><td><div class="table-actions"><button class="table-action-btn edit-btn"><i class="fas fa-edit"></i> Edit</button></div></td></tr>
+                            <tr><td>#ORD003</td><td>Bob Wilson</td><td>2024-01-17</td><td>1 item</td><td>Rs.58</td><td><span class="status-badge status-pending">Pending</span></td><td><div class="table-actions"><button class="table-action-btn edit-btn"><i class="fas fa-edit"></i> Edit</button></div></td></tr>
+                            <tr><td>#ORD004</td><td>Alice Brown</td><td>2024-01-18</td><td>2 items</td><td>Rs.120</td><td><span class="status-badge status-delivered">Delivered</span></td><td><div class="table-actions"><button class="table-action-btn edit-btn"><i class="fas fa-edit"></i> Edit</button></div></td></tr>
+                            <tr><td>#ORD005</td><td>Charlie Davis</td><td>2024-01-19</td><td>4 items</td><td>Rs.399</td><td><span class="status-badge status-processing">Processing</span></td><td><div class="table-actions"><button class="table-action-btn edit-btn"><i class="fas fa-edit"></i> Edit</button></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

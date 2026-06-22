@@ -1,0 +1,88 @@
+<!-- EDIT PAGE -->
+<div id="page-edit" class="page">
+<div class="iwrap">
+  <div class="pgnav"><label class="back-btn" for="nav-profile"><i class="fas fa-arrow-left"></i> Back to Profile</label><div class="pg-ttl">Edit Profile</div></div>
+  <div class="egrid">
+    <div>
+      <div class="fc g1 s1" style="text-align:center;">
+        <div style="width:88px;height:88px;border-radius:50%;margin:0 auto 14px;overflow:hidden;border:3px solid rgba(255,255,255,.88);box-shadow:0 8px 22px rgba(8,145,178,.25);"><img src="{{cid.pic.url}}" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px;">{{cid.firstname}}</div>
+        <div style="font-size:.7rem;color:var(--mist);margin-bottom:14px;">Tap to change photo</div>
+        <label class="change-photo-btn" for="photo-upload" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.72);border:1.5px solid rgba(255,255,255,.92);color:var(--mist);padding:8px 18px;border-radius:50px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;"><i class="fas fa-camera"></i> Change Photo</label>
+  
+      </div>
+      <div class="psb g1 s1" style="border-radius:var(--rl);">
+        <div class="pnav" style="padding:14px;">
+          <label for="nav-profile" class="pni"><i class="fas fa-user"></i> Personal Info</label>
+          <a href="#" class="pni on"><i class="fas fa-pen"></i> Edit Profile</a>
+          <a href="#" class="pni"><i class="fas fa-box"></i> My Orders</a>
+          <a href="#" class="pni"><i class="fas fa-map-marker-alt"></i> Addresses</a>
+          <a href="#" class="pni"><i class="fas fa-wallet"></i> Wallet</a>
+          <a href="#" class="pni"><i class="fas fa-shield-alt"></i> Security</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
+{% csrf_token %}
+
+<input type="file" name="pic" id="photo-upload" accept="image/*" style="display:none;">
+
+<div class="fc g1 s1">
+  <div class="fc-t">
+    <i class="fas fa-user"></i> Personal Details
+  </div>
+
+  <div class="fg">
+
+    <div class="fgrp">
+      <label>First Name *</label>
+      <input class="finp" name="firstname" value="{{cid.firstname}}">
+    </div>
+
+    <div class="fgrp">
+      <label>Last Name *</label>
+      <input class="finp" name="lastname" value="{{cid.lastname}}">
+    </div>
+
+    <div class="fgrp">
+      <label>Email *</label>
+      <input class="finp" type="email" name="email" value="{{uid.email}}" readonly>
+    </div>
+
+    <div class="fgrp">
+      <label>Phone *</label>
+      <input class="finp" type="tel" name="contectno" value="{{cid.contectno}}">
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+
+    <button class="sbtn save-trigger" type="submit">
+      <i class="fas fa-check"></i> Save Changes
+    </button>
+
+    <label class="cbtn" for="nav-profile">
+      <i class="fas fa-times"></i> Cancel
+    </label>
+
+  </div>
+
+</div>
+
+</form>
+      <div class="fc g1 s1"><div class="fc-t"><i class="fas fa-map-marker-alt"></i> Home Address</div>
+        <div class="fg">
+          <div class="fgrp sp2"><label>Flat / Building *</label><input class="finp" value="B-204, Sunshine Apartments"></div>
+          <div class="fgrp sp2"><label>Street / Area</label><input class="finp" value="Navrangpura"></div>
+          <div class="fgrp"><label>City *</label><input class="finp" value="Ahmedabad"></div>
+          <div class="fgrp"><label>State *</label><select class="finp"><option>Gujarat</option><option>Maharashtra</option><option>Delhi</option><option>Rajasthan</option></select></div>
+          <div class="fgrp"><label>PIN Code *</label><input class="finp" value="380009"></div>
+          <div class="fgrp"><label>Landmark</label><input class="finp" placeholder="Near City Mall"></div>
+        </div>
+      </div>
+      <div class="dzone" style="margin-bottom:18px;"><h4><i class="fas fa-triangle-exclamation"></i> Danger Zone</h4><p>Deleting your account will permanently remove all your orders, addresses, wishlist and wallet balance. This cannot be undone.</p><button class="delbtn"><i class="fas fa-trash-alt"></i> Delete My Account</button></div>
+    </div>
+  </div>
+</div>
+</div>

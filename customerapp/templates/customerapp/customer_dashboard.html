@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickBasket</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Included Separated CSS files -->
+<link rel="stylesheet" href="{% static 'customerapp/css/base.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/home.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/cart.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/edit.css' %}">
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="blob b5"></div>
+<div class="grain"></div>
+
+<!-- ═══ CSS-ONLY NAVIGATION SYSTEM using hidden radio inputs ═══ -->
+<!-- These radio buttons control which page is visible -->
+<input type="radio" name="page" id="nav-home" class="page-radio" checked>
+<input type="radio" name="page" id="nav-cart" class="page-radio">
+<input type="radio" name="page" id="nav-profile" class="page-radio">
+<input type="radio" name="page" id="nav-edit" class="page-radio">
+
+<!-- ═══ CATEGORY FILTER radios ═══ -->
+<input type="radio" name="cat" id="cat-all"     class="cat-radio" checked>
+<input type="radio" name="cat" id="cat-dairy"   class="cat-radio">
+<input type="radio" name="cat" id="cat-veg"     class="cat-radio">
+<input type="radio" name="cat" id="cat-fruits"  class="cat-radio">
+<input type="radio" name="cat" id="cat-grocery" class="cat-radio">
+<input type="radio" name="cat" id="cat-bakery"  class="cat-radio">
+
+<!-- HEADER -->
+<header>
+  <label class="logo" for="nav-home">
+    <div class="logo-icon">🛒</div>
+    <div><div class="logo-name">QuickBasket</div><div class="logo-tag">Fresh · Fast · Always</div></div>
+  </label>
+  <div class="hsearch"><i class="fas fa-search"></i><span>Search groceries, fruits, dairy...</span></div>
+  <div class="hright">
+    <div class="dbadge"><i class="fas fa-bolt"></i> 10 min delivery</div>
+    <a href="{% url 'view_cart' %}" style="text-decoration: none;" class="cart-btn" for="nav-cart"><i class="fas fa-basket-shopping"></i> My Cart</a>
+    <div class="ubtn-wrap">
+      <div class="ubtn">
+        <div class="uav">
+          {% if cid.pic %}
+          <img src="{{cid.pic.url}}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+          {% else %}
+          RK
+          {% endif %}
+          </div>
+        <span class="unm">{{cid.firstname}} {{cid.lastname}}</span>
+        <i class="fas fa-chevron-down" style="font-size:.6rem;color:var(--mist);"></i>
+      </div>
+      <div class="profile-menu">
+        <label for="nav-profile" class="pm-item">👤 View Profile</label>
+        <a href="{% url 'logout' %}" class="pm-item logout">🚪 Logout</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- INCLUDE SEPARATED FUNCTIONALITIES -->
+{% include 'customerapp/home.html' %}
+{% include 'customerapp/cart.html' %}
+{% include 'customerapp/profile.html' %}
+{% include 'customerapp/edit.html' %}
+
+<footer>© 2026 <b>QuickBasket</b> · Ice Blue Edition · Fresh groceries in 10 minutes 🧊</footer>
+</body>
+</html>

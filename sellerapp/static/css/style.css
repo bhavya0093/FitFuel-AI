@@ -1,0 +1,187 @@
+/* ===== HARD RESET (REMOVE ALL BACKGROUND ARTIFACTS) ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html, body {
+height: 100%;
+background: #ffe082 !important; /* solid lite yellow */
+background-image: none !important; /* REMOVE dots/patterns */
+overflow: hidden;
+font-family: 'Poppins', sans-serif;
+}
+
+/* FORCE REMOVE ANY OLD EFFECT LAYERS */
+body::before,
+body::after {
+display: none !important;
+content: none !important;
+}
+
+/* CENTER LAYOUT */
+body {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+/* ===== REGISTER CARD (COMPACT & PREMIUM) ===== */
+.register-card {
+width: 100%;
+max-width: 420px;
+background: #fffef5;
+padding: 1.6rem 1.8rem;
+border-radius: 24px;
+border: 2px solid rgba(255, 179, 0, 0.25);
+box-shadow:
+0 20px 40px rgba(255, 152, 0, 0.25),
+0 8px 20px rgba(0, 0, 0, 0.08);
+transition: 0.35s ease;
+}
+
+/* Smooth 3D Hover */
+.register-card:hover {
+transform: translateY(-6px) scale(1.01);
+box-shadow:
+0 30px 60px rgba(255, 140, 0, 0.35),
+0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* HEADER */
+.form-header {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 1.2rem;
+}
+
+.form-header i {
+font-size: 1.8rem;
+color: #ff8f00;
+background: #fff3cd;
+padding: 10px;
+border-radius: 14px;
+}
+
+.form-header h2 {
+font-size: 1.6rem;
+font-weight: 700;
+color: #e65100;
+border-left: 4px solid #ff9800;
+padding-left: 8px;
+}
+
+/* ROLE DROPDOWN */
+.role-group {
+margin-bottom: 1.1rem;
+}
+
+.role-label {
+font-size: 0.85rem;
+font-weight: 600;
+color: #7a3e00;
+margin-bottom: 5px;
+display: block;
+}
+
+.role-select {
+width: 100%;
+padding: 0.7rem;
+border-radius: 12px;
+border: 2px solid #ffe082;
+background: #fffdf5;
+font-weight: 600;
+color: #5d3a00;
+transition: 0.3s;
+}
+
+.role-select:focus {
+outline: none;
+border-color: #ff9800;
+}
+
+/* INPUT ROW */
+.name-phone-row {
+display: flex;
+gap: 10px;
+}
+
+/* INPUT FIELDS */
+.input-field {
+margin-bottom: 0.9rem;
+}
+
+.input-field label {
+font-size: 0.8rem;
+font-weight: 600;
+color: #7a3e00;
+margin-bottom: 3px;
+display: block;
+}
+
+.input-field input {
+width: 100%;
+padding: 0.65rem;
+border-radius: 12px;
+border: 2px solid #ffe082;
+background: #fffdf5;
+font-size: 0.85rem;
+transition: 0.25s;
+}
+
+.input-field input:focus {
+outline: none;
+border-color: #ff9800;
+box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.15);
+}
+
+/* BUTTON */
+.register-btn {
+width: 100%;
+padding: 0.85rem;
+border-radius: 16px;
+border: none;
+background: linear-gradient(135deg, #ff9800, #ff5722);
+color: white;
+font-size: 1rem;
+font-weight: 700;
+cursor: pointer;
+margin-top: 0.7rem;
+transition: 0.3s;
+box-shadow: 0 12px 25px rgba(255, 87, 34, 0.35);
+}
+
+.register-btn:hover {
+transform: translateY(-3px);
+background: linear-gradient(135deg, #ff6f00, #ff3d00);
+}
+
+/* LOGIN TEXT */
+.login-hint {
+text-align: center;
+margin-top: 1rem;
+font-size: 0.8rem;
+color: #9a5a00;
+border-top: 1px dashed #ffd54f;
+padding-top: 0.8rem;
+}
+
+.login-hint a {
+color: #ff6f00;
+font-weight: 600;
+text-decoration: none;
+}
+
+/* MOBILE FIX */
+@media (max-width: 480px) {
+.register-card {
+max-width: 95%;
+padding: 1.3rem;
+}
+.name-phone-row {
+flex-direction: column;
+}
+}

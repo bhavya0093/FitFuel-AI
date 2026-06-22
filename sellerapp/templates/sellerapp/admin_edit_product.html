@@ -1,0 +1,83 @@
+<!-- EDIT PRODUCT -->
+        {% for p in pid %}
+        <div id="product-edit-{{p.id}}" class="content-section">
+            <div class="pd-header">
+                <h2><i class="fas fa-edit" style="color:#0ea5e9;"></i> Edit Product</h2>
+                <label class="pd-back-btn" for="nav-product-{{p.id}}">
+                    <i class="fas fa-arrow-left"></i> Back
+                </label>
+            </div>
+            <div class="ep-layout">
+                <div class="ep-left">
+                    <div style="position:absolute;bottom:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(59,130,246,0.08);"></div>
+                    <img src="{{p.picture.url}}" style="width:100%;height:200px;object-fit:cover;border-radius:16px;border:3px solid rgba(255,255,255,0.90);box-shadow:0 12px 32px rgba(59,130,246,0.20);" alt="Preview">
+                    <label style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:10px;background:rgba(255,255,255,0.70);border:1.5px dashed rgba(14,165,233,0.50);border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.80rem;font-weight:700;color:#0369a1;cursor:pointer;margin-top:6px;">
+                        <i class="fas fa-camera"></i> Change Image
+                        <input type="file" name="picture" accept="image/*" style="display:none;">
+                                        </label>
+                    <div style="font-size:0.72rem;font-weight:600;color:#60a5fa;text-align:center;position:relative;z-index:2;"><i class="fas fa-info-circle"></i> Live preview</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;color:#0c4a6e;text-align:center;position:relative;z-index:2;">{{p.product_name}}</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#1d4ed8,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;position:relative;z-index:2;">Rs.{{p.product_price}}</div>
+                    <div style="font-size:0.68rem;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:1px;background:rgba(219,234,254,0.80);padding:4px 14px;border-radius:20px;border:1px solid rgba(59,130,246,0.20);position:relative;z-index:2;">{{p.product_category}}</div>
+                </div>
+                <div class="ep-right">
+                    <div style="margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid rgba(14,165,233,0.10);">
+                        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.05rem;font-weight:900;color:#0c4a6e;margin-bottom:3px;">Edit Product Details</div>
+                        <div style="font-size:0.76rem;font-weight:500;color:#94a3b8;">Update the fields below and save</div>
+                    </div>
+
+                    {% if p %}
+                    <form method="POST" action="{% url 'edit_product' p.id %}" enctype="multipart/form-data">
+                    {% endif %}
+                        {% csrf_token %}
+                        <div class="ep-grid">
+                            <div class="ep-field">
+                                <label class="ep-label">Product Name</label>
+                                <input class="ep-input" type="text" name="product_name" value="{{p.product_name}}">
+                            </div>
+                            <div class="ep-field">
+                                <label class="ep-label">Category</label>
+                                <select class="ep-input" name="product_category">
+                                    <option {% if p.product_category == "Dairy" %}selected{% endif %}>Dairy</option>
+                                    <option {% if p.product_category == "Vegetables" %}selected{% endif %}>Vegetables</option>
+                                    <option {% if p.product_category == "Fruits" %}selected{% endif %}>Fruits</option>
+                                    <option {% if p.product_category == "Grocery" %}selected{% endif %}>Grocery</option>
+                                    <option {% if p.product_category == "Bakery" %}selected{% endif %}>Bakery</option>
+                                </select>
+                            </div>
+                            <div class="ep-field">
+                                <label class="ep-label">Price</label>
+                                <input class="ep-input" type="number" name="product_price" value="{{p.product_price}}">
+                            </div>
+                            <div class="ep-field">
+                                <label class="ep-label">Stock Quantity</label>
+                                <input class="ep-input" type="number" name="stock_qty" value="{{p.stock_qty}}">
+                            </div>
+                            <div class="ep-field">
+                                <label class="ep-label">Discount %</label>
+                                <input class="ep-input" type="number" name="discount" value="{{p.discount}}">
+                            </div>
+                            <div class="ep-field">
+                                <label class="ep-label">Badge</label>
+                                <input class="ep-input" type="text" name="badge_text" value="{{p.badge_text}}">
+                            </div>
+                            <div class="ep-field">
+                                <label class="ep-label">Weight / Unit</label>
+                                <input class="ep-input" type="text" name="weight_unit" value="{{p.weight_unit}}">
+                            </div>
+                            <div class="ep-field ep-full">
+                                <label class="ep-label">Description</label>
+                                <textarea class="ep-input" rows="3" name="description">{{p.description}}</textarea>
+                            </div>
+                        </div>
+                        <div style="display:flex;gap:12px;">
+                            <button type="submit" class="ep-save-btn">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                            <label class="ep-cancel-btn" for="nav-product-{{p.id}}">Cancel</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}

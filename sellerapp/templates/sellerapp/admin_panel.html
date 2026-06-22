@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel · QuickBasket</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_products.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_settings.css' %}">
+
+
+    <style>
+    {% for p in pid %}
+    #nav-product-{{p.id}}:checked ~ .container .main-content #product-detail-{{p.id}} {
+        display: block;
+    }
+    #nav-edit-{{p.id}}:checked ~ .container .main-content #product-edit-{{p.id}} {
+        display: block;
+    }
+    {% endfor %}
+    </style>
+</head>
+<body>
+
+<input type="radio" name="nav" id="nav-dashboard"      class="nav-radio" checked>
+<input type="radio" name="nav" id="nav-allProducts"    class="nav-radio">
+<input type="radio" name="nav" id="nav-addProduct"     class="nav-radio">
+<input type="radio" name="nav" id="nav-categories"     class="nav-radio">
+<input type="radio" name="nav" id="nav-addCategory"    class="nav-radio">
+<input type="radio" name="nav" id="nav-orders"         class="nav-radio">
+<input type="radio" name="nav" id="nav-users"          class="nav-radio">
+<input type="radio" name="nav" id="nav-payments"       class="nav-radio">
+<input type="radio" name="nav" id="nav-settings"       class="nav-radio">
+<input type="radio" name="nav" id="nav-adminProfile"   class="nav-radio">
+<input type="radio" name="nav" id="nav-editProfile"    class="nav-radio">
+
+{% for p in pid %}
+<input type="radio" name="nav" id="nav-product-{{p.id}}"  class="nav-radio">
+<input type="radio" name="nav" id="nav-edit-{{p.id}}"     class="nav-radio">
+{% endfor %}
+
+<input type="checkbox" id="submenu-toggle" class="nav-check">
+
+<div class="container">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-store"></i>
+            <h2>QuickBasket</h2>
+            <p>Admin Panel</p>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <label class="nav-link" for="nav-dashboard">
+                    <i class="fas fa-home"></i> Dashboard
+                </label>
+            </li>
+            <li class="nav-item">
+                <label class="nav-link" for="submenu-toggle">
+                    <i class="fas fa-box"></i> Products
+                    <i class="fas fa-chevron-down submenu-chevron"></i>
+                </label>
+                <ul class="submenu" id="productsSubmenu">
+                    <li class="submenu-item">
+                        <label class="submenu-link" for="nav-allProducts">
+                            <i class="fas fa-eye"></i> View Products
+                        </label>
+                    </li>
+                    <li class="submenu-item">
+                        <label class="submenu-link" for="nav-addProduct">
+                            <i class="fas fa-plus-circle"></i> Add Product
+                        </label>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <label class="nav-link" for="nav-categories">
+                    <i class="fas fa-tags"></i> Categories
+                </label>
+            </li>
+            <li class="nav-item">
+                <label class="nav-link" for="nav-orders">
+                    <i class="fas fa-shopping-cart"></i> Orders
+                </label>
+            </li>
+            <li class="nav-item">
+                <label class="nav-link" for="nav-users">
+                    <i class="fas fa-users"></i> Users
+                </label>
+            </li>
+            <li class="nav-item">
+                <label class="nav-link" for="nav-payments">
+                    <i class="fas fa-credit-card"></i> Payments
+                </label>
+            </li>
+            <li class="nav-item">
+                <label class="nav-link" for="nav-settings">
+                    <i class="fas fa-cog"></i> Settings
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="top-bar">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="admin-info">
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span>3</span>
+                </div>
+                <details class="profile-wrap">
+                    <summary class="admin-profile">
+                        <div class="admin-avatar">
+                            <img src="{{sid.pic.url}}" class="top-profile-img" alt="Admin">
+                        </div>
+                        <div class="admin-name">
+                            <p style="font-weight:600;">{{sid.firstname}} {{sid.lastname}}</p>
+                            <p class="admin-sub">Seller</p>
+                        </div>
+                    </summary>
+                    <div class="profile-dropdown">
+                        <label class="dropdown-item" for="nav-adminProfile">
+                            <i class="fas fa-user"></i> View Profile
+                        </label>
+                        <a class="logout-btn" href="{% url 'logout' %}">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        {% include 'sellerapp/admin_dashboard.html' %}
+
+        {% include 'sellerapp/admin_add_product.html' %}
+
+        {% include 'sellerapp/admin_view_products.html' %}
+
+        {% include 'sellerapp/admin_product_detail.html' %}
+
+        {% include 'sellerapp/admin_edit_product.html' %}
+
+        {% include 'sellerapp/admin_profile.html' %}
+
+        {% include 'sellerapp/admin_edit_profile.html' %}
+
+        {% include 'sellerapp/admin_categories.html' %}
+
+        {% include 'sellerapp/admin_add_category.html' %}
+
+        {% include 'sellerapp/admin_orders.html' %}
+
+        {% include 'sellerapp/admin_users.html' %}
+
+        {% include 'sellerapp/admin_payments.html' %}
+
+        {% include 'sellerapp/admin_settings.html' %}
+
+    </div>
+</div>
+
+</body>
+</html>

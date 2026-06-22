@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+
+            <!-- Badge -->
+            <div class="badge-secure">
+                <span class="badge-dot"></span>
+                Secure Portal
+            </div>
+
+            <!-- Title -->
+            <div class="login-title">Welcome back 👋</div>
+            <div class="login-sub">Sign in to your account to continue</div>
+
+            <!-- Success Message -->
+            {% if s_msg %}
+            <div class="alert-success">{{ s_msg }}</div>
+            {% endif %}
+
+            <!-- Form -->
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+
+                <!-- Email -->
+                <div class="input-field">
+                    <label>
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-at"></i></span>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="john.doe@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="input-field">
+                    <label>
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="fas fa-key"></i></span>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Remember + Forgot -->
+                <div class="meta-row">
+                    <label class="remember-label">
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+                    <a href="{% url 'forgot_password' %}" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <!-- Submit -->
+                <input type="submit" class="login-btn" value="Log In →">
+
+                <!-- Footer -->
+                <div class="register-hint">
+                    Don't have an account?
+                    <a href="{% url 'register' %}">Register here</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

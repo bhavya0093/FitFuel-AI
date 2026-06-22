@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment</title>
+  <link rel="stylesheet" href="{% static 'customerapp/css/checkout.css' %}">
+</head>
+<body>
+
+<div class="cwrap">
+
+  <div class="pgnav">
+    <a href="/checkout/" class="back-btn">&#8592; Back to Address</a>
+    <div class="pg-ttl">Payment 💳</div>
+  </div>
+
+  <form method="POST" action="/place_order/">
+    {% csrf_token %}
+    <div class="checkout-layout">
+
+      <!-- LEFT SIDE - PAYMENT -->
+      <div class="left-col">
+        <div class="section-card">
+          <div class="section-head">
+            <div class="section-num">2</div>
+            <div class="section-title">Payment Method</div>
+          </div>
+
+          <div class="pay-options">
+
+            <!-- UPI -->
+            <div class="pay-card-wrap {% if request.GET.pay == 'upi' or not request.GET.pay %}pay-selected{% endif %}">
+              <a href="?pay=upi" class="pay-row {% if request.GET.pay == 'upi' or not request.GET.pay %}pay-active{% endif %}">
+                <div class="pay-icon upi-icon">UPI</div>
+                <div class="pay-info">
+                  <div class="pay-name">UPI Payment</div>
+                  <div class="pay-desc">GPay, PhonePe, Paytm, BHIM</div>
+                </div>
+                <div class="pay-check {% if request.GET.pay == 'upi' or not request.GET.pay %}checked{% endif %}"></div>
+              </a>
+              {% if request.GET.pay == 'upi' or not request.GET.pay %}
+              <div class="pay-detail-box">
+                <label class="form-label">UPI ID</label>
+                <input type="text" name="upi_id" class="form-input" placeholder="Enter UPI ID (e.g. name@upi)" />
+              </div>
+              {% endif %}
+              <div class="pay-option-footer">
+                <a href="?pay=upi" class="use-btn {% if request.GET.pay == 'upi' or not request.GET.pay %}use-btn-active{% endif %}">
+                  {% if request.GET.pay == 'upi' or not request.GET.pay %}✓ Using UPI{% else %}Use UPI{% endif %}
+                </a>
+              </div>
+            </div>
+
+            <!-- CREDIT/DEBIT CARD -->
+            <div class="pay-card-wrap {% if request.GET.pay == 'card' %}pay-selected{% endif %}">
+              <a href="?pay=card" class="pay-row {% if request.GET.pay == 'card' %}pay-active{% endif %}">
+                <div class="pay-icon card-icon">CARD</div>
+                <div class="pay-info">
+                  <div class="pay-name">Credit / Debit Card</div>
+                  <div class="pay-desc">Visa, Mastercard, RuPay</div>
+                </div>
+                <div class="pay-check {% if request.GET.pay == 'card' %}checked{% endif %}"></div>
+              </a>
+              {% if request.GET.pay == 'card' %}
+              <div class="pay-detail-box">
+                <div class="form-grid">
+                  <div class="form-group full">
+                    <label class="form-label">Card Number</label>
+                    <input type="text" name="card_number" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19" />
+                  </div>
+                  <div class="form-group full">
+                    <label class="form-label">Cardholder Name</label>
+                    <input type="text" name="card_name" class="form-input" placeholder="Name on card" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Expiry</label>
+                    <input type="text" name="expiry" class="form-input" placeholder="MM / YY" maxlength="7" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CVV</label>
+                    <input type="password" name="cvv" class="form-input" placeholder="•••" maxlength="3" />
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+              <div class="pay-option-footer">
+                <a href="?pay=card" class="use-btn {% if request.GET.pay == 'card' %}use-btn-active{% endif %}">
+                  {% if request.GET.pay == 'card' %}✓ Using Card{% else %}Use Card{% endif %}
+                </a>
+              </div>
+            </div>
+
+            <!-- CASH ON DELIVERY -->
+            <div class="pay-card-wrap {% if request.GET.pay == 'cod' %}pay-selected{% endif %}">
+              <a href="?pay=cod" class="pay-row {% if request.GET.pay == 'cod' %}pay-active{% endif %}">
+                <div class="pay-icon cod-icon">&#8377;</div>
+                <div class="pay-info">
+                  <div class="pay-name">Cash on Delivery</div>
+                  <div class="pay-desc">Pay when order arrives</div>
+                </div>
+                <div class="pay-check {% if request.GET.pay == 'cod' %}checked{% endif %}"></div>
+              </a>
+              {% if request.GET.pay == 'cod' %}
+              <div class="pay-detail-box">
+                <div class="cod-note">
+                  💵 Please keep exact change ready. Our delivery partner will collect payment at your doorstep.
+                </div>
+              </div>
+              {% endif %}
+              <div class="pay-option-footer">
+                <a href="?pay=cod" class="use-btn {% if request.GET.pay == 'cod' %}use-btn-active{% endif %}">
+                  {% if request.GET.pay == 'cod' %}✓ Using COD{% else %}Use COD{% endif %}
+                </a>
+              </div>
+            </div>
+
+            <input type="hidden" name="payment" value="{{ request.GET.pay|default:'upi' }}" />
+
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE - ORDER SUMMARY -->
+      <div class="right-col">
+        <div class="summary-box">
+          <div class="summary-title">Order Summary</div>
+
+          <!-- DUMMY ITEMS — Django ka loop yahan lagana -->
+          <div class="order-items">
+            <div class="order-item">
+              <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=80&q=80" alt="Bananas" class="order-item-img"/>
+              <div class="order-item-info">
+                <div class="order-item-name">Organic Bananas</div>
+                <div class="order-item-qty">Qty: 2</div>
+              </div>
+              <div class="order-item-price">&#8377;98</div>
+            </div>
+            <div class="order-item">
+              <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=80&q=80" alt="Milk" class="order-item-img"/>
+              <div class="order-item-info">
+                <div class="order-item-name">Whole Milk</div>
+                <div class="order-item-qty">Qty: 1</div>
+              </div>
+              <div class="order-item-price">&#8377;68</div>
+            </div>
+          </div>
+
+          <hr class="summary-hr"/>
+          <div class="summary-row"><span>Subtotal</span><span>&#8377;1700</span></div>
+          <div class="summary-row"><span>Discount <span class="disc-badge">WELCOME10</span></span><span class="green">-&#8377;65</span></div>
+          <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
+          <hr class="summary-hr"/>
+          <div class="total-row"><span>Total</span><span>&#8377;1635</span></div>
+
+          <button type="submit" class="place-order-btn">Place Order 🎉</button>
+          <div class="secure-note">🔒 100% Secure Checkout</div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+</div>
+</body>
+</html>

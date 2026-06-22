@@ -1,0 +1,17 @@
+/* ── STATS GRID ── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px;}
+.stat-card{border-radius:var(--r3);padding:22px 20px;display:flex;align-items:center;gap:16px;position:relative;overflow:hidden;transition:var(--tb);animation:popIn 0.50s var(--ease) both;cursor:default;border:1px solid rgba(255,255,255,0.30);color:#fff;}
+.stat-card:nth-child(1){animation-delay:0.04s;background:linear-gradient(135deg,#3b82f6 0%,#06b6d4 100%);box-shadow:0 12px 40px rgba(59,130,246,0.42);}
+.stat-card:nth-child(2){animation-delay:0.10s;background:linear-gradient(135deg,#0ea5e9 0%,#22d3ee 100%);box-shadow:0 12px 40px rgba(14,165,233,0.42);}
+.stat-card:nth-child(3){animation-delay:0.16s;background:linear-gradient(135deg,#6366f1 0%,#3b82f6 100%);box-shadow:0 12px 40px rgba(99,102,241,0.40);}
+.stat-card:nth-child(4){animation-delay:0.22s;background:linear-gradient(135deg,#22d3ee 0%,#10b981 100%);box-shadow:0 12px 40px rgba(34,211,238,0.40);}
+.stat-card::before{content:'';position:absolute;right:-28px;bottom:-28px;width:115px;height:115px;border-radius:50%;background:rgba(255,255,255,0.12);}
+.stat-card::after{content:'';position:absolute;right:18px;bottom:-52px;width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,0.08);}
+.stat-card:hover{transform:translateY(-6px) scale(1.025);}
+.stat-icon{width:54px;height:54px;border-radius:14px;background:rgba(255,255,255,0.22);border:1.5px solid rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;color:#fff;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,0.10),inset 0 1px 0 rgba(255,255,255,0.30);position:relative;z-index:1;}
+.stat-info{position:relative;z-index:1;}
+.stat-info h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.1rem;font-weight:900;color:#fff;line-height:1;margin-bottom:6px;letter-spacing:-1.5px;text-shadow:0 2px 12px rgba(0,0,0,0.12);}
+.stat-info p{font-size:0.73rem;color:rgba(255,255,255,0.82);font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+
+@keyframes popIn{from{opacity:0;transform:translateY(22px) scale(0.95);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}

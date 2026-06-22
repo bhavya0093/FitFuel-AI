@@ -1,0 +1,76 @@
+<!-- EDIT PROFILE -->
+        <div id="editProfile-section" class="content-section">
+            <div style="padding:0;">
+                <div class="pgc-page-header">
+                    <h2><i class="fas fa-user-edit"></i> Edit Profile</h2>
+                    <label class="pgc-back-btn" for="nav-adminProfile">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </label>
+                </div>
+                <div class="pgc-card">
+                    <div class="pgc-left">
+                        <div class="pgc-dots"></div>
+                        <div class="pgc-avatar">
+                            <img src="{{sid.pic.url}}" id="profilePreview" alt="Avatar">
+                        </div>
+                        <div class="pgc-left-name">{{sid.firstname}} {{sid.lastname}}</div>
+                        <div class="pgc-left-role">Seller Account</div>
+                        <div class="pgc-left-pills">
+                            <div class="pgc-pill">
+                                <i class="fas fa-envelope"></i>
+                                <span class="pgc-pill-label">Email</span>
+                                <span class="pgc-pill-val" style="font-size:0.74rem;">{{uid.email}}</span>
+                            </div>
+                            <div class="pgc-pill">
+                                <i class="fas fa-store"></i>
+                                <span class="pgc-pill-label">Store</span>
+                                <span class="pgc-pill-val">{{sid.seller_store_name}}</span>
+                            </div>
+                        </div>
+                        <div style="position:relative;z-index:2;margin-top:20px;font-size:0.68rem;color:rgba(255,255,255,0.60);text-align:center;">
+                            <i class="fas fa-camera"></i> Click avatar to change photo
+                        </div>
+                    </div>
+                    <div class="pgc-right">
+                        <div class="pgc-right-top">
+                            <div class="pgc-right-title">Update Information</div>
+                            <div class="pgc-right-sub">Make changes to your profile below</div>
+                        </div>
+                        <form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data" style="flex:1;display:flex;flex-direction:column;">
+                            {% csrf_token %}
+                            <div class="pgc-form-area">
+                                <div class="pgc-form-grid">
+                                    <div class="pgc-fg">
+                                        <label>First Name</label>
+                                        <input type="text" name="firstname" value="{{sid.firstname}}" placeholder="First name">
+                                    </div>
+                                    <div class="pgc-fg">
+                                        <label>Last Name</label>
+                                        <input type="text" name="lastname" value="{{sid.lastname}}" placeholder="Last name">
+                                    </div>
+                                    <div class="pgc-fg">
+                                        <label>Email (read-only)</label>
+                                        <input type="email" value="{{uid.email}}" readonly>
+                                    </div>
+                                    <div class="pgc-fg">
+                                        <label>Phone Number</label>
+                                        <input type="text" name="contectno" value="{{sid.contectno}}" placeholder="Phone">
+                                    </div>
+                                    <div class="pgc-fg pgc-fg-full">
+                                        <label>Store Name</label>
+                                        <input type="text" name="seller_store_name" value="{{sid.seller_store_name}}" placeholder="Store name">
+                                    </div>
+                                    <div class="pgc-fg pgc-fg-full">
+                                        <label>Profile Picture</label>
+                                        <input type="file" name="pic">
+                                    </div>
+                                </div>
+                                <button type="submit" class="pgc-save-btn">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

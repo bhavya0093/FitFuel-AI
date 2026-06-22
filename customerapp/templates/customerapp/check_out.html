@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout</title>
+  <link rel="stylesheet" href="{% static 'customerapp/css/checkout.css' %}">
+</head>
+<body>
+
+<div class="cwrap">
+
+  <div class="pgnav">
+    <a href="/view_cart/" class="back-btn">&#8592; Back to Cart</a>
+    <div class="pg-ttl">Checkout 🧾</div>
+  </div>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div class="checkout-layout">
+
+      <!-- LEFT SIDE -->
+      <div class="left-col">
+        <div class="section-card">
+          <div class="section-head">
+            <div class="section-num">1</div>
+            <div class="section-title">Delivery Address</div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" name="firstname" class="form-input" placeholder="Enter first name"  />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" name="lastname" class="form-input" placeholder="Enter last name"  />
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" name="phone" class="form-input" placeholder="+91 00000 00000"  />
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Address Line</label>
+              <input type="text" name="address" class="form-input" placeholder="House no, Street, Area"  />
+            </div>
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input type="text" name="city" class="form-input" placeholder="City"  />
+            </div>
+            <div class="form-group">
+              <label class="form-label">State</label>
+              <input type="text" name="state" class="form-input" placeholder="State"  />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Pincode</label>
+              <input type="text" name="pincode" class="form-input" placeholder="000000"  />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Landmark (Optional)</label>
+              <input type="text" name="landmark" class="form-input" placeholder="Near..." />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE - ORDER SUMMARY -->
+      <div class="right-col">
+        <div class="summary-box">
+          <div class="summary-title">Order Summary</div>
+
+          <!-- DUMMY ITEMS — Django ka loop yahan lagana -->
+           {% for c in item %}
+          <div class="order-items">
+            <div class="order-item">
+              <img src="{{c.product.picture.url}}" alt="Bananas" class="order-item-img"/>
+              <div class="order-item-info">
+                <div class="order-item-name">{{c.product.product_name}}</div>
+                <div class="order-item-qty">( ₹{{c.product.product_price}} x Qty.{{c.qty}} )</div>
+              </div>
+              <div class="order-item-price">&#8377;{{c.productprice}}</div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <hr class="summary-hr"/>
+          <!-- DUMMY TOTALS — Django variables yahan lagana -->
+          <div class="summary-row"><span>Subtotal</span><span>&#8377;{{total_amount}}</span></div>
+          <div class="summary-row"><span>Discount <span class="disc-badge">WELCOME10</span></span><span class="green">-&#8377;65</span></div>
+          <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
+          <hr class="summary-hr"/>
+          <div class="total-row"><span>Total</span><span>&#8377;{{net_amount}}</span></div>
+
+          <!-- Proceed to Payment — form submit karega -->
+          <button type="submit" class="place-order-btn" style="margin-top:16px;">
+            Proceed to Payment &#8594;
+          </button>
+
+          <div class="secure-note">🔒 100% Secure Checkout</div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+</div>
+</body>
+</html>

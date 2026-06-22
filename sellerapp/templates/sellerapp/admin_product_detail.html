@@ -1,0 +1,44 @@
+<!-- PRODUCT DETAIL -->
+        {% for p in pid %}
+        <div id="product-detail-{{p.id}}" class="content-section">
+            <div class="pd-header">
+                <h2><i class="fas fa-box" style="color:#0ea5e9;"></i> Product Detail</h2>
+                <label class="pd-back-btn" for="nav-allProducts">
+                    <i class="fas fa-arrow-left"></i> Back
+                </label>
+            </div>
+            <div class="pd-layout">
+                <div class="pd-left">
+                    <div style="position:absolute;bottom:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(59,130,246,0.08);"></div>
+                    <img src="{{p.picture.url}}" style="width:100%;height:240px;object-fit:cover;border-radius:16px;box-shadow:0 12px 36px rgba(59,130,246,0.22);border:3px solid rgba(255,255,255,0.90);margin-bottom:20px;" alt="{{p.product_name}}">
+                    {% if p.badge_text %}
+                    <span style="background:linear-gradient(135deg,#3b82f6,#06b6d4);color:white;padding:5px 18px;border-radius:20px;font-size:0.70rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;box-shadow:0 4px 14px rgba(6,182,212,0.40);margin-bottom:12px;">{{p.badge_text}}</span>
+                    {% endif %}
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:900;background:linear-gradient(135deg,#1d4ed8,#0891b2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-2px;">Rs.{{p.product_price}}</div>
+                    <div style="margin-top:8px;font-size:0.78rem;font-weight:700;color:#065f46;background:rgba(209,250,229,0.85);padding:5px 16px;border-radius:12px;border:1px solid rgba(5,150,105,0.25);">Stock: {{p.stock_qty}} units</div>
+                </div>
+                <div class="pd-right">
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:1.65rem;font-weight:900;color:#0f172a;letter-spacing:-0.5px;margin-bottom:6px;">{{p.product_name}}</div>
+                    <div class="detail-chip"><i class="fas fa-tag"></i> {{p.product_category}}</div>
+                    <div class="detail-grid">
+                        <div class="detail-mini"><div class="detail-mini-label">Weight / Unit</div><div class="detail-mini-val">{{p.weight_unit}}</div></div>
+                        <div class="detail-mini"><div class="detail-mini-label">Discount</div><div class="detail-mini-val">{{p.discount}}%</div></div>
+                        <div class="detail-mini"><div class="detail-mini-label">Stock</div><div class="detail-mini-val">{{p.stock_qty}} units</div></div>
+                        <div class="detail-mini"><div class="detail-mini-label">Category</div><div class="detail-mini-val">{{p.product_category}}</div></div>
+                    </div>
+                    <div class="detail-desc-box">
+                        <div style="font-size:0.62rem;font-weight:800;color:#60a5fa;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:7px;"><i class="fas fa-align-left" style="margin-right:4px;"></i> Description</div>
+                        <p style="font-size:0.88rem;color:#334155;line-height:1.6;font-weight:500;margin:0;">{{p.description}}</p>
+                    </div>
+                    <div class="pd-actions">
+                        <label class="pd-edit-btn" for="nav-edit-{{p.id}}">
+                            <i class="fas fa-edit"></i> Edit Product
+                        </label>
+                        <a href="{% url 'delete_product' p.id %}" class="pd-delete-btn">
+                            <i class="fas fa-trash-alt"></i> Delete Product
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}

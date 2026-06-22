@@ -1,0 +1,4 @@
+/* ── SETTINGS ── */
+#settings-section h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;color:var(--txt);margin-bottom:18px;padding-bottom:10px;border-bottom:1.5px solid rgba(59,130,246,0.10);}
+#settings-section input{background:rgba(255,255,255,0.60);backdrop-filter:blur(10px);border:1.5px solid rgba(59,130,246,0.14);color:var(--txt);padding:11px 15px;border-radius:var(--r2);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:500;outline:none;width:100%;margin-bottom:4px;transition:var(--tf);}
+#settings-section input:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(59,130,246,0.12);background:rgba(255,255,255,0.85);}

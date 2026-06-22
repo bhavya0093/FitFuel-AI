@@ -1,0 +1,112 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Account</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CLEAN EXTERNAL CSS ONLY -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="register-card">
+
+    <!-- Header -->
+    <div class="form-header">
+        <i class="fas fa-user-plus"></i>
+        <h2>Register Account</h2>
+    </div>
+
+    <form id="registerForm" method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        <!-- ROLE DROPDOWN TOP -->
+        <div class="role-group">
+            <label class="role-label">Select Account Type</label>
+            <select id="role" class="role-select" name="role" required>
+                <option value="" disabled selected>Choose Role</option>
+                <option value="seller">Seller</option>
+                <option value="customer">Customer</option>
+            </select>
+        </div>
+
+        <!-- COMMON FIELDS (Both Seller & Customer) -->
+        <div class="name-phone-row">
+            <div class="input-field" style="flex:2;">
+                <label>First Name</label>
+                <input type="text" placeholder="John Doe" required name="firstname">
+            </div>
+
+            <div class="input-field" style="flex:2;">
+                <label>Last Name</label>
+                <input type="text" placeholder="John Doe" required name="lastname">
+            </div>
+        </div>
+
+        <!-- Email (Common) -->
+        <div class="input-field">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@email.com" required name="email">
+        </div>
+
+        <!-- ================= CUSTOMER FIELDS ================= -->
+        <div id="customerFields" style="display: none;">
+            <div class="input-field">
+                <label>Customer Phone</label>
+                <input type="tel" placeholder="98765 43210" name="contectno">
+            </div>
+        </div>
+
+        <!-- ================= SELLER FIELDS ================= -->
+        <div id="sellerFields" style="display: none;">
+            <div class="input-field">
+                <label>Seller Phone</label>
+                <input type="tel" placeholder="98765 43210" name="contectno">
+            </div>
+        </div>
+
+        <!-- Button -->
+        <input type="submit" class="register-btn" value="Create Account">
+
+        <div class="login-hint">
+            Already have an account? <a href="{% url 'login' %}">Sign in</a>
+        </div>
+
+        <span style="display: block; font-size:0.7rem; margin-top:5px; color: #a0aec0; text-align: center;">
+            <i class="fas fa-user-tag"></i> Seller / Customer
+        </span>
+
+    </form>
+</div>
+
+<!-- 🔥 MOST IMPORTANT SCRIPT (Fields Auto Change) -->
+<script>
+    const roleSelect = document.getElementById("role");
+    const customerFields = document.getElementById("customerFields");
+    const sellerFields = document.getElementById("sellerFields");
+
+    roleSelect.addEventListener("change", function () {
+        if (this.value === "customer") {
+            customerFields.style.display = "block";
+            sellerFields.style.display = "none";
+        } 
+        else if (this.value === "seller") {
+            customerFields.style.display = "none";
+            sellerFields.style.display = "block";
+        } 
+        else {
+            customerFields.style.display = "none";
+            sellerFields.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

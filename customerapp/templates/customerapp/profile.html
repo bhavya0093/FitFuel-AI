@@ -1,0 +1,59 @@
+<!-- PROFILE PAGE -->
+<div id="page-profile" class="page">
+<div class="iwrap">
+  <div class="pgnav"><label class="back-btn" for="nav-home"><i class="fas fa-arrow-left"></i> Back to Home</label><div class="pg-ttl">My Profile</div></div>
+
+  <div class="pw">
+    <!-- DARK SIDEBAR -->
+    <div class="psb">
+      <div class="pav-wrap">
+        <div class="pav"><img src="{{cid.pic.url}}" alt=""></div>
+        <div class="pnm">{{cid.firstname}} {{cid.lastname}}</div>
+        <div class="pem">{{cid.email}}</div>
+      </div>
+      <div class="pkpis">
+        <div class="kpi"><span class="kpi-v">24</span><div class="kpi-l">Orders</div></div>
+        <div class="kpi"><span class="kpi-v">₹8.4k</span><div class="kpi-l">Spent</div></div>
+        <div class="kpi"><span class="kpi-v">6</span><div class="kpi-l">Wishlist</div></div>
+        <div class="kpi"><span class="kpi-v">3</span><div class="kpi-l">Coupons</div></div>
+      </div>
+      <nav class="pnav">
+        <a href="#" class="pni on"><i class="fas fa-user"></i> Personal Info</a>
+        <label for="nav-edit" class="pni"><i class="fas fa-pen"></i> Edit Profile</label>
+        <a href="#" class="pni"><i class="fas fa-box"></i> My Orders</a>
+        <a href="#" class="pni"><i class="fas fa-map-marker-alt"></i> Addresses</a>
+        <a href="#" class="pni"><i class="fas fa-heart"></i> Wishlist</a>
+        <a href="#" class="pni"><i class="fas fa-ticket-alt"></i> Coupons</a>
+        <a href="#" class="pni"><i class="fas fa-wallet"></i> Wallet</a>
+        <a href="#" class="pni"><i class="fas fa-bell"></i> Notifications</a>
+        <a href="{% url 'logout' %}" class="pni danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </nav>
+    </div>
+
+    <!-- LIGHT CONTENT -->
+    <div class="pright">
+      <div class="sec">
+        <div class="sec-h"><i class="fas fa-user-circle"></i> <span>Personal Information</span></div>
+        <div class="info-g">
+          <div class="ifd"><label>First Name</label><div class="fv">{{cid.firstname}}</div></div>
+          <div class="ifd"><label>Last Name</label><div class="fv">{{cid.lastname}}</div></div>
+          <div class="ifd"><label>Email</label><div class="fv">{{uid.email}}</div></div>
+          <div class="ifd"><label>Phone</label><div class="fv">{{cid.contectno}}</div></div>
+        </div>
+        <label class="epbtn" for="nav-edit"><i class="fas fa-pen"></i> Edit Profile</label>
+      </div>
+
+      <div class="sec">
+        <div class="sec-h"><i class="fas fa-box"></i> <span>Recent Orders</span></div>
+        <div class="obox">
+          <div class="oth"><span>Order ID</span><span>Date</span><span>Amount</span><span>Items</span><span>Status</span></div>
+          <div class="orow"><span class="oid">#QB-20482</span><span>08 Mar 2026</span><span>₹648</span><span>5</span><span class="sp s1"><i class="fas fa-check-circle"></i> Delivered</span></div>
+          <div class="orow"><span class="oid">#QB-20375</span><span>05 Mar 2026</span><span>₹1,250</span><span>8</span><span class="sp s2"><i class="fas fa-truck"></i> In Transit</span></div>
+          <div class="orow"><span class="oid">#QB-20201</span><span>01 Mar 2026</span><span>₹380</span><span>3</span><span class="sp s1"><i class="fas fa-check-circle"></i> Delivered</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>

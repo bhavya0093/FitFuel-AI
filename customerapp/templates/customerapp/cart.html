@@ -20,35 +20,74 @@
   <div class="cart-layout">
 
     <!-- CART ITEMS -->
-    <div class="cart-items-box">
-      {% for c in item %}
-      <div class="cart-item">
-        <img src="{{c.product.picture.url}}" alt="{{c.product.product_name}}" class="cart-item-img" />
-        <div class="cart-item-info">
-          <div class="cart-item-name">{{c.product.product_name}}</div>
-          <div class="cart-item-unit">₹{{c.product.product_price}} | {{c.product.product_category}} | {{c.product.weight_unit}}g</div>
-        </div>
-        <div class="qty-ctrl">
-          <a href="{% url 'decrease_qty' c.id %}" class="qty-btn">−</a>
-          <span class="qty-num">{{c.qty}}</span>
-          <a href="{% url 'increase_qty' c.id %}" class="qty-btn">+</a>
-        </div>
-        <div class="cart-item-price">₹{{ c.productprice }}</div>
-      </div>
-      {% endfor %}
+     {% if item %}
+        <div class="cart-items-box">
+          {% for c in item %}
+          <div class="cart-item">
+            <img src="{{c.product.picture.url}}" alt="{{c.product.product_name}}" class="cart-item-img" />
+            <div class="cart-item-info">
+              <div class="cart-item-name">{{c.product.product_name}}</div>
+              <div class="cart-item-unit">₹{{c.product.product_price}} | {{c.product.product_category}} | {{c.product.weight_unit}}g</div>
+            </div>
+            <div class="qty-ctrl">
+              <a href="{% url 'decrease_qty' c.id %}" class="qty-btn">−</a>
+              <span class="qty-num">{{c.qty}}</span>
+              <a href="{% url 'increase_qty' c.id %}" class="qty-btn">+</a>
+            </div>
+            <div class="cart-item-price">₹{{ c.productprice }}</div>
+          </div>
+          {% endfor %}
+          </div>
+                <!-- ORDER SUMMARY -->
+        <div class="summary-box">
+          <div class="summary-title">Order Summary</div>
+          <div class="summary-row"><span>Subtotal</span><span>₹{{total_amount}}</span></div>
+          <div class="summary-row">
+                <span>
+                    Discount
+                    {% if discount > 0 %}
+                    <span class="disc-badge">WELCOME10</span>
+                    {% endif %}
+                </span>
+
+                <span class="green">
+                    -₹{{discount}}
+                </span>
+            </div>
+
+              {% if discount > 0 %}
+              <div class="coupon-success">
+                  🎉 WELCOME10 Coupon Applied
+              </div>
+              {% else %}
+              <div class="coupon-msg">
+                  🎉 Spend ₹{{remaining_amount}} more & unlock WELCOME10
+              </div>
+              {% endif %}
+              <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
+              <hr class="summary-hr"/>
+              <div class="total-row"><span>Total</span><span>₹{{net_amount}}</span></div>
+              <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout →</a>
+              <div class="free-del-note">🚚 Free delivery on this order</div>
+            </div>
+      {% else %}
+
+            <div class="empty-cart">
+            <div class="empty-cart-icon">🛒</div>
+            <h2>Your Cart is Empty</h2>
+            <p>Add some products to get started</p>
+
+            <a href="/customer-dashboard/" class="shop-btn">
+                Continue Shopping
+            </a>
+            </div>
+
+      {% endif %}
+
+
     </div>
 
-    <!-- ORDER SUMMARY -->
-    <div class="summary-box">
-      <div class="summary-title">Order Summary</div>
-      <div class="summary-row"><span>Subtotal</span><span>₹{{total_amount}}</span></div>
-      <div class="summary-row"><span>Discount <span class="disc-badge">WELCOME10</span></span><span class="green">-₹65</span></div>
-      <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
-      <hr class="summary-hr"/>
-      <div class="total-row"><span>Total</span><span>₹{{net_amount}}</span></div>
-      <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout →</a>
-      <div class="free-del-note">🚚 Free delivery on this order</div>
-    </div>
+    
 
   </div>
 </div>

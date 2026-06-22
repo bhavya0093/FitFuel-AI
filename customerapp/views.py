@@ -75,52 +75,54 @@ def add_to_cart(request,pk):
         print("------> Cart customer ::",Cart_obj)
         print("------> Cart customer status ::",is_created) 
 
-        cartItemData,is_created = cartitem.objects.get_or_create(cart=Cart_obj, product=products)
+        cartItemData,is_created = cartitem.objects.get_or_create(
+            cart=Cart_obj,
+            product=products,
+            defaults={'qty':1}
+        )
 
-        if is_created:    
+        if not is_created:
             cartItemData.qty += 1
-        else:
-            cartItemData.qty += 1      
- 
-        cartItemData.save()
+            cartItemData.save()
 
-        item = cartitem.objects.filter(cart=Cart_obj)
+        return HttpResponseRedirect("/view_cart/")
 
-        total_amount = 0
-        for i in item:
-            total_amount += i.product.product_price * i.qty
-
-            
-
-        context = {
-            'item' : item,
-            'total_amount' : total_amount,  
-            'net_amount' : total_amount - 65, 
-        }
-
-        return render(request, "customerapp/cart.html",context)
     
 def view_cart(request):
     if "email" in request.session:
-        uid = User.objects.get(email = request.session['email'])
+        uid = User.objects.get(email=request.session['email'])
+
         if uid.role == "customer":
-            cid = customer.objects.get(user_id = uid)
-            Cart_obj = cart.objects.get (customer = cid)
+            cid = customer.objects.get(user_id=uid)
+            Cart_obj = cart.objects.get(customer=cid)
             item = cartitem.objects.filter(cart=Cart_obj)
 
             total_amount = 0
+
             for i in item:
                 total_amount += i.product.product_price * i.qty
-                
-                
+
+            # Coupon Logic
+            if total_amount >= 100:
+                discount = 65
+            else:
+                discount = 0
+
+            net_amount = total_amount - discount
+
+            if total_amount < 100:
+                remaining_amount = 100 - total_amount
+            else:
+                remaining_amount = 0
 
             context = {
-                'item' : item,
-                'total_amount' : total_amount,
-                'net_amount' : total_amount - 65 ,
+                'item': item,
+                'total_amount': total_amount,
+                'discount': discount,
+                'net_amount': net_amount,
+                'remaining_amount': remaining_amount,
             }
-
-            return render(request, "customerapp/cart.html",context)
+            return render(request, "customerapp/cart.html", context)
 
 def checkout(request):
     if "email" in request.session:

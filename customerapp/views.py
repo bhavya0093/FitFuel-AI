@@ -143,3 +143,32 @@ def checkout(request):
 
 def payment(request):
     return render(request,"customerapp/payment.html")
+
+def increase_qty(request,pk):
+    if "email" in request.session:
+        uid = User.objects.get(email = request.session['email'])
+        if uid.role == "customer":
+            cid = customer.objects.get(user_id = uid)
+            cart_obj = cart.objects.get(customer = cid)
+            cart_item = cartitem.objects.get(id=pk , cart=cart_obj)
+
+            cart_item.qty += 1
+            cart_item.save()
+    
+    return HttpResponseRedirect("/view_cart/")
+
+def decrease_qty(request, pk):
+    if "email" in request.session:
+        uid = User.objects.get(email=request.session['email'])
+        if uid.role == "customer":
+            cid = customer.objects.get(user_id=uid)
+            Cart_obj = cart.objects.get(customer=cid)
+            cart_item = cartitem.objects.get(id=pk, cart=Cart_obj)
+
+            if cart_item.qty > 1:
+                cart_item.qty -= 1
+                cart_item.save()
+            else:
+                cart_item.delete()
+
+    return HttpResponseRedirect("/view_cart/")

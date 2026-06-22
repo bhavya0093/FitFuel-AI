@@ -29,9 +29,9 @@
           <div class="cart-item-unit">₹{{c.product.product_price}} | {{c.product.product_category}} | {{c.product.weight_unit}}g</div>
         </div>
         <div class="qty-ctrl">
-          <span class="qty-btn">−</span>
+          <a href="{% url 'decrease_qty' c.id %}" class="qty-btn">−</a>
           <span class="qty-num">{{c.qty}}</span>
-          <span class="qty-btn">+</span>
+          <a href="{% url 'increase_qty' c.id %}" class="qty-btn">+</a>
         </div>
         <div class="cart-item-price">₹{{ c.productprice }}</div>
       </div>
@@ -55,4 +55,4 @@
 </div>
 
 </body>
-</html> 
+</html>

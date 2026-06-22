@@ -129,10 +129,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  text-decoration: none !important;
+  outline: none;
+  box-shadow: none;
+
   line-height: 1;
   user-select: none;
-  transition: .18s;
-  box-shadow: 0 1px 4px rgba(0,180,200,0.13);
+}
+
+.qty-btn:focus,
+.qty-btn:active,
+.qty-btn:visited {
+  text-decoration: none !important;
+  outline: none;
+  box-shadow: none;
 }
 .qty-btn:hover { background: #00c6d8; color: #fff; }
 

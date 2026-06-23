@@ -23,24 +23,38 @@ def register(request):
                 "e_msg": "Email already registered! Please Login."
             }
             return render(request, "sellerapp/register.html", context)
+        
+        # Mobile Validation
+        if not contectno.isdigit() or len(contectno) != 10:
+            context = {
+                "e_msg": "Please enter a valid 10-digit mobile number."
+            }
+            return render(request, "sellerapp/register.html", context)
 
         # Generate a strong random password (instead of the old predictable scheme)
         plain_password = generate_strong_password()
 
-        uid = User.objects.create(
-            email=email,
-            password=make_password(plain_password),   # store HASH, never plain text
-            role=role
-        )
+        try:
+                uid = User.objects.create(
+                    email=email,
+                    password=make_password(plain_password),
+                    role=role
+                )
+        except Exception:
+                context = {
+                    "e_msg": "Something went wrong. Please try again."
+                }
+                return render(request, "sellerapp/register.html", context)
+        
         myCustomMail(
-            "Welcome To QuickBasket",
-            "welcome_mail",
-            email,
-            {
-                'name': firstname,
-                'email': email
-            }
-        )
+        "Welcome To QuickBasket",
+        "welcome_mail",
+        email,
+        {
+            'name': firstname,
+            'email': email
+        }
+    )
 
         try:
             myCustomMail(

@@ -31,5 +31,6 @@ urlpatterns = [
     path('forgot_password/', forgot_password, name='forgot_password'),
     path('reset_password/', reset_password, name='reset_password'),
     path('change_password/', change_password, name='change_password'),
+    path('resend-otp/<str:email>/',resend_otp,name='resend_otp'),
 ]
 

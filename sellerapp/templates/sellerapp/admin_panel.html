@@ -16,14 +16,14 @@
 
 
     <style>
-    {% for p in pid %}
-    #nav-product-{{p.id}}:checked ~ .container .main-content #product-detail-{{p.id}} {
-        display: block;
-    }
-    #nav-edit-{{p.id}}:checked ~ .container .main-content #product-edit-{{p.id}} {
-        display: block;
-    }
-    {% endfor %}
+        {% for p in pid %}
+        #nav-product-{{p.id}}:checked ~ .container .main-content #product-detail-{{p.id}} {
+            display: block;
+        }
+        #nav-edit-{{p.id}}:checked ~ .container .main-content #product-edit-{{p.id}} {
+            display: block;
+        }
+        {% endfor %}
     </style>
 </head>
 <body>

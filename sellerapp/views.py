@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.shortcuts import get_object_or_404, render, redirect
 import random
 from .models import *
@@ -5,6 +7,7 @@ from customerapp.models import *
 from django.http import *
 from .utils import *
 from django.contrib.auth.hashers import make_password, check_password
+from django.utils import timezone
 
 def register(request):
     if request.method == "POST":
@@ -310,6 +313,7 @@ def forgot_password(request):
             uid = User.objects.get(email = email)
             otp = random.randint(1111,9999)
             uid.otp = otp
+            uid.otp_created_at = timezone.now()
             uid.save()
             print("EMAIL:", email)
             myCustomMail("Forgot Password","mail_template",email,{'otp':otp})
@@ -334,6 +338,13 @@ def reset_password(request):
         repassword = request.POST['repassword']
 
         uid = User.objects.get(email = email)
+        if uid.otp_created_at:
+            if timezone.now() > uid.otp_created_at + timedelta(minutes=1):
+                context = {
+                    'email': email,
+                    'e_msg': 'OTP Expired! Please request a new OTP.'
+                }
+            return render(request, "sellerapp/reset_password.html", context)
 
         if otp == str(uid.otp) and newpassword == repassword:
 
@@ -347,6 +358,7 @@ def reset_password(request):
 
             uid.password = make_password(newpassword)
             uid.otp = None
+            uid.otp_created_at = None
             uid.save()
             context = {
                         's_msg' : "Password Change Succsessfully..!"
@@ -356,6 +368,7 @@ def reset_password(request):
     return render(request,"sellerapp/login.html")
 
 def change_password(request):
+
     """
     Lets a LOGGED-IN user (seller or customer) change their own password.
     Requires current password + new password + confirm password.
@@ -409,3 +422,31 @@ def change_password(request):
 
     template, ctx = role_context()
     return render(request, template, ctx)
+
+
+def resend_otp(request, email):
+
+    uid = User.objects.get(email=email)
+
+    otp = random.randint(1111,9999)
+
+    uid.otp = otp
+    uid.save()
+
+    myCustomMail(
+        "Forgot Password",
+        "mail_template",
+        email,
+        {'otp': otp}
+    )
+
+    context = {
+        'email': email,
+        's_msg': 'New OTP Sent Successfully'
+    }
+
+    return render(
+        request,
+        "sellerapp/reset_password.html",
+        context
+    )

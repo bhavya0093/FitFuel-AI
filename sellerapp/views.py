@@ -9,6 +9,7 @@ from .utils import *
 from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.contrib import messages
+from django.db.models import Count
 
 def register(request):
     if request.method == "POST":
@@ -111,6 +112,7 @@ def login(request):
                 "uid": uid,
                 "sid": sid,
                 "pid": pid,
+                "categories": Category.objects.all().order_by("id"),
             }
 
             return render(request,"sellerapp/admin_panel.html",context)
@@ -257,46 +259,61 @@ def add_product(request):
     if "email" in request.session:
         uid = User.objects.get(email=request.session['email'])
         sid = seller.objects.get(user_id=uid)
-        pid = product.objects.all()   
+        pid = product.objects.all()
 
         if request.method == "POST" and uid.role == "seller":
+
+            category = Category.objects.get(
+                id=request.POST['product_category']
+            )
+
             product.objects.create(
                 user_id=uid,
                 product_name=request.POST['product_name'],
-                product_category=request.POST['product_category'],
-                product_price=request.POST['product_price'],
-                stock_qty=request.POST['stock_qty'],
+                product_category=category,
+                product_price=int(request.POST.get('product_price') or 0),
+                stock_qty=int(request.POST.get('stock_qty') or 0),
                 picture=request.FILES['picture'],
-                description=request.POST['description'],
-                discount=request.POST['discount'],
-                badge_text=request.POST['badge_text'],
-                weight_unit=request.POST['weight_unit'],
+                description=request.POST.get('description'),
+                discount=int(request.POST.get('discount') or 0),
+                badge_text=request.POST.get('badge_text'),
+                weight_unit=request.POST.get('weight_unit'),
+                brand=request.POST.get('brand'),
             )
-            return redirect('add_product')  
+
+            messages.success(request, "Product Added Successfully")
+            return redirect("view_product")
 
         context = {
             "uid": uid,
             "sid": sid,
             "pid": pid,
+            "categories": Category.objects.all(),
+            "active_nav": "addProduct",
         }
+
         return render(request, "sellerapp/admin_panel.html", context)
-    else:
-        return HttpResponseRedirect("/sellerapp/login/")
+
+    return HttpResponseRedirect("/sellerapp/login/")
 
 
 def view_product(request):
     if "email" in request.session:
         uid = User.objects.get(email=request.session['email'])
         sid = seller.objects.get(user_id=uid)
-        pid = product.objects.all()  
+        pid = product.objects.all()
+
         context = {
             "uid": uid,
             "sid": sid,
-            "pid": pid,  
+            "pid": pid,
+            "categories": Category.objects.all(),
+            "active_nav": "allProducts",  
         }
+
         return render(request, "sellerapp/admin_panel.html", context)
 
-    return HttpResponseRedirect("/seller/login")
+    return HttpResponseRedirect("/seller/login/")
 
 
 def edit_product(request, pid):
@@ -524,7 +541,7 @@ def view_categories(request):
         return HttpResponseRedirect("/seller/login/")
 
     sid = seller.objects.get(user_id=uid)
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by("id")
     pid = product.objects.all()
 
     context = {

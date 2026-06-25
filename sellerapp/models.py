@@ -47,7 +47,7 @@ class Category(models.Model):
 class product(models.Model):
     user_id = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     product_name = models.CharField(max_length=50)
-    product_category = models.CharField(max_length=50)
+    product_category = models.ForeignKey(Category,on_delete=models.CASCADE,related_name="products")
     product_price = models.IntegerField()
     stock_qty = models.IntegerField()
     picture = models.FileField(

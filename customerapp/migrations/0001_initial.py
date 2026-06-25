@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('sellerapp', '0013_category'),
+        ('sellerapp', '0001_initial'),
     ]
 
     operations = [

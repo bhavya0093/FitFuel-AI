@@ -26,13 +26,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
-                                    <select name="product_category">
-                                        <option>Select Category</option>
-                                        <option>Dairy</option>
-                                        <option>Vegetables</option>
-                                        <option>Fruits</option>
-                                        <option>Grocery</option>
-                                        <option>Bakery</option>
+                                    <select name="product_category" required>
+
+                                        <option value="">Select Category</option>
+
+                                        {% for c in categories %}
+
+                                            <option value="{{ c.id }}">
+                                            {{ c.category_name }}
+                                        </option>
+
+                                        {% endfor %}
+
                                     </select>
                                 </div>
                                 <div class="form-group">

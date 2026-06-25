@@ -17,8 +17,7 @@ def register(request):
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         email = request.POST['email']
-        contectno = request.POST['contectno']
-
+        contectno = request.POST.get("contectno", "").strip()
         # Duplicate Email Validation
         if User.objects.filter(email=email).exists():
             context = {
@@ -26,12 +25,12 @@ def register(request):
             }
             return render(request, "sellerapp/register.html", context)
         
-        # Mobile Validation
-        if not contectno.isdigit() or len(contectno) != 10:
-            context = {
-                "e_msg": "Please enter a valid 10-digit mobile number."
-            }
-            return render(request, "sellerapp/register.html", context)
+        # # Mobile Validation
+        # if not contectno.isdigit() or len(contectno) != 10:
+        #     context = {
+        #         "e_msg": "Please enter a valid 10-digit mobile number."
+        #     }
+        #     return render(request, "sellerapp/register.html", context)
 
         # Generate a strong random password (instead of the old predictable scheme)
         plain_password = generate_strong_password()
@@ -301,14 +300,12 @@ def view_product(request):
     if "email" in request.session:
         uid = User.objects.get(email=request.session['email'])
         sid = seller.objects.get(user_id=uid)
-        pid = product.objects.all()
 
         context = {
             "uid": uid,
             "sid": sid,
-            "pid": pid,
-            "categories": Category.objects.all(),
-            "active_nav": "allProducts",  
+            "categories": Category.objects.prefetch_related("products"),
+            "active_nav": "viewProduct",
         }
 
         return render(request, "sellerapp/admin_panel.html", context)

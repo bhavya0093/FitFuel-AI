@@ -110,11 +110,12 @@ def login(request):
             context = {
                 "uid": uid,
                 "sid": sid,
-                "pid": pid,
+                "pid": product.objects.all(),
                 "categories": Category.objects.all().order_by("id"),
+                "active_nav": "viewProduct",
             }
 
-            return render(request,"sellerapp/admin_panel.html",context)
+            return redirect("admin_panel")
 
         elif uid.role == "customer":
             cid = customer.objects.get(user_id=uid)
@@ -183,7 +184,7 @@ def login(request):
                             "pid": pid,
                         }
 
-                        return render(request,"sellerapp/admin_panel.html",context)
+                        return redirect("admin_panel")
 
                     elif uid.role == "customer":
                         cid = customer.objects.get(user_id=uid)
@@ -206,19 +207,21 @@ def login(request):
 def admin_panel(request):
     if "email" in request.session:
         uid = User.objects.get(email=request.session["email"])
+
         if uid.role == "seller":
             sid = seller.objects.get(user_id=uid)
-            pid = product.objects.all()
-            categories = Category.objects.all()
 
             context = {
                 "uid": uid,
                 "sid": sid,
-                "pid": pid,
-                "categories": categories,
+                "pid": product.objects.all(),
+                "categories": Category.objects.all().order_by("id"),
+                "active_nav": "dashboard",
             }
+
             return render(request, "sellerapp/admin_panel.html", context)
-    return HttpResponseRedirect("/seller/login")
+
+    return HttpResponseRedirect("/seller/login/")
 
 
 def logout(request):
@@ -304,7 +307,8 @@ def view_product(request):
         context = {
             "uid": uid,
             "sid": sid,
-            "categories": Category.objects.prefetch_related("products"),
+            "pid": product.objects.all(),
+            "categories": Category.objects.all().order_by("id"),
             "active_nav": "viewProduct",
         }
 
@@ -319,6 +323,7 @@ def edit_product(request, pid):
         return HttpResponseRedirect("/seller/login")
 
     uid = User.objects.get(email=request.session['email'])
+    category = Category.objects.get(id=request.POST["product_category"])
     sid = seller.objects.get(user_id=uid)
     all_products = product.objects.all() 
     
@@ -333,6 +338,7 @@ def edit_product(request, pid):
         p.badge_text = request.POST['badge_text']
         p.weight_unit = request.POST['weight_unit']
         p.description = request.POST['description']
+        p.product_category = category
 
         if "picture" in request.FILES:
             p.picture = request.FILES['picture']

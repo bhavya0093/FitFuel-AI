@@ -33,6 +33,7 @@
 <input type="radio" name="nav" id="nav-addProduct"     class="nav-radio" {% if active_nav == "addProduct" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-categories"     class="nav-radio" {% if active_nav == "categories" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-addCategory"    class="nav-radio" {% if active_nav == "addCategory" %}checked{% endif %}>
+<input type="radio" name="nav" id="nav-editCategory"   class="nav-radio" {% if active_nav == "editCategory" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-orders"         class="nav-radio" {% if active_nav == "orders" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-users"          class="nav-radio" {% if active_nav == "users" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-payments"       class="nav-radio" {% if active_nav == "payments" %}checked{% endif %}>
@@ -167,6 +168,9 @@
         {% include 'sellerapp/admin_payments.html' %}
 
         {% include 'sellerapp/admin_settings.html' %}
+
+        {% include 'sellerapp/admin_edit_category.html' %}
+
 
     </div>
 </div>

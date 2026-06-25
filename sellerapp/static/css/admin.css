@@ -147,6 +147,9 @@ input[type="checkbox"].nav-check {
     background:linear-gradient(180deg,var(--blue-500),var(--cyan-500));border-radius:0 4px 4px 0;
     box-shadow:0 0 14px rgba(59,130,246,0.65);
 }
+#nav-editCategory:checked ~ .container .main-content #editCategory-section{
+    display:block;
+}
 
 /* ── Products Submenu ── */
 .submenu{margin-left:20px;list-style:none;max-height:0;overflow:hidden;transition:max-height var(--ts);margin-top:3px;}
@@ -215,6 +218,8 @@ details.profile-wrap[open] .profile-dropdown {
 #nav-addProduct:checked ~ .container .main-content #addProduct-section,
 #nav-categories:checked ~ .container .main-content #categories-section,
 #nav-addCategory:checked ~ .container .main-content #addCategory-section,
+/* YE NAYA ADD KARO */
+#nav-editCategory:checked ~ .container .main-content #editCategory-section,
 #nav-orders:checked ~ .container .main-content #orders-section,
 #nav-users:checked ~ .container .main-content #users-section,
 #nav-payments:checked ~ .container .main-content #payments-section,

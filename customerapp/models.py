@@ -29,6 +29,40 @@ class cartitem(models.Model):
 
     def productprice(self):
         return self.product.product_price * self.qty
-    
-    
+
+class Address(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE,
+        related_name="addresses"
+    )
+
+    fullname = models.CharField(max_length=100)
+    mobile = models.CharField(max_length=10)
+
+    house_no = models.CharField(max_length=120)
+    area = models.CharField(max_length=200)
+    landmark = models.CharField(max_length=200, blank=True)
+
+    city = models.CharField(max_length=80)
+    state = models.CharField(max_length=80)
+    pincode = models.CharField(max_length=6)
+
+    address_type = models.CharField(
+        max_length=20,
+        choices=[
+            ("Home","Home"),
+            ("Work","Work"),
+            ("Other","Other")
+        ],
+        default="Home"
+    )
+
+    is_default = models.BooleanField(default=False)
+
+    created_at=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.fullname
     

@@ -1,0 +1,32 @@
+<h2>Add New Address</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="fullname" placeholder="Full Name" required><br><br>
+
+    <input type="text" name="mobile" placeholder="Mobile Number" required><br><br>
+
+    <input type="text" name="house_no" placeholder="House No / Flat No" required><br><br>
+
+    <input type="text" name="area" placeholder="Area / Street" required><br><br>
+
+    <input type="text" name="landmark" placeholder="Landmark"><br><br>
+
+    <input type="text" name="city" placeholder="City" required><br><br>
+
+    <input type="text" name="state" placeholder="State" required><br><br>
+
+    <input type="text" name="pincode" placeholder="Pincode" required><br><br>
+
+    <select name="address_type">
+        <option value="Home">Home</option>
+        <option value="Work">Work</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Save Address</button>
+
+</form>

@@ -29,4 +29,5 @@ urlpatterns = [
     path("payment/",views.payment,name="payment"),
     path("increase_qty/<int:pk>/", views.increase_qty, name="increase_qty"),
     path("decrease_qty/<int:pk>/", views.decrease_qty, name="decrease_qty"),
+    path("add_address/", views.add_address, name="add_address"),
 ]

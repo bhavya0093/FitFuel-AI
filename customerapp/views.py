@@ -132,7 +132,7 @@ def checkout(request):
             cid = customer.objects.get(user_id = uid)
             Cart_obj, created = cart.objects.get_or_create(customer = cid)
             item = cartitem.objects.filter(cart=Cart_obj)
-            
+            addresses = Address.objects.filter(customer=cid)
             total_amount = 0
             for i in item:
                 total_amount += i.product.product_price * i.qty
@@ -141,6 +141,7 @@ def checkout(request):
                 'item' : item,
                 'total_amount' : total_amount,
                 'net_amount' : total_amount - 65 ,
+                "addresses": addresses,
             }
         return render(request,"customerapp/check_out.html",context)
 
@@ -175,3 +176,41 @@ def decrease_qty(request, pk):
                 cart_item.delete()
 
     return HttpResponseRedirect("/view_cart/")
+
+def add_address(request):
+    if "email" in request.session:
+        return HttpResponseRedirect("/seller/login/")
+    
+    uid = User.objects.get(email=request.session['email'])
+    
+    if uid.role == "customer":
+        cid = customer.objects.get(user_id=uid)
+        if request.method == "POST":
+            fullname = request.POST['fullname']
+            mobile = request.POST['mobile']
+            house_no = request.POST['house_no']
+            area = request.POST['area']
+            landmark = request.POST['landmark']
+            city = request.POST['city']
+            state = request.POST['state']
+            pincode = request.POST['pincode']
+            address_type = request.POST['address_type']
+
+            Address.objects.create(
+                customer=cid,
+                fullname=fullname,
+                mobile=mobile,
+                house_no=house_no,
+                area=area,
+                landmark=landmark,
+                city=city,
+                state=state,
+                pincode=pincode,
+                address_type=address_type
+            )
+        addresses = Address.objects.filter(customer=cid)
+
+        context = {
+            'addresses': addresses,
+        }
+        return render(request, "customerapp/address.html", context)

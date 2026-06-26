@@ -23,44 +23,106 @@
       <!-- LEFT SIDE -->
       <div class="left-col">
         <div class="section-card">
-          <div class="section-head">
-            <div class="section-num">1</div>
-            <div class="section-title">Delivery Address</div>
+          <div class="saved-address-section">
+
+    <div class="address-header">
+
+              <div class="address-title">
+                <h3>Delivery Address</h3>
+              </div>
+
+              <a href="{% url 'add_address' %}" class="add-address-btn">
+                  + Add New Address
+              </a>
+
           </div>
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label">First Name</label>
-              <input type="text" name="firstname" class="form-input" placeholder="Enter first name"  />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Last Name</label>
-              <input type="text" name="lastname" class="form-input" placeholder="Enter last name"  />
-            </div>
-            <div class="form-group full">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" name="phone" class="form-input" placeholder="+91 00000 00000"  />
-            </div>
-            <div class="form-group full">
-              <label class="form-label">Address Line</label>
-              <input type="text" name="address" class="form-input" placeholder="House no, Street, Area"  />
-            </div>
-            <div class="form-group">
-              <label class="form-label">City</label>
-              <input type="text" name="city" class="form-input" placeholder="City"  />
-            </div>
-            <div class="form-group">
-              <label class="form-label">State</label>
-              <input type="text" name="state" class="form-input" placeholder="State"  />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Pincode</label>
-              <input type="text" name="pincode" class="form-input" placeholder="000000"  />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Landmark (Optional)</label>
-              <input type="text" name="landmark" class="form-input" placeholder="Near..." />
-            </div>
-          </div>
+
+          {% if addresses %}
+
+              {% for a in addresses %}
+
+              <label class="address-card">
+
+                  <input
+                      type="radio"
+                      name="address"
+                      value="{{ a.id }}"
+                      {% if a.is_default %}checked{% endif %}>
+
+                  <div class="address-info">
+
+                      <div class="address-top">
+
+                          <strong>{{ a.fullname }}</strong>
+
+                          <span class="address-type">
+                              {{ a.address_type }}
+                          </span>
+
+                      </div>
+
+                      <p>{{ a.mobile }}</p>
+
+                      <p>
+
+                          {{ a.house_no }},
+
+                          {{ a.area }},
+
+                          {{ a.landmark }}
+
+                      </p>
+
+                      <p>
+
+                          {{ a.city }}
+
+                          {{ a.state }}
+
+                          -
+
+                          {{ a.pincode }}
+
+                      </p>
+
+                      {% if a.is_default %}
+
+                      <span class="default-badge">
+
+                          Default
+
+                      </span>
+
+                      {% endif %}
+
+                  </div>
+
+              </label>
+
+              {% endfor %}
+
+          {% else %}
+
+              <div class="no-address">
+
+                  <i class="fas fa-map-marker-alt no-icon"></i>
+
+                  <h3>No Address Saved</h3>
+
+                  <p>
+                  Add your home or office address to continue checkout.
+                  </p>
+
+                  <a href="{% url 'add_address' %}" class="add-address-btn">
+                      <i class="fas fa-plus"></i>
+                      Add Address
+                  </a>
+
+              </div>
+
+          {% endif %}
+
+      </div>
         </div>
       </div>
 

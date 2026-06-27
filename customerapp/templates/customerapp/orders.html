@@ -82,8 +82,9 @@
     </div>
 
     <div>
-        <a href="#" class="view-btn">View Details</a>
-
+        <a href="{% url 'order_details' o.id %}" class="view-btn">
+            View Details
+        </a>
         {% if o.status == "Pending" %}
         <a href="#" class="cancel-btn">Cancel</a>
         {% endif %}

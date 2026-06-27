@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+
+    <link rel="stylesheet" href="{% static 'customerapp/css/order_details.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+
+        <a href="{% url 'orders' %}" class="back-btn">
+            ← Back
+        </a>
+
+        <h1>
+            Order #{{ order.id }}
+        </h1>
+
+    </div>
+
+    <div class="card">
+
+        <div class="head">
+
+            <div>
+                <h3>Order Information</h3>
+
+                <p>
+                    {{ order.order_date|date:"d M Y, h:i A" }}
+                </p>
+            </div>
+
+            <span class="status status-{{ order.status|lower }}">
+                {{ order.status }}
+            </span>
+
+        </div>
+
+        <hr>
+
+        <h3 class="section-title">
+            Products
+        </h3>
+
+        {% for item in order.items.all %}
+
+        <div class="product">
+
+            <img src="{{ item.product.picture.url }}">
+
+            <div class="info">
+
+                <h4>{{ item.product.product_name }}</h4>
+
+                <p>Quantity : {{ item.quantity }}</p>
+
+                <p>Price : ₹{{ item.price }}</p>
+
+            </div>
+
+            <strong>
+                ₹{{ item.subtotal }}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+        <hr>
+
+        <h3 class="section-title">
+            Delivery Address
+        </h3>
+
+        <p>{{ order.address.full_name }}</p>
+        <p>{{ order.address.mobile }}</p>
+        <p>{{ order.address.address }}</p>
+        <p>{{ order.address.city }} - {{ order.address.pincode }}</p>
+
+        <hr>
+
+        <h3 class="section-title">
+            Payment
+        </h3>
+
+        <p>
+            {{ order.payment_method }}
+        </p>
+
+        <hr>
+
+        <div class="price-box">
+
+            <div>
+                Total
+                <span>₹{{ order.total_amount }}</span>
+            </div>
+
+            <div>
+                Discount
+                <span>- ₹{{ order.discount }}</span>
+            </div>
+
+            <div class="final">
+
+                Final Amount
+
+                <span>
+                    ₹{{ order.final_amount }}
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -538,3 +538,31 @@ def order_success(request):
         request,
         "customerapp/order_success.html"
     )   
+
+def order_details(request, pk):
+
+    if "email" not in request.session:
+        return HttpResponseRedirect("/seller/login/")
+
+    uid = User.objects.get(email=request.session["email"])
+
+    if uid.role != "customer":
+        return HttpResponseRedirect("/seller/login/")
+
+    cid = customer.objects.get(user_id=uid)
+
+    order = get_object_or_404(
+        Order,
+        id=pk,
+        customer=cid
+    )
+
+    context = {
+        "order": order
+    }
+
+    return render(
+        request,
+        "customerapp/order_details.html",
+        context
+    )

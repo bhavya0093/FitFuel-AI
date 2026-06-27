@@ -134,6 +134,17 @@ def checkout(request):
             Cart_obj, created = cart.objects.get_or_create(customer = cid)
             item = cartitem.objects.filter(cart=Cart_obj)
             addresses = Address.objects.filter(customer=cid)
+            if request.method == "POST":
+
+                address_id = request.POST.get("address")
+
+                if not address_id:
+                    messages.error(request, "Please select a delivery address.")
+                    return HttpResponseRedirect("/checkout/")
+
+                request.session["address_id"] = address_id
+
+                return HttpResponseRedirect("/payment/")
             total_amount = 0
             for i in item:
                 total_amount += i.product.product_price * i.qty
@@ -147,8 +158,47 @@ def checkout(request):
         return render(request,"customerapp/check_out.html",context)
 
 def payment(request):
-    return render(request,"customerapp/payment.html")
 
+    if "email" not in request.session:
+        return HttpResponseRedirect("/seller/login/")
+
+    uid = User.objects.get(email=request.session["email"])
+
+    if uid.role != "customer":
+        return HttpResponseRedirect("/seller/login/")
+
+    cid = customer.objects.get(user_id=uid)
+
+    # Selected Address
+    address_id = request.session.get("address_id")
+
+    if not address_id:
+        messages.error(request, "Please select a delivery address.")
+        return HttpResponseRedirect("/checkout/")
+
+    address = get_object_or_404(Address, id=address_id, customer=cid)
+
+    # Cart
+    cart_obj, created = cart.objects.get_or_create(customer=cid)
+    item = cartitem.objects.filter(cart=cart_obj)
+
+    total_amount = 0
+
+    for i in item:
+        total_amount += i.product.product_price * i.qty
+
+    discount = 65 if total_amount >= 100 else 0
+    net_amount = total_amount - discount
+
+    context = {
+        "address": address,
+        "item": item,
+        "total_amount": total_amount,
+        "discount": discount,
+        "net_amount": net_amount,
+    }
+
+    return render(request, "customerapp/payment.html", context)
 def increase_qty(request,pk):
     if "email" in request.session:
         uid = User.objects.get(email = request.session['email'])

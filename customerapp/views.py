@@ -424,4 +424,87 @@ def order_success(request):
     return render(request, "customerapp/order_success.html")
 
 def orders(request):
-    return render(request, "customerapp/order_success.html")
+    return render(request, "customerapp/orders.html")
+
+def place_order(request):
+
+    if request.method == "POST":
+
+        if "email" not in request.session:
+            return HttpResponseRedirect("/seller/login/")
+
+        uid = User.objects.get(email=request.session["email"])
+        cid = customer.objects.get(user_id=uid)
+
+        address_id = request.session.get("address_id")
+
+        if not address_id:
+            messages.error(request,"Please select address.")
+            return HttpResponseRedirect("/checkout/")
+
+        address = Address.objects.get(
+            id=address_id,
+            customer=cid
+        )
+
+        cart_obj = cart.objects.get(customer=cid)
+        items = cartitem.objects.filter(cart=cart_obj)
+
+        total = 0
+
+        for i in items:
+            total += i.product.product_price * i.qty
+
+        discount = 65 if total >= 100 else 0
+        final = total - discount
+
+        payment = request.POST.get("payment_method")
+
+        if payment == "upi":
+            payment = "UPI"
+
+        elif payment == "card":
+            payment = "CARD"
+
+        else:
+            payment = "COD"
+
+        order = Order.objects.create(
+
+            customer=cid,
+            address=address,
+
+            payment_method=payment,
+
+            total_amount=total,
+            discount=discount,
+            final_amount=final,
+
+            status="Pending"
+
+        )
+
+        for i in items:
+
+            OrderItem.objects.create(
+
+                order=order,
+
+                product=i.product,
+
+                quantity=i.qty,
+
+                price=i.product.product_price,
+
+                subtotal=i.product.product_price * i.qty
+
+            )
+
+        items.delete()
+
+        if "address_id" in request.session:
+            del request.session["address_id"]
+
+        return HttpResponseRedirect("/order_success/")
+
+    return HttpResponseRedirect("/payment/")

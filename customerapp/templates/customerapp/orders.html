@@ -1,0 +1,108 @@
+
+{% load static %}
+
+<div class="orders-container">
+
+    <h2 class="page-title">
+        My Orders
+    </h2>
+
+    {% for o in orders %}
+
+    <div class="order-card">
+
+        <div class="order-top">
+
+            <div>
+
+                <h3>
+                    Order #{{ o.id }}
+                </h3>
+
+                <p>
+                    {{ o.created_at }}
+                </p>
+
+            </div>
+
+            <span class="status">
+                {{ o.status }}
+            </span>
+
+        </div>
+
+        <hr>
+
+        {% for item in o.orderitem_set.all %}
+
+        <div class="product-row">
+
+            <img src="{{ item.product.picture.url }}">
+
+            <div>
+
+                <h4>{{ item.product.product_name }}</h4>
+
+                <p>
+                    Qty : {{ item.qty }}
+                </p>
+
+            </div>
+
+            <strong>
+                ₹{{ item.price }}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+        <hr>
+
+        <div class="order-bottom">
+
+            <div>
+
+                <strong>
+                    Total :
+                </strong>
+
+                ₹{{ o.total_amount }}
+
+            </div>
+
+            <div>
+
+                <a href="{% url 'order_details' o.id %}" class="view-btn">
+                    View Details
+                </a>
+
+                {% if o.status == "Pending" %}
+
+                <a href="{% url 'cancel_order' o.id %}" class="cancel-btn">
+                    Cancel
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty-order">
+
+        <h3>No Orders Yet 😔</h3>
+
+        <a href="{% url 'customer_dashboard' %}">
+            Continue Shopping
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+</div>

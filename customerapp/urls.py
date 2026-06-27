@@ -35,4 +35,5 @@ urlpatterns = [
     path("place_order/", views.place_order, name="place_order"),
     path("order_success/", views.order_success, name="order_success"),
     path("orders/", views.orders, name="orders"),
+    path("place_order/",views.place_order,name="place_order"),
 ]

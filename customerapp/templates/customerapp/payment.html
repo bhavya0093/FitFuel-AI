@@ -15,6 +15,7 @@
     <a href="/checkout/" class="back-btn">&#8592; Back to Address</a>
     <div class="pg-ttl">Payment 💳</div>
   </div>
+  <input type="hidden" name="payment_method" value="{{ request.GET.pay|default:'upi' }}">
 
   <form method="POST" action="/place_order/">
     {% csrf_token %}

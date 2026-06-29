@@ -236,6 +236,7 @@ def admin_panel(request):
 
             total_payments = Payment.objects.count()
             
+            total_revenue = Order.objects.filter(status="Delivered").aggregate(Sum("final_amount"))["final_amount__sum"] or 0
             
             context = {
 

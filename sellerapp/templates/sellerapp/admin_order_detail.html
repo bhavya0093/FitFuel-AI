@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Details</title>
+
+    <link rel="stylesheet" href="{% static 'css/admin_order_details.css' %}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'admin_panel' %}?tab=orders" class="back-btn">
+    ← Back to Orders
+    </a>
+
+    <h1 class="page-title">
+        Order #{{ order.id }}
+    </h1>
+
+    <div class="card">
+
+        <h3 class="card-title">
+            Customer Details
+        </h3>
+
+        <div class="info-grid">
+
+            <div class="info-box">
+                <span>Name</span>
+                <strong>{{ order.customer.firstname }} {{ order.customer.lastname }}</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Email</span>
+                <strong>{{ order.customer.user_id.email }}</strong>
+            </div>
+
+            <div class="info-box">
+                <span>Payment</span>
+                <strong>{{ order.payment_method }}</strong>
+            </div>
+
+         <div class="info-box">
+            <span>Status</span>
+
+            <strong>
+                <span class="status-badge status-{{ order.status|lower }}">
+                    {{ order.status }}
+                </span>
+            </strong>
+        </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3 class="card-title">
+            Ordered Products
+        </h3>
+
+        <table class="product-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Image</th>
+
+                    <th>Product</th>
+
+                    <th>Qty</th>
+
+                    <th>Price</th>
+
+                    <th>Subtotal</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for item in order.items.all %}
+
+            <tr>
+
+                <td>
+                    <img src="{{ item.product.picture.url }}">
+                </td>
+
+                <td>
+                    {{ item.product.product_name }}
+                </td>
+
+                <td>
+                    {{ item.quantity }}
+                </td>
+
+                <td>
+                    ₹{{ item.price }}
+                </td>
+
+                <td>
+                    ₹{{ item.subtotal }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        <div class="total-box">
+
+            <div class="total-card">
+
+                <h4>Total Amount</h4>
+
+                <h2>
+                    ₹{{ order.final_amount }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -211,18 +211,16 @@ def admin_panel(request):
         if uid.role == "seller":
             sid = seller.objects.get(user_id=uid)
 
+            active_nav = request.GET.get("tab", "dashboard")
+
             context = {
-                    "uid": uid,
-                    "sid": sid,
-
-                    "pid": product.objects.all(),
-
-                    "categories": Category.objects.all().order_by("id"),
-
-                    "orders": Order.objects.all().order_by("-order_date"),
-
-                    "active_nav": "dashboard",
-                }
+                "uid": uid,
+                "sid": sid,
+                "pid": product.objects.all(),
+                "categories": Category.objects.all().order_by("id"),
+                "orders": Order.objects.all().order_by("-id"),
+                "active_nav": active_nav,
+            }
 
             return render(request, "sellerapp/admin_panel.html", context)
 
@@ -767,5 +765,31 @@ def admin_orders(request):
     return render(
         request,
         "sellerapp/admin_orders.html",
+        context
+    )
+
+def admin_order_details(request, pk):
+
+    if "email" not in request.session:
+        return HttpResponseRedirect("/seller/login/")
+
+    uid = User.objects.get(email=request.session["email"])
+
+    if uid.role != "seller":
+        return HttpResponseRedirect("/seller/login/")
+
+    sid = seller.objects.get(user_id=uid)
+
+    order = get_object_or_404(Order, id=pk)
+
+    context = {
+        "uid": uid,
+        "sid": sid,
+        "order": order,
+    }
+
+    return render(
+        request,
+        "sellerapp/admin_order_detail.html",
         context
     )

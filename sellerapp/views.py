@@ -10,6 +10,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Count
+from django.db.models import Sum
 
 def register(request):
     if request.method == "POST":
@@ -213,6 +214,29 @@ def admin_panel(request):
 
             active_nav = request.GET.get("tab", "dashboard")
 
+            total_products = product.objects.count()
+
+            total_categories = Category.objects.count()
+
+            total_customers = customer.objects.count()
+
+            total_orders = Order.objects.count()
+
+            pending_orders = Order.objects.filter(status="Pending").count()
+
+            cancelled_orders = Order.objects.filter(status="Cancelled").count()
+
+            total_revenue = Payment.objects.filter(status="Paid").aggregate(
+                total=Sum("amount")
+            )["total"] or 0
+
+            recent_orders = Order.objects.order_by("id")[:5]
+
+            recent_users = customer.objects.order_by("-id")[:5]
+
+            total_payments = Payment.objects.count()
+            
+            
             context = {
 
                 "uid": uid,
@@ -227,7 +251,17 @@ def admin_panel(request):
                 "payments": Payment.objects.all().order_by("-payment_date"),
 
                 "active_nav": active_nav,
-
+                
+                "total_products": total_products,
+                "total_categories": total_categories,
+                "total_customers": total_customers,
+                "total_orders": total_orders,
+                "pending_orders": pending_orders,
+                "cancelled_orders": cancelled_orders,
+                "total_revenue": total_revenue,
+                "total_payments": total_payments,   
+                "recent_orders": recent_orders,
+                "recent_users": recent_users,
             }
 
             return render(request, "sellerapp/admin_panel.html", context)

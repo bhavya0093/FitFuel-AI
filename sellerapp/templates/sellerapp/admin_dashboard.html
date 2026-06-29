@@ -1,22 +1,89 @@
 <!-- DASHBOARD -->
         <div id="dashboard-section" class="content-section">
             <div class="stats-grid">
+               <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <h3>{{ total_products }}</h3>
+                        <p>Total Products</p>
+                    </div>
+                </div>
+              <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+
+                <div class="stat-info">
+                    <h3>{{ total_categories }}</h3>
+                    <p>Categories</p>
+                </div>
+            </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-box"></i></div>
-                    <div class="stat-info"><h3>5</h3><p>Total Products</p></div>
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+
+                    <div class="stat-info">
+                        <h3>{{ total_orders }}</h3>
+                        <p>Total Orders</p>
+                    </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-tags"></i></div>
-                    <div class="stat-info"><h3>5</h3><p>Categories</p></div>
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
                 </div>
+
+                <div class="stat-info">
+                    <h3>{{ total_customers }}</h3>
+                    <p>Total Customers</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-indian-rupee-sign"></i>
+                </div>
+
+                <div class="stat-info">
+                    <h3>₹{{ total_revenue }}</h3>
+                    <p>Total Revenue</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <div class="stat-info">
+                    <h3>{{ pending_orders }}</h3>
+                    <p>Pending Orders</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+
+                <div class="stat-info">
+                    <h3>{{ cancelled_orders }}</h3>
+                    <p>Cancelled Orders</p>
+                </div>
+                
+            </div>
                 <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <div class="stat-info"><h3>1,234</h3><p>Total Orders</p></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-info"><h3>892</h3><p>Total Users</p></div>
-                </div>
+    <div class="stat-icon">
+        <i class="fas fa-credit-card"></i>
+    </div>
+
+    <div class="stat-info">
+        <h3>{{ total_payments }}</h3>
+        <p>Total Payments</p>
+    </div>
+</div>
             </div>
             <div class="form-container" style="margin-bottom:20px;">
                 <div class="form-title"><h3>Recent Orders</h3></div>
@@ -24,11 +91,44 @@
                     <table>
                         <thead><tr><th>Order ID</th><th>Customer</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
                         <tbody>
-                            <tr><td>#ORD001</td><td>John Doe</td><td>2024-01-15</td><td>Rs.1,234</td><td><span class="status-badge status-delivered">Delivered</span></td></tr>
-                            <tr><td>#ORD002</td><td>Jane Smith</td><td>2024-01-16</td><td>Rs.2,345</td><td><span class="status-badge status-processing">Processing</span></td></tr>
-                            <tr><td>#ORD003</td><td>Bob Wilson</td><td>2024-01-17</td><td>Rs.58</td><td><span class="status-badge status-pending">Pending</span></td></tr>
-                            <tr><td>#ORD004</td><td>Alice Brown</td><td>2024-01-18</td><td>Rs.120</td><td><span class="status-badge status-delivered">Delivered</span></td></tr>
-                            <tr><td>#ORD005</td><td>Charlie Davis</td><td>2024-01-19</td><td>Rs.399</td><td><span class="status-badge status-processing">Processing</span></td></tr>
+                            {% for o in recent_orders %}
+
+<tr>
+
+    <td>#ORD{{ o.id }}</td>
+
+    <td>
+        {{ o.customer.firstname }}
+        {{ o.customer.lastname }}
+    </td>
+
+    <td>
+        {{ o.order_date|date:"d M Y" }}
+    </td>
+
+    <td>
+        ₹{{ o.final_amount }}
+    </td>
+
+    <td>
+
+        <span class="status-badge status-{{ o.status|lower }}">
+            {{ o.status }}
+        </span>
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="5" style="text-align:center;">
+        No Orders Found
+    </td>
+</tr>
+
+{% endfor %}
                         </tbody>
                     </table>
                 </div>

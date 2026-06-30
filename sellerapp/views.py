@@ -212,60 +212,87 @@ def admin_panel(request):
         if uid.role == "seller":
             sid = seller.objects.get(user_id=uid)
 
+            # ================= SETTINGS UPDATE =================
+
+            if request.method == "POST":
+
+                sid.firstname = request.POST.get("firstname")
+                sid.lastname = request.POST.get("lastname")
+                sid.contectno = request.POST.get("contectno")
+                sid.seller_store_name = request.POST.get("seller_store_name")
+                sid.city = request.POST.get("city")
+                sid.GSTNO = request.POST.get("GSTNO")
+                sid.address = request.POST.get("address")
+
+                if "pic" in request.FILES:
+                    sid.pic = request.FILES["pic"]
+
+                sid.save()
+
+                # -------- Password Change --------
+
+                current = request.POST.get("current_password")
+                new = request.POST.get("new_password")
+                confirm = request.POST.get("confirm_password")
+
+                if current and new and confirm:
+
+                    if not check_password(current, uid.password):
+                        messages.error(request, "Current password is incorrect.")
+
+                    elif new != confirm:
+                        messages.error(request, "New password and Confirm password do not match.")
+
+                    else:
+                        uid.password = make_password(new)
+                        uid.save()
+
+                        messages.success(request, "Password changed successfully.")
+
+            # ================= DASHBOARD DATA =================
+
             active_nav = request.GET.get("tab", "dashboard")
 
             total_products = product.objects.count()
-
             total_categories = Category.objects.count()
-
             total_customers = customer.objects.count()
-
             total_orders = Order.objects.count()
 
             pending_orders = Order.objects.filter(status="Pending").count()
-
             cancelled_orders = Order.objects.filter(status="Cancelled").count()
-
-            total_revenue = Payment.objects.filter(status="Paid").aggregate(
-                total=Sum("amount")
-            )["total"] or 0
-
-            recent_orders = Order.objects.order_by("id")[:5]
-
-            recent_users = customer.objects.order_by("-id")[:5]
-
-            total_payments = Payment.objects.count()
-            
-            total_revenue = Order.objects.filter(status="Delivered").aggregate(Sum("final_amount"))["final_amount__sum"] or 0
-            
             delivered_orders = Order.objects.filter(status="Delivered").count()
 
-            recent_users = customer.objects.select_related("user_id").order_by("-id")[:5]
+            total_payments = Payment.objects.count()
 
+            total_revenue = (
+                Order.objects.filter(status="Delivered")
+                .aggregate(Sum("final_amount"))["final_amount__sum"] or 0
+            )
+
+            recent_orders = Order.objects.order_by("id")[:5]
+            recent_users = customer.objects.select_related("user_id").order_by("-id")[:5]
             recent_notifications = Order.objects.order_by("-id")[:5]
 
-            sales_data = [12000,18000,15000,25000,32000,27000]
+            sales_data = [12000, 18000, 15000, 25000, 32000, 27000]
 
             status_data = [
                 pending_orders,
                 cancelled_orders,
                 delivered_orders,
             ]
-            context = {
 
+            context = {
                 "uid": uid,
                 "sid": sid,
 
                 "pid": product.objects.all(),
-
                 "categories": Category.objects.all(),
 
                 "orders": Order.objects.all().order_by("id"),
-
                 "payments": Payment.objects.all().order_by("-payment_date"),
 
                 "active_nav": active_nav,
-                
+
                 "total_products": total_products,
                 "total_categories": total_categories,
                 "total_customers": total_customers,
@@ -273,13 +300,14 @@ def admin_panel(request):
                 "pending_orders": pending_orders,
                 "cancelled_orders": cancelled_orders,
                 "total_revenue": total_revenue,
-                "total_payments": total_payments,   
+                "total_payments": total_payments,
+
                 "recent_orders": recent_orders,
                 "recent_users": recent_users,
+                "recent_notifications": recent_notifications,
+
                 "sales_data": sales_data,
                 "status_data": status_data,
-                "recent_users": recent_users,
-                "recent_notifications": recent_notifications,
             }
 
             return render(request, "sellerapp/admin_panel.html", context)

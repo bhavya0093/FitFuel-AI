@@ -342,6 +342,7 @@ def admin_panel(request):
                 "low_stock_products": low_stock_products,
                 "top_products": top_products,
                 "users": users,
+                "delivered_orders": delivered_orders, 
             }
 
             return render(request, "sellerapp/admin_panel.html", context)

@@ -261,6 +261,11 @@ def admin_panel(request):
             pending_orders = Order.objects.filter(status="Pending").count()
             cancelled_orders = Order.objects.filter(status="Cancelled").count()
             delivered_orders = Order.objects.filter(status="Delivered").count()
+            # Low Stock Products
+            low_stock_products = product.objects.filter(stock_qty__lte=5).order_by("stock_qty")
+
+            # Top Selling Products
+            top_products = product.objects.order_by("-total_sold")[:5]
 
             total_payments = Payment.objects.count()
 
@@ -308,6 +313,8 @@ def admin_panel(request):
 
                 "sales_data": sales_data,
                 "status_data": status_data,
+                "low_stock_products": low_stock_products,
+                "top_products": top_products,
             }
 
             return render(request, "sellerapp/admin_panel.html", context)

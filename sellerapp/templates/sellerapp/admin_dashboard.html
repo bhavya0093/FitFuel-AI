@@ -181,7 +181,134 @@
     </div>
 
 </div>
+<div class="dashboard-bottom">
+
+    <!-- Top Selling -->
+
+    <div class="form-container">
+
+        <div class="form-title">
+            <h3>
+                <i class="fas fa-fire"></i>
+                Top Selling Products
+            </h3>
         </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Product</th>
+
+                    <th>Sold</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for p in top_products %}
+
+                <tr>
+
+                    <td>{{ p.product_name }}</td>
+
+                    <td>
+
+                        <span class="status-badge status-delivered">
+
+                            {{ p.total_sold }}
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="2" style="text-align:center;">
+                        No Data
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Low Stock -->
+
+    <div class="form-container">
+
+        <div class="form-title">
+            <h3>
+                <i class="fas fa-triangle-exclamation"></i>
+                Low Stock Alert
+            </h3>
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for p in low_stock_products %}
+
+                <tr>
+
+                    <td>{{ p.product_name }}</td>
+
+                    <td>
+
+                        <span class="status-badge status-pending">
+
+                            {{ p.stock_qty }} Left
+
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            {% empty %}
+
+                <tr>
+
+                    <td colspan="2" style="text-align:center;">
+                        No Low Stock Products
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    
+
+</div>
+        </div>
+        
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>

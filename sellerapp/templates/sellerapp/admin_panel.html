@@ -116,10 +116,73 @@
                 <input type="text" placeholder="Search...">
             </div>
             <div class="admin-info">
-                <div class="notification">
-                    <i class="fas fa-bell"></i>
-                    <span>3</span>
-                </div>
+               <div class="notification-wrapper">
+
+    <div class="notification">
+        <i class="fas fa-bell"></i>
+
+        <span>
+            {{ recent_notifications|length }}
+        </span>
+    </div>
+
+    <div class="notification-dropdown">
+
+        <h4>Notifications</h4>
+
+        {% for n in recent_notifications %}
+
+        <div class="notify-item">
+
+            {% if n.status == "Pending" %}
+
+            <strong style="color:#f59e0b;">
+                🟡 New Order #ORD{{ n.id }}
+            </strong>
+
+            {% elif n.status == "Delivered" %}
+
+            <strong style="color:#22c55e;">
+                🟢 Order Delivered #ORD{{ n.id }}
+            </strong>
+
+            {% elif n.status == "Cancelled" %}
+
+            <strong style="color:#ef4444;">
+                🔴 Order Cancelled #ORD{{ n.id }}
+            </strong>
+
+            {% else %}
+
+            <strong style="color:#3b82f6;">
+                🔵 Order Updated #ORD{{ n.id }}
+            </strong>
+
+            {% endif %}
+
+            <p>
+                {{ n.customer.firstname }}
+                {{ n.customer.lastname }}
+                placed an order.
+            </p>
+
+            <small>
+                {{ n.order_date|timesince }} ago
+            </small>
+
+        </div>
+
+        {% empty %}
+
+        <div class="notify-item">
+            No Notifications
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
                 <details class="profile-wrap">
                     <summary class="admin-profile">
                         <div class="admin-avatar">

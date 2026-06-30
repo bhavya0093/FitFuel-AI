@@ -251,22 +251,27 @@ def admin_panel(request):
 
             # ================= DASHBOARD DATA =================
 
-            active_nav = request.GET.get("tab", "dashboard")
+            active_nav = request.GET.get("tab")
+
+            if not active_nav:
+                active_nav = request.session.get("active_nav", "dashboard")
+
+            request.session["active_nav"] = active_nav
 
             total_products = product.objects.count()
             total_categories = Category.objects.count()
             total_customers = customer.objects.count()
             total_orders = Order.objects.count()
-            orders = Order.objects.all().order_by("-id")
+            filtered_orders = Order.objects.all().order_by("-id")
 
             search = request.GET.get("search")
             status = request.GET.get("status")
 
             if search:
-                orders = orders.filter(id__icontains=search)
+                filtered_orders = filtered_orders.filter(id__icontains=search)
 
             if status:
-                orders = orders.filter(status=status)
+                filtered_orders = filtered_orders.filter(status=status)
             pending_orders = Order.objects.filter(status="Pending").count()
             cancelled_orders = Order.objects.filter(status="Cancelled").count()
             delivered_orders = Order.objects.filter(status="Delivered").count()
@@ -275,6 +280,19 @@ def admin_panel(request):
 
             # Top Selling Products
             top_products = product.objects.order_by("-total_sold")[:5]
+
+            users = customer.objects.select_related("user_id").order_by("-id")
+
+            search = request.GET.get("user_search")
+
+            if search:
+                users = users.filter(
+                    firstname__icontains=search
+                ) | customer.objects.filter(
+                    lastname__icontains=search
+                ) | customer.objects.filter(
+                    user_id__email__icontains=search
+                )
 
             total_payments = Payment.objects.count()
 
@@ -302,7 +320,6 @@ def admin_panel(request):
                 "pid": product.objects.all(),
                 "categories": Category.objects.all(),
 
-                "orders": Order.objects.all().order_by("id"),
                 "payments": Payment.objects.all().order_by("-payment_date"),
 
                 "active_nav": active_nav,
@@ -319,11 +336,12 @@ def admin_panel(request):
                 "recent_orders": recent_orders,
                 "recent_users": recent_users,
                 "recent_notifications": recent_notifications,
-                "orders": orders,
+                "orders": filtered_orders,
                 "sales_data": sales_data,
                 "status_data": status_data,
                 "low_stock_products": low_stock_products,
                 "top_products": top_products,
+                "users": users,
             }
 
             return render(request, "sellerapp/admin_panel.html", context)
@@ -919,7 +937,8 @@ def update_order_status(request, pk):
             order.status = new_status
             order.save()
 
-    return redirect("admin_order_details", pk=pk)
+    request.session["active_nav"] = "orders"
+    return redirect("admin_panel")
 
 def admin_payment_details(request, pk):
 
@@ -946,33 +965,3 @@ def admin_payment_details(request, pk):
         "sellerapp/admin_payment_detail.html",
         context
     )
-
-def update_order_status(request, pk):
-
-    order = get_object_or_404(Order, id=pk)
-
-    if request.method == "POST":
-
-        new_status = request.POST.get("status")
-
-        order.status = new_status
-        order.save()
-
-        # Payment Auto Update
-
-        if hasattr(order, "payment"):
-
-            if new_status == "Delivered":
-                order.payment.status = "Paid"
-
-            elif new_status == "Cancelled":
-                order.payment.status = "Refunded"
-
-            else:
-                order.payment.status = "Pending"
-
-            order.payment.save()
-
-        return redirect("/seller/admin_panel/?tab=orders")
-
-    return redirect("/seller/admin_panel/?tab=orders")

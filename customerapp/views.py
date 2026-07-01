@@ -12,12 +12,18 @@ def customer_dashboard(request):
 
         uid = User.objects.get(email=request.session['email'])
         cid = customer.objects.get(user_id=uid)
+        selected_category = request.GET.get("category")
+
         pid = product.objects.all()
+
+        if selected_category:
+            pid = pid.filter(product_category=selected_category)
 
         context = {
             "uid": uid,
             "cid": cid,
             "pid": pid,
+            "selected_category": selected_category,
         }
 
         return render(request,"customerapp/customer_dashboard.html",context)

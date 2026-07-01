@@ -87,3 +87,13 @@
 .pcd-add{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--cyan));color:#fff;border:none;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;box-shadow:0 4px 14px rgba(8,145,178,.35);}
 .pcd-add:hover{transform:scale(1.18);box-shadow:0 8px 22px rgba(8,145,178,.5);}
 .pcd-add.added{background:linear-gradient(135deg,#10b981,#059669);}
+
+.cpill{
+    text-decoration:none;
+}
+
+.cpill.active{
+    background:linear-gradient(135deg,#06b6d4,#0ea5e9);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(14,165,233,.35);
+}

@@ -4,15 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login — FitFuel AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
 
     <div class="login-wrapper">
         <div class="login-card">
+
+            <!-- Brand Logo -->
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 24px;">
+                <div style="width: 38px; height: 38px; background: linear-gradient(135deg, #10b981, #06b6d4); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem;"><i class="fas fa-heartbeat"></i></div>
+                <div>
+                    <div style="font-family: 'Syne', sans-serif; font-size: 1.25rem; font-weight: 800; color: #1e1b4b; line-height: 1;">FitFuel AI</div>
+                    <div style="font-size: 0.65rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px;">Smarter Shopping</div>
+                </div>
+            </div>
 
             <!-- Badge -->
             <div class="badge-secure">
@@ -22,7 +31,7 @@
 
             <!-- Title -->
             <div class="login-title">Welcome back 👋</div>
-            <div class="login-sub">Sign in to your account to continue</div>
+            <div class="login-sub">Sign in to your FitFuel account</div>
 
             <!-- Success Message -->
             {% if s_msg %}

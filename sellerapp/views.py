@@ -49,7 +49,7 @@ def register(request):
                 return render(request, "sellerapp/register.html", context)
         
         myCustomMail(
-        "Welcome To QuickBasket",
+        "Welcome To FitFuel AI",
         "welcome_mail",
         email,
         {

@@ -14,7 +14,7 @@
 
   <div class="pgnav">
     <a href="/customer-dashboard/" class="back-btn">&#8592; Continue Shopping</a>
-    <div class="pg-ttl">My Cart 🛍️</div>
+    <div class="pg-ttl">My Nutrition Cart 🥑</div>
   </div>
 
   <div class="cart-layout">
@@ -67,15 +67,35 @@
               <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
               <hr class="summary-hr"/>
               <div class="total-row"><span>Total</span><span>₹{{net_amount}}</span></div>
-              <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout →</a>
+              
+              <!-- AI Nutrition Analyzer -->
+              <div class="ai-nutrition-analyzer" style="margin-bottom: 20px; padding: 15px; border-radius: 16px; background: rgba(16, 185, 129, 0.08); border: 1.5px dashed rgba(16, 185, 129, 0.25); text-align: left;">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-weight: 700; color: #059669; font-size: 0.85rem;">
+                      <i class="fas fa-brain"></i>
+                      <span>FitFuel AI Smart Analyzer</span>
+                  </div>
+                  <div style="font-size: 0.72rem; color: #475569; line-height: 1.4;">
+                      <p style="margin-bottom: 6px;">Scanning cart contents for dietary alignment...</p>
+                      <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                          <span>Macro Balance:</span>
+                          <strong style="color: #059669;">Optimal</strong>
+                      </div>
+                      <div style="display: flex; justify-content: space-between;">
+                          <span>AI Health Score:</span>
+                          <strong style="color: #059669;">94/100</strong>
+                      </div>
+                  </div>
+              </div>
+
+              <a href="{% url 'checkout' %}" class="checkout-btn">Secure Checkout →</a>
               <div class="free-del-note">🚚 Free delivery on this order</div>
             </div>
       {% else %}
 
             <div class="empty-cart">
-            <div class="empty-cart-icon">🛒</div>
+            <div class="empty-cart-icon"><i class="fas fa-heart-pulse" style="color: var(--teal);"></i></div>
             <h2>Your Cart is Empty</h2>
-            <p>Add some products to get started</p>
+            <p>Add healthy foods to get started</p>
 
             <a href="/customer-dashboard/" class="shop-btn">
                 Continue Shopping

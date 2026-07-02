@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuickBasket</title>
+<title>FitFuel AI — Personalized Nutrition. Smarter Shopping.</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@800&display=swap" rel="stylesheet">
 
 <!-- Included Separated CSS files -->
 <link rel="stylesheet" href="{% static 'customerapp/css/base.css' %}">
@@ -33,12 +33,12 @@
 <!-- HEADER -->
 <header>
   <label class="logo" for="nav-home">
-    <div class="logo-icon">🛒</div>
-    <div><div class="logo-name">QuickBasket</div><div class="logo-tag">Fresh · Fast · Always</div></div>
+    <div class="logo-icon"><i class="fas fa-heartbeat" style="color: #fff;"></i></div>
+    <div><div class="logo-name">FitFuel AI</div><div class="logo-tag">Personalized Nutrition</div></div>
   </label>
-  <div class="hsearch"><i class="fas fa-search"></i><span>Search groceries, fruits, dairy...</span></div>
+  <div class="hsearch"><i class="fas fa-search"></i><span>Search healthy foods, proteins, vitamins...</span></div>
   <div class="hright">
-    <div class="dbadge"><i class="fas fa-bolt"></i> 10 min delivery</div>
+    <div class="dbadge"><i class="fas fa-shield-alt"></i> Science-backed</div>
     <a href="{% url 'view_cart' %}" style="text-decoration: none;" class="cart-btn" for="nav-cart"><i class="fas fa-basket-shopping"></i> My Cart</a>
     <div class="ubtn-wrap">
       <div class="ubtn">
@@ -66,7 +66,7 @@
 {% include 'customerapp/profile.html' %}
 {% include 'customerapp/edit.html' %}
 
-<footer>© 2026 <b>QuickBasket</b> · Ice Blue Edition · Fresh groceries in 10 minutes 🧊</footer>
+<footer>© 2026 <b>FitFuel AI</b> · Powered by AI Nutrition Engine · Smarter Shopping, Healthier Living 🌿</footer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -76,6 +76,24 @@ document.addEventListener("DOMContentLoaded", function() {
         'nav-profile': 'profile',
         'nav-edit': 'edit'
     };
+    
+    // Set radio state from URL parameter on load
+    const params = new URLSearchParams(window.location.search);
+    let activePage = params.get('active_page');
+    
+    if (!activePage && window.location.hash.includes('sec-addresses')) {
+        activePage = 'profile';
+    }
+    
+    if (activePage) {
+        const targetId = Object.keys(radioIds).find(key => radioIds[key] === activePage);
+        if (targetId) {
+            const targetRadio = document.getElementById(targetId);
+            if (targetRadio) {
+                targetRadio.checked = true;
+            }
+        }
+    }
     
     Object.keys(radioIds).forEach(id => {
         const radio = document.getElementById(id);

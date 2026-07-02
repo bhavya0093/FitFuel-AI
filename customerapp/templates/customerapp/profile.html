@@ -57,7 +57,7 @@
 
           {% for order in orders %}
           <div class="orow">
-            <span class="oid">#QB-{{ order.id }}</span>
+            <span class="oid">#FF-{{ order.id }}</span>
             <span>{{ order.order_date|date:"d M Y" }}</span>
             <span>{{ order.payment_method }}</span>
             <span>₹{{ order.total_amount }}</span>

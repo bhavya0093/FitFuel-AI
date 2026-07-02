@@ -1,14 +1,14 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --ice1:#e8f4fd;--ice2:#d0eaf8;--ice3:#b8dff5;
-  --teal:#0891b2;--cyan:#06b6d4;--sky:#38bdf8;
-  --navy:#0c2340;--slate:#334e6e;--mist:#6b8ba4;
-  --accent:#f97316;--green:#10b981;--gold:#f59e0b;
+  --ice1:#f0fdf4;--ice2:#dcfce7;--ice3:#bbf7d0;
+  --teal:#10b981;--cyan:#06b6d4;--sky:#34d399;
+  --navy:#0f172a;--slate:#334155;--mist:#64748b;
+  --accent:#10b981;--green:#10b981;--gold:#f59e0b;
   --r:16px;--rl:24px;
 }
 html{scroll-behavior:smooth;}
-body{font-family: 'Libre Baskerville', Georgia, serif;color:var(--navy);min-height:100vh;
-background:linear-gradient(135deg,#f8fafc,#e0f2fe,#f0fdf4);
+body{font-family: 'Inter', system-ui, -apple-system, sans-serif;color:var(--navy);min-height:100vh;
+background:linear-gradient(135deg,#f8fafc,#f1f5f9,#f0fdf4);
 overflow-x:hidden;}
 
 /* ═══ ICE BLUE BACKGROUND ═══ */

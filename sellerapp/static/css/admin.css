@@ -1,36 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-    --bg-grad-1: #dbeafe; --bg-grad-2: #bfdbfe; --bg-grad-3: #cffafe; --bg-grad-4: #e0f2fe;
+    --bg-grad-1: #dcfce7; --bg-grad-2: #bbf7d0; --bg-grad-3: #cffafe; --bg-grad-4: #ecfdf5;
     --glass-sidebar: rgba(255,255,255,0.72); --glass-card: rgba(255,255,255,0.55);
     --glass-card2: rgba(255,255,255,0.40); --glass-input: rgba(255,255,255,0.60);
     --glass-topbar: rgba(255,255,255,0.68); --glass-hover: rgba(255,255,255,0.75);
-    --blue-50:#eff6ff; --blue-100:#dbeafe; --blue-200:#bfdbfe; --blue-300:#93c5fd;
-    --blue-400:#60a5fa; --blue-500:#3b82f6; --blue-600:#2563eb; --blue-700:#1d4ed8;
+    --blue-50:#f0fdf4; --blue-100:#dcfce7; --blue-200:#bbf7d0; --blue-300:#86efac;
+    --blue-400:#4ade80; --blue-500:#10b981; --blue-600:#059669; --blue-700:#047857;
     --cyan-100:#cffafe; --cyan-200:#a5f3fc; --cyan-300:#67e8f9; --cyan-400:#22d3ee;
     --cyan-500:#06b6d4; --cyan-600:#0891b2;
-    --sky-300:#7dd3fc; --sky-400:#38bdf8; --sky-500:#0ea5e9;
-    --indigo-400:#818cf8; --indigo-500:#6366f1;
-    --grad-hero:  linear-gradient(135deg,#3b82f6 0%,#06b6d4 100%);
-    --grad-hero2: linear-gradient(135deg,#2563eb 0%,#0891b2 100%);
-    --grad-cool:  linear-gradient(135deg,#60a5fa 0%,#22d3ee 100%);
-    --grad-deep:  linear-gradient(135deg,#1d4ed8 0%,#0e7490 100%);
-    --grad-soft:  linear-gradient(135deg,#93c5fd 0%,#67e8f9 100%);
+    --sky-300:#67e8f9; --sky-400:#22d3ee; --sky-500:#06b6d4;
+    --indigo-400:#10b981; --indigo-500:#059669;
+    --grad-hero:  linear-gradient(135deg,#10b981 0%,#06b6d4 100%);
+    --grad-hero2: linear-gradient(135deg,#059669 0%,#0891b2 100%);
+    --grad-cool:  linear-gradient(135deg,#34d399 0%,#22d3ee 100%);
+    --grad-deep:  linear-gradient(135deg,#047857 0%,#0e7490 100%);
+    --grad-soft:  linear-gradient(135deg,#86efac 0%,#67e8f9 100%);
     --s-txt:#065f46; --s-bg:rgba(209,250,229,0.85); --s-bdr:rgba(5,150,105,0.28);
     --d-txt:#9f1239; --d-bg:rgba(255,228,230,0.85); --d-bdr:rgba(244,63,94,0.25);
     --w-txt:#92400e; --w-bg:rgba(254,243,199,0.85); --w-bdr:rgba(245,158,11,0.25);
     --i-txt:#0c4a6e; --i-bg:rgba(224,242,254,0.85); --i-bdr:rgba(14,165,233,0.28);
     --m-txt:#475569; --m-bg:rgba(241,245,249,0.85); --m-bdr:#e2e8f0;
-    --txt:#0f172a; --txt2:#1e3a5f; --txt3:#3b6ba5; --txt4:#7cb3d8;
-    --sb-txt:#1e3a5f; --sb-txt-hi:#0f172a; --sb-txt-lo:#5a8ab8;
-    --bdr:rgba(59,130,246,0.12); --bdr2:rgba(59,130,246,0.20); --bdr3:rgba(59,130,246,0.32);
+    --txt:#0f172a; --txt2:#1e1b4b; --txt3:#059669; --txt4:#94a3b8;
+    --sb-txt:#1e1b4b; --sb-txt-hi:#0f172a; --sb-txt-lo:#64748b;
+    --bdr:rgba(16,185,129,0.12); --bdr2:rgba(16,185,129,0.20); --bdr3:rgba(16,185,129,0.32);
     --bdr-w:rgba(255,255,255,0.55); --bdr-w2:rgba(255,255,255,0.80);
-    --sh1:0 2px 8px rgba(59,130,246,0.08),0 1px 3px rgba(0,0,0,0.04);
-    --sh2:0 6px 20px rgba(59,130,246,0.14),0 2px 8px rgba(0,0,0,0.05);
-    --sh3:0 16px 48px rgba(59,130,246,0.20),0 6px 16px rgba(0,0,0,0.06);
-    --sh-blue:0 10px 36px rgba(59,130,246,0.38); --sh-cyan:0 10px 36px rgba(6,182,212,0.34);
-    --sh-glass:0 8px 32px rgba(59,130,246,0.12),inset 0 1px 0 rgba(255,255,255,0.80);
-    --sh-sb:2px 0 30px rgba(59,130,246,0.12),1px 0 8px rgba(0,0,0,0.04);
+    --sh1:0 2px 8px rgba(16,185,129,0.08),0 1px 3px rgba(0,0,0,0.04);
+    --sh2:0 6px 20px rgba(16,185,129,0.14),0 2px 8px rgba(0,0,0,0.05);
+    --sh3:0 16px 48px rgba(16,185,129,0.20),0 6px 16px rgba(0,0,0,0.06);
+    --sh-blue:0 10px 36px rgba(16,185,129,0.25); --sh-cyan:0 10px 36px rgba(6,182,212,0.25);
+    --sh-glass:0 8px 32px rgba(16,185,129,0.12),inset 0 1px 0 rgba(255,255,255,0.80);
+    --sh-sb:2px 0 30px rgba(16,185,129,0.12),1px 0 8px rgba(0,0,0,0.04);
     --r1:8px; --r2:14px; --r3:18px; --r4:24px;
     --ease:cubic-bezier(0.22,1,0.36,1);
     --tf:0.15s var(--ease); --tb:0.24s var(--ease); --ts:0.40s var(--ease);
@@ -46,21 +46,21 @@ body {
     font-size:14px; line-height:1.6;
     color:var(--txt); position:relative;
     background:
-        radial-gradient(ellipse 80% 60% at 20% 0%,#bfdbfe 0%,transparent 60%),
+        radial-gradient(ellipse 80% 60% at 20% 0%,#bbf7d0 0%,transparent 60%),
         radial-gradient(ellipse 70% 55% at 80% 5%,#a5f3fc 0%,transparent 55%),
-        radial-gradient(ellipse 60% 50% at 5% 70%,#93c5fd 0%,transparent 55%),
+        radial-gradient(ellipse 60% 50% at 5% 70%,#86efac 0%,transparent 55%),
         radial-gradient(ellipse 65% 50% at 90% 80%,#cffafe 0%,transparent 55%),
-        radial-gradient(ellipse 50% 45% at 50% 50%,#e0f2fe 0%,transparent 60%),
-        linear-gradient(160deg,#dbeafe 0%,#cffafe 40%,#e0f2fe 70%,#bfdbfe 100%);
+        radial-gradient(ellipse 50% 45% at 50% 50%,#ecfdf5 0%,transparent 60%),
+        linear-gradient(160deg,#dcfce7 0%,#cffafe 40%,#ecfdf5 70%,#bbf7d0 100%);
 }
 body::before {
     content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:linear-gradient(rgba(59,130,246,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.04) 1px,transparent 1px);
+    background-image:linear-gradient(rgba(16,185,129,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.04) 1px,transparent 1px);
     background-size:32px 32px;
 }
 body::after {
     content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(ellipse 40% 35% at 75% 20%,rgba(6,182,212,0.18) 0%,transparent 60%),radial-gradient(ellipse 35% 30% at 20% 75%,rgba(59,130,246,0.16) 0%,transparent 60%);
+    background:radial-gradient(ellipse 40% 35% at 75% 20%,rgba(6,182,212,0.18) 0%,transparent 60%),radial-gradient(ellipse 35% 30% at 20% 75%,rgba(16,185,129,0.16) 0%,transparent 60%);
     animation:blobDrift 12s ease-in-out infinite alternate;
 }
 @keyframes blobDrift{0%{transform:scale(1) translate(0,0);}100%{transform:scale(1.08) translate(2%,2%);}}
@@ -87,7 +87,7 @@ input[type="checkbox"].nav-check {
 }
 .sidebar::before {
     content:''; position:absolute; top:0; left:0; right:0; height:3px; z-index:2;
-    background:linear-gradient(90deg,#3b82f6,#06b6d4,#22d3ee,#0ea5e9,#6366f1,#3b82f6);
+    background:linear-gradient(90deg,#10b981,#06b6d4,#22d3ee,#34d399,#059669,#10b981);
     background-size:250% 100%; animation:sidebarBar 4s linear infinite;
 }
 @keyframes sidebarBar{0%{background-position:0% center;}100%{background-position:250% center;}}

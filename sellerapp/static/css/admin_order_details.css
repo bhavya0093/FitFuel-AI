@@ -8,7 +8,7 @@
 }
 
 body{
-    background:#eefbfc;
+    background: linear-gradient(135deg,#f8fafc,#f1f5f9,#f0fdf4);
     padding:40px;
 }
 
@@ -20,7 +20,7 @@ body{
 .page-title{
     font-size:34px;
     font-weight:800;
-    color:#0b3558;
+    color:#1e1b4b;
     margin-bottom:25px;
 }
 
@@ -29,13 +29,13 @@ body{
     border-radius:18px;
     padding:30px;
     margin-bottom:25px;
-    box-shadow:0 12px 30px rgba(0,170,190,.08);
-    border:1px solid #d8f0f3;
+    box-shadow:0 12px 30px rgba(16,185,129,.08);
+    border:1px solid #dcfce7;
 }
 
 .card-title{
     font-size:22px;
-    color:#083b54;
+    color:#1e1b4b;
     margin-bottom:22px;
     font-weight:700;
 }
@@ -47,21 +47,21 @@ body{
 }
 
 .info-box{
-    background:#f8fcfd;
+    background:#f8fafc;
     padding:16px 18px;
     border-radius:12px;
-    border:1px solid #e6f3f5;
+    border:1px solid #dcfce7;
 }
 
 .info-box > span{
     display:block;
-    color:#7d97a4;
+    color:#64748b;
     font-size:13px;
     margin-bottom:6px;
 }
 
 .info-box strong{
-    color:#083b54;
+    color:#1e1b4b;
     font-size:17px;
 }
 
@@ -126,13 +126,13 @@ body{
 .product-table th{
     padding:15px;
     text-align:left;
-    color:#083b54;
+    color:#1e1b4b;
     font-size:14px;
 }
 
 .product-table td{
     padding:18px 15px;
-    border-top:1px solid #edf4f5;
+    border-top:1px solid #dcfce7;
     color:#526875;
 }
 
@@ -141,7 +141,7 @@ body{
     height:70px;
     object-fit:cover;
     border-radius:12px;
-    border:1px solid #d8edf2;
+    border:1px solid #dcfce7;
 }
 
 .total-box{
@@ -151,7 +151,7 @@ body{
 }
 
 .total-card{
-    background:#10bfd1;
+    background:linear-gradient(135deg,#10b981,#06b6d4);
     color:#fff;
     padding:18px 28px;
     border-radius:14px;
@@ -173,8 +173,8 @@ body{
     margin-bottom:25px;
     padding:12px 22px;
     background:#fff;
-    border:2px solid #10bfd1;
-    color:#10bfd1;
+    border:2px solid #10b981;
+    color:#10b981;
     text-decoration:none;
     border-radius:40px;
     font-weight:700;
@@ -182,7 +182,7 @@ body{
 }
 
 .back-btn:hover{
-    background:#10bfd1;
+    background:#10b981;
     color:#fff;
 }
 
@@ -215,7 +215,7 @@ body{
     width:100%;
     margin-top:10px;
     padding:10px 14px;
-    border:1px solid #d8edf2;
+    border:1px solid #dcfce7;
     border-radius:10px;
     outline:none;
     font-size:15px;
@@ -228,7 +228,7 @@ body{
     padding:11px;
     border:none;
     border-radius:10px;
-    background:#10bfd1;
+    background:#10b981;
     color:#fff;
     font-weight:700;
     cursor:pointer;
@@ -236,5 +236,5 @@ body{
 }
 
 .update-btn:hover{
-    background:#099ead;
+    background:#059669;
 }

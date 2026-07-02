@@ -235,7 +235,7 @@
 
 #page-profile .oth {
   display: grid;
-  grid-template-columns: 1.5fr 1fr .8fr .5fr 1fr;
+  grid-template-columns: 1.2fr 1.3fr 1.1fr 1.1fr 0.8fr 1.2fr;
   gap: 8px;
   padding: 10px 20px;
   background: #faf8ff;
@@ -248,7 +248,7 @@
 
 #page-profile .orow {
   display: grid;
-  grid-template-columns: 1.5fr 1fr .8fr .5fr 1fr;
+  grid-template-columns: 1.2fr 1.3fr 1.1fr 1.1fr 0.8fr 1.2fr;
   gap: 8px;
   padding: 11px 20px;
   font-size: .8rem;
@@ -259,7 +259,29 @@
 
 #page-profile .oid { color: #7c3aed; font-weight: 700; }
 
-#page-profile .sp { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; }
-#page-profile .sp.s1 { background: rgba(34,211,238,.1); color: #0e7490; }
-#page-profile .sp.s2 { background: rgba(139,92,246,.1); color: #5b21b6; }
-#page-profile .sp.s3 { background: rgba(244,114,182,.1); color: #9d174d; } 
+#page-profile .oth span:last-child,
+#page-profile .orow span:last-child {
+  text-align: center;
+  justify-self: center;
+}
+
+#page-profile .sp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  max-width: 130px;
+  height: 34px;
+  padding: 0 14px;
+  margin: 0 auto;
+  border-radius: 50px;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+#page-profile .sp i { margin-right: 6px; }
+#page-profile .sp.s1 { background: #dff7ef; color: #059669; } /* Delivered (Green) */
+#page-profile .sp.s2 { background: #dbeafe; color: #2563eb; } /* In Transit / Shipped (Blue) */
+#page-profile .sp.s3 { background: #fef3c7; color: #d97706; } /* Pending / Confirmed (Amber) */
+#page-profile .sp.s4 { background: #fee2e2; color: #dc2626; } /* Cancelled (Red) */
+#page-profile .sp.s5 { background: #ede9fe; color: #7c3aed; } /* Packed (Purple) */ 

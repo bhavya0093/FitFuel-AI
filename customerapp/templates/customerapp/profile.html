@@ -12,10 +12,10 @@
         <div class="pem">{{uid.email}}</div>
       </div>
       <div class="pkpis">
-        <div class="kpi"><span class="kpi-v">24</span><div class="kpi-l">Orders</div></div>
-        <div class="kpi"><span class="kpi-v">₹8.4k</span><div class="kpi-l">Spent</div></div>
-        <div class="kpi"><span class="kpi-v">6</span><div class="kpi-l">Wishlist</div></div>
-        <div class="kpi"><span class="kpi-v">3</span><div class="kpi-l">Coupons</div></div>
+        <div class="kpi"><span class="kpi-v">{{ cid.total_orders }}</span><div class="kpi-l">Orders</div></div>
+        <div class="kpi"><span class="kpi-v">{{ cid.total_spent }}</span><div class="kpi-l">Spent</div></div>
+        <div class="kpi"><span class="kpi-v">{{ cid.wishlist_count }}</span><div class="kpi-l">Wishlist</div></div>
+        <div class="kpi"><span class="kpi-v">{{ cid.coupons_count }}</span><div class="kpi-l">Coupons</div></div>
       </div>
       <nav class="pnav">
         <a href="#" class="pni on"><i class="fas fa-user"></i> Personal Info</a>

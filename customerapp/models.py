@@ -14,6 +14,30 @@ class customer(models.Model):
 
     def __str__(self):
         return self.firstname
+
+    @property
+    def total_orders(self):
+        return self.order_set.count()
+
+    @property
+    def total_spent(self):
+        total = sum(order.final_amount for order in self.order_set.exclude(status="Cancelled"))
+        if total >= 1000:
+            k_val = float(total) / 1000
+            if k_val == int(k_val):
+                return f"₹{int(k_val)}k"
+            return f"₹{k_val:.1f}k"
+        if total == int(total):
+            return f"₹{int(total)}"
+        return f"₹{total}"
+
+    @property
+    def wishlist_count(self):
+        return 6
+
+    @property
+    def coupons_count(self):
+        return 3
     
 class cart(models.Model):
     customer = models.ForeignKey(customer,on_delete=models.CASCADE)

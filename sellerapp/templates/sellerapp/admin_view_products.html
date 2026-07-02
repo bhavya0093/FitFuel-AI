@@ -112,6 +112,28 @@
 
                     <h4>{{ p.product_name }}</h4>
 
+                    <div class="nutrition-badges">
+
+                        {% if p.is_ai_recommended %}
+                        <span class="badge-ai">
+                            🤖 AI Recommended
+                        </span>
+                        {% endif %}
+
+                        {% if p.is_featured %}
+                        <span class="badge-featured">
+                            ⭐ Featured
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="brand-name">
+
+                        {{ p.brand }}
+
+                    </div>
+
                     <div
                     style="font-size:12px;
                     color:#3b82f6;
@@ -123,11 +145,39 @@
 
                     </div>
 
+                    <div class="nutrition-grid">
+
+                    <span>🔥 {{ p.calories }} kcal</span>
+
+                    <span>💪 {{ p.protein }}g Protein</span>
+
+                    <span>🍚 {{ p.carbs }}g Carbs</span>
+
+                    <span>🥑 {{ p.fat }}g Fat</span>
+
+                </div>
+
                     <div class="product-price-all">
 
                         ₹{{ p.product_price }}
 
                     </div>
+
+                    <div class="diet-goal">
+
+                    <span class="diet-tag">
+
+                        🌱 {{ p.diet_type }}
+
+                    </span>
+
+                    <span class="goal-tag">
+
+                        🎯 {{ p.goal_type }}
+
+                    </span>
+
+                </div>
 
                     <div
                     style="font-size:13px;
@@ -141,6 +191,12 @@
 
                     </div>
 
+                    <div class="serving-size">
+
+                            🥄 {{ p.serving_size }}
+
+                        </div>
+
                     <label
                         class="view-details-btn"
                         for="nav-product-{{ p.id }}">
@@ -149,7 +205,29 @@
 
                         View Details
 
+                        
+
                     </label>
+
+                    <div class="product-actions">
+
+                            <label
+                                for="nav-product-{{ p.id }}"
+                                class="edit-btn">
+
+                                ✏️ Edit
+
+                            </label>
+
+                            <a
+                                href="{% url 'delete_product' p.id %}"
+                                class="delete-btn">
+
+                                🗑 Delete
+
+                            </a>
+
+                        </div>
 
                 </div>
 

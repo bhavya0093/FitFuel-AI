@@ -316,6 +316,80 @@ details.profile-wrap[open] .profile-dropdown {
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(59,130,246,0.12);background:rgba(255,255,255,0.92);}
 .form-group input[type="file"]{cursor:pointer;color:var(--txt3);}
 
+/* ── CHECKBOX FIX (Featured Product / AI Recommended) ── */
+.form-group input[type="checkbox"]{
+    width:16px !important;
+    height:16px !important;
+    padding:0 !important;
+    margin:0 !important;
+    background:none !important;
+    border:1.5px solid rgba(59,130,246,0.35) !important;
+    border-radius:4px !important;
+    box-shadow:none !important;
+    -webkit-appearance:checkbox !important;
+    appearance:checkbox !important;
+    accent-color:var(--blue-500);
+    cursor:pointer !important;
+    flex-shrink:0;
+    display:inline-block !important;
+}
+.form-group input[type="checkbox"]:hover,
+.form-group input[type="checkbox"]:focus{
+    box-shadow:none !important;
+    background:none !important;
+}
+.form-group label.checkbox-label,
+.form-group label:has(input[type="checkbox"]){
+    display:flex !important;
+    align-items:center !important;
+    gap:9px !important;
+    text-transform:none !important;
+    letter-spacing:normal !important;
+    font-size:0.85rem !important;
+    font-weight:700 !important;
+    color:var(--txt) !important;
+    cursor:pointer;
+    margin-top:6px;
+    margin-bottom:0;
+}
+/* ── CHECKBOX FIX (Featured Product / AI Recommended) ── */
+/* Global .form-group input rule ke upar override — checkbox ko full-width white box banne se rokta hai */
+.form-group input[type="checkbox"]{
+    width:auto;
+    height:16px;
+    padding:0;
+    margin:0;
+    background:none;
+    border:1.5px solid rgba(59,130,246,0.35);
+    border-radius:4px;
+    box-shadow:none;
+    -webkit-appearance:checkbox;
+    appearance:checkbox;
+    accent-color:var(--blue-500);
+    cursor:pointer;
+    flex-shrink:0;
+}
+.form-group input[type="checkbox"]:hover,
+.form-group input[type="checkbox"]:focus{
+    box-shadow:none;
+    background:none;
+}
+/* Checkbox ke sath wala label ek row me align ho, uppercase/spacing hat jaye */
+.form-group label.checkbox-label,
+.form-group label:has(input[type="checkbox"]){
+    display:flex;
+    align-items:center;
+    gap:9px;
+    text-transform:none;
+    letter-spacing:normal;
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--txt);
+    cursor:pointer;
+    margin-top:6px;
+    margin-bottom:0;
+}
+
 /* ── BUTTONS ── */
 .submit-btn{position:relative;overflow:hidden;background:var(--grad-hero);color:#fff;border:none;padding:13px 28px;border-radius:var(--r2);font-size:0.92rem;font-weight:800;cursor:pointer;width:100%;margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;transition:var(--tb);letter-spacing:0.4px;box-shadow:0 4px 22px rgba(59,130,246,0.42),0 1px 0 rgba(255,255,255,0.12) inset;text-decoration:none;}
 .submit-btn:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(59,130,246,0.52),0 1px 0 rgba(255,255,255,0.12) inset;}
@@ -702,4 +776,306 @@ tr:last-child td{border-bottom:none;}
 
 .search-box .search-input{
     padding-left:45px;
+}
+
+/* =========================================================
+   FITFUEL AI PRODUCT CARDS
+========================================================= */
+
+.product-card-all{
+
+background:#ffffff;
+
+border-radius:22px;
+
+overflow:hidden;
+
+box-shadow:0 15px 45px rgba(15,23,42,.08);
+
+transition:.35s;
+
+border:1px solid rgba(16,185,129,.08);
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.product-card-all:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 25px 60px rgba(16,185,129,.18);
+
+}
+
+.product-card-all img{
+
+height:220px;
+
+object-fit:cover;
+
+width:100%;
+
+}
+
+.product-info-all{
+
+padding:20px;
+
+}
+
+.brand-name{
+
+font-size:13px;
+
+font-weight:700;
+
+color:#10B981;
+
+margin:6px 0 10px;
+
+}
+
+.nutrition-badges{
+
+display:flex;
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin:10px 0;
+
+}
+
+.badge-ai{
+
+background:#ECFDF5;
+
+color:#059669;
+
+padding:6px 12px;
+
+border-radius:50px;
+
+font-size:11px;
+
+font-weight:700;
+
+}
+
+.badge-featured{
+
+background:#FEF3C7;
+
+color:#D97706;
+
+padding:6px 12px;
+
+border-radius:50px;
+
+font-size:11px;
+
+font-weight:700;
+
+}
+
+.nutrition-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:8px;
+
+margin:15px 0;
+
+}
+
+.nutrition-grid span{
+
+background:#F8FAFC;
+
+padding:8px 10px;
+
+border-radius:12px;
+
+font-size:12px;
+
+font-weight:600;
+
+}
+
+.diet-goal{
+
+display:flex;
+
+gap:10px;
+
+margin:12px 0;
+
+flex-wrap:wrap;
+
+}
+
+.diet-tag{
+
+background:#DCFCE7;
+
+color:#15803D;
+
+padding:6px 14px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+.goal-tag{
+
+background:#DBEAFE;
+
+color:#1D4ED8;
+
+padding:6px 14px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+}
+
+.serving-size{
+
+font-size:13px;
+
+font-weight:600;
+
+color:#475569;
+
+margin:8px 0 15px;
+
+}
+
+.product-actions{
+
+display:flex;
+
+gap:10px;
+
+margin-top:18px;
+
+}
+
+.edit-btn{
+
+flex:1;
+
+padding:10px;
+
+border-radius:12px;
+
+background:#10B981;
+
+color:#fff;
+
+font-weight:700;
+
+cursor:pointer;
+
+text-align:center;
+
+transition:.25s;
+
+}
+
+.edit-btn:hover{
+
+background:#059669;
+
+}
+
+.delete-btn{
+
+flex:1;
+
+padding:10px;
+
+border-radius:12px;
+
+background:#EF4444;
+
+color:#fff;
+
+font-weight:700;
+
+text-decoration:none;
+
+text-align:center;
+
+transition:.25s;
+
+}
+
+.delete-btn:hover{
+
+background:#DC2626;
+
+}
+
+.add-product-layout{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:30px;
+    align-items:start;
+}
+
+.image-upload-card{
+    position:sticky;
+    top:20px;
+}
+
+.form-divider{
+    grid-column:1/-1;
+    border:none;
+    border-top:1px solid #dbeafe;
+    margin:10px 0 20px;
+}
+
+.section-heading{
+    grid-column:1/-1;
+    margin:0;
+    font-size:22px;
+    font-weight:800;
+    color:#0f172a;
+}
+
+@media(max-width:992px){
+    .add-product-layout{
+        grid-template-columns:1fr;
+    }
+    .card-section{
+    margin-top:6px;
+}
+
+.card-section h3{
+    font-size:1.05rem;
+    font-weight:800;
+    color:var(--txt);
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+    .image-upload-card{
+        position:static;
+    }
 }

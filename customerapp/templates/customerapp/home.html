@@ -88,85 +88,71 @@
     </div>
   </div>
 
-  <!-- CATEGORIES + PRODUCTS -->
 <!-- CATEGORIES -->
 <div class="sh" style="margin-bottom:14px;">
-    <div class="sh-t">
-        Browse <em>Categories</em>
-    </div>
+    <div class="sh-t">Browse <em>Categories</em></div>
 </div>
 
 <div class="cpills">
-
     <a href="{% url 'customer_dashboard' %}"
        class="cpill {% if not selected_category %}active{% endif %}">
-        🏠 All
+        All
     </a>
-
     {% for c in categories %}
-
     <a href="{% url 'customer_dashboard' %}?category={{ c.id }}"
        class="cpill {% if selected_category == c.id|stringformat:'s' %}active{% endif %}">
-
-        {% if c.category_image %}
-            <img src="{{ c.category_image.url }}"
-                 style="width:22px;height:22px;border-radius:50%;object-fit:cover;">
-        {% else %}
-            📦
-        {% endif %}
-
         {{ c.category_name }}
-
     </a>
-
     {% endfor %}
-
 </div>
-  <div class="sh" style="margin-bottom:16px;"><div class="sh-t"><em>Fresh</em> Picks Today</div><a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a></div>
 
-  <div class="pgrid" id="pgrid">
+<!-- FRESH PICKS -->
+<div class="sh" style="margin:28px 0 18px;">
+    <div class="sh-t"><em>Fresh</em> Picks Today</div>
+    <a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a>
+</div>
 
+<div class="pgrid" id="pgrid">
     {% for p in pid %}
-    <div class="pcd g1 s1
-      {% if p.product_category == 'Dairy' %}pcd-dairy
-      {% elif p.product_category == 'Vegetables' %}pcd-veg
-      {% elif p.product_category == 'Fruits' %}pcd-fruits
-      {% elif p.product_category == 'Grocery' %}pcd-grocery
-      {% elif p.product_category == 'Bakery' %}pcd-bakery
-      {% endif %}">
-      <div class="pcd-img">
-        <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
-        {% if p.badge_text %}
-        <span class="pcd-bdg">{{ p.badge_text }}</span>
-        {% endif %}
-        <label class="pcd-fav">
-          <input type="checkbox" class="fav-chk">
-          <i class="far fa-heart"></i>
-          <i class="fas fa-heart"></i>
-        </label>
-      </div>
-      <div class="pcd-body">
-        <div class="pcd-name">{{ p.product_name }}</div>
-        <div class="pcd-qty">{{ p.weight_unit }} · {{ p.product_category }}</div>
-        <div class="pcd-foot">
-          <div class="pcd-pp">
-            <span class="pcd-now">Rs.{{ p.product_price }}</span>
-            {% if p.discount %}
-            <span class="pcd-old" style="font-size:0.75rem;color:#94a3b8;text-decoration:line-through;">{{ p.discount }}% off</span>
+    <div class="pcd">
+        <div class="pcd-img">
+            <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
+            {% if p.badge_text %}
+            <span class="pcd-bdg">{{ p.badge_text }}</span>
             {% endif %}
-          </div>
-          <a href="{% url 'add_to_cart' pk=p.id %}" class="pcd-add" style="text-decoration: none"><i class="fas fa-plus"></i></a>
+            <label class="pcd-fav">
+                <input type="checkbox" class="fav-chk">
+                <i class="far fa-heart"></i>
+                <i class="fas fa-heart"></i>
+            </label>
+            {% if p.discount %}
+            <span class="pcd-discount">{{ p.discount }}% OFF</span>
+            {% endif %}
         </div>
-      </div>
+        <div class="pcd-body">
+            <div class="pcd-cat-tag">{{ p.product_category }}</div>
+            <div class="pcd-name">{{ p.product_name }}</div>
+            <div class="pcd-qty">
+                <i class="fas fa-weight-hanging" style="font-size:0.7rem;"></i>
+                {{ p.weight_unit }}
+            </div>
+            <div class="pcd-foot">
+                <div class="pcd-pp">
+                    <span class="pcd-now">₹{{ p.product_price }}</span>
+                </div>
+                <a href="{% url 'add_to_cart' pk=p.id %}" class="pcd-add">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
     </div>
     {% empty %}
-    <div style="grid-column:1/-1;text-align:center;padding:40px;color:#94a3b8;">
-      <i class="fas fa-box-open" style="font-size:2.5rem;margin-bottom:12px;display:block;"></i>
-      <p style="font-weight:700;">No products available</p>
+    <div class="empty-products">
+        <i class="fas fa-box-open"></i>
+        <p>No products available</p>
     </div>
     {% endfor %}
-
-  </div>
+</div>
 
   <!-- ORDERS -->
   <div class="sh" style="margin-bottom:16px;"><div class="sh-t">Recent <em>Orders</em></div><a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a></div>

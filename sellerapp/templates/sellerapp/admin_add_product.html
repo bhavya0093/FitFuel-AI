@@ -68,6 +68,177 @@
                                     <label>Description</label>
                                     <textarea rows="4" name="description"></textarea>
                                 </div>
+                                <hr class="form-divider">
+
+<h3 class="section-heading">
+    🥗 Nutrition Information
+</h3>
+
+<div class="form-grid">
+
+    <div class="form-group">
+        <label>Calories (kcal)</label>
+        <input type="number" name="calories" min="0">
+    </div>
+
+    <div class="form-group">
+        <label>Protein (g)</label>
+        <input type="number" step="0.1" name="protein">
+    </div>
+
+    <div class="form-group">
+        <label>Carbs (g)</label>
+        <input type="number" step="0.1" name="carbs">
+    </div>
+
+    <div class="form-group">
+        <label>Fat (g)</label>
+        <input type="number" step="0.1" name="fat">
+    </div>
+
+    <div class="form-group">
+        <label>Sugar (g)</label>
+        <input type="number" step="0.1" name="sugar">
+    </div>
+
+    <div class="form-group">
+        <label>Fiber (g)</label>
+        <input type="number" step="0.1" name="fiber">
+    </div>
+
+    <div class="form-group">
+        <label>Serving Size</label>
+        <input type="text"
+               name="serving_size"
+               placeholder="100g">
+    </div>
+
+</div>
+
+<hr class="form-divider">
+
+<h3 class="section-heading">
+🤖 AI Product Details
+</h3>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Diet Type</label>
+
+<select name="diet_type">
+
+<option value="Veg">Veg</option>
+
+<option value="Vegan">Vegan</option>
+
+<option value="Non-Veg">Non-Veg</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Goal Type</label>
+
+<select name="goal_type">
+
+<option value="Weight Loss">
+
+Weight Loss
+
+</option>
+
+<option value="Muscle Gain">
+
+Muscle Gain
+
+</option>
+
+<option value="Maintenance">
+
+Maintenance
+
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Flavour</label>
+
+<input type="text"
+name="flavour">
+
+</div>
+
+<div class="form-group full-width">
+
+<label>Ingredients</label>
+
+<textarea
+rows="3"
+name="ingredients">
+</textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+<label>Benefits</label>
+
+<textarea
+rows="3"
+name="benefits">
+</textarea>
+
+</div>
+
+<div class="form-group full-width">
+
+<label>Recommended Usage</label>
+
+<textarea
+rows="3"
+name="recommended_usage">
+</textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+<input
+type="checkbox"
+name="is_featured">
+
+ Featured Product
+
+</label>
+
+</div>
+
+<div class="form-group">
+
+<label>
+
+<input
+type="checkbox"
+name="is_ai_recommended">
+
+ AI Recommended
+
+</label>
+
+</div>
+
+</div>
+
                             </div>
                             <button type="submit" class="submit-btn">
                                 <i class="fas fa-save"></i> Create Product

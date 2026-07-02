@@ -35,16 +35,25 @@
                                 <label class="ep-label">Product Name</label>
                                 <input class="ep-input" type="text" name="product_name" value="{{p.product_name}}">
                             </div>
-                            <div class="ep-field">
-                                <label class="ep-label">Category</label>
-                                <select class="ep-input" name="product_category">
-                                    <option {% if p.product_category == "Dairy" %}selected{% endif %}>Dairy</option>
-                                    <option {% if p.product_category == "Vegetables" %}selected{% endif %}>Vegetables</option>
-                                    <option {% if p.product_category == "Fruits" %}selected{% endif %}>Fruits</option>
-                                    <option {% if p.product_category == "Grocery" %}selected{% endif %}>Grocery</option>
-                                    <option {% if p.product_category == "Bakery" %}selected{% endif %}>Bakery</option>
-                                </select>
-                            </div>
+                           <div class="ep-field">
+    <label class="ep-label">Category</label>
+
+    <select class="ep-input" name="product_category">
+
+        {% for c in categories %}
+
+            <option value="{{ c.id }}"
+                {% if c.id == p.product_category.id %}selected{% endif %}>
+
+                {{ c.category_name }}
+
+            </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
                             <div class="ep-field">
                                 <label class="ep-label">Price</label>
                                 <input class="ep-input" type="number" name="product_price" value="{{p.product_price}}">
@@ -69,6 +78,158 @@
                                 <label class="ep-label">Description</label>
                                 <textarea class="ep-input" rows="3" name="description">{{p.description}}</textarea>
                             </div>
+                            <hr class="form-divider">
+                        </div>
+<h3 class="section-heading">
+    🥗 Nutrition Information
+</h3>
+
+<div class="ep-grid">
+
+    <div class="ep-field">
+        <label class="ep-label">Calories</label>
+        <input class="ep-input" type="number" name="calories" value="{{ p.calories }}">
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Protein (g)</label>
+        <input class="ep-input" type="number" step="0.1" name="protein" value="{{ p.protein }}">
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Carbs (g)</label>
+        <input class="ep-input" type="number" step="0.1" name="carbs" value="{{ p.carbs }}">
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Fat (g)</label>
+        <input class="ep-input" type="number" step="0.1" name="fat" value="{{ p.fat }}">
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Sugar (g)</label>
+        <input class="ep-input" type="number" step="0.1" name="sugar" value="{{ p.sugar }}">
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Fiber (g)</label>
+        <input class="ep-input" type="number" step="0.1" name="fiber" value="{{ p.fiber }}">
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Serving Size</label>
+        <input class="ep-input" type="text" name="serving_size" value="{{ p.serving_size }}">
+    </div>
+
+</div>  
+
+<hr class="form-divider">
+
+<h3 class="section-heading">
+    🤖 AI Product Details
+</h3>
+
+<div class="ep-grid">
+
+    <div class="ep-field">
+
+        <label class="ep-label">Diet Type</label>
+
+        <select class="ep-input" name="diet_type">
+
+            <option value="Veg"
+            {% if p.diet_type == "Veg" %}selected{% endif %}>
+                Veg
+            </option>
+
+            <option value="Vegan"
+            {% if p.diet_type == "Vegan" %}selected{% endif %}>
+                Vegan
+            </option>
+
+            <option value="Non-Veg"
+            {% if p.diet_type == "Non-Veg" %}selected{% endif %}>
+                Non-Veg
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="ep-field">
+
+        <label class="ep-label">Goal Type</label>
+
+        <select class="ep-input" name="goal_type">
+
+            <option value="Weight Loss"
+            {% if p.goal_type == "Weight Loss" %}selected{% endif %}>
+                Weight Loss
+            </option>
+
+            <option value="Muscle Gain"
+            {% if p.goal_type == "Muscle Gain" %}selected{% endif %}>
+                Muscle Gain
+            </option>
+
+            <option value="Maintenance"
+            {% if p.goal_type == "Maintenance" %}selected{% endif %}>
+                Maintenance
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="ep-field">
+        <label class="ep-label">Flavour</label>
+        <input class="ep-input" type="text" name="flavour" value="{{ p.flavour }}">
+    </div>
+
+    <div class="ep-field ep-full">
+        <label class="ep-label">Ingredients</label>
+        <textarea class="ep-input" rows="3" name="ingredients">{{ p.ingredients }}</textarea>
+    </div>
+
+    <div class="ep-field ep-full">
+        <label class="ep-label">Benefits</label>
+        <textarea class="ep-input" rows="3" name="benefits">{{ p.benefits }}</textarea>
+    </div>
+
+    <div class="ep-field ep-full">
+        <label class="ep-label">Recommended Usage</label>
+        <textarea class="ep-input" rows="3" name="recommended_usage">{{ p.recommended_usage }}</textarea>
+    </div>
+
+    <div class="ep-field">
+
+        <label>
+
+            <input type="checkbox"
+                   name="is_featured"
+                   {% if p.is_featured %}checked{% endif %}>
+
+            Featured Product
+
+        </label>
+
+    </div>
+
+    <div class="ep-field">
+
+        <label>
+
+            <input type="checkbox"
+                   name="is_ai_recommended"
+                   {% if p.is_ai_recommended %}checked{% endif %}>
+
+            AI Recommended
+
+        </label>
+
+    </div>
+
+</div>
                         </div>
                         <div style="display:flex;gap:12px;">
                             <button type="submit" class="ep-save-btn">

@@ -407,6 +407,35 @@ def add_product(request):
                 badge_text=request.POST.get('badge_text'),
                 weight_unit=request.POST.get('weight_unit'),
                 brand=request.POST.get('brand'),
+                calories=int(request.POST.get("calories") or 0),
+
+                protein=float(request.POST.get("protein") or 0),
+
+                carbs=float(request.POST.get("carbs") or 0),
+
+                fat=float(request.POST.get("fat") or 0),
+
+                sugar=float(request.POST.get("sugar") or 0),
+
+                fiber=float(request.POST.get("fiber") or 0),
+
+                serving_size=request.POST.get("serving_size")or "100g",
+
+                ingredients=request.POST.get("ingredients", ""),
+
+                benefits=request.POST.get("benefits", ""),
+
+                recommended_usage=request.POST.get("recommended_usage", ""),
+
+                diet_type=request.POST.get("diet_type"),
+
+                goal_type=request.POST.get("goal_type"),
+
+                flavour=request.POST.get("flavour"),
+
+                is_featured=bool(request.POST.get("is_featured")),
+
+                is_ai_recommended=bool(request.POST.get("is_ai_recommended")),
             )
 
             messages.success(request, "Product Added Successfully")
@@ -488,6 +517,35 @@ def edit_product(request, pid):
         p.weight_unit = request.POST['weight_unit']
         p.description = request.POST['description']
         p.product_category = category
+        p.calories=int(request.POST.get("calories") or 0)
+
+        p.protein=float(request.POST.get("protein") or 0)
+
+        p.carbs=float(request.POST.get("carbs") or 0)
+
+        p.fat=float(request.POST.get("fat") or 0)
+
+        p.sugar=float(request.POST.get("sugar") or 0)
+
+        p.fiber=float(request.POST.get("fiber") or 0)
+
+        p.serving_size=request.POST.get("serving_size") or "100g"
+
+        p.ingredients=request.POST.get("ingredients","")
+
+        p.benefits=request.POST.get("benefits","")
+
+        p.recommended_usage=request.POST.get("recommended_usage","")
+
+        p.diet_type=request.POST.get("diet_type")
+
+        p.goal_type=request.POST.get("goal_type")
+
+        p.flavour=request.POST.get("flavour")
+
+        p.is_featured="is_featured" in request.POST
+
+        p.is_ai_recommended="is_ai_recommended" in request.POST
 
         if "picture" in request.FILES:
             p.picture = request.FILES['picture']

@@ -161,6 +161,8 @@
     <div class="oth">
         <span>Order ID</span>
         <span>Date</span>
+        <span>Payment</span>
+        <span>City</span>
         <span>Amount</span>
         <span>Items</span>
         <span>Status</span>
@@ -176,6 +178,14 @@
 
         <span>
             {{ order.order_date|date:"d M Y" }}
+        </span>
+
+        <span>
+            {{ order.payment_method }}
+        </span>
+
+        <span>
+            {{ order.address.city|default:"-" }}
         </span>
 
         <span>
@@ -223,13 +233,13 @@
     {% empty %}
 
     <div class="orow">
-        <span style="grid-column:1/6;text-align:center;padding:25px;">
+        <span style="grid-column:1/8;text-align:center;padding:25px;">
             No Orders Yet
         </span>
     </div>
 
     {% endfor %}
 
-</div>
+  </div>
 </div>
 </div>

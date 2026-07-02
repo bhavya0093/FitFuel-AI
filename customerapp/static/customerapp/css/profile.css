@@ -231,9 +231,9 @@
 }
 
 /* Orders table */
-.obox { padding: 0; }
+#page-profile .obox { padding: 0; }
 
-.oth {
+#page-profile .oth {
   display: grid;
   grid-template-columns: 1.5fr 1fr .8fr .5fr 1fr;
   gap: 8px;
@@ -246,7 +246,7 @@
   letter-spacing: .5px;
 }
 
-.orow {
+#page-profile .orow {
   display: grid;
   grid-template-columns: 1.5fr 1fr .8fr .5fr 1fr;
   gap: 8px;
@@ -257,9 +257,9 @@
   align-items: center;
 }
 
-.oid { color: #7c3aed; font-weight: 700; }
+#page-profile .oid { color: #7c3aed; font-weight: 700; }
 
-.sp { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; }
-.sp.s1 { background: rgba(34,211,238,.1); color: #0e7490; }
-.sp.s2 { background: rgba(139,92,246,.1); color: #5b21b6; }
-.sp.s3 { background: rgba(244,114,182,.1); color: #9d174d; } 
+#page-profile .sp { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; }
+#page-profile .sp.s1 { background: rgba(34,211,238,.1); color: #0e7490; }
+#page-profile .sp.s2 { background: rgba(139,92,246,.1); color: #5b21b6; }
+#page-profile .sp.s3 { background: rgba(244,114,182,.1); color: #9d174d; } 

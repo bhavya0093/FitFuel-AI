@@ -6,29 +6,34 @@ from customerapp.models import product, customer
 from django.contrib import messages
 import uuid
 
+
 def customer_dashboard(request):
 
     if "email" in request.session:
 
-        uid = User.objects.get(email=request.session['email'])
+        uid = User.objects.get(email=request.session["email"])
         cid = customer.objects.get(user_id=uid)
+
+        categories = Category.objects.all()
+
         selected_category = request.GET.get("category")
 
         pid = product.objects.all()
 
         if selected_category:
-            pid = pid.filter(product_category=selected_category)
+            pid = pid.filter(product_category_id=selected_category)
 
         context = {
             "uid": uid,
             "cid": cid,
             "pid": pid,
+            "categories": categories,
             "selected_category": selected_category,
         }
 
-        return render(request,"customerapp/customer_dashboard.html",context)
-    
-    return HttpResponseRedirect("/seller/login")
+        return render(request, "customerapp/customer_dashboard.html", context)
+
+    return HttpResponseRedirect("/seller/login/")
 
 def logout(request):
     request.session.flush()

@@ -89,15 +89,39 @@
   </div>
 
   <!-- CATEGORIES + PRODUCTS -->
-  <div class="sh" style="margin-bottom:14px;"><div class="sh-t">Browse <em>Categories</em></div></div>
-  <div class="cpills">
-    <label for="cat-all"     class="cpill"><span>🏠</span> All</label>
-    <label for="cat-dairy"   class="cpill"><span>🥛</span> Dairy</label>
-    <label for="cat-veg"     class="cpill"><span>🥬</span> Vegetables</label>
-    <label for="cat-fruits"  class="cpill"><span>🍎</span> Fruits</label>
-    <label for="cat-grocery" class="cpill"><span>🛒</span> Grocery</label>
-    <label for="cat-bakery"  class="cpill"><span>🥖</span> Bakery</label>
-  </div>
+<!-- CATEGORIES -->
+<div class="sh" style="margin-bottom:14px;">
+    <div class="sh-t">
+        Browse <em>Categories</em>
+    </div>
+</div>
+
+<div class="cpills">
+
+    <a href="{% url 'customer_dashboard' %}"
+       class="cpill {% if not selected_category %}active{% endif %}">
+        🏠 All
+    </a>
+
+    {% for c in categories %}
+
+    <a href="{% url 'customer_dashboard' %}?category={{ c.id }}"
+       class="cpill {% if selected_category == c.id|stringformat:'s' %}active{% endif %}">
+
+        {% if c.category_image %}
+            <img src="{{ c.category_image.url }}"
+                 style="width:22px;height:22px;border-radius:50%;object-fit:cover;">
+        {% else %}
+            📦
+        {% endif %}
+
+        {{ c.category_name }}
+
+    </a>
+
+    {% endfor %}
+
+</div>
   <div class="sh" style="margin-bottom:16px;"><div class="sh-t"><em>Fresh</em> Picks Today</div><a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a></div>
 
   <div class="pgrid" id="pgrid">

@@ -97,3 +97,50 @@
     color:#fff;
     box-shadow:0 8px 20px rgba(14,165,233,.35);
 }
+.cpill{
+
+display:flex;
+align-items:center;
+gap:8px;
+
+padding:14px 28px;
+
+background:#fff;
+
+border:2px solid #e5eef8;
+
+border-radius:40px;
+
+font-weight:700;
+
+color:#5f7892;
+
+text-decoration:none;
+
+transition:.3s;
+}
+
+.cpill:hover{
+
+background:#eef8ff;
+
+color:#0ea5e9;
+
+transform:translateY(-2px);
+}
+
+.cpill.active{
+
+background:linear-gradient(135deg,#0ea5e9,#06b6d4);
+
+color:#fff;
+
+border-color:#0ea5e9;
+
+box-shadow:0 12px 25px rgba(14,165,233,.30);
+}
+
+.cpill.active:hover{
+
+color:#fff;
+} 

@@ -155,14 +155,81 @@
 </div>
 
   <!-- ORDERS -->
-  <div class="sh" style="margin-bottom:16px;"><div class="sh-t">Recent <em>Orders</em></div><a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a></div>
+  <div class="sh" style="margin-bottom:16px;"><div class="sh-t">Recent <em>Orders</em></div><a href="{% url 'orders' %}" class="sh-a">View All <i class="fas fa-arrow-right"></i></a></div>
   <div class="obox g1 s1">
-    <div class="oth"><span>Order ID</span><span>Date</span><span>Amount</span><span>Items</span><span>Status</span></div>
-    <div class="orow"><span class="oid">#QB-20482</span><span>08 Mar 2026</span><span>₹648</span><span>5</span><span class="sp s1"><i class="fas fa-check-circle"></i> Delivered</span></div>
-    <div class="orow"><span class="oid">#QB-20375</span><span>05 Mar 2026</span><span>₹1,250</span><span>8</span><span class="sp s2"><i class="fas fa-truck"></i> In Transit</span></div>
-    <div class="orow"><span class="oid">#QB-20201</span><span>01 Mar 2026</span><span>₹380</span><span>3</span><span class="sp s1"><i class="fas fa-check-circle"></i> Delivered</span></div>
-    <div class="orow"><span class="oid">#QB-20099</span><span>26 Feb 2026</span><span>₹920</span><span>6</span><span class="sp s3"><i class="fas fa-clock"></i> Processing</span></div>
-    <div class="orow"><span class="oid">#QB-19881</span><span>18 Feb 2026</span><span>₹440</span><span>4</span><span class="sp s1"><i class="fas fa-check-circle"></i> Delivered</span></div>
-  </div>
+
+    <div class="oth">
+        <span>Order ID</span>
+        <span>Date</span>
+        <span>Amount</span>
+        <span>Items</span>
+        <span>Status</span>
+    </div>
+
+    {% for order in orders %}
+
+    <div class="orow">
+
+        <span class="oid">
+            #QB-{{ order.id }}
+        </span>
+
+        <span>
+            {{ order.order_date|date:"d M Y" }}
+        </span>
+
+        <span>
+            ₹{{ order.total_amount }}
+        </span>
+
+        <span>
+            {{ order.items.count }}
+        </span>
+
+        <span
+        class="sp
+
+        {% if order.status == 'Delivered' %}
+            s1
+
+        {% elif order.status == 'In Transit' %}
+            s2
+
+        {% else %}
+            s3
+        {% endif %}
+        ">
+
+        {% if order.status == "Delivered" %}
+
+            <i class="fas fa-check-circle"></i>
+
+        {% elif order.status == "In Transit" %}
+
+            <i class="fas fa-truck"></i>
+
+        {% else %}
+
+            <i class="fas fa-clock"></i>
+
+        {% endif %}
+
+        {{ order.status }}
+
+        </span>
+
+    </div>
+
+    {% empty %}
+
+    <div class="orow">
+        <span style="grid-column:1/6;text-align:center;padding:25px;">
+            No Orders Yet
+        </span>
+    </div>
+
+    {% endfor %}
+
+</div>
 </div>
 </div>

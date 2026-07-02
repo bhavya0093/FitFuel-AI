@@ -23,12 +23,15 @@ def customer_dashboard(request):
         if selected_category:
             pid = pid.filter(product_category_id=selected_category)
 
+        orders = Order.objects.filter(customer=cid).order_by("-order_date")[:5]
+
         context = {
             "uid": uid,
             "cid": cid,
             "pid": pid,
             "categories": categories,
             "selected_category": selected_category,
+            "orders": orders,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)

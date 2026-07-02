@@ -54,13 +54,66 @@ class product(models.Model):
         upload_to="images/",
         default="images/default.jpg"
     )
-    description = models.TextField()
-    discount = models.IntegerField()
-    badge_text = models.CharField(max_length=50)
-    weight_unit = models.CharField(max_length=50)
-    brand = models.CharField(max_length=30)
+    description = models.TextField(blank=True)
+    discount = models.IntegerField(default=0)
+    badge_text = models.CharField(max_length=50, blank=True, default="")
+    weight_unit = models.CharField(max_length=50, default="100g")
+    brand = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     total_sold = models.IntegerField(default=0)
+    calories = models.IntegerField(default=0, help_text="Calories per serving")
+
+    protein = models.FloatField(default=0.0, help_text="Protein in grams")
+
+    carbs = models.FloatField(default=0.0, help_text="Carbohydrates in grams")
+
+    fat = models.FloatField(default=0.0, help_text="Fat in grams")
+
+    sugar = models.FloatField(default=0.0, help_text="Sugar in grams")
+
+    fiber = models.FloatField(default=0.0, help_text="Fiber in grams")
+
+    serving_size = models.CharField(max_length=50, default="100g")
+
+    ingredients = models.TextField(blank=True)
+
+    benefits = models.TextField(blank=True)
+
+    recommended_usage = models.TextField(blank=True)
+    rating = models.FloatField(default=0.0)
+
+    review_count = models.IntegerField(default=0)
+
+
+    # ===========================
+# AI Recommendation Fields
+# ===========================
+
+    diet_type = models.CharField(
+        max_length=20,
+        choices=[
+            ("Veg", "Veg"),
+            ("Non-Veg", "Non-Veg"),
+            ("Vegan", "Vegan")
+        ],
+        default="Veg"
+    )
+
+    goal_type = models.CharField(
+        max_length=30,
+        choices=[
+            ("Weight Loss", "Weight Loss"),
+            ("Muscle Gain", "Muscle Gain"),
+            ("Maintenance", "Maintenance")
+        ],
+        default="Maintenance"
+    )
+
+    flavour = models.CharField(max_length=50, blank=True)
+
+    is_featured = models.BooleanField(default=False)
+
+    is_ai_recommended = models.BooleanField(default=False)
 
     def __str__(self):
         return self.product_name

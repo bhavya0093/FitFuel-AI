@@ -83,10 +83,92 @@
       </div>
   </div>
 
+  {% if ai_products %}
+
+<section class="ai-recommend-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <span class="ai-badge">
+                🤖 AI Powered
+            </span>
+
+            <h2>
+                Recommended For You
+            </h2>
+
+            <p>
+                Personalized according to your health profile.
+            </p>
+
+        </div>
+
+        <a href="{% url 'show_product' %}" class="view-all">
+            View All →
+        </a>
+
+    </div>
+
+    <div class="ai-product-grid">
+
+        {% for p in ai_products %}
+
+        <div class="ai-product-card">
+
+            {% if p.picture %}
+                <img src="{{ p.picture.url }}" alt="">
+            {% endif %}
+
+            <div class="ai-match">
+                98% Match
+            </div>
+
+            <h3>
+                {{ p.product_name }}
+            </h3>
+
+            <p class="brand">
+                {{ p.brand }}
+            </p>
+
+            <div class="nutrition">
+
+                <span>{{ p.protein }}g Protein</span>
+
+                <span>{{ p.calories }} kcal</span>
+
+            </div>
+
+            <div class="price-row">
+
+                <strong>
+                    ₹{{ p.product_price }}
+                </strong>
+
+                <a href="{% url 'add_to_cart' p.id %}" class="add-btn">
+                    Add
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
 <div class="sh" style="margin-bottom:24px;">
     <div class="sh-t" style="font-size:1.4rem;">Browse <em>Categories</em></div>
     <a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a>
 </div>
+
+
 
 <div class="categories-grid">
     <a href="{% url 'customer_dashboard' %}" class="cat-card cat-all {% if not selected_category %}active{% endif %}">

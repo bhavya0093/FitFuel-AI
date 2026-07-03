@@ -7,6 +7,7 @@ from django.contrib import messages
 import uuid
 from .models import UserHealthProfile
 import math
+from django.db.models import Q
 
 
 def customer_dashboard(request):
@@ -46,6 +47,15 @@ def customer_dashboard(request):
                     })
 
         orders = Order.objects.filter(customer=cid).order_by("-order_date")[:5]
+        ai_products = []
+        health_profile = None
+
+        try:
+            health_profile = cid.health_profile
+            ai_products = get_ai_recommendations(health_profile)
+
+        except:
+            pass
 
         active_page = request.GET.get("active_page") or "home"
 
@@ -60,6 +70,8 @@ def customer_dashboard(request):
             "orders": orders,
             "active_page": active_page,
             "health": health,
+            "health_profile": health_profile,
+            "ai_products": ai_products,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)
@@ -729,3 +741,35 @@ def save_health_profile(request):
         reverse("customer_dashboard") +
         "?active_page=profile"
     )
+
+def get_ai_recommendations(health_profile):
+
+    products = product.objects.all()
+
+    # Goal Based
+    if health_profile.goal == "Muscle Gain":
+        products = products.filter(
+            protein__gte=20
+        ).order_by("-protein")
+
+    elif health_profile.goal == "Weight Loss":
+        products = products.filter(
+            calories__lte=250,
+            sugar__lte=10
+        ).order_by("-protein")
+
+    elif health_profile.goal == "Maintenance":
+        products = products.order_by("-is_featured")
+
+    # Diet Type
+    if health_profile.diet_type == "Veg":
+        products = products.filter(
+            diet_type="Veg"
+        )
+
+    elif health_profile.diet_type == "Vegan":
+        products = products.filter(
+            diet_type="Vegan"
+        )
+
+    return products[:8]

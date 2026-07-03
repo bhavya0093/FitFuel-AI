@@ -1,4 +1,26 @@
 /* ═══ PROFILE PAGE - Purple + Cyan Theme ═══ */
+#page-profile {
+  position: fixed !important;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 40px;
+}
+#page-profile .iwrap {
+  background: #ffffff;
+  border-radius: var(--rl);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 1100px;
+  padding: 30px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
 
 .pgrid2 { display: none; }
 
@@ -44,7 +66,7 @@
 .pav img { width: 100%; height: 100%; object-fit: cover; }
 
 .pnm {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: .95rem;
   font-weight: 700;
   color: #1e1b4b;
@@ -75,7 +97,7 @@
 }
 
 .kpi-v {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1.15rem;
   font-weight: 800;
   display: block;
@@ -171,7 +193,7 @@
   padding: 15px 20px;
   border-bottom: 1.5px solid #dcfce7;
   background: #f0fdf4;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: .88rem;
   font-weight: 800;
   color: #1e1b4b;

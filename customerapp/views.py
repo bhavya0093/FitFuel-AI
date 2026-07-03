@@ -575,3 +575,12 @@ def cancel_order(request, pk):
     messages.success(request, "Order Cancelled Successfully.")
 
     return redirect("orders")
+
+from django.urls import reverse
+
+def profile(request):
+    if "email" not in request.session:
+        return redirect("login")
+    
+    # Redirect to the main dashboard with the profile page activated
+    return redirect(reverse("customer_dashboard") + "?active_page=profile")

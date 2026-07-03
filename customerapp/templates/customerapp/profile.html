@@ -42,6 +42,82 @@
         </div>
         <label class="epbtn" for="nav-edit"><i class="fas fa-pen"></i> Edit Profile</label>
       </div>
+      <div class="sec" id="sec-health">
+
+    <div class="sec-h">
+        <i class="fas fa-heartbeat"></i>
+        <span>Health Profile</span>
+    </div>
+
+    {% if health %}
+
+    <div class="info-g">
+
+        <div class="ifd">
+            <label>Age</label>
+            <div class="fv">{{ health.age }} Years</div>
+        </div>
+
+        <div class="ifd">
+            <label>Gender</label>
+            <div class="fv">{{ health.gender }}</div>
+        </div>
+
+        <div class="ifd">
+            <label>Height</label>
+            <div class="fv">{{ health.height }} cm</div>
+        </div>
+
+        <div class="ifd">
+            <label>Weight</label>
+            <div class="fv">{{ health.weight }} kg</div>
+        </div>
+
+        <div class="ifd">
+            <label>BMI</label>
+            <div class="fv">{{ health.bmi }}</div>
+        </div>
+
+        <div class="ifd">
+            <label>Activity</label>
+            <div class="fv">{{ health.activity_level }}</div>
+        </div>
+
+        <div class="ifd">
+            <label>Goal</label>
+            <div class="fv">{{ health.goal }}</div>
+        </div>
+
+        <div class="ifd">
+            <label>Diet</label>
+            <div class="fv">{{ health.diet_type }}</div>
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-health">
+
+        <i class="fas fa-heartbeat"></i>
+
+        <h3>No Health Profile Found</h3>
+
+        <p>
+            Complete your health profile to unlock AI recommendations.
+        </p>
+
+        <a href="#" class="epbtn">
+
+            Complete Profile
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
 
       <div class="sec" id="sec-orders">
         <div class="sec-h"><i class="fas fa-box"></i> <span>Recent Orders</span></div>

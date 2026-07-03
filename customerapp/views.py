@@ -170,8 +170,8 @@ def checkout(request):
             Cart_obj, created = cart.objects.get_or_create(customer = cid)
             item = cartitem.objects.filter(cart=Cart_obj)
             addresses = Address.objects.filter(customer=cid)
-            discount = 65 if total_amount >= 100 else 0
-            net_amount = total_amount - discount
+            
+            
             if request.method == "POST":
 
                 address_id = request.POST.get("address")
@@ -186,6 +186,9 @@ def checkout(request):
             total_amount = 0
             for i in item:
                 total_amount += i.product.product_price * i.qty
+
+                discount = 65 if total_amount >= 100 else 0
+                net_amount = total_amount - discount
             
             context = {
                 'item' : item,
@@ -220,6 +223,10 @@ def payment(request):
     # Cart
     cart_obj, created = cart.objects.get_or_create(customer=cid)
     item = cartitem.objects.filter(cart=cart_obj)
+
+    if not item.exists():
+        messages.error(request,"Your cart is empty.")
+        return redirect("view_cart")
 
     total_amount = 0
 
@@ -411,6 +418,12 @@ def place_order(request):
     uid = User.objects.get(email=request.session["email"])
     cid = customer.objects.get(user_id=uid)
 
+    if not cartitem.objects.filter(cart__customer=cid).exists():
+
+        messages.error(request,"Your cart is empty.")
+
+        return redirect("view_cart")
+
     if request.method == "POST":
 
         payment_method = request.POST.get("payment")
@@ -444,20 +457,13 @@ def place_order(request):
             final_amount=final
         )
         Payment.objects.create(
-
-                order=order,
-
-                payment_id="PAY" + uuid.uuid4().hex[:10].upper(),
-
-                transaction_id=uuid.uuid4().hex[:16].upper(),
-
-                amount=final,
-
-                method=payment,
-
-                status="Pending" if payment == "COD" else "Paid"
-
-            )
+            order=order,
+            payment_id="PAY" + uuid.uuid4().hex[:10].upper(),
+            transaction_id=uuid.uuid4().hex[:16].upper(),
+            amount=final,
+            method=payment_method,
+            status="Pending" if payment_method == "COD" else "Paid"
+        )
 
         for i in items:
 

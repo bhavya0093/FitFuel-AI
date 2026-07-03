@@ -45,6 +45,65 @@
         </div>
 
         <hr>
+       
+
+<h3 class="section-title">
+    Order Timeline
+</h3>
+
+<div class="order-timeline">
+
+    <div class="timeline-step active">
+
+        <div class="timeline-icon">✓</div>
+
+        <div class="timeline-text">
+            <h4>Order Placed</h4>
+            <span>Your order has been placed successfully.</span>
+        </div>
+
+    </div>
+
+    <div class="timeline-step {% if order.status != 'Pending' %}active{% endif %}">
+
+        <div class="timeline-icon">✓</div>
+
+        <div class="timeline-text">
+            <h4>Order Confirmed</h4>
+            <span>Seller has confirmed your order.</span>
+        </div>
+
+    </div>
+
+    <div class="timeline-step {% if order.status == 'Packed' or order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
+
+        <div class="timeline-icon">📦</div>
+
+        <div class="timeline-text">
+            <h4>Packed</h4>
+            <span>Your order has been packed.</span>
+        </div>
+
+    </div>
+
+    <div class="timeline-step {% if order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
+
+        <div class="timeline-icon">🚚</div>
+
+        <div class="timeline-text">
+            <h4>Shipped</h4>
+            <span>Your order is on the way.</span>
+        </div>
+    </div>
+    <div class="timeline-step {% if order.status == 'Delivered' %}active{% endif %}">
+        <div class="timeline-icon">🏠</div>
+        <div class="timeline-text">
+            <h4>Delivered</h4>
+            <span>Package delivered successfully.</span>
+        </div>
+    </div>
+</div>
+<hr>
 
         <h3 class="section-title">
             Products
@@ -80,10 +139,25 @@
             Delivery Address
         </h3>
 
-        <p>{{ order.address.full_name }}</p>
-        <p>{{ order.address.mobile }}</p>
-        <p>{{ order.address.address }}</p>
-        <p>{{ order.address.city }} - {{ order.address.pincode }}</p>
+            <p>{{ order.address.fullname }}</p>
+
+            <p>{{ order.address.mobile }}</p>
+
+            <p>
+            {{ order.address.house_no }},
+            {{ order.address.area }}
+
+            {% if order.address.landmark %}
+            , {{ order.address.landmark }}
+            {% endif %}
+            </p>
+
+            <p>
+            {{ order.address.city }},
+            {{ order.address.state }}
+            -
+            {{ order.address.pincode }}
+            </p>
 
         <hr>
 

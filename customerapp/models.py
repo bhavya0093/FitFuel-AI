@@ -185,3 +185,84 @@ class Payment(models.Model):
     )
 
     payment_date = models.DateTimeField(auto_now_add=True) 
+
+class UserHealthProfile(models.Model):
+
+    ACTIVITY_CHOICES = (
+        ("Sedentary", "Sedentary"),
+        ("Light", "Light"),
+        ("Moderate", "Moderate"),
+        ("Active", "Active"),
+        ("Very Active", "Very Active"),
+    )
+
+    GOAL_CHOICES = (
+        ("Weight Loss", "Weight Loss"),
+        ("Muscle Gain", "Muscle Gain"),
+        ("Maintenance", "Maintenance"),
+    )
+
+    DIET_CHOICES = (
+        ("Veg", "Veg"),
+        ("Vegan", "Vegan"),
+        ("Non-Veg", "Non-Veg"),
+    )
+
+    GENDER_CHOICES = (
+        ("Male", "Male"),
+        ("Female", "Female"),
+        ("Other", "Other"),
+    )
+
+    customer = models.OneToOneField(
+        customer,
+        on_delete=models.CASCADE,
+        related_name="health_profile"
+    )
+
+    age = models.PositiveIntegerField(default=18)
+
+    gender = models.CharField(
+        max_length=10,
+        choices=GENDER_CHOICES
+    )
+
+    height = models.FloatField(
+        help_text="Height in centimeters"
+    )
+
+    weight = models.FloatField(
+        help_text="Weight in kilograms"
+    )
+
+    activity_level = models.CharField(
+        max_length=20,
+        choices=ACTIVITY_CHOICES
+    )
+
+    goal = models.CharField(
+        max_length=30,
+        choices=GOAL_CHOICES
+    )
+
+    diet_type = models.CharField(
+        max_length=20,
+        choices=DIET_CHOICES
+    )
+
+    bmi = models.FloatField(default=0)
+
+    daily_calories = models.IntegerField(default=0)
+
+    protein_goal = models.FloatField(default=0)
+
+    carbs_goal = models.FloatField(default=0)
+
+    fat_goal = models.FloatField(default=0)
+
+    water_goal = models.FloatField(default=0)
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.customer.firstname} Health Profile"

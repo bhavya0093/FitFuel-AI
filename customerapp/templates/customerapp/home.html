@@ -2,118 +2,68 @@
 <div id="page-home" class="page">
 <div class="wrap">
 
-  <!-- DISCOUNT CAROUSEL - Pure CSS auto-animation -->
-  <section class="hero-ai">
-
-    <div class="hero-left">
-
-        <span class="hero-badge">
-            <i class="fa-solid fa-sparkles"></i>
-            AI Powered Nutrition Platform
-        </span>
-
-        <h1>
-
-            Eat Smarter.
-            <br>
-
-            Train Better.
-
-            <span>Live Healthier.</span>
-
-        </h1>
-
-        <p>
-
-            Get personalized calories, protein goals,
-            meal recommendations and AI-powered healthy food suggestions
-            tailored to your body and fitness goal.
-
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="#" class="hero-primary">
-
-                <i class="fa-solid fa-brain"></i>
-
-                Take AI Assessment
-
-            </a>
-
-            <a href="#" class="hero-secondary">
-
-                Browse Nutrition
-
-            </a>
-
-        </div>
-
-        <div class="hero-stats">
-
-            <div class="hero-stat">
-
-                <h3>15K+</h3>
-
-                <span>Active Users</span>
-
-            </div>
-
-            <div class="hero-stat">
-
-                <h3>250+</h3>
-
-                <span>Healthy Products</span>
-
-            </div>
-
-            <div class="hero-stat">
-
-                <h3>98%</h3>
-
-                <span>Customer Rating</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="hero-right">
-
-        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&q=80"
-             alt="Fitness">
-
-        <div class="floating-card calories">
-
-            🔥
-            <strong>2200 kcal</strong>
-
-            Daily Goal
-
-        </div>
-
-        <div class="floating-card protein">
-
-            💪
-            <strong>150 g</strong>
-
-            Protein
-
-        </div>
-
-        <div class="floating-card water">
-
-            💧
-            <strong>3.5 L</strong>
-
-            Water
-
-        </div>
-
-    </div>
-
-</section>
+  <!-- CUSTOMER JOURNEY WIDGET -->
+  <section class="customer-journey-section">
+      <div class="journey-header">
+          <span class="hero-badge">
+              <i class="fa-solid fa-sparkles"></i>
+              AI Powered Nutrition Platform
+          </span>
+          <h2>Your Path to Better Health</h2>
+          <p>See how FitFuel AI optimizes your fitness journey step by step</p>
+      </div>
+      
+      <div class="journey-container">
+          <div class="journey-line"></div>
+          <div class="journey-line-active"></div>
+          
+          <div class="journey-step" style="--delay: 0s;">
+              <div class="step-icon">
+                  <i class="fa-solid fa-brain"></i>
+              </div>
+              <div class="step-content">
+                  <h3>1. AI Assessment</h3>
+                  <p>Discover your precise metabolic needs and goals</p>
+              </div>
+          </div>
+          
+          <div class="journey-step" style="--delay: 0.1s;">
+              <div class="step-icon">
+                  <i class="fa-solid fa-utensils"></i>
+              </div>
+              <div class="step-content">
+                  <h3>2. Custom Plan</h3>
+                  <p>Get a 100% personalized daily nutrition strategy</p>
+              </div>
+          </div>
+          
+          <div class="journey-step" style="--delay: 0.2s;">
+              <div class="step-icon">
+                  <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+              <div class="step-content">
+                  <h3>3. Smart Store</h3>
+                  <p>Order exact products matched to your unique profile</p>
+              </div>
+          </div>
+          
+          <div class="journey-step" style="--delay: 0.3s;">
+              <div class="step-icon">
+                  <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div class="step-content">
+                  <h3>4. Track Progress</h3>
+                  <p>Monitor daily goals and let AI optimize your path</p>
+              </div>
+          </div>
+      </div>
+      
+      <div class="journey-cta">
+          <a href="#" class="btn-primary">
+              <i class="fa-solid fa-rocket"></i> Start Your Journey Now
+          </a>
+      </div>
+  </section>
 
 <!-- CATEGORIES -->
 <div class="sh" style="margin-bottom:18px;">
@@ -131,31 +81,6 @@
         {{ c.category_name }}
     </a>
     {% endfor %}
-</div>
-
-<!-- FitFuel AI Feature Badges -->
-<div class="zepto-promo-row">
-    <div class="promo-tile">
-        <div class="promo-icon"><i class="fas fa-brain" style="color: #06b6d4;"></i></div>
-        <div class="promo-text">
-            <h4>AI Recommendation Match</h4>
-            <p>Formulated matching your goals</p>
-        </div>
-    </div>
-    <div class="promo-tile">
-        <div class="promo-icon"><i class="fas fa-shield-halved" style="color: #10b981;"></i></div>
-        <div class="promo-text">
-            <h4>100% Pure & Tested</h4>
-            <p>Lab-verified active ingredients</p>
-        </div>
-    </div>
-    <div class="promo-tile">
-        <div class="promo-icon"><i class="fas fa-tags" style="color: #1e3a8a;"></i></div>
-        <div class="promo-text">
-            <h4>Optimum Value Pricing</h4>
-            <p>Premium quality, budget-conscious rates</p>
-        </div>
-    </div>
 </div>
 
 {% if selected_category %}

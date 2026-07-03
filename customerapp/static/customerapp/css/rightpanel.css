@@ -12,28 +12,18 @@
 /* Widget */
 
 .widget{
-
-    background:rgba(255,255,255,.78);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
+    background:#ffffff;
     border-radius:24px;
-
-    border:1px solid rgba(255,255,255,.45);
-
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
-
+    border:1px solid #e5e7eb;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     padding:22px;
-
     transition:.35s;
 }
 
 .widget:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:0 18px 40px rgba(15,23,42,.12);
+    transform:translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    border-color: #d1d5db;
 }
 
 /* Title */
@@ -119,18 +109,11 @@
 /* AI Tip */
 
 .ai-tip{
-
-    background:linear-gradient(
-        135deg,
-        #10B981,
-        #06B6D4
-    );
-
+    background:linear-gradient(135deg, #111827, #1f2937);
     color:#fff;
-
-    border-radius:20px;
-
-    padding:20px;
+    border-radius:24px;
+    padding:24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .ai-tip h4{
@@ -152,35 +135,26 @@
 /* Button */
 
 .widget-btn{
-
     display:block;
-
     width:100%;
-
     margin-top:18px;
-
     padding:14px;
-
-    border-radius:14px;
-
-    background:#10B981;
-
+    border-radius:50px;
+    background:#111827;
     color:#fff;
-
     text-align:center;
-
     text-decoration:none;
-
     font-weight:700;
-
     transition:.3s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .widget-btn:hover{
-
-    background:#059669;
-
-    transform:translateY(-3px);
+    background:#1f2937;
+    transform:translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
 /* Responsive */

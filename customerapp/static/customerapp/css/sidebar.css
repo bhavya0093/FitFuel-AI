@@ -15,18 +15,10 @@
 /* Sidebar Card */
 
 .sidebar-card{
-
-    background:rgba(255,255,255,.78);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.45);
-
+    background:#ffffff;
+    border:1px solid #e5e7eb;
     border-radius:24px;
-
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
-
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     padding:22px;
 }
 
@@ -81,57 +73,40 @@
 }
 
 .sidebar-nav a{
-
     display:flex;
-
     align-items:center;
-
     gap:14px;
-
     padding:14px 18px;
-
     text-decoration:none;
-
-    color:#334155;
-
+    color:#0F172A;
     font-weight:600;
-
-    border-radius:16px;
-
-    transition:.30s;
+    border-radius:18px;
+    transition:all .30s ease;
+    position: relative;
 }
 
 /* Icon */
-
 .sidebar-nav a i{
-
     width:22px;
-
     text-align:center;
-
     font-size:18px;
+    transition: transform .3s ease;
 }
 
 /* Hover */
-
 .sidebar-nav a:hover{
+    background:#F8FAFC;
+}
 
-    background:#10B981;
-
-    color:#fff;
-
-    transform:translateX(6px);
+.sidebar-nav a:hover i {
+    transform:translateX(3px);
 }
 
 /* Active */
-
 .sidebar-nav a.active{
-
-    background:#10B981;
-
+    background:linear-gradient(135deg, #14B8A6, #06B6D4);
     color:#fff;
-
-    box-shadow:0 10px 25px rgba(16,185,129,.25);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Divider */
@@ -146,20 +121,12 @@
 /* AI Card */
 
 .ai-card{
-
     margin-top:20px;
-
-    background:linear-gradient(
-        135deg,
-        #10B981,
-        #06B6D4
-    );
-
+    background:linear-gradient(135deg, #111827, #1f2937);
     color:#fff;
-
-    border-radius:20px;
-
-    padding:20px;
+    border-radius:24px;
+    padding:24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .ai-card h4{
@@ -179,33 +146,23 @@
 }
 
 .ai-btn{
-
     margin-top:18px;
-
     display:inline-flex;
-
     align-items:center;
-
     gap:8px;
-
     padding:12px 18px;
-
-    border-radius:14px;
-
+    border-radius:50px;
     background:#fff;
-
-    color:#10B981;
-
+    color:#111827;
     text-decoration:none;
-
     font-weight:700;
-
     transition:.30s;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .ai-btn:hover{
-
     transform:translateY(-3px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 /* Logout */

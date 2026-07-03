@@ -44,29 +44,7 @@
          Navigation
     ============================ -->
 
-    <div class="ff-menu">
 
-        <a href="#" class="active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-
-        <a href="#">
-            <i class="fa-solid fa-brain"></i>
-            <span>AI Assessment</span>
-        </a>
-
-        <a href="#">
-            <i class="fa-solid fa-store"></i>
-            <span>Nutrition Store</span>
-        </a>
-
-        <a href="#">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Meal Plans</span>
-        </a>
-
-    </div>
 
     <!-- ===========================
          Right Actions
@@ -92,21 +70,13 @@
     </button>
 
     <!-- Cart -->
-
     <a href="{% url 'view_cart' %}" class="ff-icon ff-cart" title="Cart">
-
-        <i class="fa-solid fa-cart-shopping"></i>
-
+        <i class="fa-solid fa-bag-shopping"></i>
+        {% if cart_count and cart_count != '0' and cart_count != 0 %}
         <span class="ff-badge">
-
-            {% if cart_count %}
-                {{ cart_count }}
-            {% else %}
-                0
-            {% endif %}
-
+            {{ cart_count }}
         </span>
-
+        {% endif %}
     </a>
 
     <!-- Profile -->
@@ -207,48 +177,44 @@
 =========================== -->
 
 <div class="ff-mobile-menu">
-
     <a href="#">
         <i class="fa-solid fa-house"></i>
-        Home
+        Dashboard
     </a>
-
     <a href="#">
         <i class="fa-solid fa-brain"></i>
         AI Assessment
     </a>
-
     <a href="#">
         <i class="fa-solid fa-store"></i>
         Nutrition Store
     </a>
-
     <a href="#">
         <i class="fa-solid fa-utensils"></i>
         Meal Plans
     </a>
-
     <a href="#">
-        <i class="fa-solid fa-heart"></i>
-        Wishlist
+        <i class="fa-solid fa-chart-line"></i>
+        Progress
     </a>
-
     <a href="{% url 'view_cart' %}">
         <i class="fa-solid fa-cart-shopping"></i>
         My Cart
     </a>
-
     <a href="#">
-        <i class="fa-regular fa-user"></i>
+        <i class="fa-solid fa-heart"></i>
+        Wishlist
+    </a>
+    <a href="#">
+        <i class="fa-solid fa-box"></i>
+        Orders
+    </a>
+    <a href="#">
+        <i class="fa-solid fa-user"></i>
         Profile
     </a>
-
     <a href="{% url 'logout' %}" class="logout">
-
         <i class="fa-solid fa-right-from-bracket"></i>
-
         Logout
-
     </a>
-
 </div>

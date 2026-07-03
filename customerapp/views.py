@@ -170,6 +170,8 @@ def checkout(request):
             Cart_obj, created = cart.objects.get_or_create(customer = cid)
             item = cartitem.objects.filter(cart=Cart_obj)
             addresses = Address.objects.filter(customer=cid)
+            discount = 65 if total_amount >= 100 else 0
+            net_amount = total_amount - discount
             if request.method == "POST":
 
                 address_id = request.POST.get("address")
@@ -184,11 +186,12 @@ def checkout(request):
             total_amount = 0
             for i in item:
                 total_amount += i.product.product_price * i.qty
-
+            
             context = {
                 'item' : item,
                 'total_amount' : total_amount,
-                'net_amount' : total_amount - 65 ,
+                'discount': discount,
+                'net_amount': net_amount,
                 "addresses": addresses,
             }
         return render(request,"customerapp/check_out.html",context)
@@ -503,99 +506,6 @@ def orders(request):
         "customerapp/orders.html",
         context
     )
-
-
-def place_order(request):
-
-    if request.method == "POST":
-
-        if "email" not in request.session:
-            return HttpResponseRedirect("/seller/login/")
-
-        uid = User.objects.get(email=request.session["email"])
-        cid = customer.objects.get(user_id=uid)
-
-        address_id = request.session.get("address_id")
-
-        if not address_id:
-            messages.error(request,"Please select address.")
-            return HttpResponseRedirect("/checkout/")
-
-        address = Address.objects.get(
-            id=address_id,
-            customer=cid
-        )
-
-        cart_obj = cart.objects.get(customer=cid)
-        items = cartitem.objects.filter(cart=cart_obj)
-
-        total = 0
-
-        for i in items:
-            total += i.product.product_price * i.qty
-
-        discount = 65 if total >= 100 else 0
-        final = total - discount
-
-        payment = request.POST.get("payment_method")
-
-        if payment == "upi":
-            payment = "UPI"
-
-        elif payment == "card":
-            payment = "CARD"
-
-        else:
-            payment = "COD"
-
-        order = Order.objects.create(
-
-            customer=cid,
-            address=address,
-
-            payment_method=payment,
-
-            total_amount=total,
-            discount=discount,
-            final_amount=final,
-
-            status="Pending"
-
-        )
-
-        Payment.objects.create(
-            order=order,
-            payment_id="PAY" + uuid.uuid4().hex[:10].upper(),
-            transaction_id=uuid.uuid4().hex[:16].upper(),
-            amount=final,
-            method=payment,
-            status="Pending" if payment == "COD" else "Paid"
-        )
-
-        for i in items:
-
-            OrderItem.objects.create(
-
-                order=order,
-
-                product=i.product,
-
-                quantity=i.qty,
-
-                price=i.product.product_price,
-
-                subtotal=i.product.product_price * i.qty
-
-            )
-
-        items.delete()
-
-        if "address_id" in request.session:
-            del request.session["address_id"]
-
-        return HttpResponseRedirect("/order_success/")
-
-    return HttpResponseRedirect("/payment/")
 
 def order_success(request):
 

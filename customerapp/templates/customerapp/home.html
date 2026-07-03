@@ -2,83 +2,139 @@
 <div id="page-home" class="page">
 <div class="wrap">
 
-  <!-- CUSTOMER JOURNEY WIDGET -->
-  <section class="customer-journey-section">
-      <div class="journey-header">
-          <span class="hero-badge">
-              <i class="fa-solid fa-sparkles"></i>
-              AI Powered Nutrition Platform
-          </span>
-          <h2>Your Path to Better Health</h2>
-          <p>See how FitFuel AI optimizes your fitness journey step by step</p>
+  <!-- HERO BANNER -->
+  <section class="hero-light-banner">
+      <div class="hero-content">
+          <span class="hero-badge">AI POWERED NUTRITION PLATFORM</span>
+          <h1>Your Path to<br><span>Better Health</span></h1>
+          <p>See how FitFuel AI optimizes your<br>fitness journey step by step</p>
+          <a href="#" class="btn-primary"><i class="fa-solid fa-rocket"></i> Start Your Journey Now</a>
       </div>
-      
-      <div class="journey-container">
-          <div class="journey-line"></div>
-          <div class="journey-line-active"></div>
-          
-          <div class="journey-step" style="--delay: 0s;">
-              <div class="step-icon">
-                  <i class="fa-solid fa-brain"></i>
-              </div>
-              <div class="step-content">
-                  <h3>1. AI Assessment</h3>
-                  <p>Discover your precise metabolic needs and goals</p>
-              </div>
-          </div>
-          
-          <div class="journey-step" style="--delay: 0.1s;">
-              <div class="step-icon">
-                  <i class="fa-solid fa-utensils"></i>
-              </div>
-              <div class="step-content">
-                  <h3>2. Custom Plan</h3>
-                  <p>Get a 100% personalized daily nutrition strategy</p>
-              </div>
-          </div>
-          
-          <div class="journey-step" style="--delay: 0.2s;">
-              <div class="step-icon">
-                  <i class="fa-solid fa-bag-shopping"></i>
-              </div>
-              <div class="step-content">
-                  <h3>3. Smart Store</h3>
-                  <p>Order exact products matched to your unique profile</p>
-              </div>
-          </div>
-          
-          <div class="journey-step" style="--delay: 0.3s;">
-              <div class="step-icon">
-                  <i class="fa-solid fa-chart-line"></i>
-              </div>
-              <div class="step-content">
-                  <h3>4. Track Progress</h3>
-                  <p>Monitor daily goals and let AI optimize your path</p>
-              </div>
-          </div>
-      </div>
-      
-      <div class="journey-cta">
-          <a href="#" class="btn-primary">
-              <i class="fa-solid fa-rocket"></i> Start Your Journey Now
-          </a>
+      <div class="hero-image">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80" alt="Healthy Food Salad">
       </div>
   </section>
 
-<!-- CATEGORIES -->
-<div class="sh" style="margin-bottom:18px;">
-    <div class="sh-t">Browse <em>Categories</em></div>
+  <!-- OVERLAPPING STEPS -->
+  <div class="hero-steps-container">
+      <div class="hero-steps-line"></div>
+      
+      <div class="hero-step">
+          <div class="step-icon step-1"><i class="fa-solid fa-brain"></i></div>
+          <h3>1<br>AI Assessment</h3>
+          <p>Analyze your needs</p>
+      </div>
+      
+      <div class="hero-step">
+          <div class="step-icon step-2"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>2<br>Custom Plan</h3>
+          <p>100% personalized</p>
+      </div>
+      
+      <div class="hero-step">
+          <div class="step-icon step-3"><i class="fa-solid fa-bag-shopping"></i></div>
+          <h3>3<br>Smart Store</h3>
+          <p>AI matched products</p>
+      </div>
+      
+      <div class="hero-step">
+          <div class="step-icon step-4"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>4<br>Track Progress</h3>
+          <p>Improve every day</p>
+      </div>
+  </div>
+
+  <!-- STATS CARDS -->
+  <div class="stats-container">
+      <div class="stat-card">
+          <div class="stat-icon green"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-info">
+              <h3>15K+</h3>
+              <span>Active Users</span>
+              <small class="up">+12% <span>from last month</span></small>
+          </div>
+      </div>
+      
+      <div class="stat-card">
+          <div class="stat-icon blue"><i class="fa-solid fa-box"></i></div>
+          <div class="stat-info">
+              <h3>250+</h3>
+              <span>Healthy Products</span>
+              <small class="up">+18% <span>from last month</span></small>
+          </div>
+      </div>
+      
+      <div class="stat-card">
+          <div class="stat-icon purple"><i class="fa-solid fa-award"></i></div>
+          <div class="stat-info">
+              <h3>97%</h3>
+              <span>AI Accuracy</span>
+              <small class="up">+5% <span>from last month</span></small>
+          </div>
+      </div>
+      
+      <div class="stat-card">
+          <div class="stat-icon orange"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="stat-info">
+              <h3>500+</h3>
+              <span>Meal Plans</span>
+              <small class="up">+22% <span>from last month</span></small>
+          </div>
+      </div>
+  </div>
+
+<div class="sh" style="margin-bottom:24px;">
+    <div class="sh-t" style="font-size:1.4rem;">Browse <em>Categories</em></div>
+    <a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a>
 </div>
 
-<div class="cpills">
-    <a href="{% url 'customer_dashboard' %}"
-       class="cpill {% if not selected_category %}active{% endif %}">
-        All
+<div class="categories-grid">
+    <a href="{% url 'customer_dashboard' %}" class="cat-card cat-all {% if not selected_category %}active{% endif %}">
+        <div class="cat-icon-wrap">
+            <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <span>All</span>
     </a>
     {% for c in categories %}
-    <a href="{% url 'customer_dashboard' %}?category={{ c.id }}"
-       class="cpill {% if selected_category == c.id|stringformat:'s' %}active{% endif %}">
-        {{ c.category_name }}
+    <a href="{% url 'customer_dashboard' %}?category={{ c.id }}" class="cat-card {% if selected_category == c.id|stringformat:'s' %}active{% endif %}">
+        <div class="cat-icon-wrap {% if c.category_image %}has-image{% endif %}">
+            {% if c.category_image %}
+                <img src="{{ c.category_image.url }}" alt="{{ c.category_name }}">
+            {% else %}
+                <i class="fa-solid fa-box"></i>
+            {% endif %}
+        </div>
+        <span>{{ c.category_name }}</span>
+    </a>
+    {% empty %}
+    <!-- Demo Categories when DB is empty -->
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥛</div>
+        <span>Dairy</span>
+    </a>
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥦</div>
+        <span>Vegetables</span>
+    </a>
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🍎</div>
+        <span>Fruits</span>
+    </a>
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🏋️</div>
+        <span>Protein</span>
+    </a>
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥜</div>
+        <span>Dry Fruits</span>
+    </a>
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">💊</div>
+        <span>Supplements</span>
+    </a>
+    <a href="#" class="cat-card">
+        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥤</div>
+        <span>Drinks</span>
     </a>
     {% endfor %}
 </div>
@@ -256,11 +312,16 @@
     </div>
 
     {% empty %}
-
-    <div class="orow">
-        <span style="grid-column:1/8;text-align:center;padding:25px;">
-            No Orders Yet
-        </span>
+    <div class="empty-orders-state" style="grid-column:1/-1;text-align:center;padding:40px 20px;">
+        <div class="empty-icon" style="font-size:3rem;color:#10b981;margin-bottom:16px;">
+            <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">No Orders Yet</h4>
+        <p style="color:#64748b;font-size:0.9rem;margin-bottom:24px;">Looks like you haven't placed any orders.</p>
+        <div style="display:flex;gap:16px;justify-content:center;">
+            <a href="#" style="background:#10b981;color:#fff;padding:10px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:0.9rem;">Browse Nutrition Store</a>
+            <a href="#" style="background:#f8fafc;color:#0f172a;border:1px solid #e2e8f0;padding:10px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:0.9rem;">Start Shopping</a>
+        </div>
     </div>
 
     {% endfor %}

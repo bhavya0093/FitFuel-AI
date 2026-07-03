@@ -3,17 +3,11 @@
 ========================================== */
 
 .dashboard-layout{
-
     width:min(96%,1450px);
-
     margin:25px auto;
-
     display:grid;
-
-    grid-template-columns:260px 1fr 320px;
-
+    grid-template-columns:260px minmax(0, 1fr) 320px;
     gap:24px;
-
     align-items:start;
 }
 

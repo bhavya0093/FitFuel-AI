@@ -46,16 +46,50 @@ def customer_dashboard(request):
                         "products": cat_products
                     })
 
-        orders = Order.objects.filter(customer=cid).order_by("-order_date")[:5]
-        ai_products = []
-        health_profile = None
+            ai_products = []
 
         try:
-            health_profile = cid.health_profile
-            ai_products = get_ai_recommendations(health_profile)
+            hp = cid.health_profile
 
-        except:
-            pass
+            ai_products = product.objects.filter(
+                diet_type=hp.diet_type,
+                goal_type=hp.goal
+            ).order_by(
+                "-protein",
+                "product_price"
+            )[:4]
+
+        except UserHealthProfile.DoesNotExist:
+                hp = None
+
+                ai_products = product.objects.filter(
+                    is_ai_recommended=True
+                )[:4]
+        for p in ai_products:
+
+            score = 50
+
+            if hp:
+
+                if hp.goal == p.goal_type:
+                    score += 20
+
+                if hp.diet_type == p.diet_type:
+                    score += 15
+
+            if p.protein >= 25:
+                score += 10
+
+            elif p.protein >= 15:
+                score += 5
+
+            if p.rating >= 4.5:
+                score += 5
+
+            if score > 99:
+                score = 99
+
+            p.ai_match = score
 
         active_page = request.GET.get("active_page") or "home"
 
@@ -70,7 +104,7 @@ def customer_dashboard(request):
             "orders": orders,
             "active_page": active_page,
             "health": health,
-            "health_profile": health_profile,
+            "health_profile": profile,
             "ai_products": ai_products,
         }
 
@@ -518,7 +552,7 @@ def orders(request):
 
     orders = Order.objects.filter(
         customer=cid
-    ).order_by("-order_date")
+    ).order_by("-order_date")[:5]
 
     print("Orders =>", orders)
     print("Count =>", orders.count())

@@ -42,7 +42,7 @@
         </div>
         <label class="epbtn" for="nav-edit"><i class="fas fa-pen"></i> Edit Profile</label>
       </div>
-      <div class="sec" id="sec-health">
+<div class="sec" id="sec-health">
 
     <div class="sec-h">
         <i class="fas fa-heartbeat"></i>
@@ -55,7 +55,7 @@
 
         <div class="ifd">
             <label>Age</label>
-            <div class="fv">{{ health.age }} Years</div>
+            <div class="fv">{{ health.age }}</div>
         </div>
 
         <div class="ifd">
@@ -79,41 +79,84 @@
         </div>
 
         <div class="ifd">
-            <label>Activity</label>
-            <div class="fv">{{ health.activity_level }}</div>
-        </div>
-
-        <div class="ifd">
-            <label>Goal</label>
-            <div class="fv">{{ health.goal }}</div>
-        </div>
-
-        <div class="ifd">
-            <label>Diet</label>
-            <div class="fv">{{ health.diet_type }}</div>
+            <label>Daily Calories</label>
+            <div class="fv">{{ health.daily_calories }} kcal</div>
         </div>
 
     </div>
 
     {% else %}
 
-    <div class="empty-health">
+    <form method="POST" action="{% url 'save_health_profile' %}">
 
-        <i class="fas fa-heartbeat"></i>
+        {% csrf_token %}
 
-        <h3>No Health Profile Found</h3>
+        <div class="info-g">
 
-        <p>
-            Complete your health profile to unlock AI recommendations.
-        </p>
+            <div class="ifd">
+                <label>Age</label>
+                <input type="number" name="age" required>
+            </div>
 
-        <a href="#" class="epbtn">
+            <div class="ifd">
+                <label>Gender</label>
 
-            Complete Profile
+                <select name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
 
-        </a>
+            <div class="ifd">
+                <label>Height (cm)</label>
+                <input type="number" step="0.1" name="height" required>
+            </div>
 
-    </div>
+            <div class="ifd">
+                <label>Weight (kg)</label>
+                <input type="number" step="0.1" name="weight" required>
+            </div>
+
+            <div class="ifd">
+                <label>Activity Level</label>
+
+                <select name="activity_level">
+                    <option>Sedentary</option>
+                    <option>Light</option>
+                    <option>Moderate</option>
+                    <option>Active</option>
+                    <option>Very Active</option>
+                </select>
+            </div>
+
+            <div class="ifd">
+                <label>Goal</label>
+
+                <select name="goal">
+                    <option>Weight Loss</option>
+                    <option>Muscle Gain</option>
+                    <option>Maintenance</option>
+                </select>
+            </div>
+
+            <div class="ifd">
+                <label>Diet Type</label>
+
+                <select name="diet_type">
+                    <option>Veg</option>
+                    <option>Vegan</option>
+                    <option>Non-Veg</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button class="epbtn" type="submit">
+            Save Health Profile
+        </button>
+
+    </form>
 
     {% endif %}
 

@@ -5,6 +5,8 @@ from .models import *
 from customerapp.models import product, customer
 from django.contrib import messages
 import uuid
+from .models import UserHealthProfile
+import math
 
 
 def customer_dashboard(request):
@@ -13,10 +15,15 @@ def customer_dashboard(request):
 
         uid = User.objects.get(email=request.session["email"])
         cid = customer.objects.get(user_id=uid)
-
+        try:
+            health = UserHealthProfile.objects.get(customer=cid)
+        except UserHealthProfile.DoesNotExist:
+            health = None
         categories = Category.objects.all()
 
         selected_category = request.GET.get("category")
+
+        profile = UserHealthProfile.objects.filter(customer=cid).first()
 
         pid = product.objects.all()
 
@@ -52,6 +59,7 @@ def customer_dashboard(request):
             "category_sections": category_sections,
             "orders": orders,
             "active_page": active_page,
+            "health": health,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)
@@ -584,3 +592,140 @@ def profile(request):
     
     # Redirect to the main dashboard with the profile page activated
     return redirect(reverse("customer_dashboard") + "?active_page=profile")
+
+def save_health_profile(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    if request.method == "POST":
+
+        age = int(request.POST["age"])
+        gender = request.POST["gender"]
+
+        height = float(request.POST["height"])
+        weight = float(request.POST["weight"])
+
+        activity = request.POST["activity_level"]
+        goal = request.POST["goal"]
+        diet = request.POST["diet_type"]
+
+        # ==========================
+        # BMI
+        # ==========================
+
+        bmi = round(weight / ((height / 100) ** 2), 2)
+
+        # ==========================
+        # BMR
+        # ==========================
+
+        if gender == "Male":
+
+            bmr = (
+                10 * weight +
+                6.25 * height -
+                5 * age +
+                5
+            )
+
+        else:
+
+            bmr = (
+                10 * weight +
+                6.25 * height -
+                5 * age -
+                161
+            )
+
+        # ==========================
+        # TDEE
+        # ==========================
+
+        activity_factor = {
+
+            "Sedentary":1.2,
+            "Light":1.375,
+            "Moderate":1.55,
+            "Active":1.725,
+            "Very Active":1.9,
+
+        }
+
+        tdee = bmr * activity_factor.get(activity,1.2)
+
+        # ==========================
+        # Calories
+        # ==========================
+
+        if goal == "Weight Loss":
+
+            calories = int(tdee - 500)
+
+        elif goal == "Muscle Gain":
+
+            calories = int(tdee + 300)
+
+        else:
+
+            calories = int(tdee)
+
+        # ==========================
+        # Macronutrients
+        # ==========================
+
+        protein = round(weight * 2,1)
+
+        fat = round(weight * 0.8,1)
+
+        carbs = round(
+            (
+                calories -
+                (protein * 4 + fat * 9)
+            ) / 4,
+            1
+        )
+
+        water = round(weight * 0.035,1)
+
+        profile, created = UserHealthProfile.objects.get_or_create(
+            customer=cid
+        )
+
+        profile.age = age
+        profile.gender = gender
+        profile.height = height
+        profile.weight = weight
+
+        profile.activity_level = activity
+
+        profile.goal = goal
+
+        profile.diet_type = diet
+
+        profile.bmi = bmi
+
+        profile.daily_calories = calories
+
+        profile.protein_goal = protein
+
+        profile.carbs_goal = carbs
+
+        profile.fat_goal = fat
+
+        profile.water_goal = water
+
+        profile.save()
+
+        messages.success(
+            request,
+            "Health Profile Saved Successfully"
+        )
+
+    return redirect(
+        reverse("customer_dashboard") +
+        "?active_page=profile"
+    )

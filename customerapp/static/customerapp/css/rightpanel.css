@@ -153,6 +153,19 @@
     align-items: center;
     justify-content: center;
 }
+.ai-rec-img img{
+
+width:60px;
+
+height:60px;
+
+border-radius:14px;
+
+object-fit:cover;
+
+display:block;
+
+}
 
 .ai-rec-info h5 {
     font-size: 0.9rem;

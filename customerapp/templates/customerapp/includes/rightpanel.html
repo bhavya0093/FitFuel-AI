@@ -12,7 +12,7 @@
 
         <span class="stat-label">Calories</span>
 
-        <span class="stat-value">1450 / 2200 kcal</span>
+        <span class="stat-value">{{ cart_calories }} / {{ health.daily_calories }} kcal</span>
 
     </div>
 
@@ -28,7 +28,7 @@
 
         <span class="stat-label">Protein</span>
 
-        <span class="stat-value">92 / 150 g</span>
+        <span class="stat-value">{{ cart_protein }} / {{ health.protein_goal }} g</span>
 
     </div>
 
@@ -44,7 +44,7 @@
 
         <span class="stat-label">Water</span>
 
-        <span class="stat-value">2.3 / 3.5 L</span>
+        <span class="stat-value">0 / {{ health.water_goal }} L</span>
 
     </div>
 
@@ -72,7 +72,7 @@
 
         <span class="stat-label">Current BMI</span>
 
-        <span class="stat-value">24.1</span>
+        <span class="stat-value">{{ health.bmi }}</span>
 
     </div>
 
@@ -100,15 +100,15 @@
     
     <div class="stat-row">
         <span class="stat-label">Items</span>
-        <span class="stat-value">6</span>
+        <span class="stat-value">{{ cart_count }}</span>
     </div>
     <div class="stat-row">
         <span class="stat-label">Protein</span>
-        <span class="stat-value">98 g</span>
+        <span class="stat-value">{{ cart_protein }} g</span>
     </div>
     <div class="stat-row">
         <span class="stat-label">Calories</span>
-        <span class="stat-value">1840 kcal</span>
+        <span class="stat-value">{{ cart_calories }} kcal</span>
     </div>
     <div class="stat-row">
         <span class="stat-label">Savings</span>
@@ -134,28 +134,99 @@
 <!-- =============================== -->
 
 <div class="ai-rec-card">
+
     <div class="ai-rec-header">
+
         <div class="ai-rec-title">
-            <i class="fa-solid fa-robot"></i> AI Recommendation
+            <i class="fa-solid fa-robot"></i>
+            AI Recommendation
         </div>
+
     </div>
-    
+
+    {% if recommended_product %}
+
     <div class="ai-rec-body">
+
         <div class="ai-rec-product">
+
             <div class="ai-rec-img">
-                <i class="fa-solid fa-bowl-food" style="font-size: 24px; color: #a78bfa;"></i>
+
+                <img
+                    src="{{ recommended_product.picture.url }}"
+                    alt="{{ recommended_product.product_name }}"
+                >
+
             </div>
+
             <div class="ai-rec-info">
-                <h5>Greek Yogurt <span class="ai-match">98% Match</span></h5>
-                <p>Reason: High protein, low sugar and great for your goal.</p>
+
+                <h5>
+
+                    {{ recommended_product.product_name }}
+
+                    <span class="ai-match">
+
+                        {{ recommended_product.ai_match }}% Match
+
+                    </span>
+
+                </h5>
+
+                <p>
+
+                    Perfect for your
+                    <strong>{{ health.goal }}</strong>
+                    goal.
+
+                </p>
+
                 <div class="ai-rec-tags">
-                    <span>+18 g Protein</span>
-                    <span>Low Sugar</span>
+
+                    <span>
+
+                        +{{ recommended_product.protein }} g Protein
+
+                    </span>
+
+                    <span>
+
+                        {{ recommended_product.diet_type }}
+
+                    </span>
+
                 </div>
+
             </div>
+
         </div>
-        <a href="#" class="ai-rec-btn">Add to Cart</a>
+
+        <a
+            href="{% url 'add_to_cart' recommended_product.id %}"
+            class="ai-rec-btn">
+
+            Add to Cart
+
+        </a>
+
     </div>
+
+    {% else %}
+
+    <div class="ai-rec-body">
+
+        <p
+            style="text-align:center;color:#94a3b8;">
+
+            Complete your Health Profile to unlock
+            AI Recommendations.
+
+        </p>
+
+    </div>
+
+    {% endif %}
+
 </div>
 
 <!-- =============================== -->

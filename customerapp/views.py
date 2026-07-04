@@ -17,6 +17,31 @@ def customer_dashboard(request):
 
         uid = User.objects.get(email=request.session["email"])
         cid = customer.objects.get(user_id=uid)
+        # ==========================
+        # Cart Summary
+        # ==========================
+
+        cart_obj = cart.objects.filter(customer=cid).first()
+
+        cart_items = []
+
+        cart_count = 0
+
+        cart_protein = 0
+
+        cart_calories = 0
+
+        if cart_obj:
+
+            cart_items = cartitem.objects.filter(cart=cart_obj)
+
+            cart_count = cart_items.count()
+
+            for item in cart_items:
+
+                cart_protein += item.product.protein * item.qty
+
+                cart_calories += item.product.calories * item.qty
         try:
             health = UserHealthProfile.objects.get(customer=cid)
         except UserHealthProfile.DoesNotExist:
@@ -66,6 +91,7 @@ def customer_dashboard(request):
                 ai_products = product.objects.filter(
                     is_ai_recommended=True
                 )[:4]
+        recommended_product = ai_products[0] if ai_products else None
         for p in ai_products:
 
             score = 50
@@ -128,6 +154,10 @@ def customer_dashboard(request):
             "health": health,
             "health_profile": profile,
             "ai_products": ai_products,
+            "recommended_product": recommended_product,
+            "cart_count": cart_count,
+            "cart_protein": round(cart_protein,1),
+            "cart_calories": int(cart_calories),
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)

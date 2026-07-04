@@ -8,6 +8,7 @@ import uuid
 from .models import UserHealthProfile
 import math
 from django.db.models import Q
+from django.urls import reverse
 
 
 def customer_dashboard(request):
@@ -651,7 +652,7 @@ def cancel_order(request, pk):
 
     return redirect("orders")
 
-from django.urls import reverse
+
 
 def profile(request):
     if "email" not in request.session:
@@ -828,3 +829,9 @@ def get_ai_recommendations(health_profile):
         )
 
     return products[:8]
+
+def ai_assessment(request):
+    if "email" not in request.session:
+        return redirect("login")
+
+    return redirect(reverse("customer_dashboard") + "?active_page=assessment")

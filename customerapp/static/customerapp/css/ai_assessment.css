@@ -1,0 +1,256 @@
+/* =========================
+   AI Assessment
+========================= */
+#page-assessment {
+    position: fixed !important;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 40px;
+}
+
+.assessment-wrapper{
+    width: 100%;
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    border-radius:28px;
+    padding:45px;
+    box-shadow:0 25px 60px rgba(0,0,0,.08);
+    border:1px solid rgba(16,185,129,.12);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.assessment-header{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.ai-badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:40px;
+    background:#dcfce7;
+    color:#059669;
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+}
+
+.assessment-header h1{
+    margin-top:18px;
+    font-size:2.2rem;
+    font-weight:800;
+    color:#0f172a;
+}
+
+.assessment-header p{
+    margin-top:12px;
+    color:#64748b;
+    line-height:1.7;
+}
+
+/* Progress */
+
+.progress-box{
+    margin:35px 0;
+}
+
+.progress-bar{
+    width:100%;
+    height:10px;
+    background:#e2e8f0;
+    border-radius:50px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    width:20%;
+    height:100%;
+    background:linear-gradient(90deg,#10b981,#06b6d4);
+    border-radius:50px;
+    transition:.4s;
+}
+
+.progress-text{
+    display:block;
+    margin-top:10px;
+    text-align:right;
+    font-weight:600;
+    color:#64748b;
+}
+
+/* Steps */
+
+.step{
+    display:none;
+    animation:fade .4s;
+}
+
+.active-step{
+    display:block;
+}
+
+.step h2{
+    margin-bottom:25px;
+    color:#0f172a;
+    font-size:1.6rem;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* Form */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:8px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.form-group input,
+.form-group select{
+
+padding:15px 18px;
+
+border-radius:16px;
+
+border:1px solid #d1fae5;
+
+background:#f0fdfa;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+border-color:#10b981;
+
+background:#fff;
+
+box-shadow:0 0 0 4px rgba(16,185,129,.15);
+
+}
+
+/* Buttons */
+
+.assessment-buttons{
+
+margin-top:40px;
+
+display:flex;
+
+justify-content:space-between;
+
+}
+
+.assessment-buttons button{
+
+padding:15px 32px;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:700;
+
+transition:.3s;
+
+}
+
+#prevBtn{
+
+background:#e2e8f0;
+
+color:#0f172a;
+
+}
+
+#nextBtn{
+
+background:linear-gradient(90deg,#10b981,#06b6d4);
+
+color:#fff;
+
+}
+
+#submitBtn{
+
+display:none;
+
+background:linear-gradient(90deg,#10b981,#06b6d4);
+
+color:#fff;
+
+}
+
+.assessment-buttons button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 30px rgba(6,182,212,.25);
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.assessment-wrapper{
+
+padding:25px;
+
+}
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.assessment-header h1{
+
+font-size:1.8rem;
+
+}
+
+}

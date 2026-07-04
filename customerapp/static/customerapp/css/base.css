@@ -55,7 +55,8 @@
   body:has(#nav-home:checked) #page-home,
   body:has(#nav-profile:checked) #page-home,
   body:has(#nav-cart:checked) #page-home,
-  body:has(#nav-edit:checked) #page-home { display:block; }
+  body:has(#nav-edit:checked) #page-home,
+  body:has(#nav-assessment:checked) #page-home { display:block; }
   
   #nav-cart:checked ~ * #page-cart,
   body:has(#nav-cart:checked) #page-cart   { display:flex; }
@@ -65,6 +66,9 @@
   
   #nav-edit:checked ~ * #page-edit,
   body:has(#nav-edit:checked) #page-edit   { display:flex; }
+
+  #nav-assessment:checked ~ * #page-assessment,
+  body:has(#nav-assessment:checked) #page-assessment { display:flex; }
 
   /* ════════════════════════════════════════════
     CSS-ONLY CAROUSEL — Auto-play animation

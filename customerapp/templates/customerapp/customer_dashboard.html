@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="{% static 'customerapp/css/sidebar.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/rightpanel.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/ai_assessment.css' %}">
 </head>
 <body>
 <div class="bg-layer"></div>
@@ -33,6 +34,7 @@
 <input type="radio" name="page" id="nav-cart" class="page-radio" {% if active_page == "cart" %}checked{% endif %}>
 <input type="radio" name="page" id="nav-profile" class="page-radio" {% if active_page == "profile" %}checked{% endif %}>
 <input type="radio" name="page" id="nav-edit" class="page-radio" {% if active_page == "edit" %}checked{% endif %}>
+<input type="radio" name="page" id="nav-assessment" class="page-radio" {% if active_page == "assessment" %}checked{% endif %}>
 
 {% include 'customerapp/includes/navbar.html' %}
 
@@ -52,6 +54,7 @@
         {% include 'customerapp/cart.html' %}
         {% include 'customerapp/profile.html' %}
         {% include 'customerapp/edit.html' %}
+        {% include 'customerapp/ai_assessment.html' %}
 
     </main>
 

@@ -39,4 +39,6 @@ urlpatterns = [
     path("cancel_order/<int:pk>/",views.cancel_order,name="cancel_order"),
     path("profile/", views.profile, name="profile"),
     path("save_health_profile/",views.save_health_profile,name="save_health_profile"),
+    path("ai-assessment/", views.ai_assessment, name="ai_assessment"),
+
 ]

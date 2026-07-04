@@ -1,0 +1,237 @@
+{% load static %}
+
+<div id="page-assessment" class="page">
+
+<div class="assessment-wrapper" style="position: relative;">
+
+    <label for="nav-home" style="position: absolute; top: 20px; right: 25px; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: 0.2s;">
+        <i class="fa-solid fa-xmark"></i>
+    </label>
+
+    <div class="assessment-header">
+
+        <span class="ai-badge">
+            AI Powered Assessment
+        </span>
+
+        <h1>
+            Let's Build Your Perfect Nutrition Plan
+        </h1>
+
+        <p>
+            Answer a few questions and our AI will calculate your calories,
+            protein, carbs, fat and personalized meal recommendations.
+        </p>
+
+    </div>
+
+    <!-- Progress -->
+
+    <div class="progress-box">
+
+        <div class="progress-bar">
+
+            <div class="progress-fill"></div>
+
+        </div>
+
+        <span class="progress-text">
+            Step 1 of 5
+        </span>
+
+    </div>
+
+    <!-- Form -->
+
+    <form
+        method="POST"
+        action="{% url 'save_health_profile' %}"
+        id="assessmentForm"
+    >
+
+        {% csrf_token %}
+
+        <!-- STEP 1 -->
+
+        <div class="step active-step">
+
+            <h2>Basic Information</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Age</label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Gender</label>
+
+                    <select name="gender">
+
+                        <option value="Male">Male</option>
+
+                        <option value="Female">Female</option>
+
+                        <option value="Other">Other</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STEP 2 -->
+
+        <div class="step">
+
+            <h2>Body Measurements</h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Height (cm)</label>
+
+                    <input
+                        type="number"
+                        step="0.1"
+                        name="height"
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Weight (kg)</label>
+
+                    <input
+                        type="number"
+                        step="0.1"
+                        name="weight"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STEP 3 -->
+
+        <div class="step">
+
+            <h2>Activity Level</h2>
+
+            <div class="form-group">
+
+                <label>Daily Activity</label>
+
+                <select name="activity_level">
+
+                    <option>Sedentary</option>
+
+                    <option>Light</option>
+
+                    <option>Moderate</option>
+
+                    <option>Active</option>
+
+                    <option>Very Active</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- STEP 4 -->
+
+        <div class="step">
+
+            <h2>Your Goal</h2>
+
+            <div class="form-group">
+
+                <label>Fitness Goal</label>
+
+                <select name="goal">
+
+                    <option>Weight Loss</option>
+
+                    <option>Muscle Gain</option>
+
+                    <option>Maintenance</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- STEP 5 -->
+
+        <div class="step">
+
+            <h2>Diet Preference</h2>
+
+            <div class="form-group">
+
+                <label>Diet Type</label>
+
+                <select name="diet_type">
+
+                    <option>Veg</option>
+
+                    <option>Vegan</option>
+
+                    <option>Non-Veg</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+
+        <div class="assessment-buttons">
+
+            <button
+                type="button"
+                id="prevBtn"
+            >
+                Previous
+            </button>
+
+            <button
+                type="button"
+                id="nextBtn"
+            >
+                Next
+            </button>
+
+            <button
+                type="submit"
+                id="submitBtn"
+            >
+                Generate My AI Plan
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+</div>

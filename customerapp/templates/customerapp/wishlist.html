@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Wishlist</title>
+
+<link rel="stylesheet"
+href="{% static 'customerapp/css/wishlist.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'customer_dashboard' %}" class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Dashboard
+
+    </a>
+
+    <h1>
+
+        ❤️ My Wishlist
+
+    </h1>
+
+    <div class="wishlist-grid">
+
+        {% for item in wishlist_items %}
+
+        <div class="wishlist-card">
+
+            <img
+                src="{{ item.product.picture.url }}"
+                alt="{{ item.product.product_name }}">
+
+            <h3>
+
+                {{ item.product.product_name }}
+
+            </h3>
+
+            <p>
+
+                {{ item.product.brand }}
+
+            </p>
+
+            <h2>
+
+                ₹{{ item.product.product_price }}
+
+            </h2>
+
+            <div class="wishlist-actions">
+
+                <a
+                    href="{% url 'product_details' item.product.id %}"
+                    class="view-btn">
+
+                    View
+
+                </a>
+
+                <a
+                    href="{% url 'add_to_cart' item.product.id %}"
+                    class="cart-btn">
+
+                    Add To Cart
+
+                </a>
+
+                <a
+                    href="{% url 'remove_from_wishlist' item.product.id %}"
+                    class="remove-btn">
+
+                    Remove
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <i class="fa-solid fa-heart-crack"></i>
+
+            <h2>
+
+                Your Wishlist is Empty
+
+            </h2>
+
+            <a
+                href="{% url 'customer_dashboard' %}">
+
+                Start Shopping
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

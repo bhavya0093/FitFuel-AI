@@ -291,3 +291,49 @@ class ProductReview(models.Model):
 
     def __str__(self):
         return f"{self.customer.firstname} - {self.product.product_name}"
+
+class ProgressLog(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE,
+        related_name="progress_logs"
+    )
+
+    weight = models.FloatField()
+
+    bmi = models.FloatField()
+
+    calories = models.IntegerField(default=0)
+
+    protein = models.FloatField(default=0)
+
+    water = models.FloatField(default=0)
+
+    created_at = models.DateField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.customer.firstname} - {self.created_at}"
+
+class Wishlist(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    product = models.ForeignKey(
+        product,
+        on_delete=models.CASCADE
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("customer", "product")
+
+    def __str__(self):
+        return f"{self.customer.firstname} - {self.product.product_name}"

@@ -41,4 +41,7 @@ urlpatterns = [
     path("save_health_profile/",views.save_health_profile,name="save_health_profile"),
     path("ai-assessment/", views.ai_assessment, name="ai_assessment"),
     path("product/<int:pk>/",views.product_details,name="product_details"),
+    path("wishlist/", views.wishlist, name="wishlist"),
+    path("add_to_wishlist/<int:pk>/", views.add_to_wishlist, name="add_to_wishlist"),
+    path("remove_from_wishlist/<int:pk>/", views.remove_from_wishlist, name="remove_from_wishlist"),
 ]

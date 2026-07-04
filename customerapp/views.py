@@ -899,3 +899,66 @@ def product_details(request, pk):
         "customerapp/product_details.html",
         context
     )
+def add_to_wishlist(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    product_obj = get_object_or_404(product, id=pk)
+
+    Wishlist.objects.get_or_create(
+        customer=cid,
+        product=product_obj
+    )
+
+    messages.success(request, "Added to Wishlist ❤️")
+
+    return redirect(request.META.get("HTTP_REFERER", "customer_dashboard"))
+
+def remove_from_wishlist(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    Wishlist.objects.filter(
+        customer=cid,
+        product_id=pk
+    ).delete()
+
+    messages.success(request, "Removed from Wishlist")
+
+    return redirect(request.META.get("HTTP_REFERER", "wishlist"))
+
+def wishlist(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    wishlist_items = Wishlist.objects.filter(
+        customer=cid
+    ).select_related("product")
+
+    context = {
+
+        "uid": uid,
+
+        "cid": cid,
+
+        "wishlist_items": wishlist_items,
+
+    }
+
+    return render(
+        request,
+        "customerapp/wishlist.html",
+        context
+    )

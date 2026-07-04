@@ -129,6 +129,22 @@
                 {{ p.product_name }}
             </h3>
 
+            <ul class="ai-reason-list">
+
+{% for reason in p.ai_reasons %}
+
+<li>
+
+<i class="fa-solid fa-circle-check"></i>
+
+{{ reason }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
             <p class="brand">
                 {{ p.brand }}
             </p>

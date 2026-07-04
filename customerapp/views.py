@@ -91,6 +91,27 @@ def customer_dashboard(request):
 
             p.ai_match = score
 
+            reasons = []
+
+            if hp:
+
+                if hp.goal == p.goal_type:
+                    reasons.append(f"Perfect for {hp.goal}")
+
+                if hp.diet_type == p.diet_type:
+                    reasons.append(f"{hp.diet_type} Friendly")
+
+                if p.protein >= 25:
+                    reasons.append(f"High Protein ({p.protein}g)")
+
+                if p.sugar <= 5:
+                    reasons.append("Low Sugar")
+
+                if p.fiber >= 5:
+                    reasons.append("High Fiber")
+
+            p.ai_reasons = reasons[:4]
+
         active_page = request.GET.get("active_page") or "home"
 
         context = {

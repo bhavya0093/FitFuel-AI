@@ -266,3 +266,28 @@ class UserHealthProfile(models.Model):
 
     def __str__(self):
         return f"{self.customer.firstname} Health Profile"
+
+class ProductReview(models.Model):
+
+    product = models.ForeignKey(
+        product,
+        on_delete=models.CASCADE,
+        related_name="reviews"
+    )
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    rating = models.PositiveSmallIntegerField(default=5)
+
+    review = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.customer.firstname} - {self.product.product_name}"

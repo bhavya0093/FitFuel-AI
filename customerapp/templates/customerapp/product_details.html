@@ -86,6 +86,120 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
                 {{ product.description }}
 
             </p>
+            <div class="nutrition-card">
+
+    <h3>
+        <i class="fa-solid fa-chart-simple"></i>
+        Nutrition Facts
+    </h3>
+
+    <div class="nutrition-grid">
+
+        <div class="nutrition-item">
+
+            <span>Calories</span>
+
+            <strong>{{ product.calories }} kcal</strong>
+
+        </div>
+
+        <div class="nutrition-item">
+
+            <span>Protein</span>
+
+            <strong>{{ product.protein }} g</strong>
+
+        </div>
+
+        <div class="nutrition-item">
+
+            <span>Carbs</span>
+
+            <strong>{{ product.carbs }} g</strong>
+
+        </div>
+
+        <div class="nutrition-item">
+
+            <span>Fat</span>
+
+            <strong>{{ product.fat }} g</strong>
+
+        </div>
+
+        <div class="nutrition-item">
+
+            <span>Fiber</span>
+
+            <strong>{{ product.fiber }} g</strong>
+
+        </div>
+
+        <div class="nutrition-item">
+
+            <span>Sugar</span>
+
+            <strong>{{ product.sugar }} g</strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="info-card">
+
+    <h3>
+
+        <i class="fa-solid fa-heart"></i>
+
+        Benefits
+
+    </h3>
+
+    <p>
+
+        {{ product.benefits }}
+
+    </p>
+
+</div>
+
+<div class="info-card">
+
+    <h3>
+
+        <i class="fa-solid fa-leaf"></i>
+
+        Ingredients
+
+    </h3>
+
+    <p>
+
+        {{ product.ingredients }}
+
+    </p>
+
+</div>
+
+<div class="info-card">
+
+    <h3>
+
+        <i class="fa-solid fa-utensils"></i>
+
+        Recommended Usage
+
+    </h3>
+
+    <p>
+
+        {{ product.recommended_usage }}
+
+    </p>
+
+</div>
 
             <a
                 href="{% url 'add_to_cart' product.id %}"
@@ -97,6 +211,75 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
             </a>
 
+            <a href="#"
+
+class="wishlist-btn">
+
+<i class="fa-solid fa-heart"></i>
+
+Add to Wishlist
+
+</a>
+<hr style="margin:50px 0;">
+
+<div class="related-section">
+
+    <h2>
+        <i class="fa-solid fa-fire"></i>
+        Related Products
+    </h2>
+
+    <div class="related-grid">
+
+        {% for p in related_products %}
+
+        <div class="related-card">
+
+            <a href="{% url 'product_details' p.id %}">
+
+                <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
+
+            </a>
+
+            <h4>
+
+                <a href="{% url 'product_details' p.id %}">
+
+                    {{ p.product_name }}
+
+                </a>
+
+            </h4>
+
+            <p class="related-brand">
+                {{ p.brand }}
+            </p>
+
+            <div class="related-price">
+
+                ₹{{ p.product_price }}
+
+            </div>
+
+            <a
+                href="{% url 'add_to_cart' p.id %}"
+                class="related-cart">
+
+                Add to Cart
+
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No Related Products Found.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
         </div>
 
     </div>

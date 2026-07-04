@@ -105,6 +105,26 @@
 
         </div>
 
+        <div class="search-filter-bar">
+
+    <form method="GET" action="{% url 'customer_dashboard' %}">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search healthy products..."
+            value="{{ request.GET.search }}">
+
+        <button type="submit">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </button>
+
+    </form>
+
+</div>
+
         <a href="{% url 'show_product' %}" class="view-all">
             View All →
         </a>
@@ -183,7 +203,130 @@
 
 </section>
 
+
 {% endif %}
+
+
+<div class="search-filter-bar">
+
+    <form method="GET" action="{% url 'customer_dashboard' %}">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search products, brands..."
+            value="{{ search }}">
+
+        <button type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </form>
+
+</div>
+
+<div class="filter-row">
+
+<form method="GET" action="{% url 'customer_dashboard' %}">
+
+<input
+type="hidden"
+name="search"
+value="{{ search }}">
+
+<select name="diet">
+
+<option value="">Diet Type</option>
+
+<option value="Veg">Veg</option>
+
+<option value="Vegan">Vegan</option>
+
+<option value="Non-Veg">Non-Veg</option>
+
+</select>
+
+<select name="goal">
+
+<option value="">Goal</option>
+
+<option value="Weight Loss">Weight Loss</option>
+
+<option value="Muscle Gain">Muscle Gain</option>
+
+<option value="Maintenance">Maintenance</option>
+
+</select>
+
+<select name="brand">
+
+    <option value="">Brand</option>
+
+    {% for p in pid %}
+
+        <option
+            value="{{ p.brand }}"
+            {% if brand == p.brand %}selected{% endif %}>
+
+            {{ p.brand }}
+
+        </option>
+
+    {% endfor %}
+
+</select>
+
+<select name="price">
+
+    <option value="">Price</option>
+
+    <option value="500" {% if price == "500" %}selected{% endif %}>
+        Under ₹500
+    </option>
+
+    <option value="1000" {% if price == "1000" %}selected{% endif %}>
+        Under ₹1000
+    </option>
+
+    <option value="2000" {% if price == "2000" %}selected{% endif %}>
+        Under ₹2000
+    </option>
+
+    <option value="5000" {% if price == "5000" %}selected{% endif %}>
+        Under ₹5000
+    </option>
+
+</select>
+
+<select name="protein">
+
+    <option value="">Protein</option>
+
+    <option value="10" {% if protein == "10" %}selected{% endif %}>
+        10g+
+    </option>
+
+    <option value="20" {% if protein == "20" %}selected{% endif %}>
+        20g+
+    </option>
+
+    <option value="30" {% if protein == "30" %}selected{% endif %}>
+        30g+
+    </option>
+
+</select>
+
+<button type="submit">
+
+Apply Filters
+
+</button>
+
+</form>
+
+</div>
+
+
 
 <div class="sh" style="margin-bottom:24px;">
     <div class="sh-t" style="font-size:1.4rem;">Browse <em>Categories</em></div>

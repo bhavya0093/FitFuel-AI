@@ -965,3 +965,111 @@ AI Recommendation Section
 .ai-reason-list i{
     color:#10b981;
 }
+.search-filter-bar{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:25px 0;
+
+}
+
+.search-filter-bar form{
+
+    width:100%;
+
+    max-width:700px;
+
+    display:flex;
+
+    background:#fff;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.search-filter-bar input{
+
+    flex:1;
+
+    border:none;
+
+    padding:16px 22px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.search-filter-bar button{
+
+    width:65px;
+
+    border:none;
+
+    background:#10b981;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
+.filter-row{
+
+margin:20px 0 35px;
+
+}
+
+.filter-row form{
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+align-items:center;
+
+}
+
+.filter-row select{
+
+padding:12px 18px;
+
+border:1px solid #dbe4ee;
+
+border-radius:10px;
+
+background:#fff;
+
+font-size:14px;
+
+min-width:180px;
+
+}
+
+.filter-row button{
+
+padding:12px 22px;
+
+border:none;
+
+border-radius:10px;
+
+background:#10b981;
+
+color:#fff;
+
+font-weight:700;
+
+cursor:pointer;
+
+}

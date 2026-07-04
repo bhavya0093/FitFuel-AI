@@ -23,7 +23,15 @@ def customer_dashboard(request):
         # ==========================
 
         cart_obj = cart.objects.filter(customer=cid).first()
-
+        price = request.GET.get("price")
+        protein = request.GET.get("protein")
+        if price:
+            pid = pid.filter(product_price__lte=price)
+            
+        if protein:
+            pid = pid.filter(
+                protein__gte=protein
+            )
         cart_items = []
 
         cart_count = 0
@@ -50,10 +58,32 @@ def customer_dashboard(request):
         categories = Category.objects.all()
 
         selected_category = request.GET.get("category")
+        search = request.GET.get("search")
+
+        diet = request.GET.get("diet")
+        goal = request.GET.get("goal")
+        brand = request.GET.get("brand")
 
         profile = UserHealthProfile.objects.filter(customer=cid).first()
 
         pid = product.objects.all()
+        if search:
+            pid = pid.filter(
+                Q(product_name__icontains=search) |
+
+                Q(brand__icontains=search) |
+
+                Q(description__icontains=search)
+
+            )
+        if diet:
+            pid = pid.filter(diet_type=diet)
+
+        if goal:
+            pid = pid.filter(goal_type=goal)
+        
+        if brand:
+            pid = pid.filter(brand__iexact=brand)
 
         selected_category_obj = None
         category_sections = []
@@ -66,7 +96,20 @@ def customer_dashboard(request):
                 pass
         else:
             for cat in categories:
-                cat_products = product.objects.filter(product_category=cat)[:6]
+
+                cat_products = pid.filter(
+                    product_category=cat
+                )[:6]
+
+                if cat_products.exists():
+
+                        category_sections.append({
+
+                        "category": cat,
+
+                        "products": cat_products
+
+                     })
                 if cat_products.exists():
                     category_sections.append({
                         "category": cat,
@@ -159,6 +202,12 @@ def customer_dashboard(request):
             "cart_count": cart_count,
             "cart_protein": round(cart_protein,1),
             "cart_calories": int(cart_calories),
+            "search": search,
+            "diet": diet,
+            "goal": goal,
+            "brand": brand,
+            "price": price,
+            "protein": protein,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)

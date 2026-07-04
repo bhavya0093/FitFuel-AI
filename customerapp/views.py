@@ -25,13 +25,7 @@ def customer_dashboard(request):
         cart_obj = cart.objects.filter(customer=cid).first()
         price = request.GET.get("price")
         protein = request.GET.get("protein")
-        if price:
-            pid = pid.filter(product_price__lte=price)
-            
-        if protein:
-            pid = pid.filter(
-                protein__gte=protein
-            )
+        
         cart_items = []
 
         cart_count = 0
@@ -63,7 +57,8 @@ def customer_dashboard(request):
         diet = request.GET.get("diet")
         goal = request.GET.get("goal")
         brand = request.GET.get("brand")
-
+        sort = request.GET.get("sort")
+        
         profile = UserHealthProfile.objects.filter(customer=cid).first()
 
         pid = product.objects.all()
@@ -84,6 +79,32 @@ def customer_dashboard(request):
         
         if brand:
             pid = pid.filter(brand__iexact=brand)
+        
+        if price:
+            pid = pid.filter(product_price__lte=price)
+            
+        if protein:
+            pid = pid.filter(
+                protein__gte=protein
+            )
+
+        if sort == "latest":
+            pid = pid.order_by("-created_at")
+
+        elif sort == "low":
+            pid = pid.order_by("product_price")
+
+        elif sort == "high":
+            pid = pid.order_by("-product_price")
+
+        elif sort == "protein":
+            pid = pid.order_by("-protein")
+
+        elif sort == "rating":
+            pid = pid.order_by("-rating")
+
+        elif sort == "popular":
+            pid = pid.order_by("-total_sold")
 
         selected_category_obj = None
         category_sections = []
@@ -104,17 +125,9 @@ def customer_dashboard(request):
                 if cat_products.exists():
 
                         category_sections.append({
-
                         "category": cat,
-
                         "products": cat_products
-
                      })
-                if cat_products.exists():
-                    category_sections.append({
-                        "category": cat,
-                        "products": cat_products
-                    })
 
             ai_products = []
 
@@ -208,6 +221,7 @@ def customer_dashboard(request):
             "brand": brand,
             "price": price,
             "protein": protein,
+            "sort": sort,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)
@@ -325,8 +339,31 @@ def checkout(request):
             cid = customer.objects.get(user_id = uid)
             Cart_obj, created = cart.objects.get_or_create(customer = cid)
             item = cartitem.objects.filter(cart=Cart_obj)
+            # ==========================
+            # Buy Now
+            # ==========================
+
+            buy_now_product = request.session.get("buy_now_product")
+
+            if buy_now_product:
+
+                product_obj = get_object_or_404(
+                    product,
+                    id=buy_now_product
+                )
+
+                class BuyNowItem:
+                    pass
+
+                buy_item = BuyNowItem()
+
+                buy_item.product = product_obj
+
+                buy_item.qty = 1
+
+                item = [buy_item]
             addresses = Address.objects.filter(customer=cid)
-            
+                        
             
             if request.method == "POST":
 
@@ -574,9 +611,14 @@ def place_order(request):
     uid = User.objects.get(email=request.session["email"])
     cid = customer.objects.get(user_id=uid)
 
-    if not cartitem.objects.filter(cart__customer=cid).exists():
+    buy_now_product = request.session.get("buy_now_product")
 
-        messages.error(request,"Your cart is empty.")
+    if (
+        not buy_now_product and
+        not cartitem.objects.filter(cart__customer=cid).exists()
+    ):
+
+        messages.error(request, "Your cart is empty.")
 
         return redirect("view_cart")
 
@@ -592,8 +634,28 @@ def place_order(request):
 
         address = get_object_or_404(Address, id=address_id)
 
-        cart_obj = cart.objects.get(customer=cid)
-        items = cartitem.objects.filter(cart=cart_obj)
+        if buy_now_product:
+
+            product_obj = get_object_or_404(
+                product,
+                id=buy_now_product
+            )
+
+            class BuyNowItem:
+                pass
+
+            obj = BuyNowItem()
+
+            obj.product = product_obj
+            obj.qty = 1
+
+            items = [obj]
+
+        else:
+
+            cart_obj = cart.objects.get(customer=cid)
+
+            items = cartitem.objects.filter(cart=cart_obj)
 
         total = 0
 
@@ -631,10 +693,13 @@ def place_order(request):
                 subtotal=i.product.product_price * i.qty
             )
 
-        items.delete()
+        if not buy_now_product:
+            items.delete()
 
         if "address_id" in request.session:
             del request.session["address_id"]
+        if "buy_now_product" in request.session:
+            del request.session["buy_now_product"]
 
         messages.success(request, "Order Placed Successfully.")
 
@@ -1061,3 +1126,12 @@ def add_review(request, pk):
         "product_details",
         pk=pk
     )
+
+def buy_now(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    request.session["buy_now_product"] = pk
+
+    return redirect("checkout")

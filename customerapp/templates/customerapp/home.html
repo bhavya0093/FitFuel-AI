@@ -322,7 +322,43 @@ Apply Filters
 
 </button>
 
+<a href="{% url 'customer_dashboard' %}" class="clear-filter-btn">
+
+    Clear
+
+</a>
+
 </form>
+
+<select name="sort">
+
+    <option value="">Sort By</option>
+
+    <option value="latest" {% if sort == "latest" %}selected{% endif %}>
+        Newest
+    </option>
+
+    <option value="low" {% if sort == "low" %}selected{% endif %}>
+        Price: Low → High
+    </option>
+
+    <option value="high" {% if sort == "high" %}selected{% endif %}>
+        Price: High → Low
+    </option>
+
+    <option value="protein" {% if sort == "protein" %}selected{% endif %}>
+        Highest Protein
+    </option>
+
+    <option value="rating" {% if sort == "rating" %}selected{% endif %}>
+        Highest Rating
+    </option>
+
+    <option value="popular" {% if sort == "popular" %}selected{% endif %}>
+        Best Selling
+    </option>
+
+</select>
 
 </div>
 

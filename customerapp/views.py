@@ -7,8 +7,9 @@ from django.contrib import messages
 import uuid
 from .models import UserHealthProfile
 import math
-from django.db.models import Q
+from django.db.models import Q,Avg
 from django.urls import reverse
+
 
 
 def customer_dashboard(request):
@@ -682,8 +683,6 @@ def cancel_order(request, pk):
 
     return redirect("orders")
 
-
-
 def profile(request):
     if "email" not in request.session:
         return redirect("login")
@@ -882,16 +881,14 @@ def product_details(request, pk):
         id=product_obj.id
     )[:4]
 
+    reviews = ProductReview.objects.filter(product=product_obj)
+
     context = {
-
         "uid": uid,
-
         "cid": cid,
-
         "product": product_obj,
-
         "related_products": related_products,
-
+        "reviews": reviews,
     }
 
     return render(
@@ -899,6 +896,7 @@ def product_details(request, pk):
         "customerapp/product_details.html",
         context
     )
+
 def add_to_wishlist(request, pk):
 
     if "email" not in request.session:
@@ -961,4 +959,56 @@ def wishlist(request):
         request,
         "customerapp/wishlist.html",
         context
+    )
+
+def add_review(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    product_obj = get_object_or_404(product, id=pk)
+
+    if request.method == "POST":
+
+        rating = request.POST["rating"]
+
+        review = request.POST["review"]
+
+        ProductReview.objects.create(
+
+            customer=cid,
+
+            product=product_obj,
+
+            rating=rating,
+
+            review=review
+
+        )
+
+        reviews = ProductReview.objects.filter(
+            product=product_obj
+        )
+
+        avg = reviews.aggregate(
+            Avg("rating")
+        )["rating__avg"]
+
+        product_obj.rating = round(avg,1)
+
+        product_obj.review_count = reviews.count()
+
+        product_obj.save()
+
+        messages.success(
+            request,
+            "Review Added Successfully."
+        )
+
+    return redirect(
+        "product_details",
+        pk=pk
     )

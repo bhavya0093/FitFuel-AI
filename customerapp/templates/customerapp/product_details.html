@@ -222,6 +222,96 @@ Add to Wishlist
 </a>
 <hr style="margin:50px 0;">
 
+<hr style="margin:50px 0;">
+
+<div class="review-section">
+
+<h2>
+
+⭐ Customer Reviews
+
+</h2>
+
+<form
+method="POST"
+action="{% url 'add_review' product.id %}">
+
+{% csrf_token %}
+
+<select name="rating">
+
+<option value="5">★★★★★</option>
+
+<option value="4">★★★★☆</option>
+
+<option value="3">★★★☆☆</option>
+
+<option value="2">★★☆☆☆</option>
+
+<option value="1">★☆☆☆☆</option>
+
+</select>
+
+<textarea
+
+name="review"
+
+placeholder="Write your review..."
+
+required>
+
+</textarea>
+
+<button type="submit">
+
+Submit Review
+
+</button>
+
+</form>
+
+{% for r in reviews %}
+
+<div class="review-card">
+
+<h4>
+
+{{ r.customer.firstname }}
+
+</h4>
+
+<p>
+
+⭐ {{ r.rating }}/5
+
+</p>
+
+<p>
+
+{{ r.review }}
+
+</p>
+
+<small>
+
+{{ r.created_at }}
+
+</small>
+
+</div>
+
+{% empty %}
+
+<p>
+
+No Reviews Yet.
+
+</p>
+
+{% endfor %}
+
+</div>
+
 <div class="related-section">
 
     <h2>

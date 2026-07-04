@@ -118,7 +118,13 @@
         <div class="ai-product-card">
 
             {% if p.picture %}
+
+            <a href="{% url 'product_details' p.id %}">
+
                 <img src="{{ p.picture.url }}" alt="">
+
+            </a>
+
             {% endif %}
 
             <div class="ai-match">
@@ -247,7 +253,12 @@
         {% for p in pid %}
         <div class="pcd">
             <div class="pcd-img">
-                <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
+
+                <a href="{% url 'product_details' p.id %}">
+
+                    <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
+
+                </a>
                 {% if p.badge_text %}
                 <span class="pcd-bdg">{{ p.badge_text }}</span>
                 {% endif %}
@@ -297,7 +308,10 @@
             {% for p in section.products %}
             <div class="pcd">
                 <div class="pcd-img">
-                    <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
+
+                    <a href="{% url 'product_details' p.id %}">
+                        <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
+                    </a>
                     {% if p.badge_text %}
                     <span class="pcd-bdg">{{ p.badge_text }}</span>
                     {% endif %}

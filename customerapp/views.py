@@ -865,3 +865,37 @@ def ai_assessment(request):
         return redirect("login")
 
     return redirect(reverse("customer_dashboard") + "?active_page=assessment")
+
+def product_details(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    product_obj = get_object_or_404(product, id=pk)
+
+    related_products = product.objects.filter(
+        product_category=product_obj.product_category
+    ).exclude(
+        id=product_obj.id
+    )[:4]
+
+    context = {
+
+        "uid": uid,
+
+        "cid": cid,
+
+        "product": product_obj,
+
+        "related_products": related_products,
+
+    }
+
+    return render(
+        request,
+        "customerapp/product_details.html",
+        context
+    )

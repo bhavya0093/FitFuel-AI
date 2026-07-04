@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ product.product_name }}</title>
+
+<link rel="stylesheet" href="{% static 'customerapp/css/product_details.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'customer_dashboard' %}" class="back-btn">
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back
+
+    </a>
+
+    <div class="product-wrapper">
+
+        <!-- LEFT -->
+
+        <div class="product-image">
+
+            <img
+                src="{{ product.picture.url }}"
+                alt="{{ product.product_name }}">
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="product-details">
+
+            <span class="brand">
+
+                {{ product.brand }}
+
+            </span>
+
+            <h1>
+
+                {{ product.product_name }}
+
+            </h1>
+
+            <div class="rating">
+
+                ⭐ {{ product.rating }}
+
+                ({{ product.review_count }} Reviews)
+
+            </div>
+
+            <div class="price">
+
+                ₹{{ product.product_price }}
+
+            </div>
+
+            <div class="badges">
+
+                <span>{{ product.diet_type }}</span>
+
+                <span>{{ product.goal_type }}</span>
+
+                <span>{{ product.weight_unit }}</span>
+
+            </div>
+
+            <p class="description">
+
+                {{ product.description }}
+
+            </p>
+
+            <a
+                href="{% url 'add_to_cart' product.id %}"
+                class="cart-btn">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                Add To Cart
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

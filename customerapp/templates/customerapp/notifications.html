@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Notifications</title>
+
+<link rel="stylesheet"
+href="{% static 'customerapp/css/notifications.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="{% url 'customer_dashboard' %}" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Back
+
+</a>
+
+<h1>
+
+🔔 Notifications
+
+</h1>
+
+{% for n in notifications %}
+
+<div class="notification-card {% if not n.is_read %}unread{% endif %}">
+
+<h3>
+
+{{ n.title }}
+
+</h3>
+
+<p>
+
+{{ n.message }}
+
+</p>
+
+<small>
+
+{{ n.created_at|date:"d M Y h:i A" }}
+
+</small>
+
+</div>
+
+{% empty %}
+
+<div class="empty">
+
+No Notifications Yet
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html> 

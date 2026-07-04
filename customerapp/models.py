@@ -337,3 +337,21 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return f"{self.customer.firstname} - {self.product.product_name}"
+
+class Notification(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(max_length=150)
+
+    message = models.TextField()
+
+    is_read = models.BooleanField(default=False)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

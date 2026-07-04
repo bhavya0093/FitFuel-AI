@@ -701,6 +701,16 @@ def place_order(request):
         if "buy_now_product" in request.session:
             del request.session["buy_now_product"]
 
+        Notification.objects.create(
+
+            customer=cid,
+
+            title="Order Placed",
+
+            message=f"Your Order #{order.id} has been placed successfully."
+
+        )
+
         messages.success(request, "Order Placed Successfully.")
 
         return HttpResponseRedirect("/order_success/")
@@ -793,9 +803,48 @@ def cancel_order(request, pk):
     order.status = "Cancelled"
     order.save()
 
+    Notification.objects.create(
+
+        customer=cid,
+
+        title="Order Cancelled",
+
+        message=f"Your Order #{order.id} has been cancelled successfully."
+
+    )
+
     messages.success(request, "Order Cancelled Successfully.")
 
     return redirect("orders")
+
+def notifications(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(
+        email=request.session["email"]
+    )
+
+    cid = customer.objects.get(
+        user_id=uid
+    )
+
+    notifications = Notification.objects.filter(
+        customer=cid
+    ).order_by("-created_at")
+
+    context = {
+
+        "notifications": notifications
+
+    }
+
+    return render(
+        request,
+        "customerapp/notifications.html",
+        context
+    )
 
 def profile(request):
     if "email" not in request.session:

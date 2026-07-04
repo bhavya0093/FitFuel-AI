@@ -46,4 +46,5 @@ urlpatterns = [
     path("remove_from_wishlist/<int:pk>/", views.remove_from_wishlist, name="remove_from_wishlist"),
     path("add_review/<int:pk>/",views.add_review,name="add_review"),
     path("buy-now/<int:pk>/",views.buy_now,name="buy_now"),
+    path("notifications/",views.notifications,name="notifications"),  
 ]

@@ -1446,3 +1446,91 @@ def remove_coupon(request):
         del request.session["coupon_id"]
 
     return redirect("checkout")
+
+def remove_from_wishlist(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    item = get_object_or_404(
+
+        Wishlist,
+
+        id=pk,
+
+        customer=cid
+
+    )
+
+    product_name = item.product.product_name
+
+    item.delete()
+
+    Notification.objects.create(
+
+        customer=cid,
+
+        title="Wishlist Updated",
+
+        message=f"{product_name} removed from Wishlist."
+
+    )
+
+    messages.success(
+
+        request,
+
+        "Product removed from wishlist."
+
+    )
+
+    return redirect("wishlist")
+
+def wishlist_to_cart(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    wish = get_object_or_404(
+        Wishlist,
+        id=pk,
+        customer=cid
+    )
+
+    cart_obj, created = cart.objects.get_or_create(
+        customer=cid
+    )
+
+    cart_item, created = cartitem.objects.get_or_create(
+
+        cart=cart_obj,
+
+        product=wish.product,
+
+        defaults={"qty": 1}
+
+    )
+
+    if not created:
+
+        cart_item.qty += 1
+
+        cart_item.save()
+
+    wish.delete()
+
+    messages.success(
+
+        request,
+
+        "Product moved to cart."
+
+    )
+
+    return redirect("wishlist")

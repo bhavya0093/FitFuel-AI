@@ -52,4 +52,6 @@ urlpatterns = [
     path("coupons/",views.coupons,name="coupons"),
     path("apply-coupon/",views.apply_coupon,name="apply_coupon"),
     path("remove-coupon/",views.remove_coupon,name="remove_coupon"),
+    path("wishlist/remove/<int:pk>/",views.remove_from_wishlist,name="remove_from_wishlist"),
+    path("wishlist/cart/<int:pk>/",views.wishlist_to_cart,name="wishlist_to_cart"),
 ]

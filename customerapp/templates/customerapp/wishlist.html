@@ -31,9 +31,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     </a>
 
     <h1>
-
         ❤️ My Wishlist
-
     </h1>
 
     <div class="wishlist-grid">
@@ -42,27 +40,83 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
         <div class="wishlist-card">
 
+            <!-- AI Badge -->
+            {% if item.product.is_ai_recommended %}
+            <div class="ai-badge">
+                🤖 AI Pick
+            </div>
+            {% endif %}
+
             <img
                 src="{{ item.product.picture.url }}"
                 alt="{{ item.product.product_name }}">
 
             <h3>
-
                 {{ item.product.product_name }}
-
             </h3>
 
-            <p>
-
+            <p class="brand">
                 {{ item.product.brand }}
-
             </p>
 
+            <!-- Diet Badge -->
+            <div class="diet-badge">
+                {{ item.product.diet_type }}
+            </div>
+
+            <!-- Goal Badge -->
+            <div class="goal-badge">
+                {{ item.product.goal_type }}
+            </div>
+
+            <!-- Nutrition -->
+            <div class="nutrition-tags">
+
+                <span>
+                    🔥 {{ item.product.calories }} kcal
+                </span>
+
+                <span>
+                    💪 {{ item.product.protein }}g Protein
+                </span>
+
+            </div>
+
+            <!-- Rating -->
+            <div class="rating">
+
+                ⭐ {{ item.product.rating }}
+
+                ({{ item.product.review_count }} Reviews)
+
+            </div>
+
             <h2>
-
                 ₹{{ item.product.product_price }}
-
             </h2>
+
+            <!-- Stock -->
+            {% if item.product.stock_qty > 0 %}
+
+            <div class="stock in-stock">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                In Stock
+
+            </div>
+
+            {% else %}
+
+            <div class="stock out-stock">
+
+                <i class="fa-solid fa-circle-xmark"></i>
+
+                Out of Stock
+
+            </div>
+
+            {% endif %}
 
             <div class="wishlist-actions">
 
@@ -75,15 +129,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
                 </a>
 
                 <a
-                    href="{% url 'add_to_cart' item.product.id %}"
+                    href="{% url 'wishlist_to_cart' item.id %}"
                     class="cart-btn">
 
-                    Add To Cart
+                    Move To Cart
 
                 </a>
 
                 <a
-                    href="{% url 'remove_from_wishlist' item.product.id %}"
+                    href="{% url 'remove_from_wishlist' item.id %}"
                     class="remove-btn">
 
                     Remove
@@ -106,10 +160,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
             </h2>
 
-            <a
-                href="{% url 'customer_dashboard' %}">
+            <p>
 
-                Start Shopping
+                Save your favourite healthy products here.
+
+            </p>
+
+            <a
+                href="{% url 'customer_dashboard' %}"
+                class="shop-btn">
+
+                Continue Shopping
 
             </a>
 

@@ -119,3 +119,263 @@ color:#cbd5e1;
 margin-bottom:20px;
 
 }
+/* ===============================
+   PREMIUM WISHLIST
+=================================*/
+
+.wishlist-card{
+    position:relative;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.wishlist-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(16,185,129,.18);
+}
+
+/* AI Badge */
+
+.ai-badge{
+
+position:absolute;
+
+top:15px;
+
+right:15px;
+
+background:linear-gradient(135deg,#8b5cf6,#6366f1);
+
+color:#fff;
+
+padding:6px 12px;
+
+border-radius:30px;
+
+font-size:11px;
+
+font-weight:700;
+
+box-shadow:0 6px 18px rgba(99,102,241,.3);
+
+}
+
+/* Brand */
+
+.brand{
+
+color:#64748b;
+
+font-size:14px;
+
+margin-bottom:10px;
+
+}
+
+/* Diet Badge */
+
+.diet-badge{
+
+display:inline-block;
+
+padding:5px 12px;
+
+background:#dcfce7;
+
+color:#15803d;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+margin:4px;
+
+}
+
+/* Goal Badge */
+
+.goal-badge{
+
+display:inline-block;
+
+padding:5px 12px;
+
+background:#dbeafe;
+
+color:#2563eb;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+margin:4px;
+
+}
+
+/* Nutrition */
+
+.nutrition-tags{
+
+display:flex;
+
+justify-content:center;
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin:14px 0;
+
+}
+
+.nutrition-tags span{
+
+background:#f1f5f9;
+
+padding:6px 10px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:600;
+
+}
+
+/* Rating */
+
+.rating{
+
+margin:10px 0;
+
+font-size:14px;
+
+font-weight:600;
+
+color:#f59e0b;
+
+}
+
+/* Stock */
+
+.stock{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:6px;
+
+padding:7px 14px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:700;
+
+margin-bottom:18px;
+
+}
+
+.in-stock{
+
+background:#dcfce7;
+
+color:#15803d;
+
+}
+
+.out-stock{
+
+background:#fee2e2;
+
+color:#dc2626;
+
+}
+
+/* Buttons */
+
+.wishlist-actions{
+
+margin-top:15px;
+
+}
+
+.wishlist-actions a{
+
+transition:.3s;
+
+}
+
+.view-btn:hover{
+
+background:#0e7490;
+
+}
+
+.cart-btn:hover{
+
+background:#059669;
+
+}
+
+.remove-btn:hover{
+
+background:#dc2626;
+
+}
+
+/* Empty */
+
+.shop-btn{
+
+display:inline-block;
+
+margin-top:25px;
+
+padding:14px 28px;
+
+background:#10b981;
+
+color:#fff;
+
+text-decoration:none;
+
+font-weight:700;
+
+border-radius:50px;
+
+transition:.3s;
+
+}
+
+.shop-btn:hover{
+
+background:#059669;
+
+transform:translateY(-2px);
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.wishlist-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.wishlist-card img{
+
+height:220px;
+
+}
+
+}

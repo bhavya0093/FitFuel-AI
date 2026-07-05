@@ -207,160 +207,68 @@
 {% endif %}
 
 
-<div class="search-filter-bar">
+<form method="GET" action="{% url 'customer_dashboard' %}" class="master-filter-form">
+    <!-- Top Search Bar -->
+    <div class="master-search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" name="search" placeholder="Search products, brands, proteins..." value="{{ search }}">
+        <button type="submit" class="search-btn">Search</button>
+    </div>
 
-    <form method="GET" action="{% url 'customer_dashboard' %}">
+    <!-- Filters Row -->
+    <div class="master-filters">
+        <select name="diet" class="ff-select">
+            <option value="">Diet Type</option>
+            <option value="Veg" {% if diet == "Veg" %}selected{% endif %}>Veg</option>
+            <option value="Vegan" {% if diet == "Vegan" %}selected{% endif %}>Vegan</option>
+            <option value="Non-Veg" {% if diet == "Non-Veg" %}selected{% endif %}>Non-Veg</option>
+        </select>
+        
+        <select name="goal" class="ff-select">
+            <option value="">Goal</option>
+            <option value="Weight Loss" {% if goal == "Weight Loss" %}selected{% endif %}>Weight Loss</option>
+            <option value="Muscle Gain" {% if goal == "Muscle Gain" %}selected{% endif %}>Muscle Gain</option>
+            <option value="Maintenance" {% if goal == "Maintenance" %}selected{% endif %}>Maintenance</option>
+        </select>
+        
+        <select name="brand" class="ff-select">
+            <option value="">Brand</option>
+            {% for p in pid %}
+                <option value="{{ p.brand }}" {% if brand == p.brand %}selected{% endif %}>{{ p.brand }}</option>
+            {% endfor %}
+        </select>
+        
+        <select name="price" class="ff-select">
+            <option value="">Price</option>
+            <option value="500" {% if price == "500" %}selected{% endif %}>Under ₹500</option>
+            <option value="1000" {% if price == "1000" %}selected{% endif %}>Under ₹1000</option>
+            <option value="2000" {% if price == "2000" %}selected{% endif %}>Under ₹2000</option>
+            <option value="5000" {% if price == "5000" %}selected{% endif %}>Under ₹5000</option>
+        </select>
+        
+        <select name="protein" class="ff-select">
+            <option value="">Protein</option>
+            <option value="10" {% if protein == "10" %}selected{% endif %}>10g+</option>
+            <option value="20" {% if protein == "20" %}selected{% endif %}>20g+</option>
+            <option value="30" {% if protein == "30" %}selected{% endif %}>30g+</option>
+        </select>
+        
+        <select name="sort" class="ff-select">
+            <option value="">Sort By</option>
+            <option value="latest" {% if sort == "latest" %}selected{% endif %}>Newest</option>
+            <option value="low" {% if sort == "low" %}selected{% endif %}>Price: Low → High</option>
+            <option value="high" {% if sort == "high" %}selected{% endif %}>Price: High → Low</option>
+            <option value="protein" {% if sort == "protein" %}selected{% endif %}>Highest Protein</option>
+            <option value="rating" {% if sort == "rating" %}selected{% endif %}>Highest Rating</option>
+            <option value="popular" {% if sort == "popular" %}selected{% endif %}>Best Selling</option>
+        </select>
 
-        <input
-            type="text"
-            name="search"
-            placeholder="Search products, brands..."
-            value="{{ search }}">
-
-        <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
-    </form>
-
-</div>
-
-<div class="filter-row">
-
-<form method="GET" action="{% url 'customer_dashboard' %}">
-
-<input
-type="hidden"
-name="search"
-value="{{ search }}">
-
-<select name="diet">
-
-<option value="">Diet Type</option>
-
-<option value="Veg">Veg</option>
-
-<option value="Vegan">Vegan</option>
-
-<option value="Non-Veg">Non-Veg</option>
-
-</select>
-
-<select name="goal">
-
-<option value="">Goal</option>
-
-<option value="Weight Loss">Weight Loss</option>
-
-<option value="Muscle Gain">Muscle Gain</option>
-
-<option value="Maintenance">Maintenance</option>
-
-</select>
-
-<select name="brand">
-
-    <option value="">Brand</option>
-
-    {% for p in pid %}
-
-        <option
-            value="{{ p.brand }}"
-            {% if brand == p.brand %}selected{% endif %}>
-
-            {{ p.brand }}
-
-        </option>
-
-    {% endfor %}
-
-</select>
-
-<select name="price">
-
-    <option value="">Price</option>
-
-    <option value="500" {% if price == "500" %}selected{% endif %}>
-        Under ₹500
-    </option>
-
-    <option value="1000" {% if price == "1000" %}selected{% endif %}>
-        Under ₹1000
-    </option>
-
-    <option value="2000" {% if price == "2000" %}selected{% endif %}>
-        Under ₹2000
-    </option>
-
-    <option value="5000" {% if price == "5000" %}selected{% endif %}>
-        Under ₹5000
-    </option>
-
-</select>
-
-<select name="protein">
-
-    <option value="">Protein</option>
-
-    <option value="10" {% if protein == "10" %}selected{% endif %}>
-        10g+
-    </option>
-
-    <option value="20" {% if protein == "20" %}selected{% endif %}>
-        20g+
-    </option>
-
-    <option value="30" {% if protein == "30" %}selected{% endif %}>
-        30g+
-    </option>
-
-</select>
-
-<button type="submit">
-
-Apply Filters
-
-</button>
-
-<a href="{% url 'customer_dashboard' %}" class="clear-filter-btn">
-
-    Clear
-
-</a>
-
+        <div class="filter-actions">
+            <button type="submit" class="btn-apply">Apply Filters</button>
+            <a href="{% url 'customer_dashboard' %}" class="btn-clear">Clear</a>
+        </div>
+    </div>
 </form>
-
-<select name="sort">
-
-    <option value="">Sort By</option>
-
-    <option value="latest" {% if sort == "latest" %}selected{% endif %}>
-        Newest
-    </option>
-
-    <option value="low" {% if sort == "low" %}selected{% endif %}>
-        Price: Low → High
-    </option>
-
-    <option value="high" {% if sort == "high" %}selected{% endif %}>
-        Price: High → Low
-    </option>
-
-    <option value="protein" {% if sort == "protein" %}selected{% endif %}>
-        Highest Protein
-    </option>
-
-    <option value="rating" {% if sort == "rating" %}selected{% endif %}>
-        Highest Rating
-    </option>
-
-    <option value="popular" {% if sort == "popular" %}selected{% endif %}>
-        Best Selling
-    </option>
-
-</select>
-
-</div>
 
 
 
@@ -620,3 +528,40 @@ Apply Filters
   </div>
 </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const sliders = document.querySelectorAll('.categories-grid, .horizontal-shelf');
+    
+    sliders.forEach(slider => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.style.cursor = 'grabbing';
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mouseup', () => {
+            isDown = false;
+            slider.style.cursor = 'grab';
+        });
+        slider.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll-fast
+            slider.scrollLeft = scrollLeft - walk;
+        });
+        
+        // Initial cursor style
+        slider.style.cursor = 'grab';
+    });
+});
+</script>

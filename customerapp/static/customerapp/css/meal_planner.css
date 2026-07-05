@@ -59,3 +59,70 @@ margin-bottom:8px;
 color:#94a3b8;
 
 }
+/* ==========================
+   Progress Section
+========================== */
+
+.progress-section{
+
+margin:35px 0;
+
+display:grid;
+
+gap:20px;
+
+}
+
+.progress-card{
+
+background:#fff;
+
+padding:20px;
+
+border-radius:18px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.progress-head{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:12px;
+
+font-weight:700;
+
+}
+
+.progress-bar{
+
+height:12px;
+
+background:#e2e8f0;
+
+border-radius:30px;
+
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+background:linear-gradient(90deg,#10b981,#22c55e);
+
+border-radius:30px;
+
+transition:width .6s ease;
+
+}
+
+.progress-fill.protein{
+
+background:linear-gradient(90deg,#2563eb,#3b82f6);
+
+}

@@ -244,6 +244,54 @@ Goal
 
 </div>
 
+<div class="progress-section">
+
+    <div class="progress-card">
+
+        <div class="progress-head">
+
+            <span>Calories Progress</span>
+
+            <strong>{{ calorie_progress }}%</strong>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                style="width:{{ calorie_progress }}%;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="progress-card">
+
+        <div class="progress-head">
+
+            <span>Protein Progress</span>
+
+            <strong>{{ protein_progress }}%</strong>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill protein"
+                style="width:{{ protein_progress }}%;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <div class="planner-actions">
 
 <a href="{% url 'generate_meal_plan' %}" class="generate-btn">

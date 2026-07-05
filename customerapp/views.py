@@ -1576,6 +1576,27 @@ def meal_planner(request):
         total_protein += meal.product.protein * meal.quantity
         total_carbs += meal.product.carbs * meal.quantity
         total_fat += meal.product.fat * meal.quantity
+    
+    # ==========================
+    # Goal Progress
+    # ==========================
+
+    calorie_progress = 0
+    protein_progress = 0
+
+    if health.daily_calories > 0:
+
+        calorie_progress = min(
+            round((total_calories / health.daily_calories) * 100),
+            100
+        )
+
+    if health.protein_goal > 0:
+
+        protein_progress = min(
+            round((total_protein / health.protein_goal) * 100),
+            100
+        )
 
     context = {
 
@@ -1584,7 +1605,8 @@ def meal_planner(request):
         "total_protein": round(total_protein, 1),
         "total_carbs": round(total_carbs, 1),
         "total_fat": round(total_fat, 1),
-
+        "calorie_progress": calorie_progress,
+        "protein_progress": protein_progress,
         "meal_plan": meal_plan,
 
     }

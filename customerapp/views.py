@@ -693,6 +693,32 @@ def place_order(request):
             status="Pending" if payment_method == "COD" else "Paid"
         )
 
+        # ==========================
+        # Cashback (5%)
+        # ==========================
+
+        wallet, created = Wallet.objects.get_or_create(
+            customer=cid
+        )
+
+        cashback = round(final * 0.05, 2)
+
+        wallet.balance += cashback
+        wallet.save()
+
+        WalletTransaction.objects.create(
+            wallet=wallet,
+            amount=cashback,
+            transaction_type="Credit",
+            description=f"5% Cashback on Order #{order.id}"
+        )
+
+        Notification.objects.create(
+            customer=cid,
+            title="Cashback Received",
+            message=f"₹{cashback} cashback has been added to your wallet."
+        )
+
         for i in items:
 
             OrderItem.objects.create(

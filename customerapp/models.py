@@ -404,3 +404,62 @@ class WalletTransaction(models.Model):
 
     def __str__(self):
         return f"{self.transaction_type} - ₹{self.amount}"
+
+class Coupon(models.Model):
+
+    code = models.CharField(
+        max_length=30,
+        unique=True
+    )
+
+    description = models.CharField(
+        max_length=255
+    )
+
+    discount = models.PositiveIntegerField(
+        help_text="Discount Percentage"
+    )
+
+    minimum_amount = models.PositiveIntegerField(
+        default=0
+    )
+
+    maximum_discount = models.PositiveIntegerField(
+        default=500
+    )
+
+    expiry_date = models.DateField()
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    def __str__(self):
+        return self.code
+    
+class UserCoupon(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    coupon = models.ForeignKey(
+        Coupon,
+        on_delete=models.CASCADE
+    )
+
+    is_used = models.BooleanField(
+        default=False
+    )
+
+    used_at = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        unique_together = (
+            "customer",
+            "coupon"
+        )

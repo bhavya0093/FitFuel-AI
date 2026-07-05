@@ -112,11 +112,19 @@ Goal
 
 <div class="meal-item">
 
+<img
+src="{{ meal.product.picture.url }}"
+class="meal-image">
+
+<div>
+
 <strong>{{ meal.product.product_name }}</strong>
 
-<p>{{ meal.product.calories }} kcal</p>
+<p>🔥 {{ meal.product.calories }} kcal</p>
 
-<p>{{ meal.product.protein }} g Protein</p>
+<p>💪 {{ meal.product.protein }} g Protein</p>
+
+</div>
 
 </div>
 
@@ -292,7 +300,55 @@ Goal
 
 </div>
 
+<div class="meal-stats">
+
+<div class="stat-card">
+
+<h3>{{ meal_plan|length }}</h3>
+
+<p>Total Meals</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>{{ health.diet_type }}</h3>
+
+<p>Diet Type</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>{{ health.goal }}</h3>
+
+<p>Fitness Goal</p>
+
+</div>
+
+<div class="stat-card">
+
+<h3>{{ health.water_goal }} L</h3>
+
+<p>Water Goal</p>
+
+</div>
+
+</div>
+
 <div class="planner-actions">
+
+{% if meal_plan %}
+
+<a href="{% url 'generate_meal_plan' %}" class="generate-btn">
+
+<i class="fa-solid fa-rotate"></i>
+
+Generate New AI Plan
+
+</a>
+
+{% else %}
 
 <a href="{% url 'generate_meal_plan' %}" class="generate-btn">
 
@@ -301,6 +357,8 @@ Goal
 Generate AI Meal Plan
 
 </a>
+
+{% endif %}
 
 </div>
 

@@ -342,6 +342,7 @@ def view_cart(request):
                 'discount': discount,
                 'net_amount': net_amount,
                 'remaining_amount': remaining_amount,
+                'is_standalone': True,
             }
             return render(request, "customerapp/cart.html", context)
 
@@ -1021,9 +1022,10 @@ def save_health_profile(request):
 
         water = round(weight * 0.035,1)
 
-        profile, created = UserHealthProfile.objects.get_or_create(
-            customer=cid
-        )
+        try:
+            profile = UserHealthProfile.objects.get(customer=cid)
+        except UserHealthProfile.DoesNotExist:
+            profile = UserHealthProfile(customer=cid)
 
         profile.age = age
         profile.gender = gender

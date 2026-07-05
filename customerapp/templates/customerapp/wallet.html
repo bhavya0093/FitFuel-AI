@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Wallet</title>
+
+<link rel="stylesheet"
+href="{% static 'customerapp/css/wallet.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="wallet-container">
+
+<a href="{% url 'customer_dashboard' %}" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Back
+
+</a>
+
+<div class="wallet-card">
+
+<h2>
+
+<i class="fa-solid fa-wallet"></i>
+
+My Wallet
+
+</h2>
+
+<div class="wallet-balance">
+
+₹{{ wallet.balance }}
+
+</div>
+
+<p>
+
+Available Balance
+
+</p>
+
+</div>
+
+<h3>
+
+Recent Transactions
+
+</h3>
+
+{% for t in transactions %}
+
+<div class="transaction-card">
+
+<div>
+
+<strong>
+
+{{ t.description }}
+
+</strong>
+
+<br>
+
+<small>
+
+{{ t.created_at|date:"d M Y h:i A" }}
+
+</small>
+
+</div>
+
+<div class="{% if t.transaction_type == 'Credit' %}credit{% else %}debit{% endif %}">
+
+{{ t.transaction_type }}
+
+₹{{ t.amount }}
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>No Transactions Yet.</p>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>

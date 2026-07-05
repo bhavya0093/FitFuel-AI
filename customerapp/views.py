@@ -18,6 +18,9 @@ def customer_dashboard(request):
 
         uid = User.objects.get(email=request.session["email"])
         cid = customer.objects.get(user_id=uid)
+        wallet, created = Wallet.objects.get_or_create(
+                                customer=cid
+                            )
         # ==========================
         # Cart Summary
         # ==========================
@@ -228,6 +231,7 @@ def customer_dashboard(request):
             "protein": protein,
             "sort": sort,
             "unread_notifications": unread_notifications,
+            "wallet": wallet,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)
@@ -1209,3 +1213,40 @@ def read_notification(request, pk):
     notification.save()
 
     return redirect("notifications")
+
+def wallet(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(
+        email=request.session["email"]
+    )
+
+    cid = customer.objects.get(
+        user_id=uid
+    )
+
+    wallet, created = Wallet.objects.get_or_create(
+        customer=cid
+    )
+
+    transactions = WalletTransaction.objects.filter(
+        wallet=wallet
+    ).order_by("-created_at")
+
+    return render(
+
+        request,
+
+        "customerapp/wallet.html",
+
+        {
+
+            "wallet": wallet,
+
+            "transactions": transactions
+
+        }
+
+    )

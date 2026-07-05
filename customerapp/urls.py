@@ -47,5 +47,6 @@ urlpatterns = [
     path("add_review/<int:pk>/",views.add_review,name="add_review"),
     path("buy-now/<int:pk>/",views.buy_now,name="buy_now"),
     path("notifications/",views.notifications,name="notifications"),  
-    path("notification/read/<int:pk>/",views.read_notification,name="read_notification",),
+    path("notification/read/<int:pk>/",views.read_notification,name="read_notification"),
+    path("wallet/",views.wallet,name="wallet"),
 ]

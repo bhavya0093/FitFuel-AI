@@ -52,6 +52,16 @@ Back
 
 <small>
 
+    {% if not n.is_read %}
+
+<a href="{% url 'read_notification' n.id %}" class="read-btn">
+
+    Mark as Read
+
+</a>
+
+{% endif %}
+
 {{ n.created_at|date:"d M Y h:i A" }}
 
 </small>

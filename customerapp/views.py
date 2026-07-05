@@ -198,6 +198,11 @@ def customer_dashboard(request):
 
         active_page = request.GET.get("active_page") or "home"
 
+        unread_notifications = Notification.objects.filter(
+                                customer=cid,
+                                is_read=False
+                            ).count()
+
         context = {
             "uid": uid,
             "cid": cid,
@@ -222,6 +227,7 @@ def customer_dashboard(request):
             "price": price,
             "protein": protein,
             "sort": sort,
+            "unread_notifications": unread_notifications,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)
@@ -1184,3 +1190,22 @@ def buy_now(request, pk):
     request.session["buy_now_product"] = pk
 
     return redirect("checkout")
+
+def read_notification(request, pk):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    notification = get_object_or_404(
+        Notification,
+        id=pk,
+        customer=cid
+    )
+
+    notification.is_read = True
+    notification.save()
+
+    return redirect("notifications")

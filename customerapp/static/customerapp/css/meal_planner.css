@@ -1,0 +1,61 @@
+/* ==========================
+   Nutrition Summary
+========================== */
+
+.nutrition-summary{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:20px;
+
+margin:40px 0;
+
+}
+
+.summary-box{
+
+background:#fff;
+
+border-radius:20px;
+
+padding:22px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.summary-box:hover{
+
+transform:translateY(-5px);
+
+}
+
+.summary-box h4{
+
+color:#64748b;
+
+margin-bottom:10px;
+
+}
+
+.summary-box h2{
+
+font-size:32px;
+
+color:#10b981;
+
+margin-bottom:8px;
+
+}
+
+.summary-box small{
+
+color:#94a3b8;
+
+}

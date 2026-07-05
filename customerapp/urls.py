@@ -54,4 +54,6 @@ urlpatterns = [
     path("remove-coupon/",views.remove_coupon,name="remove_coupon"),
     path("wishlist/remove/<int:pk>/",views.remove_from_wishlist,name="remove_from_wishlist"),
     path("wishlist/cart/<int:pk>/",views.wishlist_to_cart,name="wishlist_to_cart"),
+    path("meal-planner/",views.meal_planner,name="meal_planner"),
+    path("generate-meal-plan/",views.generate_meal_plan,name="generate_meal_plan"),
 ]

@@ -1534,3 +1534,138 @@ def wishlist_to_cart(request, pk):
     )
 
     return redirect("wishlist")
+
+def meal_planner(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    try:
+        health = UserHealthProfile.objects.get(customer=cid)
+    except UserHealthProfile.DoesNotExist:
+
+        messages.error(
+            request,
+            "Please complete your Health Profile first."
+        )
+
+        return redirect(
+            reverse("customer_dashboard") +
+            "?active_page=profile"
+        )
+
+    meal_plan = MealPlan.objects.filter(
+        customer=cid
+    ).select_related("product")
+
+    # ==========================
+    # Nutrition Summary
+    # ==========================
+
+    total_calories = 0
+    total_protein = 0
+    total_carbs = 0
+    total_fat = 0
+
+    for meal in meal_plan:
+
+        total_calories += meal.product.calories * meal.quantity
+        total_protein += meal.product.protein * meal.quantity
+        total_carbs += meal.product.carbs * meal.quantity
+        total_fat += meal.product.fat * meal.quantity
+
+    context = {
+
+        "health": health,
+        "total_calories": total_calories,
+        "total_protein": round(total_protein, 1),
+        "total_carbs": round(total_carbs, 1),
+        "total_fat": round(total_fat, 1),
+
+        "meal_plan": meal_plan,
+
+    }
+
+    return render(
+        request,
+        "customerapp/meal_planner.html",
+        context
+    )
+def generate_meal_plan(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    try:
+        hp = UserHealthProfile.objects.get(customer=cid)
+    except UserHealthProfile.DoesNotExist:
+
+        messages.error(
+            request,
+            "Please complete your Health Profile."
+        )
+
+        return redirect("meal_planner")
+
+    # Old Meal Plan Delete
+    MealPlan.objects.filter(customer=cid).delete()
+
+    # Products according to user's profile
+    products = product.objects.filter(
+        diet_type=hp.diet_type,
+        goal_type=hp.goal
+    ).order_by("-protein")
+
+    breakfast = products[:2]
+    lunch = products[2:4]
+    dinner = products[4:6]
+    snacks = products[6:8]
+
+    for p in breakfast:
+
+        MealPlan.objects.create(
+            customer=cid,
+            meal_type="Breakfast",
+            product=p,
+            quantity=1
+        )
+
+    for p in lunch:
+
+        MealPlan.objects.create(
+            customer=cid,
+            meal_type="Lunch",
+            product=p,
+            quantity=1
+        )
+
+    for p in dinner:
+
+        MealPlan.objects.create(
+            customer=cid,
+            meal_type="Dinner",
+            product=p,
+            quantity=1
+        )
+
+    for p in snacks:
+
+        MealPlan.objects.create(
+            customer=cid,
+            meal_type="Snacks",
+            product=p,
+            quantity=1
+        )
+
+    messages.success(
+        request,
+        "AI Meal Plan Generated Successfully."
+    )
+
+    return redirect("meal_planner")

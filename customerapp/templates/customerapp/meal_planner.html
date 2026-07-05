@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Meal Planner</title>
+
+<link rel="stylesheet" href="{% static 'customerapp/css/meal_planner.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="meal-container">
+
+<a href="{% url 'customer_dashboard' %}" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Back
+
+</a>
+
+<div class="meal-header">
+
+<h1>
+
+🍽 AI Meal Planner
+
+</h1>
+
+<p>
+
+Personalized nutrition based on your health profile
+
+</p>
+
+</div>
+
+<!-- Daily Goal -->
+
+<div class="goal-card">
+
+<div>
+
+<h3>
+
+Daily Calories
+
+</h3>
+
+<h2>
+
+{{ health.daily_calories }} kcal
+
+</h2>
+
+</div>
+
+<div>
+
+<h3>
+
+Protein Goal
+
+</h3>
+
+<h2>
+
+{{ health.protein_goal }} g
+
+</h2>
+
+</div>
+
+<div>
+
+<h3>
+
+Goal
+
+</h3>
+
+<h2>
+
+{{ health.goal }}
+
+</h2>
+
+</div>
+
+</div>
+
+<!-- Meals -->
+
+<div class="meal-grid">
+
+<div class="meal-card">
+
+<h2>🍳 Breakfast</h2>
+
+{% for meal in meal_plan %}
+{% if meal.meal_type == "Breakfast" %}
+
+<div class="meal-item">
+
+<strong>{{ meal.product.product_name }}</strong>
+
+<p>{{ meal.product.calories }} kcal</p>
+
+<p>{{ meal.product.protein }} g Protein</p>
+
+</div>
+
+{% endif %}
+{% empty %}
+<p>No Breakfast Added</p>
+{% endfor %}
+
+</div>
+
+<div class="meal-card">
+
+<h2>🥗 Lunch</h2>
+
+{% for meal in meal_plan %}
+{% if meal.meal_type == "Lunch" %}
+
+<div class="meal-item">
+
+<strong>{{ meal.product.product_name }}</strong>
+
+<p>{{ meal.product.calories }} kcal</p>
+
+<p>{{ meal.product.protein }} g Protein</p>
+
+</div>
+
+{% endif %}
+{% empty %}
+<p>No Lunch Added</p>
+{% endfor %}
+
+</div>
+
+<div class="meal-card">
+
+<h2>🍛 Dinner</h2>
+
+{% for meal in meal_plan %}
+{% if meal.meal_type == "Dinner" %}
+
+<div class="meal-item">
+
+<strong>{{ meal.product.product_name }}</strong>
+
+<p>{{ meal.product.calories }} kcal</p>
+
+<p>{{ meal.product.protein }} g Protein</p>
+
+</div>
+
+{% endif %}
+{% empty %}
+<p>No Dinner Added</p>
+{% endfor %}
+
+</div>
+
+<div class="meal-card">
+
+<h2>🥜 Snacks</h2>
+
+{% for meal in meal_plan %}
+{% if meal.meal_type == "Snacks" %}
+
+<div class="meal-item">
+
+<strong>{{ meal.product.product_name }}</strong>
+
+<p>{{ meal.product.calories }} kcal</p>
+
+<p>{{ meal.product.protein }} g Protein</p>
+
+</div>
+
+{% endif %}
+{% empty %}
+<p>No Snacks Added</p>
+{% endfor %}
+
+</div>
+
+</div>
+<div class="nutrition-summary">
+
+    <div class="summary-box">
+
+        <h4>Calories</h4>
+
+        <h2>{{ total_calories }}</h2>
+
+        <small>Target {{ health.daily_calories }}</small>
+
+    </div>
+
+    <div class="summary-box">
+
+        <h4>Protein</h4>
+
+        <h2>{{ total_protein }} g</h2>
+
+        <small>Target {{ health.protein_goal }} g</small>
+
+    </div>
+
+    <div class="summary-box">
+
+        <h4>Carbs</h4>
+
+        <h2>{{ total_carbs }} g</h2>
+
+        <small>Daily Intake</small>
+
+    </div>
+
+    <div class="summary-box">
+
+        <h4>Fat</h4>
+
+        <h2>{{ total_fat }} g</h2>
+
+        <small>Healthy Fats</small>
+
+    </div>
+
+</div>
+
+<div class="planner-actions">
+
+<a href="{% url 'generate_meal_plan' %}" class="generate-btn">
+
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+
+Generate AI Meal Plan
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

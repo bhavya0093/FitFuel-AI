@@ -22,7 +22,7 @@
         <label for="nav-edit" class="pni"><i class="fas fa-pen"></i> Edit Profile</label>
         <a href="{% url 'orders' %}" class="pni"><i class="fas fa-box"></i> My Orders</a>
         <a href="#sec-addresses" class="pni"><i class="fas fa-map-marker-alt"></i> Addresses</a>
-        <a href="#" class="pni"><i class="fas fa-heart"></i> Wishlist</a>
+        <a href="{% url 'wishlist' %}" class="pni"><i class="fas fa-heart"></i> Wishlist</a>
         <a href="{% url 'coupons' %}" class="pni">
     <i class="fas fa-ticket-alt"></i>
     Coupons
@@ -30,6 +30,13 @@
         <a href="{% url 'wallet' %}" class="pni">
     <i class="fas fa-wallet"></i>
     Wallet
+</a>
+<a href="{% url 'meal_planner' %}" class="pni">
+
+    <i class="fa-solid fa-utensils"></i>
+
+    Meal Planner
+
 </a>
         <a href="{% url 'notifications' %}" class="pni">
 

@@ -49,4 +49,7 @@ urlpatterns = [
     path("notifications/",views.notifications,name="notifications"),  
     path("notification/read/<int:pk>/",views.read_notification,name="read_notification"),
     path("wallet/",views.wallet,name="wallet"),
+    path("coupons/",views.coupons,name="coupons"),
+    path("apply-coupon/",views.apply_coupon,name="apply_coupon"),
+    path("remove-coupon/",views.remove_coupon,name="remove_coupon"),
 ]

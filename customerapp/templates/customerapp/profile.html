@@ -23,7 +23,10 @@
         <a href="{% url 'orders' %}" class="pni"><i class="fas fa-box"></i> My Orders</a>
         <a href="#sec-addresses" class="pni"><i class="fas fa-map-marker-alt"></i> Addresses</a>
         <a href="#" class="pni"><i class="fas fa-heart"></i> Wishlist</a>
-        <a href="#" class="pni"><i class="fas fa-ticket-alt"></i> Coupons</a>
+        <a href="{% url 'coupons' %}" class="pni">
+    <i class="fas fa-ticket-alt"></i>
+    Coupons
+</a>
         <a href="{% url 'wallet' %}" class="pni">
     <i class="fas fa-wallet"></i>
     Wallet

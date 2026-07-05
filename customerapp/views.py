@@ -1,3 +1,5 @@
+from urllib import request
+
 from django.shortcuts import render,get_object_or_404,redirect
 from sellerapp.models import User
 from django.http import HttpResponseRedirect 
@@ -9,6 +11,7 @@ from .models import UserHealthProfile
 import math
 from django.db.models import Q,Avg
 from django.urls import reverse
+from django.utils import timezone
 
 
 
@@ -390,8 +393,35 @@ def checkout(request):
             for i in item:
                 total_amount += i.product.product_price * i.qty
 
-                discount = 65 if total_amount >= 100 else 0
-                net_amount = total_amount - discount
+            discount = 65 if total_amount >= 100 else 0
+
+            coupon_discount = 0
+
+            coupon = None
+
+            coupon_id = request.session.get("coupon_id")
+
+            if coupon_id:
+
+                try:
+
+                    coupon = Coupon.objects.get(id=coupon_id)
+
+                    if total_amount >= coupon.minimum_amount:
+
+                        coupon_discount = (
+                            total_amount * coupon.discount
+                        ) / 100
+
+                        if coupon_discount > coupon.maximum_discount:
+
+                            coupon_discount = coupon.maximum_discount
+
+                except Coupon.DoesNotExist:
+
+                    pass
+
+                net_amount = total_amount - discount - coupon_discount
             
             context = {
                 'item' : item,
@@ -399,6 +429,8 @@ def checkout(request):
                 'discount': discount,
                 'net_amount': net_amount,
                 "addresses": addresses,
+                "coupon": coupon,
+                "coupon_discount": coupon_discount,
             }
         return render(request,"customerapp/check_out.html",context)
 
@@ -736,6 +768,8 @@ def place_order(request):
             del request.session["address_id"]
         if "buy_now_product" in request.session:
             del request.session["buy_now_product"]
+        if "coupon_id" in request.session:
+            del request.session["coupon_id"]
 
         Notification.objects.create(
 
@@ -1276,3 +1310,139 @@ def wallet(request):
         }
 
     )
+
+def coupons(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    coupons = Coupon.objects.filter(
+        is_active=True,
+        expiry_date__gte=timezone.now().date()
+    ).order_by("expiry_date")
+
+    return render(
+        request,
+        "customerapp/coupons.html",
+        {
+            "coupons": coupons
+        }
+    )
+
+
+def apply_coupon(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    if request.method == "POST":
+
+        code = request.POST.get("coupon_code", "").strip().upper()
+
+        if not code:
+
+            messages.error(request, "Please enter a coupon code.")
+
+            return redirect("checkout")
+
+        try:
+
+            coupon = Coupon.objects.get(
+                code=code,
+                is_active=True
+            )
+
+        except Coupon.DoesNotExist:
+
+            messages.error(request, "Invalid Coupon Code.")
+
+            return redirect("checkout")
+
+        # ==========================
+        # Expiry Check
+        # ==========================
+
+        if coupon.expiry_date < timezone.now().date():
+
+            messages.error(request, "This coupon has expired.")
+
+            return redirect("checkout")
+
+        # ==========================
+        # Already Used Check
+        # ==========================
+
+        already_used = UserCoupon.objects.filter(
+
+            customer=cid,
+
+            coupon=coupon,
+
+            is_used=True
+
+        ).exists()
+
+        if already_used:
+
+            messages.error(
+
+                request,
+
+                "You have already used this coupon."
+
+            )
+
+            return redirect("checkout")
+
+        # ==========================
+        # Cart Total Check
+        # ==========================
+
+        cart_obj, created = cart.objects.get_or_create(customer=cid)
+
+        items = cartitem.objects.filter(cart=cart_obj)
+
+        total = 0
+
+        for i in items:
+
+            total += i.product.product_price * i.qty
+
+        if total < coupon.minimum_amount:
+
+            messages.error(
+
+                request,
+
+                f"This coupon requires a minimum order of ₹{coupon.minimum_amount}."
+
+            )
+
+            return redirect("checkout")
+
+        # ==========================
+        # Apply Coupon
+        # ==========================
+
+        request.session["coupon_id"] = coupon.id
+
+        messages.success(
+
+            request,
+
+            f"{coupon.code} applied successfully."
+
+        )
+
+    return redirect("checkout")
+
+def remove_coupon(request):
+
+    if "coupon_id" in request.session:
+
+        del request.session["coupon_id"]
+
+    return redirect("checkout")

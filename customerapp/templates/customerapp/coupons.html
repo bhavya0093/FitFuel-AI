@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>My Coupons</title>
+
+<link rel="stylesheet"
+href="{% static 'customerapp/css/coupons.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="coupon-container">
+
+<a href="{% url 'customer_dashboard' %}" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Back
+
+</a>
+
+<h1>
+
+🎟 Available Coupons
+
+</h1>
+
+{% for c in coupons %}
+
+<div class="coupon-card">
+
+<div>
+
+<h3>{{ c.code }}</h3>
+
+<p>{{ c.description }}</p>
+
+<small>
+
+Minimum Order ₹{{ c.minimum_amount }}
+
+</small>
+
+</div>
+
+<div>
+
+<strong>
+
+{{ c.discount }}% OFF
+
+</strong>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="empty-coupon">
+
+No Coupons Available
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>

@@ -175,8 +175,63 @@
           <!-- DUMMY TOTALS — Django variables yahan lagana -->
           <div class="summary-row"><span>Subtotal</span><span>&#8377;{{total_amount}}</span></div>
           <div class="summary-row"><span>Discount <span class="disc-badge">WELCOME10</span></span><span class="green">-&#8377;{{ discount }}</span></div>
+          {% if coupon %}
+
+<div class="summary-row">
+
+    <span>
+
+        Coupon ({{ coupon.code }})
+
+    </span>
+
+    <span>
+
+        -₹{{ coupon_discount }}
+
+    </span>
+
+</div>
+
+{% endif %}
           <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
           <hr class="summary-hr"/>
+          <div class="coupon-box">
+
+<form method="POST" action="{% url 'apply_coupon' %}">
+
+    {% csrf_token %}
+
+    <input
+        type="text"
+        name="coupon_code"
+        placeholder="Enter Coupon Code">
+
+    <button type="submit">
+
+        Apply
+
+    </button>
+
+</form>
+{% if coupon %}
+
+<p style="color:green">
+
+Coupon Applied :
+<b>{{ coupon.code }}</b>
+
+</p>
+
+<a href="{% url 'remove_coupon' %}">
+
+Remove Coupon
+
+</a>
+
+{% endif %}
+
+</div>
           <div class="total-row"><span>Total</span><span>&#8377;{{net_amount}}</span></div>
 
           <!-- Proceed to Payment — form submit karega -->

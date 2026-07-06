@@ -546,6 +546,10 @@ HEALTH PROFILE
     transition:.25s;
     outline:none;
 }
+#sec-health .fv {
+    display: flex;
+    align-items: center;
+}
 
 #sec-health input:focus,
 #sec-health select:focus{

@@ -1054,13 +1054,10 @@ def save_health_profile(request):
 
         messages.success(
             request,
-            "Health Profile Saved Successfully"
+            "Health Profile Saved Successfully!"
         )
 
-    return redirect(
-        reverse("customer_dashboard") +
-        "?active_page=profile"
-    )
+    return redirect("meal_planner")
 
 def get_ai_recommendations(health_profile):
 

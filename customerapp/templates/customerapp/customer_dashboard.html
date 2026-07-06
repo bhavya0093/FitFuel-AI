@@ -73,7 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
         'nav-home': 'home',
         'nav-cart': 'cart',
         'nav-profile': 'profile',
-        'nav-edit': 'edit'
+        'nav-edit': 'edit',
+        'nav-assessment': 'assessment'
     };
     
     // Set radio state from URL parameter on load
@@ -108,5 +109,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<script src="{% static 'customerapp/js/assessment.js' %}"></script>
 </body>
 </html>

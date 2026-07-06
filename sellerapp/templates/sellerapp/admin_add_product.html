@@ -1,3 +1,4 @@
+{% load static %}
 <!-- ADD PRODUCT -->
         <div id="addProduct-section" class="content-section">
             <div class="form-container">
@@ -22,7 +23,7 @@
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label>Product Name</label>
-                                    <input type="text" name="product_name" placeholder="Fresh Cow Milk">
+                                    <input type="text" name="product_name" id="product_name" placeholder="Fresh Cow Milk">
                                 </div>
                                 <div class="form-group">
                                     <label>Category</label>
@@ -58,15 +59,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Weight</label>
-                                    <input type="text" name="weight_unit" placeholder="500g / 1L">
+                                    <input type="text" id="weight_unit" name="weight_unit" placeholder="500g / 1L">
                                 </div>
                                 <div class="form-group">
                                     <label>Brand</label>
-                                    <input type="text" name="brand" placeholder="Amul">
+                                    <input type="text" name="brand" placeholder="Amul" id="brand">
                                 </div>
                                 <div class="form-group full-width">
                                     <label>Description</label>
-                                    <textarea rows="4" name="description"></textarea>
+                                    <textarea rows="4" name="description" id="description"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -85,31 +86,31 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Calories</label>
-                                <input type="number" name="calories">
+                                <input type="number" name="calories" id="calories">
                             </div>
                             <div class="form-group">
                                 <label>Protein</label>
-                                <input type="number" step="0.1" name="protein">
+                                <input type="number" step="0.1" name="protein" id="protein">
                             </div>
                             <div class="form-group">
                                 <label>Carbs</label>
-                                <input type="number" step="0.1" name="carbs">
+                                <input type="number" step="0.1" name="carbs" id="carbs">
                             </div>
                             <div class="form-group">
                                 <label>Fat</label>
-                                <input type="number" step="0.1" name="fat">
+                                <input type="number" step="0.1" name="fat" id="fat">
                             </div>
                             <div class="form-group">
                                 <label>Sugar</label>
-                                <input type="number" step="0.1" name="sugar">
+                                <input type="number" step="0.1" name="sugar" id="sugar">
                             </div>
                             <div class="form-group">
                                 <label>Fiber</label>
-                                <input type="number" step="0.1" name="fiber">
+                                <input type="number" step="0.1" name="fiber" id="fiber">
                             </div>
                             <div class="form-group">
                                 <label>Serving Size</label>
-                                <input type="text" name="serving_size">
+                                <input type="text" name="serving_size" id="serving_size">
                             </div>
                         </div>
                     </div>
@@ -121,15 +122,15 @@
                         <div class="form-grid">
                             <div class="form-group">
                                 <label>Diet Type</label>
-                                <select name="diet_type">
+                                <select name="diet_type" id="diet_type">
                                     <option>Veg</option>
                                     <option>Vegan</option>
                                     <option>Non-Veg</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label>Goal Type</label>
-                                <select name="goal_type">
+                                <select name="goal_type" id="goal_type">
                                     <option>Weight Loss</option>
                                     <option>Muscle Gain</option>
                                     <option>Maintenance</option>
@@ -138,22 +139,22 @@
 
                             <div class="form-group">
                                 <label>Flavour</label>
-                                <input type="text" name="flavour">
+                                <input type="text" name="flavour" id="flavour">
                             </div>
 
                             <div class="form-group full-width">
                                 <label>Ingredients</label>
-                                <textarea rows="3" name="ingredients"></textarea>
+                                <textarea rows="3" name="ingredients" id="ingredients"></textarea>
                             </div>
 
                             <div class="form-group full-width">
                                 <label>Benefits</label>
-                                <textarea rows="3" name="benefits"></textarea>
+                                <textarea rows="3" name="benefits" id="benefits"></textarea>
                             </div>
 
                             <div class="form-group full-width">
                                 <label>Recommended Usage</label>
-                                <textarea rows="3" name="recommended_usage"></textarea>
+                                <textarea rows="3" name="recommended_usage" id="recommended_usage"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -180,3 +181,4 @@
                 </form>
             </div>
         </div>
+<script src="{% static 'sellerapp/js/ai_product.js' %}"></script>

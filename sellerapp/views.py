@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.contrib import messages
 from django.db.models import Count
 from django.db.models import Sum
+from django.http import JsonResponse
+from .services import analyze_product_with_ai
 
 def register(request):
     if request.method == "POST":
@@ -427,11 +429,11 @@ def add_product(request):
 
                 recommended_usage=request.POST.get("recommended_usage", ""),
 
-                diet_type=request.POST.get("diet_type"),
+                diet_type=request.POST.get("diet_type") or "Veg",
 
-                goal_type=request.POST.get("goal_type"),
+                goal_type=request.POST.get("goal_type") or "Maintenance",
 
-                flavour=request.POST.get("flavour"),
+                flavour=request.POST.get("flavour") or "",
 
                 is_featured="is_featured" in request.POST,
 
@@ -1032,3 +1034,55 @@ def admin_payment_details(request, pk):
         "sellerapp/admin_payment_detail.html",
         context
     )
+
+def analyze_product(request):
+
+    if "email" not in request.session:
+        return JsonResponse(
+            {"success": False, "message": "Login Required"}
+        )
+
+    if request.method != "POST":
+
+        return JsonResponse(
+            {"success": False, "message": "Invalid Request"}
+        )
+
+    product_name = request.POST.get("product_name", "")
+    brand = request.POST.get("brand", "")
+    description = request.POST.get("description", "")
+    weight = request.POST.get("weight", "")
+
+    if product_name == "":
+
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "Product Name Required"
+            }
+        )
+
+    try:
+
+        result = analyze_product_with_ai(
+            product_name,
+            brand,
+            description,
+            weight,
+        )
+
+        return JsonResponse(
+            {
+                "success": True,
+                "data": result
+            }
+        )
+
+    except Exception as e:
+
+        return JsonResponse(
+            {
+                "success": False,
+                "message": str(e)
+            }
+        )

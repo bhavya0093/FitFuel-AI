@@ -500,3 +500,71 @@ margin-bottom:10px;
 color:#cbd5e1;
 
 }
+/* ==========================
+   AI Reasons
+========================== */
+
+.meal-ai{
+
+margin-top:10px;
+
+font-size:13px;
+
+font-weight:700;
+
+color:#10b981;
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+}
+
+.meal-reasons{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+margin-top:10px;
+
+}
+
+.meal-reasons span{
+
+background:#dcfce7;
+
+color:#15803d;
+
+padding:6px 12px;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:600;
+
+}
+.ai-score{
+
+display:inline-block;
+
+margin:8px 0;
+
+padding:5px 12px;
+
+background:#ede9fe;
+
+color:#7c3aed;
+
+border-radius:30px;
+
+font-size:12px;
+
+font-weight:700;
+
+}

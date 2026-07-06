@@ -149,10 +149,36 @@ class="meal-image">
 </span>
 
 </div>
+<div class="ai-score">
+
+{{ meal.ai_score }}% AI Match
+
+</div>
 
 <div class="meal-rating">
 
 ⭐ {{ meal.product.rating }}
+
+</div>
+<div class="meal-ai">
+
+<i class="fa-solid fa-robot"></i>
+
+Why AI Selected
+
+</div>
+
+<div class="meal-reasons">
+
+{% for reason in meal.ai_reasons %}
+
+<span>
+
+{{ reason }}
+
+</span>
+
+{% endfor %}
 
 </div>
 

@@ -1573,6 +1573,52 @@ def meal_planner(request):
         customer=cid
     ).select_related("product")
 
+    
+
+    # ==========================
+    # AI Meal Reasons
+    # ==========================
+
+    for meal in meal_plan:
+
+        score = 50
+
+        if health.goal == meal.product.goal_type:
+            score += 20
+
+        if health.diet_type == meal.product.diet_type:
+            score += 15
+
+        if meal.product.protein >= 25:
+            score += 10
+
+        if meal.product.rating >= 4.5:
+            score += 5
+
+        meal.ai_score = min(score, 99)
+
+        reasons = []
+
+        if health.goal == meal.product.goal_type:
+            reasons.append(f"Perfect for {health.goal}")
+
+        if health.diet_type == meal.product.diet_type:
+            reasons.append(f"{health.diet_type} Friendly")
+
+        if meal.product.protein >= 25:
+            reasons.append("High Protein")
+
+        elif meal.product.protein >= 15:
+            reasons.append("Good Protein")
+
+        if meal.product.sugar <= 5:
+            reasons.append("Low Sugar")
+
+        if meal.product.fiber >= 5:
+            reasons.append("High Fiber")
+
+        meal.ai_reasons = reasons[:4]
+
     # ==========================
     # Nutrition Summary
     # ==========================
@@ -1628,7 +1674,10 @@ def meal_planner(request):
         "customerapp/meal_planner.html",
         context
     )
+
 def generate_meal_plan(request):
+
+    print("===== GENERATE MEAL PLAN CALLED =====")
 
     if "email" not in request.session:
         return redirect("login")
@@ -1726,20 +1775,22 @@ def generate_meal_plan(request):
     }
 
     for meal_type, meal_products in meal_data.items():
-
+        print("MealPlan Count:", meal_plan.count())
         for p in meal_products:
-
+            print(meal_type, p.product_name)
             MealPlan.objects.create(
                 customer=cid,
                 meal_type=meal_type,
                 product=p,
                 quantity=1
             )
+            print("Saved Successfully")
 
     messages.success(
         request,
         "AI Meal Plan Generated Successfully."
     )
+    print(MealPlan.objects.filter(customer=cid).count())
 
     return redirect("meal_planner")
 

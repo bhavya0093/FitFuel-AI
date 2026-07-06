@@ -82,6 +82,19 @@
 
 <input type="file" name="pic" id="photo-upload" accept="image/*" style="display:none;">
 
+<script>
+document.getElementById('photo-upload').addEventListener('change', function(event) {
+    if(event.target.files.length > 0){
+        var src = URL.createObjectURL(event.target.files[0]);
+        // Find the image element above
+        var img = document.querySelector('.fc.g1.s1 img');
+        if(img){
+            img.src = src;
+        }
+    }
+});
+</script>
+
 <div class="fc g1 s1">
   <div class="fc-t">
     <i class="fas fa-user"></i> Personal Details

@@ -222,6 +222,13 @@ def customer_dashboard(request):
                                 is_read=False
                             ).count()
 
+        orders = Order.objects.filter(customer=cid).order_by("-order_date")
+
+        total_amount = sum(i.product.product_price * i.qty for i in cart_items) if cart_items else 0
+        discount = 65 if total_amount >= 100 else 0
+        net_amount = total_amount - discount
+        remaining_amount = 100 - total_amount if total_amount < 100 else 0
+
         context = {
             "uid": uid,
             "cid": cid,
@@ -239,6 +246,11 @@ def customer_dashboard(request):
             "cart_count": cart_count,
             "cart_protein": round(cart_protein,1),
             "cart_calories": int(cart_calories),
+            "item": cart_items,
+            "total_amount": total_amount,
+            "discount": discount,
+            "net_amount": net_amount,
+            "remaining_amount": remaining_amount,
             "search": search,
             "diet": diet,
             "goal": goal,
@@ -273,14 +285,7 @@ def edit_profile(request):
             
             cid.save()
 
-            context = {
-                "uid": uid,
-                "cid": cid,
-                "pid": product.objects.all(),
-                "active_page": "profile",
-            }
-
-            return render(request, "customerapp/customer_dashboard.html", context)
+            return redirect("customer_dashboard")
 
 def show_product(request):
 

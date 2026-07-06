@@ -105,25 +105,7 @@
 
         </div>
 
-        <div class="search-filter-bar">
 
-    <form method="GET" action="{% url 'customer_dashboard' %}">
-
-        <input
-            type="text"
-            name="search"
-            placeholder="Search healthy products..."
-            value="{{ request.GET.search }}">
-
-        <button type="submit">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-        </button>
-
-    </form>
-
-</div>
 
         <a href="{% url 'show_product' %}" class="view-all">
             View All →
@@ -211,7 +193,7 @@
     <!-- Top Search Bar -->
     <div class="master-search-bar">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" name="search" placeholder="Search products, brands, proteins..." value="{{ search }}">
+        <input type="text" name="search" placeholder="Search products, brands, proteins..." value="{{ search|default_if_none:'' }}">
         <button type="submit" class="search-btn">Search</button>
     </div>
 
@@ -273,54 +255,38 @@
 
 
 <div class="sh" style="margin-bottom:24px;">
-    <div class="sh-t" style="font-size:1.4rem;">Browse <em>Categories</em></div>
-    <a href="#" class="sh-a">View All <i class="fas fa-arrow-right"></i></a>
+    <div class="sh-t" style="font-size:1.4rem;">Browse <span style="color:#10b981;">Categories</span></div>
+    <a href="{% url 'show_product' %}" class="sh-a">View All <i class="fas fa-arrow-right"></i></a>
 </div>
 
 
 
 <div class="categories-grid">
     <a href="{% url 'customer_dashboard' %}" class="cat-card cat-all {% if not selected_category %}active{% endif %}">
-        <div class="cat-icon-wrap">
-            <i class="fa-solid fa-layer-group"></i>
-        </div>
         <span>All</span>
     </a>
     {% for c in categories %}
     <a href="{% url 'customer_dashboard' %}?category={{ c.id }}" class="cat-card {% if selected_category == c.id|stringformat:'s' %}active{% endif %}">
-        <div class="cat-icon-wrap {% if c.category_image %}has-image{% endif %}">
-            {% if c.category_image %}
-                <img src="{{ c.category_image.url }}" alt="{{ c.category_name }}">
-            {% else %}
-                <i class="fa-solid fa-box"></i>
-            {% endif %}
-        </div>
         <span>{{ c.category_name }}</span>
     </a>
     {% empty %}
     <!-- Demo Categories when DB is empty -->
     <a href="#" class="cat-card">
-        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥛</div>
         <span>Dairy</span>
     </a>
     <a href="#" class="cat-card">
-        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥦</div>
         <span>Vegetables</span>
     </a>
     <a href="#" class="cat-card">
-        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🍎</div>
         <span>Fruits</span>
     </a>
     <a href="#" class="cat-card">
-        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🏋️</div>
         <span>Protein</span>
     </a>
     <a href="#" class="cat-card">
-        <div class="cat-icon-wrap has-image" style="font-size: 28px;">🥜</div>
         <span>Dry Fruits</span>
     </a>
     <a href="#" class="cat-card">
-        <div class="cat-icon-wrap has-image" style="font-size: 28px;">💊</div>
         <span>Supplements</span>
     </a>
     <a href="#" class="cat-card">
@@ -386,7 +352,7 @@
     <!-- Default homepage: dynamic category-wise product shelves -->
     {% for section in category_sections %}
     <div class="sh" style="margin:36px 0 18px;">
-        <div class="sh-t">Healthy <em>{{ section.category.category_name }}</em></div>
+        <div class="sh-t">Healthy <span style="color:#10b981;">{{ section.category.category_name }}</span></div>
         <a href="{% url 'customer_dashboard' %}?category={{ section.category.id }}" class="sh-a">View All <i class="fas fa-arrow-right"></i></a>
     </div>
     

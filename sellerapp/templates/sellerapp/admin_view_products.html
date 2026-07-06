@@ -112,122 +112,30 @@
 
                     <h4>{{ p.product_name }}</h4>
 
-                    <div class="nutrition-badges">
-
-                        {% if p.is_ai_recommended %}
-                        <span class="badge-ai">
-                            🤖 AI Recommended
-                        </span>
-                        {% endif %}
-
-                        {% if p.is_featured %}
-                        <span class="badge-featured">
-                            ⭐ Featured
-                        </span>
-                        {% endif %}
-
-                    </div>
-
                     <div class="brand-name">
-
                         {{ p.brand }}
-
                     </div>
-
-                    <div
-                    style="font-size:12px;
-                    color:#3b82f6;
-                    font-weight:700;
-                    margin-bottom:6px;
-                    text-transform:uppercase;">
-
-                        {{ p.product_category.category_name }}
-
-                    </div>
-
-                    <div class="nutrition-grid">
-
-                    <span>🔥 {{ p.calories }} kcal</span>
-
-                    <span>💪 {{ p.protein }}g Protein</span>
-
-                    <span>🍚 {{ p.carbs }}g Carbs</span>
-
-                    <span>🥑 {{ p.fat }}g Fat</span>
-
-                </div>
 
                     <div class="product-price-all">
-
                         ₹{{ p.product_price }}
-
                     </div>
 
-                    <div class="diet-goal">
-
-                    <span class="diet-tag">
-
-                        🌱 {{ p.diet_type }}
-
-                    </span>
-
-                    <span class="goal-tag">
-
-                        🎯 {{ p.goal_type }}
-
-                    </span>
-
-                </div>
-
-                    <div
-                    style="font-size:13px;
-                    color:#888;
-                    margin-bottom:10px;">
-
-                        Stock :
-                        {{ p.stock_qty }}
-
-                        Units
-
+                    <div style="font-size:13px; color:#888; margin-bottom:10px;">
+                        Stock : {{ p.stock_qty }} Units
                     </div>
 
-                    <div class="serving-size">
-
-                            🥄 {{ p.serving_size }}
-
-                        </div>
-
-                    <label
-                        class="view-details-btn"
-                        for="nav-product-{{ p.id }}">
-
-                        <i class="fas fa-eye"></i>
-
-                        View Details
-
-                        
-
+                    <label class="view-details-btn" for="nav-product-{{ p.id }}">
+                        <i class="fas fa-eye"></i> View Details
                     </label>
 
                     <div class="product-actions">
-
-                            <label
-                                for="nav-product-{{ p.id }}"
-                                class="edit-btn">
-
-                                ✏️ Edit
-
-                            </label>
-
-                            <a
-                                href="{% url 'delete_product' p.id %}"
-                                class="delete-btn">
-
-                                🗑 Delete
-
-                            </a>
-
-                        </div>
+                        <label for="nav-product-{{ p.id }}" class="edit-btn">
+                            ✏️ Edit
+                        </label>
+                        <a href="{% url 'delete_product' p.id %}" class="delete-btn">
+                            🗑 Delete
+                        </a>
+                    </div>
 
                 </div>
 

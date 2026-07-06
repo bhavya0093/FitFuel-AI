@@ -574,7 +574,7 @@ def edit_product(request, pid):
 def delete_product(request, pid):   
     if "email" in request.session:
         p = get_object_or_404(product, id=pid).delete()
-        return redirect('admin_panel')
+        return redirect('view_product')
     return HttpResponseRedirect("/seller/login")
 
 def forgot_password(request):

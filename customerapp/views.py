@@ -1,8 +1,8 @@
 from urllib import request
-
+import random
 from django.shortcuts import render,get_object_or_404,redirect
 from sellerapp.models import User
-from django.http import HttpResponseRedirect 
+from django.http import HttpResponseRedirect ,HttpResponse
 from .models import *
 from customerapp.models import product, customer
 from django.contrib import messages
@@ -12,6 +12,19 @@ import math
 from django.db.models import Q,Avg
 from django.urls import reverse
 from django.utils import timezone
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle
+)
+
+from reportlab.lib.styles import getSampleStyleSheet
+
+from reportlab.lib import colors
+
+from reportlab.lib.units import inch
 
 
 
@@ -1625,64 +1638,103 @@ def generate_meal_plan(request):
 
     try:
         hp = UserHealthProfile.objects.get(customer=cid)
+
     except UserHealthProfile.DoesNotExist:
 
         messages.error(
             request,
-            "Please complete your Health Profile."
+            "Please complete your Health Profile first."
         )
 
         return redirect("meal_planner")
 
-    # Old Meal Plan Delete
+    # Delete Old Meal Plan
     MealPlan.objects.filter(customer=cid).delete()
 
-    # Products according to user's profile
+    # ==================================
+    # AI Product Selection
+    # ==================================
+
     products = product.objects.filter(
         diet_type=hp.diet_type,
         goal_type=hp.goal
     ).order_by("-protein")
 
-    breakfast = products[:2]
-    lunch = products[2:4]
-    dinner = products[4:6]
-    snacks = products[6:8]
+    # Fallback 1
+    if not products.exists():
 
-    for p in breakfast:
+        products = product.objects.filter(
+            diet_type=hp.diet_type
+        ).order_by("-protein")
 
-        MealPlan.objects.create(
-            customer=cid,
-            meal_type="Breakfast",
-            product=p,
-            quantity=1
+    # Fallback 2
+    if not products.exists():
+
+        products = product.objects.filter(
+            goal_type=hp.goal
+        ).order_by("-protein")
+
+    # Fallback 3
+    if not products.exists():
+
+        products = product.objects.all().order_by("-protein")
+
+    # Convert to list & Shuffle
+    products = list(products)
+    random.shuffle(products)
+
+    # No products available
+    if not products:
+
+        messages.error(
+            request,
+            "No products available to generate meal plan."
         )
 
-    for p in lunch:
+        return redirect("meal_planner")
 
-        MealPlan.objects.create(
-            customer=cid,
-            meal_type="Lunch",
-            product=p,
-            quantity=1
-        )
+    # ==================================
+    # Meal Distribution
+    # ==================================
 
-    for p in dinner:
+    if len(products) >= 8:
 
-        MealPlan.objects.create(
-            customer=cid,
-            meal_type="Dinner",
-            product=p,
-            quantity=1
-        )
+        breakfast = products[0:2]
+        lunch = products[2:4]
+        dinner = products[4:6]
+        snacks = products[6:8]
 
-    for p in snacks:
+    else:
 
-        MealPlan.objects.create(
-            customer=cid,
-            meal_type="Snacks",
-            product=p,
-            quantity=1
-        )
+        breakfast = [products[0]]
+
+        lunch = [products[1]] if len(products) > 1 else breakfast
+
+        dinner = [products[2]] if len(products) > 2 else lunch
+
+        snacks = [products[3]] if len(products) > 3 else breakfast
+
+    # ==================================
+    # Save Meal Plan
+    # ==================================
+
+    meal_data = {
+        "Breakfast": breakfast,
+        "Lunch": lunch,
+        "Dinner": dinner,
+        "Snacks": snacks,
+    }
+
+    for meal_type, meal_products in meal_data.items():
+
+        for p in meal_products:
+
+            MealPlan.objects.create(
+                customer=cid,
+                meal_type=meal_type,
+                product=p,
+                quantity=1
+            )
 
     messages.success(
         request,
@@ -1690,3 +1742,172 @@ def generate_meal_plan(request):
     )
 
     return redirect("meal_planner")
+
+def nutrition_report(request):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    try:
+        health = UserHealthProfile.objects.get(customer=cid)
+    except UserHealthProfile.DoesNotExist:
+
+        messages.error(
+            request,
+            "Please complete your Health Profile first."
+        )
+
+        return redirect("meal_planner")
+
+    meal_plan = MealPlan.objects.filter(
+        customer=cid
+    ).select_related("product")
+
+    response = HttpResponse(
+        content_type="application/pdf"
+    )
+
+    response["Content-Disposition"] = (
+        'attachment; filename="FitFuel_AI_Report.pdf"'
+    )
+
+    doc = SimpleDocTemplate(response)
+
+    styles = getSampleStyleSheet()
+
+    elements = []
+
+    # ==========================
+    # Title
+    # ==========================
+
+    elements.append(
+        Paragraph(
+            "<b><font size=20>FitFuel AI</font></b>",
+            styles["Title"]
+        )
+    )
+
+    elements.append(
+        Paragraph(
+            "Personalized Nutrition Report",
+            styles["Heading2"]
+        )
+    )
+
+    elements.append(
+        Spacer(1, 0.3 * inch)
+    )
+
+    # ==========================
+    # User Details
+    # ==========================
+
+    data = [
+
+        ["Name",
+         f"{cid.firstname} {cid.lastname}"],
+
+        ["Goal",
+         health.goal],
+
+        ["Diet",
+         health.diet_type],
+
+        ["BMI",
+         str(health.bmi)],
+
+        ["Daily Calories",
+         f"{health.daily_calories} kcal"],
+
+        ["Protein Goal",
+         f"{health.protein_goal} g"],
+
+        ["Carbs Goal",
+         f"{health.carbs_goal} g"],
+
+        ["Fat Goal",
+         f"{health.fat_goal} g"],
+
+        ["Water Goal",
+         f"{health.water_goal} L"]
+
+    ]
+
+    table = Table(data, colWidths=[170, 250])
+
+    table.setStyle(
+
+        TableStyle([
+
+            ("BACKGROUND", (0,0), (-1,0), colors.green),
+
+            ("TEXTCOLOR", (0,0), (-1,0), colors.white),
+
+            ("GRID", (0,0), (-1,-1), 1, colors.grey),
+
+            ("BACKGROUND", (0,1), (-1,-1), colors.beige),
+
+            ("BOTTOMPADDING", (0,0), (-1,0), 10),
+
+        ])
+
+    )
+
+    elements.append(table)
+
+    elements.append(
+        Spacer(1, 0.4 * inch)
+    )
+
+    # ==========================
+    # Meal Plan
+    # ==========================
+
+    elements.append(
+        Paragraph(
+            "<b>AI Meal Plan</b>",
+            styles["Heading2"]
+        )
+    )
+
+    for meal in meal_plan:
+
+        elements.append(
+
+            Paragraph(
+
+                f"{meal.meal_type} : "
+
+                f"{meal.product.product_name}"
+
+                f" ({meal.product.calories} kcal)",
+
+                styles["BodyText"]
+
+            )
+
+        )
+
+    elements.append(
+        Spacer(1, 0.3 * inch)
+    )
+
+    elements.append(
+
+        Paragraph(
+
+            "Generated by FitFuel AI",
+
+            styles["Italic"]
+
+        )
+
+    )
+
+    doc.build(elements)
+
+    return response

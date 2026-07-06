@@ -112,17 +112,69 @@ Goal
 
 <div class="meal-item">
 
+<div class="meal-left">
+
 <img
 src="{{ meal.product.picture.url }}"
 class="meal-image">
 
-<div>
+</div>
 
-<strong>{{ meal.product.product_name }}</strong>
+<div class="meal-center">
 
-<p>🔥 {{ meal.product.calories }} kcal</p>
+<h4>
 
-<p>💪 {{ meal.product.protein }} g Protein</p>
+{{ meal.product.product_name }}
+
+</h4>
+
+<p class="meal-brand">
+
+{{ meal.product.brand }}
+
+</p>
+
+<div class="meal-tags">
+
+<span>
+
+🔥 {{ meal.product.calories }} kcal
+
+</span>
+
+<span>
+
+💪 {{ meal.product.protein }} g
+
+</span>
+
+</div>
+
+<div class="meal-rating">
+
+⭐ {{ meal.product.rating }}
+
+</div>
+
+</div>
+
+<div class="meal-right">
+
+<a
+href="{% url 'add_to_cart' meal.product.id %}"
+class="meal-cart">
+
+<i class="fa-solid fa-cart-shopping"></i>
+
+</a>
+
+<a
+href="{% url 'add_to_wishlist' meal.product.id %}"
+class="meal-heart">
+
+<i class="fa-solid fa-heart"></i>
+
+</a>
 
 </div>
 
@@ -130,7 +182,17 @@ class="meal-image">
 
 {% endif %}
 {% empty %}
-<p>No Breakfast Added</p>
+<div class="empty-meal">
+
+<i class="fa-solid fa-bowl-food"></i>
+
+<p>
+
+No Meal Generated Yet
+
+</p>
+
+</div>
 {% endfor %}
 
 </div>
@@ -342,9 +404,17 @@ class="meal-image">
 
 <a href="{% url 'generate_meal_plan' %}" class="generate-btn">
 
-<i class="fa-solid fa-rotate"></i>
+    <i class="fa-solid fa-rotate"></i>
 
-Generate New AI Plan
+    Generate New AI Plan
+
+</a>
+
+<a href="{% url 'nutrition_report' %}" class="download-btn">
+
+    <i class="fa-solid fa-file-pdf"></i>
+
+    Download Nutrition Report
 
 </a>
 
@@ -352,9 +422,9 @@ Generate New AI Plan
 
 <a href="{% url 'generate_meal_plan' %}" class="generate-btn">
 
-<i class="fa-solid fa-wand-magic-sparkles"></i>
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
 
-Generate AI Meal Plan
+    Generate AI Meal Plan
 
 </a>
 

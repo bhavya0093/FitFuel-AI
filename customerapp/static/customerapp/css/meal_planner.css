@@ -109,15 +109,158 @@ body {
     border-bottom: 1px solid #e2e8f0;
 }
 
-.meal-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    margin-bottom: 12px;
-    background: #f8fafc;
-    border-radius: 15px;
-    border: 1px solid #f1f5f9;
+.meal-item{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:18px;
+
+padding:18px;
+
+margin:14px 0;
+
+background:#f8fafc;
+
+border-radius:16px;
+
+transition:.3s;
+
+}
+
+.meal-item:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 10px 25px rgba(16,185,129,.15);
+
+}
+
+.meal-left{
+
+flex-shrink:0;
+
+}
+
+.meal-image{
+
+width:75px;
+
+height:75px;
+
+object-fit:contain;
+
+background:#fff;
+
+padding:8px;
+
+border-radius:14px;
+
+}
+
+.meal-center{
+
+flex:1;
+
+}
+
+.meal-center h4{
+
+margin-bottom:5px;
+
+}
+
+.meal-brand{
+
+color:#64748b;
+
+font-size:13px;
+
+margin-bottom:8px;
+
+}
+
+.meal-tags{
+
+display:flex;
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin-bottom:8px;
+
+}
+
+.meal-tags span{
+
+background:#ecfeff;
+
+padding:5px 10px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:600;
+
+color:#0891b2;
+
+}
+
+.meal-rating{
+
+color:#f59e0b;
+
+font-weight:700;
+
+}
+
+.meal-right{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.meal-cart,
+
+.meal-heart{
+
+width:42px;
+
+height:42px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+text-decoration:none;
+
+color:#fff;
+
+}
+
+.meal-cart{
+
+background:#10b981;
+
+}
+
+.meal-heart{
+
+background:#ef4444;
+
 }
 
 .meal-item:last-child {
@@ -309,4 +452,51 @@ body {
     border-radius: 12px;
     font-weight: 500;
     border: 1px dashed #cbd5e1;
+}
+.download-btn{
+
+display:inline-block;
+
+margin-top:18px;
+
+padding:14px 24px;
+
+background:#dc2626;
+
+color:#fff;
+
+text-decoration:none;
+
+border-radius:12px;
+
+font-weight:700;
+
+transition:.3s;
+
+}
+
+.download-btn:hover{
+
+background:#b91c1c;
+
+}
+
+.empty-meal{
+
+text-align:center;
+
+padding:25px;
+
+color:#94a3b8;
+
+}
+
+.empty-meal i{
+
+font-size:32px;
+
+margin-bottom:10px;
+
+color:#cbd5e1;
+
 }

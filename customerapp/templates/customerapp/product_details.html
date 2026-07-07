@@ -147,6 +147,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
 </div>
 
+<div class="info-cards-grid">
+
 <div class="info-card">
 
     <h3>
@@ -201,6 +203,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
 </div>
 
+</div>
+
             <a
                 href="{% url 'add_to_cart' product.id %}"
                 class="cart-btn">
@@ -220,7 +224,11 @@ class="wishlist-btn">
 Add to Wishlist
 
 </a>
-<hr style="margin:50px 0;">
+</a>
+            
+        </div> <!-- End of product-details -->
+
+    </div> <!-- End of product-wrapper -->
 
 <hr style="margin:50px 0;">
 
@@ -232,42 +240,21 @@ Add to Wishlist
 
 </h2>
 
-<form
-method="POST"
-action="{% url 'add_review' product.id %}">
-
+<form method="POST" action="{% url 'add_review' product.id %}" class="review-form">
 {% csrf_token %}
-
-<select name="rating">
-
-<option value="5">★★★★★</option>
-
-<option value="4">★★★★☆</option>
-
-<option value="3">★★★☆☆</option>
-
-<option value="2">★★☆☆☆</option>
-
-<option value="1">★☆☆☆☆</option>
-
-</select>
-
-<textarea
-
-name="review"
-
-placeholder="Write your review..."
-
-required>
-
-</textarea>
-
-<button type="submit">
-
-Submit Review
-
-</button>
-
+    <div class="review-form-group">
+        <select name="rating" class="review-select">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+        </select>
+    </div>
+    <div class="review-form-group">
+        <textarea name="review" class="review-textarea" placeholder="Write your review..." required></textarea>
+    </div>
+    <button type="submit" class="review-submit-btn">Submit Review</button>
 </form>
 
 {% for r in reviews %}
@@ -311,6 +298,52 @@ No Reviews Yet.
 {% endfor %}
 
 </div>
+
+<hr style="margin:50px 0;">
+
+<div class="ai-chat-card">
+
+    <h2>
+        🤖 Ask FitFuel AI
+    </h2>
+
+    <p>
+        Ask anything about this product.
+    </p>
+
+    <div class="chat-box" id="chatBox">
+
+        <div class="ai-message">
+
+            👋 Hi! I am FitFuel AI.
+
+            Ask me anything about
+            <strong>{{ product.product_name }}</strong>
+
+        </div>
+
+    </div>
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="userQuestion"
+            placeholder="Example: Is this good for muscle gain?">
+
+        <button
+            type="button"
+            id="askAiBtn">
+
+            Ask AI
+
+        </button>
+
+    </div>
+
+</div>
+
+
 
 <div class="related-section">
 
@@ -377,10 +410,6 @@ No Reviews Yet.
     </div>
 
 </div>
-        </div>
-
-    </div>
-
 </div>
 
 </body>

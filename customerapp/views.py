@@ -25,6 +25,7 @@ from reportlab.lib.units import inch
 from django.http import JsonResponse
 from .services import model
 from .prompts import product_chat_prompt
+from datetime import timedelta
 
 
 
@@ -1624,7 +1625,7 @@ def meal_planner(request):
 
         meal.ai_reasons = reasons[:4]
 
-        today = timezone.now().date()
+    today = timezone.now().date()
 
     for meal in meal_plan:
 
@@ -1640,17 +1641,28 @@ def meal_planner(request):
     # Nutrition Summary
     # ==========================
 
+    today = timezone.now().date()
+
+    daily_logs = DailyMealLog.objects.filter(
+        customer=cid,
+        log_date=today,
+        consumed=True
+    )
+
     total_calories = 0
     total_protein = 0
     total_carbs = 0
     total_fat = 0
 
-    for meal in meal_plan:
+    for log in daily_logs:
 
-        total_calories += meal.product.calories * meal.quantity
-        total_protein += meal.product.protein * meal.quantity
-        total_carbs += meal.product.carbs * meal.quantity
-        total_fat += meal.product.fat * meal.quantity
+        total_calories += log.calories * log.quantity
+
+        total_protein += log.protein * log.quantity
+
+        total_carbs += log.carbs * log.quantity
+
+        total_fat += log.fat * log.quantity
     
     # ==========================
     # Goal Progress
@@ -1672,6 +1684,45 @@ def meal_planner(request):
             round((total_protein / health.protein_goal) * 100),
             100
         )
+    today_logs = DailyMealLog.objects.filter(
+    customer=cid,
+    consumed=True,
+    log_date=timezone.now().date()
+    )
+
+    today_meals = today_logs.count()
+
+    last_7_days = []
+
+    for i in range(6, -1, -1):
+
+        day = timezone.now().date() - timedelta(days=i)
+
+        logs = DailyMealLog.objects.filter(
+            customer=cid,
+            consumed=True,
+            log_date=day
+        )
+
+        calories = sum(
+            log.calories * log.quantity
+            for log in logs
+        )
+
+        protein = sum(
+            log.protein * log.quantity
+            for log in logs
+        )
+
+        last_7_days.append({
+
+            "day": day.strftime("%a"),
+
+            "calories": calories,
+
+            "protein": round(protein, 1)
+
+        })
 
     context = {
 
@@ -1683,6 +1734,8 @@ def meal_planner(request):
         "calorie_progress": calorie_progress,
         "protein_progress": protein_progress,
         "meal_plan": meal_plan,
+        "today_meals": today_meals,
+        "last_7_days": last_7_days,
 
     }
 

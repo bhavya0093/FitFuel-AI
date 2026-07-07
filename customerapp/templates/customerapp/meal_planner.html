@@ -186,31 +186,41 @@ Why AI Selected
 
 <div class="meal-right">
 
-<a
-href="{% url 'add_to_cart' meal.product.id %}"
-class="meal-cart">
+    <a
+    href="{% url 'add_to_cart' meal.product.id %}"
+    class="meal-cart">
 
-<i class="fa-solid fa-cart-shopping"></i>
+        <i class="fa-solid fa-cart-shopping"></i>
 
-</a>
+    </a>
 
-<a
-href="{% url 'add_to_wishlist' meal.product.id %}"
-class="meal-heart">
+    <a
+    href="{% url 'add_to_wishlist' meal.product.id %}"
+    class="meal-heart">
 
-<i class="fa-solid fa-heart"></i>
+        <i class="fa-solid fa-heart"></i>
 
-</a>
+    </a>
 
-<a
-href="{% url 'add_daily_log' meal.product.id meal.meal_type %}"
-class="meal-consume">
+    {% if meal.is_consumed %}
 
-<i class="fa-solid fa-check"></i>
+        <span class="meal-consumed">
 
-Consumed
+            ✅ Consumed
 
-</a>
+        </span>
+
+    {% else %}
+
+        <a
+        href="{% url 'add_daily_log' meal.product.id meal.meal_type %}"
+        class="meal-consume">
+
+            ✔ Mark as Consumed
+
+        </a>
+
+    {% endif %}
 
 </div>
 

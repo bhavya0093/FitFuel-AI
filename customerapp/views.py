@@ -1624,6 +1624,18 @@ def meal_planner(request):
 
         meal.ai_reasons = reasons[:4]
 
+        today = timezone.now().date()
+
+    for meal in meal_plan:
+
+        meal.is_consumed = DailyMealLog.objects.filter(
+            customer=cid,
+            product=meal.product,
+            meal_type=meal.meal_type,
+            log_date=today,
+            consumed=True
+        ).exists()
+
     # ==========================
     # Nutrition Summary
     # ==========================
@@ -2051,6 +2063,24 @@ def add_daily_log(request, pk, meal_type):
 
     p = get_object_or_404(product, id=pk)
 
+    today = timezone.now().date()
+
+    already_logged = DailyMealLog.objects.filter(
+        customer=cid,
+        product=p,
+        meal_type=meal_type,
+        log_date=today
+    ).exists()
+
+    if already_logged:
+
+        messages.info(
+            request,
+            "This meal is already marked as consumed."
+        )
+
+        return redirect("meal_planner")
+
     DailyMealLog.objects.create(
         customer=cid,
         product=p,
@@ -2060,6 +2090,7 @@ def add_daily_log(request, pk, meal_type):
         protein=p.protein,
         carbs=p.carbs,
         fat=p.fat,
+        consumed=True,
     )
 
     messages.success(

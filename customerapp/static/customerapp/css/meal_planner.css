@@ -603,3 +603,20 @@ font-weight:700;
     background:#059669;
 
 }
+.meal-consumed{
+
+display:inline-block;
+
+margin-top:10px;
+
+padding:10px 18px;
+
+background:#16a34a;
+
+color:white;
+
+border-radius:10px;
+
+font-weight:bold;
+
+}

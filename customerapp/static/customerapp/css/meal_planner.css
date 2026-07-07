@@ -846,3 +846,24 @@ border-radius:10px;
     transition:.4s;
 
 }
+.ai-feedback-card{
+
+    background:#f0fdf4;
+
+    border-left:6px solid #10b981;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:35px;
+
+}
+
+.ai-feedback-card h3{
+
+    margin-bottom:10px;
+
+    color:#059669;
+
+}

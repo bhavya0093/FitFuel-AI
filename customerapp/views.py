@@ -1773,6 +1773,25 @@ def meal_planner(request):
     health_score += 10
 
     health_score = min(health_score, 100)
+    if health_score >= 90:
+
+        health_status = "Excellent 🏆"
+
+    elif health_score >= 75:
+
+        health_status = "Very Good 💪"
+
+    elif health_score >= 60:
+
+        health_status = "Good 👍"
+
+    elif health_score >= 40:
+
+        health_status = "Average 🙂"
+
+    else:
+
+        health_status = "Needs Improvement ⚠️"
 
     # ==========================
     # AI Feedback

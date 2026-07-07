@@ -533,3 +533,22 @@ class DailyMealLog(models.Model):
     def __str__(self):
 
         return f"{self.customer.firstname} - {self.product.product_name}"
+
+class UserAchievement(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    title = models.CharField(max_length=100)
+
+    description = models.CharField(max_length=255)
+
+    badge = models.CharField(max_length=50)
+
+    unlocked_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+
+        return f"{self.customer} - {self.title}"

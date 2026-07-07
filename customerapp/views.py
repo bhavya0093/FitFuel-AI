@@ -1817,6 +1817,8 @@ def meal_planner(request):
 
         ai_feedback = "Let's restart your healthy journey. Complete today's meals."
 
+    achievements = UserAchievement.objects.filter(customer=cid).order_by("-unlocked_at")
+
     context = {
 
         "health": health,
@@ -1832,6 +1834,7 @@ def meal_planner(request):
         "health_score": health_score,
         "health_status": health_status,
         "ai_feedback": ai_feedback,
+        "achievements": achievements,
     }
 
     return render(

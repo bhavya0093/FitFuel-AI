@@ -755,3 +755,94 @@ border-radius:10px;
     text-align:right;
 
 }
+/* ===========================
+   Health Score
+=========================== */
+
+.health-score-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:30px 0;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:linear-gradient(135deg,#10b981,#06b6d4);
+
+    color:white;
+
+}
+
+.score-left h1{
+
+    font-size:50px;
+
+    margin:10px 0;
+
+}
+
+.score-left p{
+
+    font-size:18px;
+
+    opacity:.95;
+
+}
+
+.score-circle{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#10b981;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.score-progress{
+
+    width:100%;
+
+    height:12px;
+
+    background:#e5e7eb;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:40px;
+
+}
+
+.score-fill{
+
+    height:100%;
+
+    background:#10b981;
+
+    border-radius:20px;
+
+    transition:.4s;
+
+}

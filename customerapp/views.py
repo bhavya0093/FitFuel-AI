@@ -1723,6 +1723,80 @@ def meal_planner(request):
             "protein": round(protein, 1)
 
         })
+    
+    # ==========================
+    # AI Health Score
+    # ==========================
+
+    health_score = 0
+
+    # Protein Score (30)
+    if health.protein_goal > 0:
+
+        protein_ratio = min(
+            total_protein / health.protein_goal,
+            1
+        )
+
+        health_score += int(protein_ratio * 30)
+
+    # Calories Score (30)
+    if health.daily_calories > 0:
+
+        calorie_difference = abs(
+            health.daily_calories - total_calories
+        )
+
+        calorie_ratio = max(
+            0,
+            1 - (calorie_difference / health.daily_calories)
+        )
+
+        health_score += int(calorie_ratio * 30)
+
+    # Meals Score (20)
+
+    consumed_meals = DailyMealLog.objects.filter(
+        customer=cid,
+        consumed=True,
+        log_date=today
+    ).values(
+        "meal_type"
+    ).distinct().count()
+
+    health_score += min(consumed_meals * 5, 20)
+
+    # Water Score (Temporary)
+    health_score += 10
+
+    # Consistency Score (Temporary)
+    health_score += 10
+
+    health_score = min(health_score, 100)
+
+    # ==========================
+    # AI Feedback
+    # ==========================
+
+    if health_score >= 90:
+
+        ai_feedback = "Excellent! Keep following your nutrition plan."
+
+    elif health_score >= 75:
+
+        ai_feedback = "Great job! A little more consistency will improve your score."
+
+    elif health_score >= 60:
+
+        ai_feedback = "You're doing well. Try completing all meals and protein goals."
+
+    elif health_score >= 40:
+
+        ai_feedback = "You need to improve your daily nutrition intake."
+
+    else:
+
+        ai_feedback = "Let's restart your healthy journey. Complete today's meals."
 
     context = {
 
@@ -1736,7 +1810,9 @@ def meal_planner(request):
         "meal_plan": meal_plan,
         "today_meals": today_meals,
         "last_7_days": last_7_days,
-
+        "health_score": health_score,
+        "health_status": health_status,
+        "ai_feedback": ai_feedback,
     }
 
     return render(

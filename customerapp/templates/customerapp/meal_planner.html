@@ -395,6 +395,49 @@ No Meal Generated Yet
 
 </div>
 
+<div class="history-section">
+
+    <h2>
+        📈 Last 7 Days Nutrition
+    </h2>
+
+    {% for day in last_7_days %}
+
+    <div class="history-card">
+
+        <div class="history-left">
+
+            <h4>{{ day.day }}</h4>
+
+            <small>{{ day.calories }} kcal</small>
+
+        </div>
+
+        <div class="history-center">
+
+            <div class="history-bar">
+
+                <div
+                    class="history-fill"
+                    style="width:{% widthratio day.calories health.daily_calories 100 %}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="history-right">
+
+            💪 {{ day.protein }} g
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
 <div class="progress-section">
 
     <div class="progress-card">

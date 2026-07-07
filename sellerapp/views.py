@@ -121,37 +121,7 @@ def login(request):
             return redirect("admin_panel")
 
         elif uid.role == "customer":
-            cid = customer.objects.get(user_id=uid)
-            pid = product.objects.all()
-
-            cart_item = cart.objects.filter(customer=cid)
-
-            if cart_item:
-
-                Cart_obj = cart_item.first()  
-                item = cartitem.objects.filter(cart=Cart_obj)
-   
-                total_amount = 0
-                for i in item:
-                    total_amount += i.product.product_price * i.qty
-                    
-                context = {
-                    "uid": uid,
-                    "cid": cid,
-                    "pid": pid,
-                    "item" : item,
-                    "total_amount" : total_amount,
-                    'net_amount' : total_amount - 65,
-                }
-
-                return render(request,"customerapp/customer_dashboard.html",context)
-            else:
-                context = {
-                    "uid": uid,
-                    "cid": cid,
-                    "pid": pid, 
-                }
-                return render(request, "customerapp/customer_dashboard.html", context)
+            return redirect("customer_dashboard")
 
     else:
 
@@ -190,16 +160,7 @@ def login(request):
                         return redirect("admin_panel")
 
                     elif uid.role == "customer":
-                        cid = customer.objects.get(user_id=uid)
-                        pid = product.objects.all()
-
-                        context = {
-                            "uid": uid,
-                            "cid": cid,
-                            "pid": pid,
-                        }
-
-                        return render(request,"customerapp/customer_dashboard.html",context)
+                        return redirect("customer_dashboard")
 
             except:
                 return render(request,"sellerapp/login.html")
@@ -438,6 +399,20 @@ def add_product(request):
                 is_featured="is_featured" in request.POST,
 
                 is_ai_recommended="is_ai_recommended" in request.POST,
+
+                health_score=int(
+                    request.POST.get("health_score") or 0
+                ),
+
+                ai_tags=request.POST.get(
+                    "ai_tags",
+                    ""
+                ),
+
+                ai_summary=request.POST.get(
+                    "ai_summary",
+                    ""
+                ),
             )
 
             messages.success(request, "Product Added Successfully")

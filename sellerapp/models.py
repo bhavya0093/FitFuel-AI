@@ -115,6 +115,19 @@ class product(models.Model):
 
     is_ai_recommended = models.BooleanField(default=False)
 
+    # ==========================
+    # AI Insights
+    # ==========================
+
+    health_score = models.PositiveIntegerField(default=0)
+
+    ai_tags = models.TextField(
+        blank=True,
+        help_text="Comma separated AI tags"
+    )
+
+    ai_summary = models.TextField(blank=True)
+
     def __str__(self):
         return self.product_name
 

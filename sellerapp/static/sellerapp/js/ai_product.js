@@ -65,6 +65,28 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("ingredients").value = d.ingredients;
             document.getElementById("benefits").value = d.benefits;
             document.getElementById("recommended_usage").value = d.recommended_usage;
+            document.getElementById("health_score").value = d.health_score;
+            document.getElementById("ai_tags").value = d.ai_tags;
+            document.getElementById("ai_summary").value = d.ai_summary;
+
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            btn.innerHTML = `
+            <i class="fa-solid fa-check"></i>
+            AI Completed
+            `;
+
+            alert("AI Analysis Completed Successfully!");
+
+            setTimeout(() => {
+            btn.innerHTML = `
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Analyze with AI
+            `;
+            }, 2500);
+
+            
+
 
         })
         .catch(err => {
@@ -76,7 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(err);
             alert("Something went wrong.");
         });
+    
 
     });
+    alert("AI Analysis Completed Successfully!");
 
 });

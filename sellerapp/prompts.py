@@ -19,7 +19,7 @@ Output Format:
     "sugar": 0,
     "fiber": 0,
     "health_score":0,
-    "ai_tags":"",
+    "ai_tags":[],
     "ai_summary":"",
     "serving_size": "",
     "diet_type": "",

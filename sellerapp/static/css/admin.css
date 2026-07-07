@@ -302,6 +302,9 @@ details.profile-wrap[open] .profile-dropdown {
 /* ── FORM CONTAINER ── */
 .form-container{background:var(--glass-card);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:1.5px solid var(--bdr-w);border-radius:var(--r3);padding:28px;margin-bottom:20px;box-shadow:var(--sh-glass);position:relative;overflow:hidden;}
 .form-container::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#60a5fa 25%,#22d3ee 55%,#0ea5e9 80%,transparent);opacity:0.70;}
+/* ── CARD SECTION ── */
+.card-section { background: var(--glass-card); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); border: 1.5px solid var(--bdr-w); border-radius: var(--r3); padding: 24px; margin-bottom: 20px; box-shadow: var(--sh-glass); }
+.card-section h3 { margin-bottom: 20px; font-size: 1.15rem; font-weight: 800; color: var(--txt); border-bottom: 1.5px solid rgba(59,130,246,0.10); padding-bottom: 12px; }
 .form-title{margin-bottom:26px;padding-bottom:18px;border-bottom:1.5px solid rgba(59,130,246,0.10);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .form-title h2,.form-title h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.2rem;font-weight:800;color:var(--txt);}
 .form-title p{font-size:0.78rem;color:var(--txt3);margin-top:4px;}
@@ -799,6 +802,7 @@ border:1px solid rgba(16,185,129,.08);
 display:flex;
 
 flex-direction:column;
+height:100%;
 
 }
 
@@ -812,9 +816,9 @@ box-shadow:0 25px 60px rgba(16,185,129,.18);
 
 .product-card-all img{
 
-height:220px;
+height:180px;
 
-object-fit:cover;
+object-fit:contain;
 
 width:100%;
 
@@ -822,7 +826,10 @@ width:100%;
 
 .product-info-all{
 
-padding:20px;
+padding:15px;
+display:flex;
+flex-direction:column;
+flex-grow:1;
 
 }
 
@@ -835,6 +842,10 @@ font-weight:700;
 color:#10B981;
 
 margin:6px 0 10px;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 
 }
 

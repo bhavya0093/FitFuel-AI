@@ -3,18 +3,18 @@
 .products-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
 .products-header h2{font-size:22px;}
 .product-search{padding:10px 15px;border-radius:8px;border:1px solid #e2e8f0;width:250px;font-family:'Plus Jakarta Sans',sans-serif;}
-.all-products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;}
-.product-card-all{background:white;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.05);transition:0.3s;}
+.all-products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}
+.product-card-all{background:white;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.05);transition:0.3s;display:flex;flex-direction:column;height:100%;}
 .product-card-all:hover{transform:translateY(-6px);box-shadow:0 18px 42px rgba(16,185,129,0.18);border:1.5px solid rgba(16,185,129,0.25);}
-.product-card-all img{width:100%;height:160px;object-fit:cover;display:block;}
-.product-info-all{padding:15px;}
-.product-info-all h4{margin-bottom:5px;font-size:0.95rem;font-weight:700;color:var(--txt);}
+.product-card-all img{width:100%;height:160px;object-fit:contain;display:block;background:#fff;}
+.product-info-all{padding:15px;display:flex;flex-direction:column;flex-grow:1;}
+.product-info-all h4{margin-bottom:5px;font-size:0.95rem;font-weight:700;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .product-price-all{font-weight:700;margin-bottom:8px;font-size:1rem;color:var(--blue-700);}
 .view-details-btn {
     width:100%;padding:9px 0;background:linear-gradient(135deg,#10b981,#06b6d4);color:#fff;border:none;
     border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.80rem;font-weight:700;
     cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:0.18s;
-    text-decoration:none;
+    text-decoration:none;margin-top:auto;
 }
 .view-details-btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(16,185,129,0.40);}
 

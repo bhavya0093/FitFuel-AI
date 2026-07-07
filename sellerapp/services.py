@@ -43,4 +43,12 @@ Weight:
     elif text.startswith("```"):
         text = text.replace("```", "").strip()
 
-    return json.loads(text)
+    data = json.loads(text)
+
+    if isinstance(data.get("ai_tags"), list):
+
+        data["ai_tags"] = ", ".join(data["ai_tags"])
+
+    return data    
+
+    # return json.loads(text)

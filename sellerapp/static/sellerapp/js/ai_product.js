@@ -101,6 +101,5 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
     });
-    alert("AI Analysis Completed Successfully!");
 
 });

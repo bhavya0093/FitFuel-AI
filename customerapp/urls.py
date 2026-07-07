@@ -56,4 +56,6 @@ urlpatterns = [
     path("wishlist/cart/<int:pk>/",views.wishlist_to_cart,name="wishlist_to_cart"),
     path("meal-planner/",views.meal_planner,name="meal_planner"),
     path("generate-meal-plan/",views.generate_meal_plan,name="generate_meal_plan"),
+    path("ask-ai/",views.ask_ai,name="ask_ai",),
+    path("add-daily-log/<int:pk>/<str:meal_type>/",views.add_daily_log,name="add_daily_log"),
 ]

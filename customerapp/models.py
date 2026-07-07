@@ -491,3 +491,45 @@ class MealPlan(models.Model):
 
     def __str__(self):
         return f"{self.customer.firstname} - {self.meal_type}"
+
+class DailyMealLog(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    product = models.ForeignKey(
+        product,
+        on_delete=models.CASCADE
+    )
+
+    meal_type = models.CharField(
+        max_length=30,
+        choices=[
+            ("Breakfast","Breakfast"),
+            ("Lunch","Lunch"),
+            ("Dinner","Dinner"),
+            ("Snacks","Snacks"),
+        ]
+    )
+
+    quantity = models.PositiveIntegerField(default=1)
+
+    calories = models.IntegerField(default=0)
+
+    protein = models.FloatField(default=0)
+
+    carbs = models.FloatField(default=0)
+
+    fat = models.FloatField(default=0)
+
+    consumed = models.BooleanField(default=False)
+
+    log_date = models.DateField(auto_now_add=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+
+        return f"{self.customer.firstname} - {self.product.product_name}"

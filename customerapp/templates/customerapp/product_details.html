@@ -82,10 +82,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             </div>
 
             <p class="description">
-
                 {{ product.description }}
-
             </p>
+
+            <div class="action-buttons" style="display: flex; align-items: center; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add To Cart
+                </a>
+                <a href="#" class="wishlist-btn" style="margin-left: 0;">
+                    <i class="fa-solid fa-heart"></i> Add to Wishlist
+                </a>
+            </div>
             <div class="nutrition-card">
 
     <h3>
@@ -203,29 +210,50 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
 </div>
 
+
+<div class="ai-chat-card">
+
+    <h3>
+        🤖 Ask FitFuel AI
+    </h3>
+
+    <p>
+        Ask anything about this product.
+    </p>
+
+    <textarea
+        id="aiQuestion"
+        rows="3"
+        placeholder="Example:
+Is this good for weight loss?">
+    </textarea>
+
+    <button
+        id="askAiBtn">
+
+        Ask AI
+
+    </button>
+
+    <input
+    type="hidden"
+    id="product_id"
+    value="{{ product.id }}">
+
+    <input
+    type="hidden"
+    name="csrfmiddlewaretoken"
+    value="{{ csrf_token }}">
+
+    <div id="aiAnswer">
+
+    </div>
+
 </div>
 
-            <a
-                href="{% url 'add_to_cart' product.id %}"
-                class="cart-btn">
+</div>
 
-                <i class="fa-solid fa-cart-shopping"></i>
 
-                Add To Cart
-
-            </a>
-
-            <a href="#"
-
-class="wishlist-btn">
-
-<i class="fa-solid fa-heart"></i>
-
-Add to Wishlist
-
-</a>
-</a>
-            
         </div> <!-- End of product-details -->
 
     </div> <!-- End of product-wrapper -->
@@ -299,118 +327,10 @@ No Reviews Yet.
 
 </div>
 
-<hr style="margin:50px 0;">
 
-<div class="ai-chat-card">
 
-    <h2>
-        🤖 Ask FitFuel AI
-    </h2>
-
-    <p>
-        Ask anything about this product.
-    </p>
-
-    <div class="chat-box" id="chatBox">
-
-        <div class="ai-message">
-
-            👋 Hi! I am FitFuel AI.
-
-            Ask me anything about
-            <strong>{{ product.product_name }}</strong>
-
-        </div>
-
-    </div>
-
-    <div class="chat-input">
-
-        <input
-            type="text"
-            id="userQuestion"
-            placeholder="Example: Is this good for muscle gain?">
-
-        <button
-            type="button"
-            id="askAiBtn">
-
-            Ask AI
-
-        </button>
-
-    </div>
 
 </div>
-
-
-
-<div class="related-section">
-
-    <h2>
-        <i class="fa-solid fa-fire"></i>
-        Related Products
-    </h2>
-
-    <div class="related-grid">
-
-        {% for p in related_products %}
-
-        <div class="related-card">
-
-            <a href="{% url 'product_details' p.id %}">
-
-                <img src="{{ p.picture.url }}" alt="{{ p.product_name }}">
-
-            </a>
-
-            <h4>
-
-                <a href="{% url 'product_details' p.id %}">
-
-                    {{ p.product_name }}
-
-                </a>
-
-            </h4>
-
-            <p class="related-brand">
-                {{ p.brand }}
-            </p>
-
-            <div class="related-price">
-
-                ₹{{ p.product_price }}
-
-            </div>
-
-            <a
-                href="{% url 'add_to_cart' p.id %}"
-                class="related-cart">
-
-                Add to Cart
-
-            </a>
-            <a href="{% url 'buy_now' product.id %}" class="buy-btn">
-
-    <i class="fa-solid fa-bolt"></i>
-
-    Buy Now
-
-</a>
-
-        </div>
-
-        {% empty %}
-
-        <p>No Related Products Found.</p>
-
-        {% endfor %}
-
-    </div>
-
-</div>
-</div>
-
+<script src="{% static 'customerapp/js/product_ai_chat.js' %}"></script>
 </body>
 </html>

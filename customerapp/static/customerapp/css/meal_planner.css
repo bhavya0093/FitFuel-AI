@@ -568,3 +568,38 @@ font-size:12px;
 font-weight:700;
 
 }
+.meal-consume{
+
+    margin-top:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:10px;
+
+    background:#10b981;
+
+    color:#fff;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.meal-consume:hover{
+
+    background:#059669;
+
+}

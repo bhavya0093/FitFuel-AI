@@ -19,12 +19,12 @@ from reportlab.platypus import (
     Table,
     TableStyle
 )
-
 from reportlab.lib.styles import getSampleStyleSheet
-
 from reportlab.lib import colors
-
 from reportlab.lib.units import inch
+from django.http import JsonResponse
+from .services import model
+from .prompts import product_chat_prompt
 
 
 
@@ -1984,3 +1984,87 @@ def product_details(request, pk):
         "related_products": related_products,
     }
     return render(request, "customerapp/product_details.html", context)
+
+def ask_ai(request):
+
+    if "email" not in request.session:
+
+        return JsonResponse({
+            "success":False,
+            "message":"Login Required"
+        })
+
+    if request.method!="POST":
+
+        return JsonResponse({
+            "success":False
+        })
+
+    product_id=request.POST.get("product_id")
+
+    question=request.POST.get("question")
+
+    try:
+
+        p=product.objects.get(id=product_id)
+
+    except product.DoesNotExist:
+
+        return JsonResponse({
+            "success":False,
+            "message":"Product Not Found"
+        })
+
+    prompt=product_chat_prompt(
+        p,
+        question
+    )
+
+    try:
+
+        response=model.generate_content(prompt)
+
+        return JsonResponse({
+
+            "success":True,
+
+            "answer":response.text
+
+        })
+
+    except Exception as e:
+
+        return JsonResponse({
+
+            "success":False,
+
+            "message":str(e)
+
+        })
+def add_daily_log(request, pk, meal_type):
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    p = get_object_or_404(product, id=pk)
+
+    DailyMealLog.objects.create(
+        customer=cid,
+        product=p,
+        meal_type=meal_type,
+        quantity=1,
+        calories=p.calories,
+        protein=p.protein,
+        carbs=p.carbs,
+        fat=p.fat,
+    )
+
+    messages.success(
+        request,
+        f"{p.product_name} added to today's nutrition log."
+    )
+
+    return redirect("meal_planner")

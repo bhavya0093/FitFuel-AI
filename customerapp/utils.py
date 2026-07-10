@@ -91,6 +91,7 @@ def unlock_achievement(
 def check_user_achievements(customer):
 
     update_streak(customer)
+    game, created = UserGamification.objects.get_or_create(customer=customer)
 
     # ==========================
     # First Meal

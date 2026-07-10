@@ -231,6 +231,49 @@ def customer_dashboard(request):
         net_amount = total_amount - discount
         remaining_amount = 100 - total_amount if total_amount < 100 else 0
 
+        # Achievements & Leaderboard Integration
+        achievements = UserAchievement.objects.filter(
+            customer=cid
+        ).order_by("-unlocked_at")
+
+        total_badges = achievements.count()
+
+        gold_badges = achievements.filter(
+            badge="🏆"
+        ).count()
+
+        protein_badges = achievements.filter(
+            title__icontains="Protein"
+        ).count()
+
+        latest_badge = achievements.first()
+
+        game, created = UserGamification.objects.get_or_create(customer=cid)
+        level = game.level
+        current_xp = game.xp
+        next_level_xp = level * 100
+        remaining_xp = next_level_xp - current_xp
+        xp_progress = round((current_xp / next_level_xp) * 100) if next_level_xp > 0 else 0
+
+        leaderboard_qs = UserGamification.objects.select_related(
+            "customer",
+            "customer__user_id"
+        ).order_by(
+            "-xp",
+            "-level"
+        )
+
+        rank = 1
+        for user in leaderboard_qs:
+            user.rank = rank
+            rank += 1
+
+        my_rank = None
+        for user in leaderboard_qs:
+            if user.customer == cid:
+                my_rank = user.rank
+                break
+
         context = {
             "uid": uid,
             "cid": cid,
@@ -262,6 +305,23 @@ def customer_dashboard(request):
             "sort": sort,
             "unread_notifications": unread_notifications,
             "wallet": wallet,
+            # Achievements & Leaderboard Context
+            "achievements": achievements,
+            "total_badges": total_badges,
+            "gold_badges": gold_badges,
+            "protein_badges": protein_badges,
+            "latest_badge": latest_badge,
+            "level": level,
+            "current_xp": current_xp,
+            "next_level_xp": next_level_xp,
+            "remaining_xp": remaining_xp,
+            "xp_progress": xp_progress,
+            "game": game,
+            "my_game": game,
+            "leaderboard": leaderboard_qs[:10],
+            "my_rank": my_rank,
+            "daily_challenge": "Complete Protein Goal",
+            "daily_reward": 20,
         }
 
         return render(request, "customerapp/customer_dashboard.html", context)
@@ -2398,136 +2458,14 @@ def achievements(request):
 
         return redirect("login")
 
-    uid = User.objects.get(
-        email=request.session["email"]
-    )
-
-    cid = customer.objects.get(
-        user_id=uid
-    )
-
-    achievements = UserAchievement.objects.filter(
-        customer=cid
-    ).order_by("-unlocked_at")
-
-    total_badges = achievements.count()
-
-    gold_badges = achievements.filter(
-        badge="🏆"
-    ).count()
-
-    protein_badges = achievements.filter(
-        title__icontains="Protein"
-    ).count()
-
-    latest_badge = achievements.first()
-    streak_progress = 3
-
-    water_progress = 2
-
-    healthy_week_progress = 4
-
-    ai_progress = 12
-
-    level = 5
-
-    current_xp = 420
-
-    next_level_xp = 500
-
-    remaining_xp = next_level_xp - current_xp
-
-    xp_progress = round(
-        (current_xp / next_level_xp) * 100
-    )
-
-    context = {
-        "uid": uid,
-        "cid": cid,
-        "achievements": achievements,
-        "total_badges": total_badges,
-        "gold_badges": gold_badges,
-        "protein_badges": protein_badges,
-        "latest_badge": latest_badge,
-        "level": level,
-        "current_xp": current_xp,
-        "next_level_xp": next_level_xp,
-        "remaining_xp": remaining_xp,
-        "xp_progress": xp_progress,
-        "daily_challenge": "Complete Protein Goal",
-        "daily_reward": 20,
-    }
-
-    return render(
-
-        request,
-
-        "customerapp/achievements.html",
-
-        context
-
-    )
+    return redirect(reverse("customer_dashboard") + "?active_page=achievements")
 
 def leaderboard(request):
 
     if "email" not in request.session:
         return redirect("login")
 
-    uid = User.objects.get(
-        email=request.session["email"]
-    )
-
-    cid = customer.objects.get(
-        user_id=uid
-    )
-
-    leaderboard = UserGamification.objects.select_related(
-        "customer",
-        "customer__user_id"
-    ).order_by(
-        "-xp",
-        "-level"
-    )
-
-    rank = 1
-
-    for user in leaderboard:
-
-        user.rank = rank
-
-        rank += 1
-
-    my_rank = None
-
-    for user in leaderboard:
-
-        if user.customer == cid:
-
-            my_rank = user.rank
-
-            break
-
-    context = {
-
-        "leaderboard": leaderboard[:10],
-
-        "my_rank": my_rank,
-
-        "my_game": UserGamification.objects.get(
-            customer=cid
-        )
-
-    }
-
-    return render(
-
-        request,
-
-        "customerapp/leaderboard.html",
-
-        context
-
-    )
+    return redirect(reverse("customer_dashboard") + "?active_page=leaderboard")
 def generate_health_insight(customer):
 
     today = timezone.now().date()

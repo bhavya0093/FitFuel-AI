@@ -1,278 +1,146 @@
 {% load static %}
 
-<!DOCTYPE html>
+<div id="page-achievements" class="page">
+<div class="container" style="position: relative;">
 
-<html>
-
-<head>
-
-    <title>Achievements</title>
-
-    <link rel="stylesheet"
-          href="{% static 'customerapp/css/achievements.css' %}">
-
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-</head>
-
-<body>
-
-<div class="container">
-
-    <a href="{% url 'customer_dashboard' %}">
-
-        ← Back
-
-    </a>
+    <label class="back-btn" for="nav-home" style="cursor: pointer; display: inline-block; margin-bottom: 20px; color: #10b981; font-weight: 700;">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </label>
 
     <h1>
-
         🏆 Your Achievements
-
     </h1>
+
     <div class="level-card">
-
-    <div class="level-top">
-
-        <h2>
-
-            🏆 Level {{ level }}
-
-        </h2>
-
-        <span>
-
-            {{ current_xp }}/{{ next_level_xp }} XP
-
-        </span>
-
-    </div>
-    <a href="{% url 'leaderboard' %}"
-class="leaderboard-btn">
-
-🏆 View Leaderboard
-
-</a>
-
-    <div class="progress">
-
-        <div
-            class="progress-fill"
-            style="width:{{ xp_progress }}%;">
-
+        <div class="level-top">
+            <h2>
+                🏆 Level {{ level }}
+            </h2>
+            <span>
+                {{ current_xp }}/{{ next_level_xp }} XP
+            </span>
         </div>
-
-    </div>
-
-    <small>
-
-        {{ remaining_xp }} XP to next level
-
-    </small>
-
-</div>
-<div class="challenge-card">
-
-    <div class="challenge-left">
-
-        <span class="challenge-badge">
-
-            🔥 Daily Challenge
-
-        </span>
-
-        <h2>
-
-            Complete Today's Protein Goal
-
-        </h2>
-
-        <p>
-
-            Consume {{ health.protein_goal }}g protein today.
-
-        </p>
-
-    </div>
-
-    <div class="challenge-right">
-
-        <div class="reward-box">
-
-            +20 XP
-
-        </div>
-
-        <button class="challenge-btn">
-
-            Start Challenge
-
-        </button>
-
-    </div>
-
-</div>
-
-    <div class="stats-grid">
-
-    <div class="stat-box">
-
-        <h2>{{ total_badges }}</h2>
-
-        <p>Total Badges</p>
-
-    </div>
-
-    <div class="stat-box">
-
-        <h2>{{ gold_badges }}</h2>
-
-        <p>Gold Awards</p>
-
-    </div>
-
-    <div class="stat-box">
-
-        <h2>{{ protein_badges }}</h2>
-
-        <p>Protein Achievements</p>
-
-    </div>
-
-    <div class="stat-box">
-
-        {% if latest_badge %}
-
-        <h2>{{ latest_badge.badge }}</h2>
-
-        <p>Latest Badge</p>
-
-        {% else %}
-
-        <h2>--</h2>
-
-        <p>Latest Badge</p>
-
-        {% endif %}
-
-    </div>
-
-</div>
-
-    {% for a in achievements %}
-
-    <div class="achievement-card">
-
-        <h2>
-
-            {{ a.badge }}
-
-            {{ a.title }}
-
-        </h2>
-
-        <p>
-
-            {{ a.description }}
-
-        </p>
-
-        <small>
-
-            {{ a.unlocked_at }}
-
-        </small>
-
-    </div>
-
-    {% empty %}
-
-    <h3>
-
-        No Achievements Yet
-
-    </h3>
-
-    {% endfor %}
-
-</div>
-<hr>
-
-<h2>🔒 Upcoming Achievements</h2>
-
-<div class="achievement-card locked">
-
-    <div class="badge-icon">
-        🔥
-    </div>
-
-    <div class="badge-content">
-
-        <h2>7 Day Streak</h2>
-
-        <p>Log meals for 7 consecutive days.</p>
+        
+        <label for="nav-leaderboard" class="leaderboard-btn" style="cursor: pointer; display: inline-block;">
+            🏆 View Leaderboard
+        </label>
 
         <div class="progress">
-
-            <div
-                class="progress-fill"
-                style="width:45%;">
-
-            </div>
-
+            <div class="progress-fill" style="width:{{ xp_progress }}%;"></div>
         </div>
 
         <small>
-
-            3 / 7 Days
-
+            {{ remaining_xp }} XP to next level
         </small>
+    </div>
 
+    <div class="challenge-card">
+        <div class="challenge-left">
+            <span class="challenge-badge">
+                🔥 Daily Challenge
+            </span>
+            <h2>
+                Complete Today's Protein Goal
+            </h2>
+            <p>
+                Consume {{ health.protein_goal }}g protein today.
+            </p>
+        </div>
+        <div class="challenge-right">
+            <div class="reward-box">
+                +20 XP
+            </div>
+            <button class="challenge-btn">
+                Start Challenge
+            </button>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-box">
+            <h2>{{ total_badges }}</h2>
+            <p>Total Badges</p>
+        </div>
+        <div class="stat-box">
+            <h2>{{ gold_badges }}</h2>
+            <p>Gold Awards</p>
+        </div>
+        <div class="stat-box">
+            <h2>{{ protein_badges }}</h2>
+            <p>Protein Achievements</p>
+        </div>
+        <div class="stat-box">
+            {% if latest_badge %}
+            <h2>{{ latest_badge.badge }}</h2>
+            <p>Latest Badge</p>
+            {% else %}
+            <h2>--</h2>
+            <p>Latest Badge</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {% for a in achievements %}
+    <div class="achievement-card">
+        <h2>
+            {{ a.badge }}
+            {{ a.title }}
+        </h2>
+        <p>
+            {{ a.description }}
+        </p>
+        <small>
+            {{ a.unlocked_at }}
+        </small>
+    </div>
+    {% empty %}
+    <h3>
+        No Achievements Yet
+    </h3>
+    {% endfor %}
+
+    <hr style="margin: 40px 0; border: 0; border-top: 1.5px solid rgba(16,185,129,.15);">
+
+    <h2 style="margin-bottom: 20px; font-weight: 700; color: #1e1b4b;">🔒 Upcoming Achievements</h2>
+
+    <div class="achievement-card locked">
+        <div class="badge-icon">
+            🔥
+        </div>
+        <div class="badge-content">
+            <h2>7 Day Streak</h2>
+            <p>Log meals for 7 consecutive days.</p>
+            <div class="progress">
+                <div class="progress-fill" style="width:45%;"></div>
+            </div>
+            <small>
+                3 / 7 Days
+            </small>
+        </div>
+    </div>
+
+    <div class="achievement-card">
+        <h2>💧 Hydration Hero</h2>
+        <p>Complete your water goal for 7 days.</p>
+    </div>
+
+    <div class="achievement-card">
+        <h2>🥗 Healthy Week</h2>
+        <p>Maintain a Health Score above 90 for 7 days.</p>
+    </div>
+
+    <div class="achievement-card">
+        <h2>🤖 AI Explorer</h2>
+        <p>Ask FitFuel AI 25 questions.</p>
+    </div>
+
+    <div class="streak-card">
+        <h2>🔥 Current Streak</h2>
+        <h1>{{ game.current_streak }} Days</h1>
+        <p>
+            Longest Streak : {{ game.longest_streak }} Days
+        </p>
     </div>
 
 </div>
-
-<div class="achievement-card">
-
-    <h2>💧 Hydration Hero</h2>
-
-    <p>Complete your water goal for 7 days.</p>
-
 </div>
-
-<div class="achievement-card">
-
-    <h2>🥗 Healthy Week</h2>
-
-    <p>Maintain a Health Score above 90 for 7 days.</p>
-
-</div>
-
-<div class="achievement-card">
-
-    <h2>🤖 AI Explorer</h2>
-
-    <p>Ask FitFuel AI 25 questions.</p>
-
-</div>
-<div class="streak-card">
-
-    <h2>🔥 Current Streak</h2>
-
-    <h1>{{ game.current_streak }} Days</h1>
-
-    <p>
-
-        Longest Streak :
-
-        {{ game.longest_streak }} Days
-
-    </p>
-
-</div>
-
-
-</body>
-
-</html>

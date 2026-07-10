@@ -1,129 +1,63 @@
 {% load static %}
-<!DOCTYPE html>
-<html>
 
-<head>
+<div id="page-leaderboard" class="page">
+<div class="container" style="position: relative;">
 
-<meta charset="UTF-8">
+    <label class="back-btn" for="nav-achievements" style="cursor: pointer; display: inline-block; margin-bottom: 20px; color: #10b981; font-weight: 700;">
+        <i class="fa-solid fa-arrow-left"></i> Back
+    </label>
 
-<title>Leaderboard</title>
+    <h1>
+        🏆 FitFuel Leaderboard
+    </h1>
 
-<link rel="stylesheet"
-href="{% static 'customerapp/css/leaderboard.css' %}">
+    <div class="leaderboard">
+        {% for u in leaderboard %}
+        <div class="user-card {% if u.customer == my_game.customer %}me{% endif %}">
+            <div class="rank">
+                {% if forloop.counter == 1 %}
+                🥇
+                {% elif forloop.counter == 2 %}
+                🥈
+                {% elif forloop.counter == 3 %}
+                🥉
+                {% else %}
+                #{{ u.rank }}
+                {% endif %}
+            </div>
+            
+            <div class="info">
+                <h3>
+                    {{ u.customer.firstname }} {{ u.customer.lastname }}
+                </h3>
+                <p>
+                    Level {{ u.level }}
+                </p>
+            </div>
+            
+            <div class="xp">
+                {{ u.xp }} XP
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <hr style="margin: 40px 0; border: 0; border-top: 1.5px solid rgba(16,185,129,.15);">
 
-</head>
-
-<body>
-
-<div class="container">
-
-<a href="{% url 'achievements' %}" class="back-btn">
-
-<i class="fa-solid fa-arrow-left"></i>
-
-Back
-
-</a>
-
-<h1>
-
-🏆 FitFuel Leaderboard
-
-</h1>
-
-<div class="leaderboard">
-
-{% for u in leaderboard %}
-
-<div class="user-card {% if u.customer == my_game.customer %}me{% endif %}">
-
-<div class="rank">
-
-{% if forloop.counter == 1 %}
-
-🥇
-
-{% elif forloop.counter == 2 %}
-
-🥈
-
-{% elif forloop.counter == 3 %}
-
-🥉
-
-{% else %}
-
-#{{ u.rank }}
-
-{% endif %}
-
-</div>
-
-<div class="info">
-
-<h3>
-
-{{ u.customer.firstname }}
-
-{{ u.customer.lastname }}
-
-</h3>
-
-<p>
-
-Level {{ u.level }}
-
-</p>
+    <div class="my-rank">
+        <h2>
+            Your Rank
+        </h2>
+        <h1>
+            #{{ my_rank }}
+        </h1>
+        <p>
+            Level {{ my_game.level }}
+        </p>
+        <p>
+            {{ my_game.xp }} XP
+        </p>
+    </div>
 
 </div>
-
-<div class="xp">
-
-{{ u.xp }} XP
-
 </div>
-
-</div>
-
-{% endfor %}
-
-</div>
-
-<hr>
-
-<div class="my-rank">
-
-<h2>
-
-Your Rank
-
-</h2>
-
-<h1>
-
-#{{ my_rank }}
-
-</h1>
-
-<p>
-
-Level {{ my_game.level }}
-
-</p>
-
-<p>
-
-{{ my_game.xp }} XP
-
-</p>
-
-</div>
-
-</div>
-
-</body>
-
-</html>

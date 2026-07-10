@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="{% static 'customerapp/css/rightpanel.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/footer.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/ai_assessment.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/achievements.css' %}">
+<link rel="stylesheet" href="{% static 'customerapp/css/leaderboard.css' %}">
 </head>
 <body>
 <div class="bg-layer"></div>
@@ -35,6 +37,8 @@
 <input type="radio" name="page" id="nav-profile" class="page-radio" {% if active_page == "profile" %}checked{% endif %}>
 <input type="radio" name="page" id="nav-edit" class="page-radio" {% if active_page == "edit" %}checked{% endif %}>
 <input type="radio" name="page" id="nav-assessment" class="page-radio" {% if active_page == "assessment" %}checked{% endif %}>
+<input type="radio" name="page" id="nav-achievements" class="page-radio" {% if active_page == "achievements" %}checked{% endif %}>
+<input type="radio" name="page" id="nav-leaderboard" class="page-radio" {% if active_page == "leaderboard" %}checked{% endif %}>
 
 {% include 'customerapp/includes/navbar.html' %}
 
@@ -55,6 +59,8 @@
         {% include 'customerapp/profile.html' %}
         {% include 'customerapp/edit.html' %}
         {% include 'customerapp/ai_assessment.html' %}
+        {% include 'customerapp/achievements.html' %}
+        {% include 'customerapp/leaderboard.html' %}
 
     </main>
 
@@ -74,7 +80,9 @@ document.addEventListener("DOMContentLoaded", function() {
         'nav-cart': 'cart',
         'nav-profile': 'profile',
         'nav-edit': 'edit',
-        'nav-assessment': 'assessment'
+        'nav-assessment': 'assessment',
+        'nav-achievements': 'achievements',
+        'nav-leaderboard': 'leaderboard'
     };
     
     // Set radio state from URL parameter on load

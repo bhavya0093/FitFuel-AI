@@ -2419,3 +2419,6 @@ def achievements(request):
         context
 
     )
+
+def leaderboard(request):
+    pass

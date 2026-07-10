@@ -59,4 +59,5 @@ urlpatterns = [
     path("ask-ai/",views.ask_ai,name="ask_ai",),
     path("add-daily-log/<int:pk>/<str:meal_type>/",views.add_daily_log,name="add_daily_log"),
     path("achievements/",views.achievements,name="achievements"),
+    path("leaderboard/",views.leaderboard,name="leaderboard"),
 ]

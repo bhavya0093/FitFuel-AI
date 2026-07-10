@@ -46,3 +46,79 @@ def unlock_achievement(
 
     # Save
     game.save()
+
+def check_user_achievements(customer):
+
+    # ==========================
+    # First Meal
+    # ==========================
+
+    meal_count = DailyMealLog.objects.filter(
+        customer=customer,
+        consumed=True
+    ).count()
+
+    if meal_count >= 1:
+
+        unlock_achievement(
+            customer,
+            "First Meal",
+            "Completed your first healthy meal.",
+            "🍽",
+            20
+        )
+
+    # ==========================
+    # Protein Champion
+    # ==========================
+
+    high_protein = DailyMealLog.objects.filter(
+        customer=customer,
+        protein__gte=25
+    ).count()
+
+    if high_protein >= 10:
+
+        unlock_achievement(
+            customer,
+            "Protein Champion",
+            "Completed 10 high protein meals.",
+            "💪",
+            50
+        )
+
+    # ==========================
+    # First Review
+    # ==========================
+
+    review_count = ProductReview.objects.filter(
+        customer=customer
+    ).count()
+
+    if review_count >= 1:
+
+        unlock_achievement(
+            customer,
+            "Reviewer",
+            "Submitted your first review.",
+            "⭐",
+            20
+        )
+
+    # ==========================
+    # First Order
+    # ==========================
+
+    order_count = Order.objects.filter(
+        customer=customer
+    ).count()
+
+    if order_count >= 1:
+
+        unlock_achievement(
+            customer,
+            "First Order",
+            "Placed your first order.",
+            "🛒",
+            30
+        )

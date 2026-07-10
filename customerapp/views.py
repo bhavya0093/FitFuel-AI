@@ -26,6 +26,7 @@ from django.http import JsonResponse
 from .services import model
 from .prompts import product_chat_prompt
 from datetime import timedelta
+from .utils import check_user_achievements
 
 
 
@@ -800,6 +801,7 @@ def place_order(request):
             message=f"Your Order #{order.id} has been placed successfully."
 
         )
+        check_user_achievements(cid)
 
         messages.success(request, "Order Placed Successfully.")
 
@@ -1254,6 +1256,8 @@ def add_review(request, pk):
 
         product_obj.save()
 
+        check_user_achievements(cid)
+
         messages.success(
             request,
             "Review Added Successfully."
@@ -1346,7 +1350,6 @@ def coupons(request):
             "coupons": coupons
         }
     )
-
 
 def apply_coupon(request):
 
@@ -2036,6 +2039,7 @@ def generate_meal_plan(request):
         request,
         "AI Meal Plan Generated Successfully."
     )
+    check_user_achievements(cid)
     print(MealPlan.objects.filter(customer=cid).count())
 
     return redirect("meal_planner")
@@ -2282,6 +2286,7 @@ def ask_ai(request):
             "message":str(e)
 
         })
+
 def add_daily_log(request, pk, meal_type):
 
     if "email" not in request.session:
@@ -2307,6 +2312,7 @@ def add_daily_log(request, pk, meal_type):
             request,
             "This meal is already marked as consumed."
         )
+        check_user_achievements(cid)
 
         return redirect("meal_planner")
 

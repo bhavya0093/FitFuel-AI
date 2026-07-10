@@ -2312,7 +2312,7 @@ def add_daily_log(request, pk, meal_type):
             request,
             "This meal is already marked as consumed."
         )
-        check_user_achievements(cid)
+        
 
         return redirect("meal_planner")
 
@@ -2328,10 +2328,19 @@ def add_daily_log(request, pk, meal_type):
         consumed=True,
     )
 
+    check_user_achievements(cid)
+
     messages.success(
         request,
         f"{p.product_name} added to today's nutrition log."
     )
+    game = UserGamification.objects.get_or_create(
+    customer=cid
+    )[0]
+
+    context = {
+        "game": game,
+    }
 
     return redirect("meal_planner")
 

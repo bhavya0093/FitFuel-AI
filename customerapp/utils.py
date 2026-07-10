@@ -1,6 +1,45 @@
 from .models import *
 from django.db import transaction
 
+from datetime import timedelta
+from django.utils import timezone
+
+
+def update_streak(customer):
+
+    game, created = UserGamification.objects.get_or_create(
+        customer=customer
+    )
+
+    today = timezone.now().date()
+
+    streak = 0
+
+    while True:
+
+        check_day = today - timedelta(days=streak)
+
+        exists = DailyMealLog.objects.filter(
+            customer=customer,
+            consumed=True,
+            log_date=check_day
+        ).exists()
+
+        if exists:
+
+            streak += 1
+
+        else:
+
+            break
+
+    game.current_streak = streak
+
+    if streak > game.longest_streak:
+
+        game.longest_streak = streak
+
+    game.save()
 
 def unlock_achievement(
     customer,
@@ -48,6 +87,8 @@ def unlock_achievement(
     game.save()
 
 def check_user_achievements(customer):
+
+    update_streak(customer)
 
     # ==========================
     # First Meal
@@ -121,4 +162,43 @@ def check_user_achievements(customer):
             "Placed your first order.",
             "🛒",
             30
+        )
+    
+    # ==========================
+    # 7 Day Streak
+    # ==========================
+
+    if game.current_streak >= 7:
+
+        unlock_achievement(
+
+            customer,
+
+            "7 Day Streak",
+
+            "Logged meals for 7 consecutive days.",
+
+            "🔥",
+
+            100
+
+        )
+    # ==========================
+    # 30 Day Streak
+    # ==========================
+
+    if game.current_streak >= 30:
+
+        unlock_achievement(
+
+            customer,
+
+            "30 Day Streak",
+
+            "Maintained a 30 day nutrition streak.",
+
+            "🏆",
+
+            500
+
         )

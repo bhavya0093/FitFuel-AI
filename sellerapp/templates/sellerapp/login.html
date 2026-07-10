@@ -38,6 +38,13 @@
             <div class="alert-success">{{ s_msg }}</div>
             {% endif %}
 
+            <!-- Error Message -->
+            {% if e_msg %}
+            <div class="alert-danger" style="background: #fef2f2; border: 1px solid #fee2e2; color: #b91c1c; padding: 12px; border-radius: 8px; font-size: 0.875rem; margin-bottom: 20px; text-align: center;">
+                <i class="fas fa-exclamation-circle" style="margin-right: 6px;"></i> {{ e_msg }}
+            </div>
+            {% endif %}
+
             <!-- Form -->
             <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}

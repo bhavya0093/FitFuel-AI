@@ -60,4 +60,5 @@ urlpatterns = [
     path("add-daily-log/<int:pk>/<str:meal_type>/",views.add_daily_log,name="add_daily_log"),
     path("achievements/",views.achievements,name="achievements"),
     path("leaderboard/",views.leaderboard,name="leaderboard"),
+    path("", views.root_redirect, name="root_redirect"),
 ]

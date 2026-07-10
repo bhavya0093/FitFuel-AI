@@ -35,12 +35,7 @@ def update_streak(customer):
 
             break
 
-    game.current_streak = streak
-
-    if streak > game.longest_streak:
-
-        game.longest_streak = streak
-
+    game.streak = streak
     game.save()
 
 def unlock_achievement(
@@ -171,7 +166,7 @@ def check_user_achievements(customer):
     # 7 Day Streak
     # ==========================
 
-    if game.current_streak >= 7:
+    if game.streak >= 7:
 
         unlock_achievement(
 
@@ -190,7 +185,7 @@ def check_user_achievements(customer):
     # 30 Day Streak
     # ==========================
 
-    if game.current_streak >= 30:
+    if game.streak >= 30:
 
         unlock_achievement(
 

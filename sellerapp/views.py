@@ -161,9 +161,13 @@ def login(request):
 
                     elif uid.role == "customer":
                         return redirect("customer_dashboard")
+                else:
+                    return render(request, "sellerapp/login.html", {"e_msg": "Incorrect password. Please try again."})
 
-            except:
-                return render(request,"sellerapp/login.html")
+            except User.DoesNotExist:
+                return render(request, "sellerapp/login.html", {"e_msg": "Account with this email does not exist."})
+            except Exception as e:
+                return render(request, "sellerapp/login.html", {"e_msg": "An error occurred. Please try again."})
 
     return render(request,"sellerapp/login.html")
 

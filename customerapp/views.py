@@ -2132,7 +2132,7 @@ def generate_meal_plan(request):
     }
 
     for meal_type, meal_products in meal_data.items():
-        print("MealPlan Count:", meal_plan.count())
+        print("MealPlan Count:", MealPlan.objects.filter(customer=cid).count())
         for p in meal_products:
             print(meal_type, p.product_name)
             MealPlan.objects.create(
@@ -2559,3 +2559,15 @@ def generate_health_insight(customer):
         health_score=0
 
     )
+
+def root_redirect(request):
+    if "email" in request.session:
+        try:
+            uid = User.objects.get(email=request.session["email"])
+            if uid.role == "seller":
+                return redirect("admin_panel")
+            elif uid.role == "customer":
+                return redirect("customer_dashboard")
+        except User.DoesNotExist:
+            pass
+    return redirect("login")

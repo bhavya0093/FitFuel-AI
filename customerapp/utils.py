@@ -3,6 +3,8 @@ from django.db import transaction
 
 from datetime import timedelta
 from django.utils import timezone
+from .models import DailyMealLog, UserHealthProfile, DailyHealthInsight
+from .ai import generate_nutrition_advice
 
 
 def update_streak(customer):
@@ -203,4 +205,172 @@ def check_user_achievements(customer):
 
         )
 def generate_health_insight(customer):
-    pass
+
+    today = timezone.now().date()
+
+    logs = DailyMealLog.objects.filter(
+        customer=customer,
+        consumed=True,
+        log_date=today
+    )
+
+    total_calories = sum(
+        log.calories * log.quantity
+        for log in logs
+    )
+
+    total_protein = sum(
+        log.protein * log.quantity
+        for log in logs
+    )
+
+    total_carbs = sum(
+        log.carbs * log.quantity
+        for log in logs
+    )
+
+    total_fat = sum(
+        log.fat * log.quantity
+        for log in logs
+    )
+
+    meals = logs.values(
+        "meal_type"
+    ).distinct().count()
+
+    try:
+
+        profile = UserHealthProfile.objects.get(
+            customer=customer
+        )
+
+    except UserHealthProfile.DoesNotExist:
+
+        return
+
+    # -----------------------------
+    # Gemini AI
+    # -----------------------------
+
+    try:
+
+        insight = generate_nutrition_advice(
+
+            profile=profile,
+
+            calories=total_calories,
+
+            protein=total_protein,
+
+            meals=meals
+
+        )
+
+    except Exception:
+
+        # Rule Based Fallback
+
+        advice = []
+
+        if total_protein < profile.protein_goal:
+
+            remain = round(
+                profile.protein_goal - total_protein,
+                1
+            )
+
+            advice.append(
+                f"You still need {remain}g protein today."
+            )
+
+        else:
+
+            advice.append(
+                "Excellent! You completed your protein goal."
+            )
+
+        if total_calories < profile.daily_calories:
+
+            remain = (
+                profile.daily_calories -
+                total_calories
+            )
+
+            advice.append(
+                f"You can consume {remain} kcal today."
+            )
+
+        else:
+
+            advice.append(
+                "Your calorie goal has been completed."
+            )
+
+        if meals < 4:
+
+            advice.append(
+                "Complete all meals to improve your Health Score."
+            )
+
+        else:
+
+            advice.append(
+                "Awesome! You completed all meals today."
+            )
+
+        insight = " ".join(advice)
+
+    # -----------------------------
+    # Health Score
+    # -----------------------------
+
+    score = 0
+
+    if profile.protein_goal > 0:
+
+        score += min(
+            int((total_protein / profile.protein_goal) * 40),
+            40
+        )
+
+    if profile.daily_calories > 0:
+
+        diff = abs(
+            profile.daily_calories - total_calories
+        )
+
+        score += max(
+            0,
+            40 - int(
+                (diff / profile.daily_calories) * 40
+            )
+        )
+
+    score += min(
+        meals * 5,
+        20
+    )
+
+    score = min(score, 100)
+
+    # -----------------------------
+    # Save / Update
+    # -----------------------------
+
+    DailyHealthInsight.objects.update_or_create(
+
+        customer=customer,
+
+        defaults={
+
+            "insight": insight,
+
+            "health_score": score,
+
+            "calories": total_calories,
+
+            "protein": total_protein,
+
+        }
+
+    )

@@ -2588,7 +2588,9 @@ def generate_health_insight(customer):
         messages.append(
             "Daily calorie goal completed."
         )
-        meals = logs.values(
+
+    # Meal Count
+    meals = logs.values(
         "meal_type"
     ).distinct().count()
 
@@ -2603,4 +2605,19 @@ def generate_health_insight(customer):
         messages.append(
             "Awesome! All meals completed."
         )
+
     insight = " ".join(messages)
+
+    DailyHealthInsight.objects.create(
+
+        customer=customer,
+
+        insight=insight,
+
+        calories=total_calories,
+
+        protein=total_protein,
+
+        health_score=0
+
+    )

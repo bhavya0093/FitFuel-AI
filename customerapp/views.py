@@ -1816,6 +1816,84 @@ def meal_planner(request):
     else:
 
         ai_feedback = "Let's restart your healthy journey. Complete today's meals."
+    
+    # =====================================
+    # AUTO UNLOCK ACHIEVEMENTS
+    # =====================================
+
+    def unlock(title, description, badge):
+
+        if not UserAchievement.objects.filter(
+            customer=cid,
+            title=title
+        ).exists():
+
+            UserAchievement.objects.create(
+
+                customer=cid,
+
+                title=title,
+
+                description=description,
+
+                badge=badge
+
+            )
+    # Protein Champion
+
+        if protein_progress >= 100:
+
+            unlock(
+
+                "Protein Champion",
+
+                "Completed Daily Protein Goal.",
+
+                "💪"
+
+            )
+
+        # Calorie Master
+
+        if calorie_progress >= 100:
+
+            unlock(
+
+                "Calorie Master",
+
+                "Completed Daily Calories Goal.",
+
+                "🔥"
+
+            )
+
+        # Nutrition Master
+
+        if health_score >= 90:
+
+            unlock(
+
+                "Nutrition Master",
+
+                "Health Score above 90.",
+
+                "🏆"
+
+            )
+
+        # Meal Finisher
+
+        if today_meals >= 4:
+
+            unlock(
+
+                "Meal Finisher",
+
+                "Completed all meals today.",
+
+                "🍽"
+
+            )
 
     achievements = UserAchievement.objects.filter(customer=cid).order_by("-unlocked_at")
 
@@ -2250,3 +2328,41 @@ def add_daily_log(request, pk, meal_type):
     )
 
     return redirect("meal_planner")
+
+def achievements(request):
+
+    if "email" not in request.session:
+
+        return redirect("login")
+
+    uid = User.objects.get(
+        email=request.session["email"]
+    )
+
+    cid = customer.objects.get(
+        user_id=uid
+    )
+
+    achievements = UserAchievement.objects.filter(
+        customer=cid
+    ).order_by("-unlocked_at")
+
+    context = {
+
+        "uid": uid,
+
+        "cid": cid,
+
+        "achievements": achievements
+
+    }
+
+    return render(
+
+        request,
+
+        "customerapp/achievements.html",
+
+        context
+
+    )

@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Leaderboard</title>
+
+<link rel="stylesheet"
+href="{% static 'customerapp/css/leaderboard.css' %}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="{% url 'achievements' %}" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+Back
+
+</a>
+
+<h1>
+
+🏆 FitFuel Leaderboard
+
+</h1>
+
+<div class="leaderboard">
+
+{% for u in leaderboard %}
+
+<div class="user-card {% if u.customer == my_game.customer %}me{% endif %}">
+
+<div class="rank">
+
+{% if forloop.counter == 1 %}
+
+🥇
+
+{% elif forloop.counter == 2 %}
+
+🥈
+
+{% elif forloop.counter == 3 %}
+
+🥉
+
+{% else %}
+
+#{{ u.rank }}
+
+{% endif %}
+
+</div>
+
+<div class="info">
+
+<h3>
+
+{{ u.customer.firstname }}
+
+{{ u.customer.lastname }}
+
+</h3>
+
+<p>
+
+Level {{ u.level }}
+
+</p>
+
+</div>
+
+<div class="xp">
+
+{{ u.xp }} XP
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<hr>
+
+<div class="my-rank">
+
+<h2>
+
+Your Rank
+
+</h2>
+
+<h1>
+
+#{{ my_rank }}
+
+</h1>
+
+<p>
+
+Level {{ my_game.level }}
+
+</p>
+
+<p>
+
+{{ my_game.xp }} XP
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

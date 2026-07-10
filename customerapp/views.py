@@ -1757,6 +1757,10 @@ def meal_planner(request):
 
         health_score += int(calorie_ratio * 30)
 
+        health_score = min(health_score,100)
+        
+        
+
     # Meals Score (20)
 
     consumed_meals = DailyMealLog.objects.filter(
@@ -1776,6 +1780,9 @@ def meal_planner(request):
     health_score += 10
 
     health_score = min(health_score, 100)
+    
+    generate_health_insight(cid)
+
     if health_score >= 90:
 
         health_status = "Excellent 🏆"
@@ -1823,80 +1830,121 @@ def meal_planner(request):
     # =====================================
     # AUTO UNLOCK ACHIEVEMENTS
     # =====================================
+    latest_insight = DailyHealthInsight.objects.filter(
+        customer=cid
+    ).first()
 
-    def unlock(title, description, badge):
+    context = {
 
-        if not UserAchievement.objects.filter(
+        "health": health,
+
+        "meal_plan": meal_plan,
+
+        "today_meals": today_meals,
+
+        "total_calories": total_calories,
+
+        "total_protein": round(total_protein, 1),
+
+        "total_carbs": round(total_carbs, 1),
+
+        "total_fat": round(total_fat, 1),
+
+        "calorie_progress": calorie_progress,
+
+        "protein_progress": protein_progress,
+
+        "last_7_days": last_7_days,
+
+        "health_score": health_score,
+
+        "health_status": health_status,
+
+        "ai_feedback": ai_feedback,
+
+        "latest_insight": latest_insight,
+
+    }
+
+    return render(
+        request,
+        "customerapp/meal_planner.html",
+        context
+    )
+
+def unlock(title, description, badge):
+
+    if not UserAchievement.objects.filter(
+        customer=cid,
+        title=title
+    ).exists():
+
+        UserAchievement.objects.create(
+
             customer=cid,
-            title=title
-        ).exists():
 
-            UserAchievement.objects.create(
+            title=title,
 
-                customer=cid,
+            description=description,
 
-                title=title,
+            badge=badge
 
-                description=description,
-
-                badge=badge
-
-            )
+        )
     # Protein Champion
 
-        if protein_progress >= 100:
+    if protein_progress >= 100:
 
-            unlock(
+        unlock(
 
-                "Protein Champion",
+            "Protein Champion",
 
-                "Completed Daily Protein Goal.",
+            "Completed Daily Protein Goal.",
 
-                "💪"
+            "💪"
 
-            )
+        )
 
-        # Calorie Master
+    # Calorie Master
 
-        if calorie_progress >= 100:
+    if calorie_progress >= 100:
 
-            unlock(
+        unlock(
 
-                "Calorie Master",
+            "Calorie Master",
 
-                "Completed Daily Calories Goal.",
+            "Completed Daily Calories Goal.",
 
-                "🔥"
+            "🔥"
 
-            )
+        )
 
-        # Nutrition Master
+    # Nutrition Master
 
-        if health_score >= 90:
+    if health_score >= 90:
 
-            unlock(
+        unlock(
 
-                "Nutrition Master",
+            "Nutrition Master",
 
-                "Health Score above 90.",
+            "Health Score above 90.",
 
-                "🏆"
+            "🏆"
 
-            )
+        )
 
-        # Meal Finisher
+    # Meal Finisher
 
-        if today_meals >= 4:
+    if today_meals >= 4:
 
-            unlock(
+        unlock(
 
-                "Meal Finisher",
+            "Meal Finisher",
 
-                "Completed all meals today.",
+            "Completed all meals today.",
 
-                "🍽"
+            "🍽"
 
-            )
+        )
 
     achievements = UserAchievement.objects.filter(customer=cid).order_by("-unlocked_at")
 
@@ -2421,4 +2469,138 @@ def achievements(request):
     )
 
 def leaderboard(request):
-    pass
+
+    if "email" not in request.session:
+        return redirect("login")
+
+    uid = User.objects.get(
+        email=request.session["email"]
+    )
+
+    cid = customer.objects.get(
+        user_id=uid
+    )
+
+    leaderboard = UserGamification.objects.select_related(
+        "customer",
+        "customer__user_id"
+    ).order_by(
+        "-xp",
+        "-level"
+    )
+
+    rank = 1
+
+    for user in leaderboard:
+
+        user.rank = rank
+
+        rank += 1
+
+    my_rank = None
+
+    for user in leaderboard:
+
+        if user.customer == cid:
+
+            my_rank = user.rank
+
+            break
+
+    context = {
+
+        "leaderboard": leaderboard[:10],
+
+        "my_rank": my_rank,
+
+        "my_game": UserGamification.objects.get(
+            customer=cid
+        )
+
+    }
+
+    return render(
+
+        request,
+
+        "customerapp/leaderboard.html",
+
+        context
+
+    )
+def generate_health_insight(customer):
+
+    today = timezone.now().date()
+
+    logs = DailyMealLog.objects.filter(
+        customer=customer,
+        consumed=True,
+        log_date=today
+    )
+
+    total_calories = sum(
+        log.calories * log.quantity
+        for log in logs
+    )
+
+    total_protein = sum(
+        log.protein * log.quantity
+        for log in logs
+    )
+
+    try:
+
+        profile = UserHealthProfile.objects.get(
+            customer=customer
+        )
+
+    except UserHealthProfile.DoesNotExist:
+
+        return
+    messages = []
+
+    if total_protein < profile.protein_goal:
+
+        remain = round(
+            profile.protein_goal - total_protein,
+            1
+        )
+
+        messages.append(
+            f"You still need {remain}g protein today."
+        )
+
+    else:
+
+        messages.append(
+            "Excellent! Protein goal completed."
+        )
+    if total_calories < profile.daily_calories:
+
+        remain = profile.daily_calories - total_calories
+
+        messages.append(
+            f"You can consume {remain} kcal today."
+        )
+
+    else:
+
+        messages.append(
+            "Daily calorie goal completed."
+        )
+        meals = logs.values(
+        "meal_type"
+    ).distinct().count()
+
+    if meals < 4:
+
+        messages.append(
+            "Complete all meals to improve your Health Score."
+        )
+
+    else:
+
+        messages.append(
+            "Awesome! All meals completed."
+        )
+    insight = " ".join(messages)

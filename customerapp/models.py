@@ -575,3 +575,26 @@ class UserGamification(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     updated_at = models.DateTimeField(auto_now=True)
+
+class DailyHealthInsight(models.Model):
+
+    customer = models.ForeignKey(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    insight = models.TextField()
+
+    health_score = models.IntegerField(default=0)
+
+    calories = models.IntegerField(default=0)
+
+    protein = models.FloatField(default=0)
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+
+        ordering = ["-created_at"]  

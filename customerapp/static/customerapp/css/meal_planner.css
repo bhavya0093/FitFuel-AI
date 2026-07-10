@@ -888,3 +888,21 @@ box-shadow:0 20px 40px rgba(0,0,0,.12);
 margin-bottom:15px;
 
 }
+
+.coach-score{
+
+margin-top:20px;
+
+display:inline-block;
+
+padding:10px 20px;
+
+background:white;
+
+color:#10b981;
+
+border-radius:40px;
+
+font-weight:bold;
+
+}

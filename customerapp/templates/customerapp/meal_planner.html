@@ -57,19 +57,37 @@ Back
         </div>
 
     </div>
-    <div class="ai-coach-card">
+<div class="ai-coach-card">
 
-<h2>
+    <h2>
+        🤖 FitFuel AI Coach
+    </h2>
 
-🤖 FitFuel AI Coach
+    {% if latest_insight %}
 
-</h2>
+    <p>
 
-<p>
+        {{ latest_insight.insight }}
 
-{{ latest_insight.insight }}
+    </p>
 
-</p>
+    <div class="coach-score">
+
+        Health Score
+
+        {{ latest_insight.health_score }}/100
+
+    </div>
+
+    {% else %}
+
+    <p>
+
+        Generate today's meal plan to receive AI coaching.
+
+    </p>
+
+    {% endif %}
 
 </div>
 

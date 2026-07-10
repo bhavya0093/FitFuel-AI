@@ -552,3 +552,26 @@ class UserAchievement(models.Model):
     def __str__(self):
 
         return f"{self.customer} - {self.title}"
+    
+class UserGamification(models.Model):
+
+    customer = models.OneToOneField(
+        customer,
+        on_delete=models.CASCADE
+    )
+
+    xp = models.IntegerField(default=0)
+
+    level = models.IntegerField(default=1)
+
+    streak = models.IntegerField(default=0)
+
+    ai_questions = models.IntegerField(default=0)
+
+    total_meals = models.IntegerField(default=0)
+
+    water_streak = models.IntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)

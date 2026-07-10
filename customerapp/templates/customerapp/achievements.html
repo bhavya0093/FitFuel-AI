@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Achievements</title>
+
+    <link rel="stylesheet"
+          href="{% static 'customerapp/css/achievements.css' %}">
+
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'customer_dashboard' %}">
+
+        ← Back
+
+    </a>
+
+    <h1>
+
+        🏆 Your Achievements
+
+    </h1>
+    <div class="level-card">
+
+    <div class="level-top">
+
+        <h2>
+
+            🏆 Level {{ level }}
+
+        </h2>
+
+        <span>
+
+            {{ current_xp }}/{{ next_level_xp }} XP
+
+        </span>
+
+    </div>
+
+    <div class="progress">
+
+        <div
+            class="progress-fill"
+            style="width:{{ xp_progress }}%;">
+
+        </div>
+
+    </div>
+
+    <small>
+
+        {{ remaining_xp }} XP to next level
+
+    </small>
+
+</div>
+
+    <div class="stats-grid">
+
+    <div class="stat-box">
+
+        <h2>{{ total_badges }}</h2>
+
+        <p>Total Badges</p>
+
+    </div>
+
+    <div class="stat-box">
+
+        <h2>{{ gold_badges }}</h2>
+
+        <p>Gold Awards</p>
+
+    </div>
+
+    <div class="stat-box">
+
+        <h2>{{ protein_badges }}</h2>
+
+        <p>Protein Achievements</p>
+
+    </div>
+
+    <div class="stat-box">
+
+        {% if latest_badge %}
+
+        <h2>{{ latest_badge.badge }}</h2>
+
+        <p>Latest Badge</p>
+
+        {% else %}
+
+        <h2>--</h2>
+
+        <p>Latest Badge</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+    {% for a in achievements %}
+
+    <div class="achievement-card">
+
+        <h2>
+
+            {{ a.badge }}
+
+            {{ a.title }}
+
+        </h2>
+
+        <p>
+
+            {{ a.description }}
+
+        </p>
+
+        <small>
+
+            {{ a.unlocked_at }}
+
+        </small>
+
+    </div>
+
+    {% empty %}
+
+    <h3>
+
+        No Achievements Yet
+
+    </h3>
+
+    {% endfor %}
+
+</div>
+<hr>
+
+<h2>🔒 Upcoming Achievements</h2>
+
+<div class="achievement-card locked">
+
+    <div class="badge-icon">
+        🔥
+    </div>
+
+    <div class="badge-content">
+
+        <h2>7 Day Streak</h2>
+
+        <p>Log meals for 7 consecutive days.</p>
+
+        <div class="progress">
+
+            <div
+                class="progress-fill"
+                style="width:45%;">
+
+            </div>
+
+        </div>
+
+        <small>
+
+            3 / 7 Days
+
+        </small>
+
+    </div>
+
+</div>
+
+<div class="achievement-card">
+
+    <h2>💧 Hydration Hero</h2>
+
+    <p>Complete your water goal for 7 days.</p>
+
+</div>
+
+<div class="achievement-card">
+
+    <h2>🥗 Healthy Week</h2>
+
+    <p>Maintain a Health Score above 90 for 7 days.</p>
+
+</div>
+
+<div class="achievement-card">
+
+    <h2>🤖 AI Explorer</h2>
+
+    <p>Ask FitFuel AI 25 questions.</p>
+
+</div>
+
+
+</body>
+
+</html>

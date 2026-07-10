@@ -2347,14 +2347,50 @@ def achievements(request):
         customer=cid
     ).order_by("-unlocked_at")
 
+    total_badges = achievements.count()
+
+    gold_badges = achievements.filter(
+        badge="🏆"
+    ).count()
+
+    protein_badges = achievements.filter(
+        title__icontains="Protein"
+    ).count()
+
+    latest_badge = achievements.first()
+    streak_progress = 3
+
+    water_progress = 2
+
+    healthy_week_progress = 4
+
+    ai_progress = 12
+
+    level = 5
+
+    current_xp = 420
+
+    next_level_xp = 500
+
+    remaining_xp = next_level_xp - current_xp
+
+    xp_progress = round(
+        (current_xp / next_level_xp) * 100
+    )
+
     context = {
-
         "uid": uid,
-
         "cid": cid,
-
-        "achievements": achievements
-
+        "achievements": achievements,
+        "total_badges": total_badges,
+        "gold_badges": gold_badges,
+        "protein_badges": protein_badges,
+        "latest_badge": latest_badge,
+        "level": level,
+        "current_xp": current_xp,
+        "next_level_xp": next_level_xp,
+        "remaining_xp": remaining_xp,
+        "xp_progress": xp_progress,
     }
 
     return render(

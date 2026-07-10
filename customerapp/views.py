@@ -2391,6 +2391,8 @@ def achievements(request):
         "next_level_xp": next_level_xp,
         "remaining_xp": remaining_xp,
         "xp_progress": xp_progress,
+        "daily_challenge": "Complete Protein Goal",
+        "daily_reward": 20,
     }
 
     return render(

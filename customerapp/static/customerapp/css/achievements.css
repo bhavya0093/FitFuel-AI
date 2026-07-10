@@ -166,3 +166,74 @@ body{
     color:#10b981;
 
 }
+.challenge-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:30px;
+
+    margin:30px 0;
+
+    border-radius:22px;
+
+    background:linear-gradient(135deg,#10b981,#06b6d4);
+
+    color:white;
+
+    box-shadow:0 20px 40px rgba(16,185,129,.25);
+
+}
+
+.challenge-badge{
+
+    display:inline-block;
+
+    background:rgba(255,255,255,.2);
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+.reward-box{
+
+    background:white;
+
+    color:#10b981;
+
+    padding:15px 22px;
+
+    border-radius:15px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    margin-bottom:15px;
+
+}
+
+.challenge-btn{
+
+    border:none;
+
+    padding:14px 25px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}

@@ -322,7 +322,7 @@
 /* Tables Section Styling */
 .tables-dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 25px;
     margin-bottom: 30px;
 }
@@ -352,6 +352,7 @@
 
 .table-responsive {
     overflow-x: auto;
+    width: 100%;
 }
 
 .dashboard-table {
@@ -364,7 +365,7 @@
 .dashboard-table th {
     font-weight: 700;
     color: #475569;
-    padding: 12px 16px;
+    padding: 12px 10px;
     border-bottom: 2px solid rgba(0,0,0,0.05);
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -372,7 +373,7 @@
 }
 
 .dashboard-table td {
-    padding: 16px;
+    padding: 12px 10px;
     border-bottom: 1px solid rgba(0,0,0,0.04);
     color: #334155;
     vertical-align: middle;
@@ -471,6 +472,10 @@
 .customer-email {
     font-size: 0.75rem;
     color: var(--text-muted);
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .achievement-badge {
@@ -673,4 +678,76 @@
     .filter-dropdown {
         width: 100%;
     }
+}
+
+/* AI Insights Skeleton Loading */
+.insight-card.skeleton-loading {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 16px;
+    pointer-events: none;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+}
+
+.insight-card.skeleton-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.06) 20%,
+        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer-effect 1.6s infinite;
+}
+
+@keyframes shimmer-effect {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.skeleton-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+.skeleton-text-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skeleton-title {
+    width: 40%;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+}
+
+.skeleton-text {
+    width: 90%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.skeleton-text.short {
+    width: 60%;
 }

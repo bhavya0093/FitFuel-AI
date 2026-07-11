@@ -42,5 +42,6 @@ urlpatterns = [
     path("admin_payment_details/<int:pk>/",admin_payment_details,name="admin_payment_details",),
     path("analyze_product/",analyze_product,name="analyze_product"),
     path("analytics/",analytics,name="analytics"),
+    path("api/ai-insights/", seller_ai_insights, name="seller_ai_insights"),
 ]
 

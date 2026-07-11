@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.db.models import Count
 from django.db.models import Sum,Avg
 from django.http import JsonResponse
-from .services import analyze_product_with_ai
+from .services import analyze_product_with_ai, generate_seller_insights_with_ai
 
 def register(request):
     if request.method == "POST":
@@ -307,23 +307,26 @@ def admin_panel(request):
             
             monthly_labels = []
             monthly_revenue = []
-            for s in monthly_sales:
-                if s['month']:
-                    monthly_labels.append(s['month'].strftime('%b %Y'))
-                    monthly_revenue.append(float(s['revenue']))
-
-            if not monthly_labels:
-                monthly_labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-                monthly_revenue = [12000, 18000, 15000, 25000, 32000, 27000]
-
-            # Calculate monthly orders and top products for Chart.js
             monthly_orders = []
             for s in monthly_sales:
                 if s['month']:
+                    monthly_labels.append(s['month'].strftime('%b %Y'))
+                    monthly_revenue.append(float(s['revenue'] or 0))
                     cnt = Order.objects.filter(order_date__year=s['month'].year, order_date__month=s['month'].month).count()
                     monthly_orders.append(cnt)
-            if not monthly_orders:
-                monthly_orders = [120, 180, 150, 250, 320, 270]
+
+            if not monthly_labels:
+                for i in range(5, -1, -1):
+                    now = timezone.now()
+                    year = now.year
+                    month = now.month - i
+                    while month <= 0:
+                        month += 12
+                        year -= 1
+                    month_date = timezone.datetime(year, month, 1)
+                    monthly_labels.append(month_date.strftime('%b %Y'))
+                    monthly_revenue.append(0.0)
+                    monthly_orders.append(0)
 
             top_products_sold = product.objects.order_by("-total_sold")[:5]
             top_selling_names = [p.product_name for p in top_products_sold]
@@ -1193,9 +1196,17 @@ def analytics(request):
             monthly_orders.append(s['count'])
 
     if not monthly_labels:
-        monthly_labels = ["Jan 2026", "Feb 2026", "Mar 2026", "Apr 2026", "May 2026", "Jun 2026"]
-        monthly_revenue = [12000, 18000, 15000, 25000, 32000, 27000]
-        monthly_orders = [120, 180, 150, 250, 320, 270]
+        for i in range(5, -1, -1):
+            now = timezone.now()
+            year = now.year
+            month = now.month - i
+            while month <= 0:
+                month += 12
+                year -= 1
+            month_date = timezone.datetime(year, month, 1)
+            monthly_labels.append(month_date.strftime('%b %Y'))
+            monthly_revenue.append(0.0)
+            monthly_orders.append(0)
 
     # Category Sales (Doughnut Chart)
     categories_analytics = Category.objects.annotate(
@@ -1321,3 +1332,41 @@ def analytics(request):
         "sellerapp/admin_panel.html",
         context,
     )
+
+
+def seller_ai_insights(request):
+    if "email" not in request.session:
+        return JsonResponse({"success": False, "message": "Unauthorized"}, status=401)
+
+    try:
+        uid = User.objects.get(email=request.session["email"])
+        if uid.role != "seller":
+            return JsonResponse({"success": False, "message": "Unauthorized"}, status=401)
+    except User.DoesNotExist:
+        return JsonResponse({"success": False, "message": "Unauthorized"}, status=401)
+
+    total_customers = customer.objects.count()
+    total_products = product.objects.count()
+    total_orders = Order.objects.count()
+    total_revenue = float(Order.objects.filter(status="Delivered").aggregate(total=Sum("final_amount"))["total"] or 0)
+    average_rating = float(product.objects.aggregate(avg=Avg("rating"))["avg"] or 0)
+    ai_products = product.objects.filter(is_ai_recommended=True).count()
+    low_stock_count = product.objects.filter(stock_qty__lte=5).count()
+    average_order_value = round(total_revenue / total_orders, 2) if total_orders > 0 else 0.0
+    top_selling_products = ", ".join([p.product_name for p in product.objects.order_by("-total_sold")[:5]])
+
+    metrics_data = {
+        "total_customers": total_customers,
+        "total_products": total_products,
+        "total_orders": total_orders,
+        "total_revenue": total_revenue,
+        "average_order_value": average_order_value,
+        "average_rating": average_rating,
+        "ai_products": ai_products,
+        "low_stock_count": low_stock_count,
+        "top_selling_products": top_selling_products
+    }
+
+    insights = generate_seller_insights_with_ai(metrics_data)
+    return JsonResponse({"success": True, "insights": insights})
+

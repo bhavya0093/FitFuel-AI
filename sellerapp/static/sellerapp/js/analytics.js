@@ -28,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 600);
         });
     }
+
+    // 6. Fetch AI Insights
+    loadAiInsights();
 });
 
 /**
@@ -395,3 +398,63 @@ function initRecentOrdersTable() {
     // Initial render call
     renderTableRows();
 }
+
+/**
+ * Fetch and render dynamic AI Insights
+ */
+function loadAiInsights() {
+    const grid = document.getElementById('ai-insights-grid');
+    if (!grid) return;
+
+    fetch('/seller/api/ai-insights/')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && Array.isArray(data.insights)) {
+                // Clear skeleton loading cards
+                grid.innerHTML = '';
+                
+                data.insights.forEach((insight, index) => {
+                    const card = document.createElement('div');
+                    card.className = `insight-card type-${insight.type || 'info'}`;
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px)';
+                    card.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+
+                    card.innerHTML = `
+                        <div class="insight-icon">${insight.icon || '💡'}</div>
+                        <div class="insight-content">
+                            <h4>${insight.title || 'Insight'}</h4>
+                            <p>${insight.text || ''}</p>
+                        </div>
+                    `;
+
+                    grid.appendChild(card);
+                    
+                    // Staggered entry animation
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            } else {
+                showAiErrorState(grid);
+            }
+        })
+        .catch(err => {
+            console.error('Error fetching AI Insights:', err);
+            showAiErrorState(grid);
+        });
+}
+
+function showAiErrorState(grid) {
+    grid.innerHTML = `
+        <div class="insight-card type-warning" style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; padding: 24px; text-align: center;">
+            <div class="insight-icon">⚠️</div>
+            <div class="insight-content">
+                <h4>AI Engine Offline</h4>
+                <p>Failed to generate real-time AI Insights. Please try refreshing the dashboard.</p>
+            </div>
+        </div>
+    `;
+}
+

@@ -40,6 +40,7 @@
 <input type="radio" name="nav" id="nav-settings"       class="nav-radio" autocomplete="off" {% if active_nav == "settings" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-adminProfile"   class="nav-radio" autocomplete="off" {% if active_nav == "adminProfile" %}checked{% endif %}>
 <input type="radio" name="nav" id="nav-editProfile"    class="nav-radio" autocomplete="off" {% if active_nav == "editProfile" %}checked{% endif %}>
+<input type="radio" name="nav" id="nav-analytics"      class="nav-radio" autocomplete="off" {% if active_nav == "analytics" %}checked{% endif %}>
 
 {% for p in pid %}
 <input type="radio" name="nav" id="nav-product-{{p.id}}"  class="nav-radio">
@@ -90,7 +91,12 @@
         <i class="fas fa-tags"></i> Categories
     </a>
 </li>
-
+<li class="nav-item">
+    <a href="/seller/admin_panel/?tab=analytics" 
+       class="nav-link {% if active_nav == 'analytics' %}active{% endif %}">
+        <i class="fas fa-chart-line"></i> Analytics Dashboard
+    </a>
+</li>
 <li class="nav-item">
     <a href="/seller/admin_panel/?tab=orders" 
        class="nav-link {% if active_nav == 'orders' %}active{% endif %}">
@@ -245,6 +251,8 @@
         {% include 'sellerapp/admin_settings.html' %}
 
         {% include 'sellerapp/admin_edit_category.html' %}
+
+        {% include 'sellerapp/analytics.html' %}
 
 
     </div>

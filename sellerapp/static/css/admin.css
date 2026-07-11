@@ -249,7 +249,8 @@ details.profile-wrap[open] .profile-dropdown {
 #nav-payments:checked ~ .container .main-content #payments-section,
 #nav-settings:checked ~ .container .main-content #settings-section,
 #nav-adminProfile:checked ~ .container .main-content #adminProfile-section,
-#nav-editProfile:checked ~ .container .main-content #editProfile-section {
+#nav-editProfile:checked ~ .container .main-content #editProfile-section,
+#nav-analytics:checked ~ .container .main-content #analytics-section {
     display: block;
 }
 .stats-grid{

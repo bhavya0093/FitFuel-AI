@@ -41,6 +41,6 @@ urlpatterns = [
     path("update_order_status/<int:pk>/",update_order_status,name="update_order_status",),
     path("admin_payment_details/<int:pk>/",admin_payment_details,name="admin_payment_details",),
     path("analyze_product/",analyze_product,name="analyze_product"),
-    
+    path("analytics/",analytics,name="analytics"),
 ]
 

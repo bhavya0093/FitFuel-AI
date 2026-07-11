@@ -272,7 +272,51 @@ def admin_panel(request):
             recent_users = customer.objects.select_related("user_id").order_by("-id")[:5]
             recent_notifications = Order.objects.order_by("-id")[:5]
 
-            sales_data = [12000, 18000, 15000, 25000, 32000, 27000]
+            # ================= ANALYTICS DATA =================
+            average_order_value = round(float(total_revenue) / total_orders, 2) if total_orders > 0 else 0.0
+
+            # Sales by Category
+            categories_analytics = Category.objects.annotate(
+                total_sold_qty=Sum('products__total_sold')
+            ).order_by('-total_sold_qty')
+            category_names = [c.category_name for c in categories_analytics]
+            category_sales = [c.total_sold_qty or 0 for c in categories_analytics]
+
+            # Payment Methods Distribution
+            payment_methods_query = Order.objects.values('payment_method').annotate(count=Count('id'))
+            payment_labels = [p['payment_method'] for p in payment_methods_query]
+            payment_counts = [p['count'] for p in payment_methods_query]
+
+            # Order Status Breakdown
+            status_query = Order.objects.values('status').annotate(count=Count('id'))
+            status_labels = [s['status'] for s in status_query]
+            status_counts = [s['count'] for s in status_query]
+
+            # Monthly Sales Trend (Last 6 Months)
+            from django.db.models.functions import TruncMonth
+            
+            six_months_ago = timezone.now() - timedelta(days=180)
+            monthly_sales = Order.objects.filter(
+                status="Delivered", 
+                order_date__gte=six_months_ago
+            ).annotate(
+                month=TruncMonth('order_date')
+            ).values('month').annotate(
+                revenue=Sum('final_amount')
+            ).order_by('month')
+            
+            monthly_labels = []
+            monthly_revenue = []
+            for s in monthly_sales:
+                if s['month']:
+                    monthly_labels.append(s['month'].strftime('%b %Y'))
+                    monthly_revenue.append(float(s['revenue']))
+
+            if not monthly_labels:
+                monthly_labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+                monthly_revenue = [12000, 18000, 15000, 25000, 32000, 27000]
+
+            sales_data = monthly_revenue
 
             status_data = [
                 pending_orders,
@@ -283,6 +327,14 @@ def admin_panel(request):
             context = {
                 "uid": uid,
                 "sid": sid,
+                "average_order_value": average_order_value,
+                "category_names": category_names,
+                "category_sales": category_sales,
+                "payment_labels": payment_labels,
+                "payment_counts": payment_counts,
+                "status_labels": status_labels,
+                "status_counts": status_counts,
+                "monthly_labels": monthly_labels,
 
                 "pid": product.objects.all(),
                 "categories": Category.objects.all(),
@@ -1065,3 +1117,6 @@ def analyze_product(request):
                 "message": str(e)
             }
         )
+
+def analytics(request):
+    return redirect("/seller/admin_panel/?tab=analytics")

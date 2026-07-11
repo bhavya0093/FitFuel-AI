@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/admin_products.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/admin_settings.css' %}">
+    <link rel="stylesheet" href="{% static 'css/analytics.css' %}?v=1.0.3">
 
 
     <style>
@@ -92,7 +93,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="/seller/admin_panel/?tab=analytics" 
+    <a href="{% url 'analytics' %}" 
        class="nav-link {% if active_nav == 'analytics' %}active{% endif %}">
         <i class="fas fa-chart-line"></i> Analytics Dashboard
     </a>
@@ -258,5 +259,6 @@
     </div>
 </div>
 <script src="{% static 'sellerapp/js/ai_product.js' %}"></script>
+<script src="{% static 'sellerapp/js/analytics.js' %}?v=1.0.3"></script>
 </body>
 </html>

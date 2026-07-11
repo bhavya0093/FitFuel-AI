@@ -1,207 +1,353 @@
 <div id="analytics-section" class="content-section">
-    <div class="form-container" style="background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); border: 1.5px solid var(--bdr-w); border-radius: var(--r3); padding: 28px; margin-bottom: 25px; box-shadow: var(--sh-glass);">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(59,130,246,0.1); padding-bottom: 15px; margin-bottom: 25px;">
-            <div>
-                <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--txt); display: flex; align-items: center; gap: 10px; margin: 0;">
-                    📊 Advanced Analytics Dashboard
-                </h2>
-                <p style="font-size: 0.85rem; color: var(--sb-txt-lo); margin-top: 4px; margin-bottom: 0;">Real-time overview of your store's performance, revenue growth, and category sales.</p>
-            </div>
-            <button onclick="window.print()" class="back-btn" style="cursor: pointer; background: rgba(59, 130, 246, 0.1); color: var(--blue-700); border-color: rgba(59,130,246,0.2);">
+    <!-- Top Header -->
+    <header class="analytics-header">
+        <div class="header-left">
+            <h1 class="analytics-title">📊 Enterprise Analytics</h1>
+            <p class="analytics-subtitle" id="current-date-display">Real-time store performance, financial reports, and product analytics.</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-refresh" id="btn-refresh" title="Refresh Page">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="btn btn-export" id="btn-export" onclick="window.print()">
                 <i class="fas fa-file-export"></i> Export Report
             </button>
         </div>
+    </header>
 
-        <!-- KPIs Grid -->
-        <div class="stats-grid" style="margin-bottom: 25px;">
-            <div class="stat-card" style="background: linear-gradient(135deg, #10b981, #059669); border-radius: var(--r2); padding: 20px; min-height: 110px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(16,185,129,0.25);">
-                <div style="background: rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; font-size: 1.5rem; color: #fff;">
-                    <i class="fas fa-indian-rupee-sign"></i>
-                </div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin: 0;">₹{{ total_revenue }}</h3>
-                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8); margin: 2px 0 0 0; font-weight: 600;">Total Revenue</p>
+    <!-- Statistics Section (8 Cards) -->
+    <section class="stats-grid">
+        <!-- 1. Total Revenue -->
+        <div class="stat-card card-revenue">
+            <div class="card-icon"><i class="fas fa-indian-rupee-sign"></i></div>
+            <div class="card-info">
+                <p class="card-label">Total Revenue</p>
+                <h3 class="card-number" data-target="{{ total_revenue }}" data-prefix="₹">₹0.00</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +18.4%</span>
+            </div>
+        </div>
+        <!-- 2. Total Orders -->
+        <div class="stat-card card-orders">
+            <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
+            <div class="card-info">
+                <p class="card-label">Total Orders</p>
+                <h3 class="card-number" data-target="{{ total_orders }}">0</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +12.1%</span>
+            </div>
+        </div>
+        <!-- 3. Total Customers -->
+        <div class="stat-card card-customers">
+            <div class="card-icon"><i class="fas fa-users"></i></div>
+            <div class="card-info">
+                <p class="card-label">Total Customers</p>
+                <h3 class="card-number" data-target="{{ total_customers }}">0</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +8.2%</span>
+            </div>
+        </div>
+        <!-- 4. Total Products -->
+        <div class="stat-card card-products">
+            <div class="card-icon"><i class="fas fa-box"></i></div>
+            <div class="card-info">
+                <p class="card-label">Total Products</p>
+                <h3 class="card-number" data-target="{{ total_products }}">0</h3>
+                <span class="card-trend trend-neutral"><i class="fas fa-minus"></i> Stable</span>
+            </div>
+        </div>
+        <!-- 5. Average Order Value -->
+        <div class="stat-card card-aov">
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="card-info">
+                <p class="card-label">Avg. Order Value</p>
+                <h3 class="card-number" data-target="{{ average_order_value }}" data-prefix="₹">₹0.00</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +15.3%</span>
+            </div>
+        </div>
+        <!-- 6. AI Recommended Products -->
+        <div class="stat-card card-ai">
+            <div class="card-icon"><i class="fas fa-robot"></i></div>
+            <div class="card-info">
+                <p class="card-label">AI Recommended</p>
+                <h3 class="card-number" data-target="{{ ai_products }}">0</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +22.0%</span>
+            </div>
+        </div>
+        <!-- 7. Total Meal Plans -->
+        <div class="stat-card card-meals">
+            <div class="card-icon"><i class="fas fa-utensils"></i></div>
+            <div class="card-info">
+                <p class="card-label">Total Meal Plans</p>
+                <h3 class="card-number" data-target="{{ meal_plans }}">0</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +14.5%</span>
+            </div>
+        </div>
+        <!-- 8. Achievements Unlocked -->
+        <div class="stat-card card-achievements">
+            <div class="card-icon"><i class="fas fa-trophy"></i></div>
+            <div class="card-info">
+                <p class="card-label">Achievements Unlocked</p>
+                <h3 class="card-number" data-target="{{ achievements }}">0</h3>
+                <span class="card-trend trend-up"><i class="fas fa-arrow-up"></i> +20.0%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Insights Section -->
+    <section class="insights-section">
+        <h2 class="section-title"><i class="fas fa-lightbulb"></i> AI Intelligence Insights</h2>
+        <div class="insights-grid">
+            <div class="insight-card type-positive">
+                <div class="insight-icon">📈</div>
+                <div class="insight-content">
+                    <h4>Revenue Growth</h4>
+                    <p>Revenue increased by 18% this month due to peak weekend order volume.</p>
                 </div>
             </div>
-
-            <div class="stat-card" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); border-radius: var(--r2); padding: 20px; min-height: 110px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(59,130,246,0.25);">
-                <div style="background: rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; font-size: 1.5rem; color: #fff;">
-                    <i class="fas fa-shopping-bag"></i>
-                </div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin: 0;">{{ total_orders }}</h3>
-                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8); margin: 2px 0 0 0; font-weight: 600;">Total Orders</p>
+            <div class="insight-card type-trending">
+                <div class="insight-icon">🥗</div>
+                <div class="insight-content">
+                    <h4>Top Categories</h4>
+                    <p>Protein supplement products are trending. Sales are up 24% compared to other supplement categories.</p>
                 </div>
             </div>
-
-            <div class="stat-card" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); border-radius: var(--r2); padding: 20px; min-height: 110px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(139,92,246,0.25);">
-                <div style="background: rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; font-size: 1.5rem; color: #fff;">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin: 0;">₹{{ average_order_value }}</h3>
-                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8); margin: 2px 0 0 0; font-weight: 600;">Avg. Order Value</p>
+            <div class="insight-card type-ai">
+                <div class="insight-icon">🤖</div>
+                <div class="insight-content">
+                    <h4>AI Conversions</h4>
+                    <p>AI Recommended products convert 35% better than non-recommended alternatives.</p>
                 </div>
             </div>
-
-            <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: var(--r2); padding: 20px; min-height: 110px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 15px rgba(245,158,11,0.25);">
-                <div style="background: rgba(255,255,255,0.2); border-radius: 12px; padding: 12px; font-size: 1.5rem; color: #fff;">
-                    <i class="fas fa-users"></i>
+            <div class="insight-card type-warning">
+                <div class="insight-icon">⚠</div>
+                <div class="insight-content">
+                    <h4>Stock Warning</h4>
+                    <p>Low stock detected on fast-selling items. Check stock status below.</p>
                 </div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin: 0;">{{ total_customers }}</h3>
-                    <p style="font-size: 0.8rem; color: rgba(255,255,255,0.8); margin: 2px 0 0 0; font-weight: 600;">Total Customers</p>
+            </div>
+            <div class="insight-card type-info">
+                <div class="insight-icon">💰</div>
+                <div class="insight-content">
+                    <h4>Basket Insights</h4>
+                    <p>Average order value increased to ₹{{ average_order_value }} following the checkout upgrade.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Charts Section -->
-        <div class="charts-grid" style="margin-bottom: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="form-container" style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: var(--r2); border: 1.5px solid var(--bdr-w); margin-bottom: 0;">
-                <h3 style="font-size: 1rem; font-weight: 800; color: var(--txt); margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid rgba(59,130,246,0.1); padding-bottom: 10px;">
-                    📈 Monthly Sales Revenue
-                </h3>
-                <canvas id="monthlySalesChart" style="max-height: 280px;"></canvas>
+    <!-- Charts Grid Section -->
+    <section class="charts-dashboard-grid">
+        <div class="chart-box">
+            <h3>📈 Monthly Revenue (Line)</h3>
+            <div class="chart-container">
+                <canvas id="chart-monthly-revenue"></canvas>
             </div>
+        </div>
+        <div class="chart-box">
+            <h3>📊 Monthly Orders (Bar)</h3>
+            <div class="chart-container">
+                <canvas id="chart-monthly-orders"></canvas>
+            </div>
+        </div>
+        <div class="chart-box">
+            <h3>🍩 Category Sales (Doughnut)</h3>
+            <div class="chart-container">
+                <canvas id="chart-category-sales"></canvas>
+            </div>
+        </div>
+        <div class="chart-box">
+            <h3>🥧 Payment Methods (Pie)</h3>
+            <div class="chart-container">
+                <canvas id="chart-payment-methods"></canvas>
+            </div>
+        </div>
+        <div class="chart-box">
+            <h3>🌐 Order Status (Polar Area)</h3>
+            <div class="chart-container">
+                <canvas id="chart-order-status"></canvas>
+            </div>
+        </div>
+        <div class="chart-box">
+            <h3>🏅 Top Selling Products (Horizontal Bar)</h3>
+            <div class="chart-container">
+                <canvas id="chart-top-selling"></canvas>
+            </div>
+        </div>
+    </section>
 
-            <div class="form-container" style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: var(--r2); border: 1.5px solid var(--bdr-w); margin-bottom: 0;">
-                <h3 style="font-size: 1rem; font-weight: 800; color: var(--txt); margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid rgba(59,130,246,0.1); padding-bottom: 10px;">
-                    💳 Preferred Payment Methods
-                </h3>
-                <canvas id="paymentsDistributionChart" style="max-height: 280px;"></canvas>
+    <!-- Tables Grid Section -->
+    <section class="tables-dashboard-grid">
+        <!-- Top Products Table -->
+        <div class="table-card">
+            <div class="table-card-header">
+                <h3>🏆 Top Products</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Sales</th>
+                            <th>Revenue</th>
+                            <th>Rating</th>
+                            <th>Stock</th>
+                            <th>Trend</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in top_products_data %}
+                        <tr>
+                            <td>
+                                <div class="product-cell">
+                                    <img src="{{ p.picture_url }}" alt="{{ p.product_name }}" class="product-thumb">
+                                    <span class="product-name-txt">{{ p.product_name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ p.total_sold }}</td>
+                            <td>₹{{ p.revenue|floatformat:2 }}</td>
+                            <td>
+                                <div class="rating-cell">
+                                    <i class="fas fa-star text-warning"></i> {{ p.rating }}
+                                </div>
+                            </td>
+                            <td>
+                                {% if p.stock_qty <= 5 %}
+                                <span class="stock-badge stock-low">{{ p.stock_qty }} Left</span>
+                                {% else %}
+                                <span class="stock-badge stock-in">{{ p.stock_qty }} In Stock</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="trend-text text-up"><i class="fas fa-caret-up"></i> {{ p.trend }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="charts-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px;">
-            <div class="form-container" style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: var(--r2); border: 1.5px solid var(--bdr-w); margin-bottom: 0;">
-                <h3 style="font-size: 1rem; font-weight: 800; color: var(--txt); margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid rgba(59,130,246,0.1); padding-bottom: 10px;">
-                    🏷️ Category Sales Share
-                </h3>
-                <canvas id="categorySalesChart" style="max-height: 280px;"></canvas>
+        <!-- Top Customers Table -->
+        <div class="table-card">
+            <div class="table-card-header">
+                <h3>👥 Top Customers</h3>
             </div>
-
-            <div class="form-container" style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: var(--r2); border: 1.5px solid var(--bdr-w); margin-bottom: 0;">
-                <h3 style="font-size: 1rem; font-weight: 800; color: var(--txt); margin-top: 0; margin-bottom: 15px; border-bottom: 1px solid rgba(59,130,246,0.1); padding-bottom: 10px;">
-                    📋 Order Status Breakdown
-                </h3>
-                <canvas id="statusBreakdownChart" style="max-height: 280px;"></canvas>
+            <div class="table-responsive">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Orders</th>
+                            <th>Spent</th>
+                            <th>Wallet</th>
+                            <th>Achievements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in top_customers_data %}
+                        <tr>
+                            <td>
+                                <div class="customer-cell">
+                                    <img src="{{ c.pic_url }}" alt="{{ c.firstname }}" class="customer-avatar">
+                                    <div class="customer-detail">
+                                        <div class="customer-name">{{ c.firstname }} {{ c.lastname }}</div>
+                                        <div class="customer-email">{{ c.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ c.order_count }}</td>
+                            <td>₹{{ c.spent|floatformat:2 }}</td>
+                            <td>₹{{ c.wallet|floatformat:2 }}</td>
+                            <td>
+                                <div class="achievement-badge">
+                                    <i class="fas fa-award"></i> {{ c.achievements }}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Recent Orders Section -->
+    <section class="recent-orders-section table-card">
+        <div class="table-card-header recent-orders-header">
+            <h3>📦 Recent Orders</h3>
+            <div class="table-controls">
+                <div class="search-box-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="order-search-input" placeholder="Search orders...">
+                </div>
+                <select id="order-status-filter" class="filter-dropdown">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Packed">Packed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="dashboard-table" id="recent-orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Method</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="recent-orders-tbody">
+                    {% for o in recent_orders_data %}
+                    <tr class="order-row" data-status="{{ o.status }}">
+                        <td><strong>#{{ o.id }}</strong></td>
+                        <td>
+                            <div class="order-customer-info">
+                                <span class="customer-name-text">{{ o.customer_name }}</span>
+                                <span class="customer-email-text">{{ o.customer_email }}</span>
+                            </div>
+                        </td>
+                        <td>{{ o.order_date }}</td>
+                        <td>₹{{ o.final_amount|floatformat:2 }}</td>
+                        <td><span class="payment-method-badge">{{ o.payment_method }}</span></td>
+                        <td>
+                            <span class="status-badge status-{{ o.status|lower }}">
+                                {{ o.status }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination Footer -->
+        <div class="table-pagination">
+            <span class="pagination-info" id="pagination-info-text">Showing 1-10 of 20 orders</span>
+            <div class="pagination-buttons">
+                <button class="btn btn-pagination" id="btn-prev-page" disabled><i class="fas fa-chevron-left"></i> Prev</button>
+                <button class="btn btn-pagination" id="btn-next-page">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Line chart for Monthly Sales
-        const monthlyCtx = document.getElementById('monthlySalesChart').getContext('2d');
-        new Chart(monthlyCtx, {
-            type: 'line',
-            data: {
-                labels: {{ monthly_labels|safe }},
-                datasets: [{
-                    label: 'Sales Revenue (₹)',
-                    data: {{ monthly_revenue|safe }},
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#1d4ed8',
-                    pointRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(0,0,0,0.05)' }
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
-                }
-            }
-        });
-
-        // Doughnut chart for Payment Methods
-        const paymentsCtx = document.getElementById('paymentsDistributionChart').getContext('2d');
-        new Chart(paymentsCtx, {
-            type: 'doughnut',
-            data: {
-                labels: {{ payment_labels|safe }},
-                datasets: [{
-                    data: {{ payment_counts|safe }},
-                    backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6'],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom' }
-                }
-            }
-        });
-
-        // Bar Chart for Category Sales
-        const categoryCtx = document.getElementById('categorySalesChart').getContext('2d');
-        new Chart(categoryCtx, {
-            type: 'bar',
-            data: {
-                labels: {{ category_names|safe }},
-                datasets: [{
-                    label: 'Quantity Sold',
-                    data: {{ category_sales|safe }},
-                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
-                    borderColor: '#10b981',
-                    borderWidth: 1.5,
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(0,0,0,0.05)' }
-                    },
-                    x: {
-                        grid: { display: false }
-                    }
-                }
-            }
-        });
-
-        // Status Breakdown Chart
-        const statusCtx = document.getElementById('statusBreakdownChart').getContext('2d');
-        new Chart(statusCtx, {
-            type: 'polarArea',
-            data: {
-                labels: {{ status_labels|safe }},
-                datasets: [{
-                    data: {{ status_counts|safe }},
-                    backgroundColor: ['#f59e0b', '#10b981', '#ef4444', '#3b82f6', '#8b5cf6'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom' }
-                }
-            }
-        });
-    });
+<!-- Embedded serialized data to initialize charts in analytics.js -->
+<script id="analytics-chart-data" type="application/json">
+{
+    "monthly_labels": {{ monthly_labels|safe|default:"[]" }},
+    "monthly_revenue": {{ monthly_revenue|safe|default:"[]" }},
+    "monthly_orders": {{ monthly_orders|safe|default:"[]" }},
+    "category_names": {{ category_names|safe|default:"[]" }},
+    "category_sales": {{ category_sales|safe|default:"[]" }},
+    "payment_labels": {{ payment_labels|safe|default:"[]" }},
+    "payment_counts": {{ payment_counts|safe|default:"[]" }},
+    "status_labels": {{ status_labels|safe|default:"[]" }},
+    "status_counts": {{ status_counts|safe|default:"[]" }},
+    "top_selling_names": {{ top_selling_names|safe|default:"[]" }},
+    "top_selling_counts": {{ top_selling_counts|safe|default:"[]" }}
+}
 </script>

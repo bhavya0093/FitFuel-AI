@@ -1,15 +1,11 @@
 import json
-import google.generativeai as genai
-
+import os
+from google import genai
 from django.conf import settings
-
 from .prompts import PRODUCT_ANALYSIS_PROMPT
 
-
-genai.configure(api_key=settings.GEMINI_API_KEY)
-
-model = genai.GenerativeModel("gemini-2.5-flash")
-
+# Initialize the new Google GenAI Client
+client = genai.Client(api_key=getattr(settings, 'GEMINI_API_KEY', None) or os.getenv("GEMINI_API_KEY") or "DUMMY_KEY")
 
 def analyze_product_with_ai(
     product_name,
@@ -33,7 +29,10 @@ Weight:
 {weight}
 """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
 
     text = response.text.strip()
 
@@ -50,5 +49,3 @@ Weight:
         data["ai_tags"] = ", ".join(data["ai_tags"])
 
     return data    
-
-    # return json.loads(text)

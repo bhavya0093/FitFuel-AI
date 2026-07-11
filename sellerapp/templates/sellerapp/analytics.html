@@ -91,6 +91,30 @@
         </div>
     </section>
 
+    <!-- 🤖 AI Business Insights Section -->
+    <section class="business-insights-section">
+        <h2 class="section-title"><i class="fas fa-robot"></i> AI Business Insights</h2>
+        <div class="business-insights-grid">
+            {% for insight in business_insights %}
+            <div class="business-insight-card priority-{{ insight.priority|lower }}" style="--stagger: {{ forloop.index }}">
+                <div class="card-glow"></div>
+                <div class="insight-priority-badge">{{ insight.priority }} Priority</div>
+                <div class="insight-main-content">
+                    <p class="insight-title-text">{{ insight.title }}</p>
+                    <p class="insight-desc-text">{{ insight.description }}</p>
+                </div>
+                <div class="insight-footer">
+                    <span class="insight-time"><i class="far fa-clock"></i> Generated Just Now</span>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-insights-card">
+                <i class="fas fa-info-circle"></i> No business insights generated yet. Click refresh to analyze.
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
     <!-- AI Insights Section -->
     <section class="insights-section">
         <h2 class="section-title"><i class="fas fa-lightbulb"></i> AI Intelligence Insights</h2>

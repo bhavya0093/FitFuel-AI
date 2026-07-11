@@ -1325,6 +1325,9 @@ def analytics(request):
         "pid": pid,
         "categories": Category.objects.all(),
         "recent_notifications": recent_notifications,
+
+        # AI Business Insights
+        "business_insights": generate_business_insights(sid),
     }
 
     return render(
@@ -1332,6 +1335,7 @@ def analytics(request):
         "sellerapp/admin_panel.html",
         context,
     )
+
 
 
 def seller_ai_insights(request):

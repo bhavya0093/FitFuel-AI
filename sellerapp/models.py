@@ -132,3 +132,15 @@ class product(models.Model):
         return self.product_name
 
 
+class BusinessInsight(models.Model):
+    seller = models.ForeignKey(seller, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    priority = models.CharField(max_length=20, choices=[('High', 'High'), ('Medium', 'Medium'), ('Low', 'Low')])
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.title} ({self.priority})"
+
+
+

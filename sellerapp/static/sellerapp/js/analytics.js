@@ -31,6 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 6. Fetch AI Insights
     loadAiInsights();
+
+    // 7. Initialize AI Business Insights animations
+    initBusinessInsights();
 });
 
 /**
@@ -457,4 +460,29 @@ function showAiErrorState(grid) {
         </div>
     `;
 }
+
+function initBusinessInsights() {
+    const cards = document.querySelectorAll('.business-insight-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const glow = card.querySelector('.card-glow');
+            if (glow) {
+                glow.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255, 255, 255, 0.3) 0%, transparent 60%)`;
+                glow.style.transform = 'translate(0, 0)';
+            }
+        });
+
+        card.addEventListener('mouseleave', function() {
+            const glow = card.querySelector('.card-glow');
+            if (glow) {
+                glow.style.background = 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%)';
+            }
+        });
+    });
+}
+
 

@@ -134,19 +134,21 @@
 </div>
 
         <div class="ff-user">
-
             <strong>
-
                 {{ cid.firstname }} {{ cid.lastname }}
-
+                {% if cid.subscription_plan == 'Pro' %}
+                <span class="pro-badge-navbar"><i class="fa-solid fa-star"></i> PRO</span>
+                {% elif cid.subscription_plan == 'Elite' %}
+                <span class="vip-badge-navbar"><i class="fa-solid fa-crown"></i> ELITE</span>
+                {% endif %}
             </strong>
-
             <small>
-
+                {% if cid.subscription_plan == 'Free' %}
+                Free Account
+                {% else %}
                 Premium Member
-
+                {% endif %}
             </small>
-
         </div>
 
         <i class="fa-solid fa-chevron-down"></i>

@@ -2637,3 +2637,44 @@ def add_progress_log(request):
             messages.error(request, f"Error logging progress: {str(e)}")
             
     return redirect("/customer-dashboard/?active_page=progress")
+
+def subscription_plans(request):
+    if "email" not in request.session:
+        return redirect("login")
+        
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+    
+    unread_notifications = Notification.objects.filter(customer=cid, is_read=False).count()
+    notifications = Notification.objects.filter(customer=cid).order_by("-created_at")[:5]
+    wishlist_count = cid.wishlist_count
+    
+    context = {
+        "uid": uid,
+        "cid": cid,
+        "unread_notifications": unread_notifications,
+        "notifications": notifications,
+        "wishlist_count": wishlist_count,
+    }
+    
+    return render(request, "customerapp/subscription.html", context)
+
+def update_subscription(request):
+    if "email" not in request.session:
+        return JsonResponse({"success": False, "message": "Authentication required."})
+        
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+    
+    plan = request.POST.get("plan") or request.GET.get("plan")
+    if plan not in ["Free", "Pro", "Elite"]:
+        return JsonResponse({"success": False, "message": "Invalid subscription plan selected."})
+        
+    cid.subscription_plan = plan
+    cid.save()
+    
+    return JsonResponse({
+        "success": True,
+        "plan": plan,
+        "message": f"Welcome to FitFuel {plan}! Your subscription has been activated successfully."
+    })

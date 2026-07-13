@@ -65,4 +65,6 @@ urlpatterns = [
     path("add-progress-log/",views.add_progress_log,name="add_progress_log"),
     path("", views.root_redirect, name="root_redirect"),
     path("nutrition-report/",views.nutrition_report,name="nutrition_report"),
+    path("subscription/", views.subscription_plans, name="subscription_plans"),
+    path("subscription/upgrade/", views.update_subscription, name="update_subscription"),
 ]

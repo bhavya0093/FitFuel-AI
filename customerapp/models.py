@@ -11,6 +11,11 @@ class customer(models.Model):
         upload_to="images/",
         default="images/seller_admin.jpg"
     )
+    subscription_plan = models.CharField(
+        max_length=20,
+        default="Free",
+        choices=(("Free", "Free"), ("Pro", "Pro"), ("Elite", "Elite"))
+    )
 
     def __str__(self):
         return self.firstname

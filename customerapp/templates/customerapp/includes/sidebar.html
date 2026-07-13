@@ -17,9 +17,14 @@
             <i class="fa-solid fa-store"></i>
             <span>Nutrition Store</span>
         </label>
-        <a href="{% url 'meal_planner' %}">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Meal Plans</span>
+        <a href="{% url 'meal_planner' %}" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-solid fa-utensils"></i>
+                <span>Meal Plans</span>
+            </span>
+            {% if cid.subscription_plan == 'Free' %}
+            <i class="fa-solid fa-lock" style="font-size: 11px; opacity: 0.7; color: #f59e0b;"></i>
+            {% endif %}
         </a>
         <label for="nav-progress" class="sidebar-item progress-btn" style="cursor: pointer;">
             <i class="fa-solid fa-chart-line"></i>

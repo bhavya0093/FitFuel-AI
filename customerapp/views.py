@@ -1633,6 +1633,17 @@ def meal_planner(request):
     uid = User.objects.get(email=request.session["email"])
     cid = customer.objects.get(user_id=uid)
 
+    if cid.subscription_plan == "Free":
+        unread_notifications = Notification.objects.filter(customer=cid, is_read=False).count()
+        notifications = Notification.objects.filter(customer=cid).order_by("-created_at")[:5]
+        wishlist_count = cid.wishlist_count
+        return render(request, "customerapp/meal_planner_locked.html", {
+            "cid": cid,
+            "unread_notifications": unread_notifications,
+            "notifications": notifications,
+            "wishlist_count": wishlist_count
+        })
+
     try:
         health = UserHealthProfile.objects.get(customer=cid)
     except UserHealthProfile.DoesNotExist:
@@ -2051,6 +2062,10 @@ def generate_meal_plan(request):
     uid = User.objects.get(email=request.session["email"])
     cid = customer.objects.get(user_id=uid)
 
+    if cid.subscription_plan == "Free":
+        messages.error(request, "Please upgrade to FitFuel Pro/Elite to access this feature.")
+        return redirect("meal_planner")
+
     try:
         hp = UserHealthProfile.objects.get(customer=cid)
 
@@ -2168,6 +2183,10 @@ def nutrition_report(request):
 
     uid = User.objects.get(email=request.session["email"])
     cid = customer.objects.get(user_id=uid)
+
+    if cid.subscription_plan == "Free":
+        messages.error(request, "Please upgrade to FitFuel Pro/Elite to access this feature.")
+        return redirect("meal_planner")
 
     try:
         health = UserHealthProfile.objects.get(customer=cid)

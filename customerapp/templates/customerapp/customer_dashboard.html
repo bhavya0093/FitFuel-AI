@@ -259,6 +259,22 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(err => console.error("Error toggling wishlist:", err));
         });
     });
+
+    // Notification dropdown click toggle for mobile / click interactions
+    const notificationBellBtn = document.querySelector(".ff-notification-dropdown-wrapper button");
+    const notificationWrapper = document.querySelector(".ff-notification-dropdown-wrapper");
+    if (notificationBellBtn && notificationWrapper) {
+        notificationBellBtn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            notificationWrapper.classList.toggle("active");
+        });
+        
+        document.addEventListener("click", function(e) {
+            if (!notificationWrapper.contains(e.target)) {
+                notificationWrapper.classList.remove("active");
+            }
+        });
+    }
 });
 </script>
 <script src="{% static 'customerapp/js/assessment.js' %}"></script>

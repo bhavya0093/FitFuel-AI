@@ -198,6 +198,7 @@
     font-size:22px;
     position:relative;
     padding:8px;
+    text-decoration:none;
 }
 
 .ff-icon:hover{
@@ -356,7 +357,8 @@ padding:0 28px;
 }
 
 .ff-profile:hover .ff-dropdown,
-.ff-notification-dropdown-wrapper:hover .ff-dropdown {
+.ff-notification-dropdown-wrapper:hover .ff-dropdown,
+.ff-notification-dropdown-wrapper.active .ff-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

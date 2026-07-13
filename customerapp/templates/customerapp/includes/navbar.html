@@ -98,8 +98,7 @@
         </div>
     </div>
 
-    <!-- Wishlist -->
-    <a href="{% url 'wishlist' %}" class="ff-icon" title="Wishlist" style="position: relative;">
+    <a href="{% url 'wishlist' %}" class="ff-icon" title="Wishlist" style="position: relative; text-decoration: none;">
         <i class="fa-regular fa-heart"></i>
         {% if wishlist_count and wishlist_count > 0 %}
         <span class="ff-badge" id="wishlist-badge" style="background: #10b981;">{{ wishlist_count }}</span>

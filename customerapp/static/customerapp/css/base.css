@@ -55,28 +55,38 @@
   body:has(#nav-home:checked) #page-home { display:block; }
   
   #nav-cart:checked ~ * #page-cart,
-  body:has(#nav-cart:checked) #page-cart   { display:flex; }
+  body:has(#nav-cart:checked) #page-cart   { display:block; }
   
   #nav-profile:checked ~ * #page-profile,
-  body:has(#nav-profile:checked) #page-profile { display:flex; } /* Flex for modal */
+  body:has(#nav-profile:checked) #page-profile { display:block; }
   
   #nav-edit:checked ~ * #page-edit,
-  body:has(#nav-edit:checked) #page-edit   { display:flex; }
+  body:has(#nav-edit:checked) #page-edit   { display:block; }
 
   #nav-assessment:checked ~ * #page-assessment,
-  body:has(#nav-assessment:checked) #page-assessment { display:flex; }
+  body:has(#nav-assessment:checked) #page-assessment { display:block; }
 
   #nav-achievements:checked ~ * #page-achievements,
-  body:has(#nav-achievements:checked) #page-achievements { display:flex; }
+  body:has(#nav-achievements:checked) #page-achievements { display:block; }
 
   #nav-leaderboard:checked ~ * #page-leaderboard,
-  body:has(#nav-leaderboard:checked) #page-leaderboard { display:flex; }
+  body:has(#nav-leaderboard:checked) #page-leaderboard { display:block; }
 
   #nav-progress:checked ~ * #page-progress,
-  body:has(#nav-progress:checked) #page-progress { display:flex; }
+  body:has(#nav-progress:checked) #page-progress { display:block; }
 
   #nav-store:checked ~ * #page-store,
   body:has(#nav-store:checked) #page-store { display:block; }
+
+  /* Layout expansion when any inner page is selected instead of home */
+  @media (min-width: 1201px) {
+    body:not(:has(#nav-home:checked)) .right-panel {
+        display: none !important;
+    }
+    body:not(:has(#nav-home:checked)) .dashboard-layout {
+        grid-template-columns: 260px minmax(0, 1fr) !important;
+    }
+  }
 
   /* ════════════════════════════════════════════
     CSS-ONLY CAROUSEL — Auto-play animation

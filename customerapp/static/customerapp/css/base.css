@@ -52,13 +52,7 @@
 
   /* Show correct page based on checked radio */
   #nav-home:checked ~ * #page-home,
-  body:has(#nav-home:checked) #page-home,
-  body:has(#nav-profile:checked) #page-home,
-  body:has(#nav-cart:checked) #page-home,
-  body:has(#nav-edit:checked) #page-home,
-  body:has(#nav-assessment:checked) #page-home,
-  body:has(#nav-achievements:checked) #page-home,
-  body:has(#nav-leaderboard:checked) #page-home { display:block; }
+  body:has(#nav-home:checked) #page-home { display:block; }
   
   #nav-cart:checked ~ * #page-cart,
   body:has(#nav-cart:checked) #page-cart   { display:flex; }

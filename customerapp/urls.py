@@ -61,4 +61,5 @@ urlpatterns = [
     path("achievements/",views.achievements,name="achievements"),
     path("leaderboard/",views.leaderboard,name="leaderboard"),
     path("", views.root_redirect, name="root_redirect"),
+    path("nutrition-report/",views.nutrition_report,name="nutrition_report"),
 ]

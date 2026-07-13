@@ -62,22 +62,19 @@
     </button>
 
     <!-- Wishlist -->
-
-    <button class="ff-icon" title="Wishlist">
-
+    <a href="{% url 'wishlist' %}" class="ff-icon" title="Wishlist">
         <i class="fa-regular fa-heart"></i>
-
-    </button>
+    </a>
 
     <!-- Cart -->
-    <a href="{% url 'view_cart' %}" class="ff-icon ff-cart" title="Cart">
+    <label for="nav-cart" class="ff-icon ff-cart" title="Cart" style="cursor: pointer;">
         <i class="fa-solid fa-bag-shopping"></i>
         {% if cart_count and cart_count != '0' and cart_count != 0 %}
         <span class="ff-badge">
             {{ cart_count }}
         </span>
         {% endif %}
-    </a>
+    </label>
 
     <!-- Profile -->
 
@@ -127,20 +124,14 @@
 
             </a>
 
-            <a href="#">
-
+            <a href="{% url 'meal_planner' %}">
                 <i class="fa-solid fa-chart-line"></i>
-
                 Progress
-
             </a>
 
-            <a href="#">
-
+            <a href="{% url 'profile' %}">
                 <i class="fa-solid fa-gear"></i>
-
                 Settings
-
             </a>
 
             <hr>
@@ -177,42 +168,42 @@
 =========================== -->
 
 <div class="ff-mobile-menu">
-    <a href="#">
+    <label for="nav-home" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-house"></i>
         Dashboard
-    </a>
-    <a href="#">
+    </label>
+    <label for="nav-assessment" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-brain"></i>
         AI Assessment
-    </a>
-    <a href="#">
+    </label>
+    <label for="nav-home" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-store"></i>
         Nutrition Store
-    </a>
+    </label>
     <a href="{% url 'meal_planner' %}">
         <i class="fa-solid fa-utensils"></i>
         Meal Plans
     </a>
-    <a href="#">
+    <a href="{% url 'meal_planner' %}">
         <i class="fa-solid fa-chart-line"></i>
         Progress
     </a>
-    <a href="{% url 'view_cart' %}">
+    <label for="nav-cart" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-cart-shopping"></i>
         My Cart
-    </a>
-    <a href="#">
+    </label>
+    <a href="{% url 'wishlist' %}">
         <i class="fa-solid fa-heart"></i>
         Wishlist
     </a>
-    <a href="#">
+    <a href="{% url 'orders' %}">
         <i class="fa-solid fa-box"></i>
         Orders
     </a>
-    <a href="{% url 'profile' %}">
+    <label for="nav-profile" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-user"></i>
         Profile
-    </a>
+    </label>
     <a href="{% url 'logout' %}" class="logout">
         <i class="fa-solid fa-right-from-bracket"></i>
         Logout

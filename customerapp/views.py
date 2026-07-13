@@ -352,19 +352,10 @@ def edit_profile(request):
 def show_product(request):
 
     if "email" in request.session:
-
-        uid = User.objects.get(email=request.session['email'])
-        cid = customer.objects.get(user_id=uid)
-
-        products = product.objects.all()
-
-        return render(request, "customerapp/index.html", {
-            "cid": cid,
-            "products": products
-        })
+        return redirect("customer_dashboard")
     
     else:
-        return HttpResponseRedirect("/seller/login")
+        return HttpResponseRedirect("/seller/login/")
     
 def add_to_cart(request,pk):
     uid = User.objects.get(email = request.session['email'])
@@ -1527,48 +1518,6 @@ def remove_coupon(request):
         del request.session["coupon_id"]
 
     return redirect("checkout")
-
-def remove_from_wishlist(request, pk):
-
-    if "email" not in request.session:
-        return redirect("login")
-
-    uid = User.objects.get(email=request.session["email"])
-    cid = customer.objects.get(user_id=uid)
-
-    item = get_object_or_404(
-
-        Wishlist,
-
-        id=pk,
-
-        customer=cid
-
-    )
-
-    product_name = item.product.product_name
-
-    item.delete()
-
-    Notification.objects.create(
-
-        customer=cid,
-
-        title="Wishlist Updated",
-
-        message=f"{product_name} removed from Wishlist."
-
-    )
-
-    messages.success(
-
-        request,
-
-        "Product removed from wishlist."
-
-    )
-
-    return redirect("wishlist")
 
 def wishlist_to_cart(request, pk):
 

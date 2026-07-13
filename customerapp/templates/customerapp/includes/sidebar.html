@@ -5,35 +5,35 @@
     =========================== -->
 
     <div class="sidebar-nav">
-        <a href="#" class="active">
+        <label for="nav-home" class="sidebar-item dashboard-btn" style="cursor: pointer;">
             <i class="fa-solid fa-house"></i>
             <span>Dashboard</span>
-        </a>
+        </label>
         <label for="nav-assessment" class="sidebar-item" style="cursor: pointer;">
             <i class="fa-solid fa-brain"></i>
             <span>AI Assessment</span>
         </label>
-        <a href="#">
+        <label for="nav-home" class="sidebar-item store-btn" style="cursor: pointer;">
             <i class="fa-solid fa-store"></i>
             <span>Nutrition Store</span>
-        </a>
+        </label>
         <a href="{% url 'meal_planner' %}">
             <i class="fa-solid fa-utensils"></i>
             <span>Meal Plans</span>
         </a>
-        <a href="#">
+        <a href="{% url 'meal_planner' %}">
             <i class="fa-solid fa-chart-line"></i>
             <span>Progress</span>
         </a>
-        <a href="#">
+        <label for="nav-cart" class="sidebar-item" style="cursor: pointer;">
             <i class="fa-solid fa-cart-shopping"></i>
             <span>My Cart</span>
-        </a>
+        </label>
         <a href="{% url 'wishlist' %}">
             <i class="fa-solid fa-heart"></i>
             <span>Wishlist</span>
         </a>
-        <a href="#">
+        <a href="{% url 'orders' %}">
             <i class="fa-solid fa-box"></i>
             <span>Orders</span>
         </a>
@@ -45,14 +45,6 @@
             <i class="fa-solid fa-ranking-star"></i>
             <span>Leaderboard</span>
         </label>
-        <label for="nav-profile" class="sidebar-item" style="cursor: pointer;">
-            <i class="fa-solid fa-user"></i>
-            <span>Profile</span>
-        </label>
-        <a href="{% url 'logout' %}" class="logout-link">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Logout</span>
-        </a>
     </div>
 
 </div>

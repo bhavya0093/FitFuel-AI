@@ -431,7 +431,8 @@ padding:0 28px;
         opacity: 1;
         visibility: visible;
     }
-    .ff-mobile-menu a {
+    .ff-mobile-menu a,
+    .ff-mobile-menu label.mobile-item {
         display: flex;
         align-items: center;
         gap: 15px;
@@ -441,7 +442,9 @@ padding:0 28px;
         font-weight: 600;
         border-bottom: 1px solid #f1f5f9;
     }
-    .ff-mobile-menu a:last-child { border-bottom: none; }
-    .ff-mobile-menu a:hover { color: #10B981; background: #f8fafc; }
+    .ff-mobile-menu a:last-child,
+    .ff-mobile-menu label.mobile-item:last-child { border-bottom: none; }
+    .ff-mobile-menu a:hover,
+    .ff-mobile-menu label.mobile-item:hover { color: #10B981; background: #f8fafc; cursor: pointer; }
     .ff-mobile-menu a.logout { color: #ef4444; }
 }

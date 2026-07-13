@@ -1,0 +1,251 @@
+/* ==========================================
+   FitFuel AI - Premium Progress Tracker CSS
+   ========================================== */
+
+#page-progress {
+    display: none;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.progress-header {
+    margin-bottom: 24px;
+}
+
+.progress-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, var(--navy) 30%, var(--teal) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.progress-header p {
+    color: var(--mist);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.progress-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.progress-stat-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.progress-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.08);
+}
+
+.progress-stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.progress-stat-icon.bmi {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--secondary);
+}
+
+.progress-stat-icon.streak {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--gold);
+}
+
+.progress-stat-info span {
+    display: block;
+    font-size: 11px;
+    color: var(--mist);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.progress-stat-info strong {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+/* Two-column layout for Form and Chart */
+.progress-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.progress-form-card {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(20px);
+}
+
+.progress-form-card h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--slate);
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--navy);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.btn-submit-progress {
+    width: 100%;
+    background: linear-gradient(135deg, var(--teal) 0%, #059669 100%);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15);
+}
+
+.btn-submit-progress:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+}
+
+/* History Logs */
+.progress-history-card {
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.02);
+    backdrop-filter: blur(20px);
+    margin-top: 30px;
+}
+
+.progress-history-card h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-table-wrapper {
+    overflow-x: auto;
+}
+
+.progress-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.progress-table th {
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mist);
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.progress-table td {
+    padding: 16px;
+    font-size: 14px;
+    color: var(--navy);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.progress-table tr:last-child td {
+    border-bottom: none;
+}
+
+.bmi-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.bmi-normal { background: rgba(16, 185, 129, 0.1); color: #047857; }
+.bmi-overweight { background: rgba(245, 158, 11, 0.1); color: #b45309; }
+.bmi-underweight { background: rgba(59, 130, 246, 0.1); color: #1d4ed8; }
+.bmi-obese { background: rgba(239, 68, 68, 0.1); color: #b91c1c; }
+
+/* Responsive styling for progress grid */
+@media (max-width: 900px) {
+    .progress-split-grid {
+        grid-template-columns: 1fr;
+    }
+    .progress-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

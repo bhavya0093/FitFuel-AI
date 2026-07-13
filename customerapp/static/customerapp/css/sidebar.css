@@ -117,7 +117,8 @@ body:has(#nav-assessment:checked) .sidebar-nav label[for="nav-assessment"],
 body:has(#nav-profile:checked) .sidebar-nav label[for="nav-profile"],
 body:has(#nav-achievements:checked) .sidebar-nav label[for="nav-achievements"],
 body:has(#nav-leaderboard:checked) .sidebar-nav label[for="nav-leaderboard"],
-body:has(#nav-cart:checked) .sidebar-nav label[for="nav-cart"] {
+body:has(#nav-cart:checked) .sidebar-nav label[for="nav-cart"],
+body:has(#nav-progress:checked) .sidebar-nav label[for="nav-progress"] {
     background: linear-gradient(135deg, #14B8A6, #06B6D4);
     color: #fff;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);

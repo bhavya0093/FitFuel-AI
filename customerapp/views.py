@@ -274,10 +274,16 @@ def customer_dashboard(request):
                 my_rank = user.rank
                 break
 
+        progress_logs = ProgressLog.objects.filter(customer=cid).order_by("-created_at")
+        chart_logs = list(ProgressLog.objects.filter(customer=cid).order_by("-created_at")[:7])
+        chart_logs.reverse()
+
         context = {
             "uid": uid,
             "cid": cid,
             "pid": pid,
+            "progress_logs": progress_logs,
+            "chart_logs": chart_logs,
             "categories": categories,
             "selected_category": selected_category,
             "selected_category_obj": selected_category_obj,
@@ -2520,3 +2526,60 @@ def root_redirect(request):
         except User.DoesNotExist:
             pass
     return redirect("login")
+
+def add_progress_log(request):
+    if "email" not in request.session:
+        return redirect("login")
+    
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+    
+    if request.method == "POST":
+        try:
+            weight = float(request.POST.get("weight", 0))
+            water = float(request.POST.get("water", 0))
+            calories = int(request.POST.get("calories", 0))
+            protein = float(request.POST.get("protein", 0))
+            
+            bmi = 0
+            try:
+                hp = cid.health_profile
+                height_m = hp.height / 100.0
+                if height_m > 0:
+                    bmi = round(weight / (height_m * height_m), 1)
+            except Exception:
+                pass
+                
+            ProgressLog.objects.create(
+                customer=cid,
+                weight=weight,
+                bmi=bmi,
+                calories=calories,
+                protein=protein,
+                water=water
+            )
+            
+            try:
+                hp = cid.health_profile
+                hp.weight = weight
+                if bmi > 0:
+                    hp.bmi = bmi
+                hp.save()
+            except Exception:
+                pass
+                
+            try:
+                game = UserGamification.objects.get(customer=cid)
+                game.xp += 15
+                if game.xp >= game.level * 100:
+                    game.xp -= game.level * 100
+                    game.level += 1
+                game.save()
+            except Exception:
+                pass
+                
+            messages.success(request, "Daily progress logged successfully!")
+        except Exception as e:
+            messages.error(request, f"Error logging progress: {str(e)}")
+            
+    return redirect("/customer-dashboard/?active_page=progress")

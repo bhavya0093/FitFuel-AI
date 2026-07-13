@@ -75,6 +75,9 @@
   #nav-progress:checked ~ * #page-progress,
   body:has(#nav-progress:checked) #page-progress { display:flex; }
 
+  #nav-store:checked ~ * #page-store,
+  body:has(#nav-store:checked) #page-store { display:block; }
+
   /* ════════════════════════════════════════════
     CSS-ONLY CAROUSEL — Auto-play animation
     Dots click karne par manual control milta hai

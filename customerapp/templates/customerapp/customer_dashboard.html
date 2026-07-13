@@ -41,6 +41,7 @@
 <input type="radio" name="page" id="nav-achievements" class="page-radio" {% if active_page == "achievements" %}checked{% endif %}>
 <input type="radio" name="page" id="nav-leaderboard" class="page-radio" {% if active_page == "leaderboard" %}checked{% endif %}>
 <input type="radio" name="page" id="nav-progress" class="page-radio" {% if active_page == "progress" %}checked{% endif %}>
+<input type="radio" name="page" id="nav-store" class="page-radio" {% if active_page == "store" %}checked{% endif %}>
 
 {% include 'customerapp/includes/navbar.html' %}
 
@@ -64,6 +65,7 @@
         {% include 'customerapp/achievements.html' %}
         {% include 'customerapp/leaderboard.html' %}
         {% include 'customerapp/progress.html' %}
+        {% include 'customerapp/store.html' %}
 
     </main>
 
@@ -86,7 +88,8 @@ document.addEventListener("DOMContentLoaded", function() {
         'nav-assessment': 'assessment',
         'nav-achievements': 'achievements',
         'nav-leaderboard': 'leaderboard',
-        'nav-progress': 'progress'
+        'nav-progress': 'progress',
+        'nav-store': 'store'
     };
     
     // Set radio state from URL parameter on load

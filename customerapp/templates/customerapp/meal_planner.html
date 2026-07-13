@@ -202,132 +202,56 @@ Goal
 <div class="meal-item">
 
 <div class="meal-left">
-
-<img
-src="{{ meal.product.picture.url }}"
-class="meal-image">
-
+    <img src="{{ meal.product.picture.url }}" class="meal-image">
 </div>
 
 <div class="meal-center">
-
-<h4>
-
-{{ meal.product.product_name }}
-
-</h4>
-
-<p class="meal-brand">
-
-{{ meal.product.brand }}
-
-</p>
-
-<div class="meal-tags">
-
-<span>
-
-🔥 {{ meal.product.calories }} kcal
-
-</span>
-
-<span>
-
-💪 {{ meal.product.protein }} g
-
-</span>
-
-</div>
-<div class="ai-score">
-
-{{ meal.ai_score }}% AI Match
-
-</div>
-
-<div class="meal-rating">
-
-⭐ {{ meal.product.rating }}
-
-</div>
-<div class="meal-ai">
-
-<i class="fa-solid fa-robot"></i>
-
-Why AI Selected
-
-</div>
-
-<div class="meal-reasons">
-
-{% for reason in meal.ai_reasons %}
-
-<span>
-
-{{ reason }}
-
-</span>
-
-{% endfor %}
-
-</div>
-
+    <h4>{{ meal.product.product_name }}</h4>
+    <p class="meal-brand">{{ meal.product.brand }}</p>
+    
+    <div class="meal-tags">
+        <span>🔥 {{ meal.product.calories }} kcal</span>
+        <span>💪 {{ meal.product.protein }} g</span>
+    </div>
+    
+    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
+    
+    <div class="meal-ai">
+        <i class="fa-solid fa-robot"></i>
+        Why AI Selected
+    </div>
+    
+    <div class="meal-reasons">
+        {% for reason in meal.ai_reasons %}
+        <span>{{ reason }}</span>
+        {% endfor %}
+    </div>
 </div>
 
 <div class="meal-right">
-
-    <a
-    href="{% url 'add_to_cart' meal.product.id %}"
-    class="meal-cart">
-
+    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
         <i class="fa-solid fa-cart-shopping"></i>
-
     </a>
-
-    <a
-    href="{% url 'add_to_wishlist' meal.product.id %}"
-    class="meal-heart">
-
+    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
         <i class="fa-solid fa-heart"></i>
-
     </a>
-
     {% if meal.is_consumed %}
-
-        <span class="meal-consumed">
-
-            ✅ Consumed
-
-        </span>
-
+        <span class="meal-consumed">✅ Consumed</span>
     {% else %}
-
-        <a
-        href="{% url 'add_daily_log' meal.product.id meal.meal_type %}"
-        class="meal-consume">
-
-            ✔ Mark as Consumed
-
+        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+            ✔ Consume
         </a>
-
     {% endif %}
-
 </div>
-
 
 </div>
 
 {% endif %}
 {% empty %}
 <div class="empty-meal">
-
-<i class="fa-solid fa-bowl-food"></i>
-
-<p>
-
-No Meal Generated Yet
-
-</p>
-
+    <i class="fa-solid fa-bowl-food"></i>
+    <p>No Breakfast Generated</p>
 </div>
 {% endfor %}
 
@@ -342,17 +266,58 @@ No Meal Generated Yet
 
 <div class="meal-item">
 
-<strong>{{ meal.product.product_name }}</strong>
+<div class="meal-left">
+    <img src="{{ meal.product.picture.url }}" class="meal-image">
+</div>
 
-<p>{{ meal.product.calories }} kcal</p>
+<div class="meal-center">
+    <h4>{{ meal.product.product_name }}</h4>
+    <p class="meal-brand">{{ meal.product.brand }}</p>
+    
+    <div class="meal-tags">
+        <span>🔥 {{ meal.product.calories }} kcal</span>
+        <span>💪 {{ meal.product.protein }} g</span>
+    </div>
+    
+    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
+    
+    <div class="meal-ai">
+        <i class="fa-solid fa-robot"></i>
+        Why AI Selected
+    </div>
+    
+    <div class="meal-reasons">
+        {% for reason in meal.ai_reasons %}
+        <span>{{ reason }}</span>
+        {% endfor %}
+    </div>
+</div>
 
-<p>{{ meal.product.protein }} g Protein</p>
+<div class="meal-right">
+    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </a>
+    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+        <i class="fa-solid fa-heart"></i>
+    </a>
+    {% if meal.is_consumed %}
+        <span class="meal-consumed">✅ Consumed</span>
+    {% else %}
+        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+            ✔ Consume
+        </a>
+    {% endif %}
+</div>
 
 </div>
 
 {% endif %}
 {% empty %}
-<p>No Lunch Added</p>
+<div class="empty-meal">
+    <i class="fa-solid fa-bowl-food"></i>
+    <p>No Lunch Generated</p>
+</div>
 {% endfor %}
 
 </div>
@@ -366,17 +331,58 @@ No Meal Generated Yet
 
 <div class="meal-item">
 
-<strong>{{ meal.product.product_name }}</strong>
+<div class="meal-left">
+    <img src="{{ meal.product.picture.url }}" class="meal-image">
+</div>
 
-<p>{{ meal.product.calories }} kcal</p>
+<div class="meal-center">
+    <h4>{{ meal.product.product_name }}</h4>
+    <p class="meal-brand">{{ meal.product.brand }}</p>
+    
+    <div class="meal-tags">
+        <span>🔥 {{ meal.product.calories }} kcal</span>
+        <span>💪 {{ meal.product.protein }} g</span>
+    </div>
+    
+    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
+    
+    <div class="meal-ai">
+        <i class="fa-solid fa-robot"></i>
+        Why AI Selected
+    </div>
+    
+    <div class="meal-reasons">
+        {% for reason in meal.ai_reasons %}
+        <span>{{ reason }}</span>
+        {% endfor %}
+    </div>
+</div>
 
-<p>{{ meal.product.protein }} g Protein</p>
+<div class="meal-right">
+    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </a>
+    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+        <i class="fa-solid fa-heart"></i>
+    </a>
+    {% if meal.is_consumed %}
+        <span class="meal-consumed">✅ Consumed</span>
+    {% else %}
+        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+            ✔ Consume
+        </a>
+    {% endif %}
+</div>
 
 </div>
 
 {% endif %}
 {% empty %}
-<p>No Dinner Added</p>
+<div class="empty-meal">
+    <i class="fa-solid fa-bowl-food"></i>
+    <p>No Dinner Generated</p>
+</div>
 {% endfor %}
 
 </div>
@@ -390,17 +396,58 @@ No Meal Generated Yet
 
 <div class="meal-item">
 
-<strong>{{ meal.product.product_name }}</strong>
+<div class="meal-left">
+    <img src="{{ meal.product.picture.url }}" class="meal-image">
+</div>
 
-<p>{{ meal.product.calories }} kcal</p>
+<div class="meal-center">
+    <h4>{{ meal.product.product_name }}</h4>
+    <p class="meal-brand">{{ meal.product.brand }}</p>
+    
+    <div class="meal-tags">
+        <span>🔥 {{ meal.product.calories }} kcal</span>
+        <span>💪 {{ meal.product.protein }} g</span>
+    </div>
+    
+    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
+    
+    <div class="meal-ai">
+        <i class="fa-solid fa-robot"></i>
+        Why AI Selected
+    </div>
+    
+    <div class="meal-reasons">
+        {% for reason in meal.ai_reasons %}
+        <span>{{ reason }}</span>
+        {% endfor %}
+    </div>
+</div>
 
-<p>{{ meal.product.protein }} g Protein</p>
+<div class="meal-right">
+    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+    </a>
+    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+        <i class="fa-solid fa-heart"></i>
+    </a>
+    {% if meal.is_consumed %}
+        <span class="meal-consumed">✅ Consumed</span>
+    {% else %}
+        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+            ✔ Consume
+        </a>
+    {% endif %}
+</div>
 
 </div>
 
 {% endif %}
 {% empty %}
-<p>No Snacks Added</p>
+<div class="empty-meal">
+    <i class="fa-solid fa-bowl-food"></i>
+    <p>No Snacks Generated</p>
+</div>
 {% endfor %}
 
 </div>

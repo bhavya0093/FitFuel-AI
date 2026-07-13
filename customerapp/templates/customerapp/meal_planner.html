@@ -3,882 +3,1366 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFuel AI - Premium Meal Planner</title>
+    
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           FitFuel AI - Ultra Premium Theme
+           ========================================== */
+        :root {
+            --bg-dark: #070a13;
+            --card-bg: rgba(17, 25, 40, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.2);
+            --secondary: #6366f1;
+            --secondary-glow: rgba(99, 102, 241, 0.2);
+            --accent: #a855f7;
+            --accent-glow: rgba(168, 85, 247, 0.2);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
 
-<meta charset="UTF-8">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 60px;
+        }
 
-<title>AI Meal Planner</title>
+        /* Ambient Background Blobs */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
 
-<link rel="stylesheet" href="{% static 'customerapp/css/meal_planner.css' %}">
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.15;
+            animation: float 20s infinite alternate ease-in-out;
+        }
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        .blob-1 {
+            background: var(--primary);
+            width: 500px;
+            height: 500px;
+            top: -10%;
+            left: -10%;
+        }
 
-<style>
-/* Bulletproof layout overrides to prevent cached CSS files from breaking the UI */
-.meal-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-}
+        .blob-2 {
+            background: var(--secondary);
+            width: 600px;
+            height: 600px;
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -5s;
+        }
 
-.meal-item {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: space-between !important;
-    flex: 1 !important;
-    gap: 8px !important;
-    padding: 12px !important;
-    background: #f8fafc !important;
-    border-radius: 16px !important;
-    border: 1px solid #e2e8f0 !important;
-}
+        .blob-3 {
+            background: var(--accent);
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.08;
+            animation-delay: -10s;
+        }
 
-.meal-left {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    margin: 0 0 4px 0 !important;
-}
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
 
-.meal-image {
-    width: 90px !important;
-    height: 90px !important;
-    object-fit: contain !important;
-    background: #fff !important;
-    padding: 6px !important;
-    border-radius: 12px !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-}
+        /* Container Layout */
+        .meal-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 24px;
+        }
 
-.meal-center {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;
-    flex: 1 !important;
-}
+        /* Header Navigation */
+        .header-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
 
-.meal-center h4 {
-    font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    margin: 0 !important;
-    color: #0f172a !important;
-    line-height: 1.3 !important;
-}
+        .back-btn {
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
 
-.meal-brand {
-    font-size: 0.8rem !important;
-    color: #64748b !important;
-    margin: 0 0 2px 0 !important;
-}
+        .back-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-4px);
+        }
 
-.meal-tags {
-    display: flex !important;
-    gap: 4px !important;
-    flex-wrap: wrap !important;
-    margin: 2px 0 !important;
-}
+        .brand-badge {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
 
-.meal-tags span {
-    background: #ecfeff !important;
-    padding: 3px 6px !important;
-    border-radius: 20px !important;
-    font-size: 10px !important;
-    font-weight: 600 !important;
-    color: #0891b2 !important;
-}
+        /* Page Title */
+        .meal-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-.ai-score {
-    align-self: flex-start !important;
-    margin: 2px 0 !important;
-    padding: 3px 8px !important;
-    background: #ede9fe !important;
-    color: #7c3aed !important;
-    border-radius: 20px !important;
-    font-size: 10px !important;
-    font-weight: 700 !important;
-}
+        .meal-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
 
-.meal-rating {
-    font-size: 11px !important;
-    color: #f59e0b !important;
-    font-weight: 700 !important;
-}
+        .meal-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
 
-.meal-ai {
-    display: flex !important;
-    align-items: center !important;
-    gap: 4px !important;
-    font-size: 11px !important;
-    color: #10b981 !important;
-    font-weight: 700 !important;
-    margin-top: 2px !important;
-}
+        /* Glassmorphism Dashboard Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
 
-.meal-reasons {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 4px !important;
-    margin-top: 2px !important;
-}
+        /* Hero Dashboard Layout */
+        .hero-dashboard {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
 
-.meal-reasons span {
-    background: #dcfce7 !important;
-    color: #15803d !important;
-    padding: 3px 6px !important;
-    border-radius: 20px !important;
-    font-size: 10px !important;
-    font-weight: 600 !important;
-}
+        /* Health Score Widget */
+        .health-score-widget {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
 
-.meal-right {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 6px !important;
-    width: 100% !important;
-    margin-top: 8px !important;
-}
+        .score-circle-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
 
-.meal-cart, .meal-heart {
-    width: 36px !important;
-    height: 36px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 50% !important;
-    text-decoration: none !important;
-    color: #fff !important;
-    font-size: 12px !important;
-    transition: 0.2s !important;
-}
+        .score-circle-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
 
-.meal-cart {
-    background: #10b981 !important;
-}
+        .score-circle-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.05);
+            stroke-width: 12;
+        }
 
-.meal-heart {
-    background: #ef4444 !important;
-}
+        .score-circle-fill {
+            fill: none;
+            stroke: url(#scoreGradient);
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 402;
+            transition: stroke-dashoffset 1s ease-out;
+        }
 
-.meal-consume {
-    flex: 1 !important;
-    height: 36px !important;
-    margin-top: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 4px !important;
-    background: #10b981 !important;
-    color: #fff !important;
-    border-radius: 18px !important;
-    text-decoration: none !important;
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    white-space: nowrap !important;
-    padding: 0 8px !important;
-}
+        .score-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.1;
+        }
 
-.meal-consumed {
-    flex: 1 !important;
-    height: 36px !important;
-    margin-top: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: #16a34a !important;
-    color: white !important;
-    border-radius: 18px !important;
-    font-size: 11px !important;
-    font-weight: 600 !important;
-    white-space: nowrap !important;
-    padding: 0 8px !important;
-}
-</style>
+        .score-value span {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
 
+        .score-info {
+            flex: 1;
+        }
+
+        .score-info h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .score-info p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* AI Coach Feedback Block */
+        .ai-coach-block {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+            padding-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .ai-coach-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .ai-coach-content h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .ai-coach-content p {
+            color: var(--text-main);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Goals Sidebar */
+        .goals-widget {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .goal-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .goal-row:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .goal-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--secondary);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+
+        .goal-icon.calories {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            border-color: rgba(16, 185, 129, 0.15);
+        }
+
+        .goal-icon.target {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--accent);
+            border-color: rgba(168, 85, 247, 0.15);
+        }
+
+        .goal-details span {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .goal-details strong {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* 4 Columns Grid for Meals */
+        .meal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .meal-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .meal-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        .meal-card h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meal-item {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: space-between;
+            flex: 1;
+            gap: 12px;
+        }
+
+        .meal-left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+
+        .meal-image {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .meal-card:hover .meal-image {
+            transform: scale(1.08);
+        }
+
+        .meal-center {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .meal-center h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+            margin-bottom: 2px;
+        }
+
+        .meal-brand {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .meal-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .meal-tags span {
+            background: rgba(99, 102, 241, 0.12);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .ai-score {
+            align-self: flex-start;
+            padding: 4px 10px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #d8b4fe;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .meal-rating {
+            font-size: 11px;
+            color: var(--warning);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .meal-ai {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .meal-reasons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .meal-reasons span {
+            background: rgba(16, 185, 129, 0.08);
+            color: #6ee7b7;
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            padding: 3px 6px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* Action Buttons Row */
+        .meal-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .meal-cart, .meal-heart {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+        }
+
+        .meal-cart:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+            transform: scale(1.05);
+        }
+
+        .meal-heart:hover {
+            background: var(--danger);
+            border-color: var(--danger);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+            transform: scale(1.05);
+        }
+
+        .meal-consume {
+            flex: 1;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .meal-consume:hover {
+            background: #059669;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .meal-consumed {
+            flex: 1;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Empty State */
+        .empty-meal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 10px;
+            text-align: center;
+            color: var(--text-muted);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.01);
+            flex: 1;
+        }
+
+        .empty-meal i {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .empty-meal p {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Stats & Chart Layout Split */
+        .stats-chart-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* Nutrition Intake Stats */
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .stat-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stat-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-amount {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .stat-target {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .bar-container {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 14px;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--accent) 100%);
+            border-radius: 10px;
+        }
+
+        .bar-fill.calories {
+            background: linear-gradient(90deg, var(--primary) 0%, #34d399 100%);
+        }
+
+        /* 7 Days Bar Chart */
+        .chart-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .chart-wrapper {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            height: 160px;
+            padding-top: 10px;
+        }
+
+        .chart-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            gap: 10px;
+        }
+
+        .chart-bar-container {
+            width: 18px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill {
+            width: 100%;
+            background: linear-gradient(180deg, var(--primary) 0%, rgba(16, 185, 129, 0.3) 100%);
+            border-radius: 20px;
+            transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chart-day {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* 4 Horizontal Quick Stats */
+        .quick-stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .quick-stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            padding: 16px 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .quick-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+        }
+
+        .quick-stat-icon.water {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .quick-stat-info span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .quick-stat-info strong {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Bottom Action Buttons */
+        .action-footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .btn-gradient {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 25px var(--primary-glow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* Responsive Design */
+        @media(max-width: 1200px) {
+            .meal-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .quick-stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 900px) {
+            .hero-dashboard {
+                grid-template-columns: 1fr;
+            }
+            .stats-chart-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .meal-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-stats-row {
+                grid-template-columns: 1fr;
+            }
+            .action-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .btn-gradient, .btn-secondary {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-<div class="meal-container">
-
-<a href="{% url 'customer_dashboard' %}" class="back-btn">
-
-<i class="fa-solid fa-arrow-left"></i>
-
-Back
-
-</a>
-<div class="health-score-card">
-
-    <div class="score-left">
-
-        <h2>
-            ❤️ FitFuel Health Score
-        </h2>
-
-        <h1>
-            {{ health_score }}/100
-        </h1>
-
-        <p>
-
-            {{ health_status }}
-
-        </p>
-
+    <!-- Ambient Background Blobs -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <div class="score-right">
-
-        <div class="score-circle">
-
-            {{ health_score }}%
-
+    <!-- Main Container -->
+    <div class="meal-container">
+        
+        <!-- Header Nav -->
+        <div class="header-nav">
+            <a href="{% url 'customer_dashboard' %}" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Dashboard
+            </a>
+            <div class="brand-badge">
+                <i class="fa-solid fa-bolt"></i> FitFuel AI
+            </div>
         </div>
 
-    </div>
-<div class="ai-coach-card">
-
-    <h2>
-        🤖 FitFuel AI Coach
-    </h2>
-
-    {% if latest_insight %}
-
-    <p>
-
-        {{ latest_insight.insight }}
-
-    </p>
-
-    <div class="coach-score">
-
-        Health Score
-
-        {{ latest_insight.health_score }}/100
-
-    </div>
-
-    {% else %}
-
-    <p>
-
-        Generate today's meal plan to receive AI coaching.
-
-    </p>
-
-    {% endif %}
-
-</div>
-
-</div>
-
-<div class="score-progress">
-
-    <div
-        class="score-fill"
-        style="width:{{ health_score }}%;">
-
-    </div>
-
-</div>
-<div class="ai-feedback-card">
-
-    <h3>
-
-        🤖 AI Coach
-
-    </h3>
-
-    <p>
-
-        {{ ai_feedback }}
-
-    </p>
-
-</div>
-
-<div class="meal-header">
-
-<h1>
-
-🍽 AI Meal Planner
-
-</h1>
-
-<p>
-
-Personalized nutrition based on your health profile
-
-</p>
-
-</div>
-
-<!-- Daily Goal -->
-
-<div class="goal-card">
-
-<div>
-
-<h3>
-
-Daily Calories
-
-</h3>
-
-<h2>
-
-{{ health.daily_calories }} kcal
-
-</h2>
-
-</div>
-
-<div>
-
-<h3>
-
-Protein Goal
-
-</h3>
-
-<h2>
-
-{{ health.protein_goal }} g
-
-</h2>
-
-</div>
-
-<div>
-
-<h3>
-
-Goal
-
-</h3>
-
-<h2>
-
-{{ health.goal }}
-
-</h2>
-
-</div>
-
-</div>
-
-<!-- Meals -->
-
-<div class="meal-grid">
-
-<div class="meal-card">
-
-<h2>🍳 Breakfast</h2>
-
-{% for meal in meal_plan %}
-{% if meal.meal_type == "Breakfast" %}
-
-<div class="meal-item">
-
-<div class="meal-left">
-    <img src="{{ meal.product.picture.url }}" class="meal-image">
-</div>
-
-<div class="meal-center">
-    <h4>{{ meal.product.product_name }}</h4>
-    <p class="meal-brand">{{ meal.product.brand }}</p>
-    
-    <div class="meal-tags">
-        <span>🔥 {{ meal.product.calories }} kcal</span>
-        <span>💪 {{ meal.product.protein }} g</span>
-    </div>
-    
-    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
-    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
-    
-    <div class="meal-ai">
-        <i class="fa-solid fa-robot"></i>
-        Why AI Selected
-    </div>
-    
-    <div class="meal-reasons">
-        {% for reason in meal.ai_reasons %}
-        <span>{{ reason }}</span>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="meal-right">
-    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-    </a>
-    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
-        <i class="fa-solid fa-heart"></i>
-    </a>
-    {% if meal.is_consumed %}
-        <span class="meal-consumed">✅ Consumed</span>
-    {% else %}
-        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
-            ✔ Consume
-        </a>
-    {% endif %}
-</div>
-
-</div>
-
-{% endif %}
-{% empty %}
-<div class="empty-meal">
-    <i class="fa-solid fa-bowl-food"></i>
-    <p>No Breakfast Generated</p>
-</div>
-{% endfor %}
-
-</div>
-
-<div class="meal-card">
-
-<h2>🥗 Lunch</h2>
-
-{% for meal in meal_plan %}
-{% if meal.meal_type == "Lunch" %}
-
-<div class="meal-item">
-
-<div class="meal-left">
-    <img src="{{ meal.product.picture.url }}" class="meal-image">
-</div>
-
-<div class="meal-center">
-    <h4>{{ meal.product.product_name }}</h4>
-    <p class="meal-brand">{{ meal.product.brand }}</p>
-    
-    <div class="meal-tags">
-        <span>🔥 {{ meal.product.calories }} kcal</span>
-        <span>💪 {{ meal.product.protein }} g</span>
-    </div>
-    
-    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
-    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
-    
-    <div class="meal-ai">
-        <i class="fa-solid fa-robot"></i>
-        Why AI Selected
-    </div>
-    
-    <div class="meal-reasons">
-        {% for reason in meal.ai_reasons %}
-        <span>{{ reason }}</span>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="meal-right">
-    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-    </a>
-    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
-        <i class="fa-solid fa-heart"></i>
-    </a>
-    {% if meal.is_consumed %}
-        <span class="meal-consumed">✅ Consumed</span>
-    {% else %}
-        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
-            ✔ Consume
-        </a>
-    {% endif %}
-</div>
-
-</div>
-
-{% endif %}
-{% empty %}
-<div class="empty-meal">
-    <i class="fa-solid fa-bowl-food"></i>
-    <p>No Lunch Generated</p>
-</div>
-{% endfor %}
-
-</div>
-
-<div class="meal-card">
-
-<h2>🍛 Dinner</h2>
-
-{% for meal in meal_plan %}
-{% if meal.meal_type == "Dinner" %}
-
-<div class="meal-item">
-
-<div class="meal-left">
-    <img src="{{ meal.product.picture.url }}" class="meal-image">
-</div>
-
-<div class="meal-center">
-    <h4>{{ meal.product.product_name }}</h4>
-    <p class="meal-brand">{{ meal.product.brand }}</p>
-    
-    <div class="meal-tags">
-        <span>🔥 {{ meal.product.calories }} kcal</span>
-        <span>💪 {{ meal.product.protein }} g</span>
-    </div>
-    
-    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
-    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
-    
-    <div class="meal-ai">
-        <i class="fa-solid fa-robot"></i>
-        Why AI Selected
-    </div>
-    
-    <div class="meal-reasons">
-        {% for reason in meal.ai_reasons %}
-        <span>{{ reason }}</span>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="meal-right">
-    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-    </a>
-    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
-        <i class="fa-solid fa-heart"></i>
-    </a>
-    {% if meal.is_consumed %}
-        <span class="meal-consumed">✅ Consumed</span>
-    {% else %}
-        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
-            ✔ Consume
-        </a>
-    {% endif %}
-</div>
-
-</div>
-
-{% endif %}
-{% empty %}
-<div class="empty-meal">
-    <i class="fa-solid fa-bowl-food"></i>
-    <p>No Dinner Generated</p>
-</div>
-{% endfor %}
-
-</div>
-
-<div class="meal-card">
-
-<h2>🥜 Snacks</h2>
-
-{% for meal in meal_plan %}
-{% if meal.meal_type == "Snacks" %}
-
-<div class="meal-item">
-
-<div class="meal-left">
-    <img src="{{ meal.product.picture.url }}" class="meal-image">
-</div>
-
-<div class="meal-center">
-    <h4>{{ meal.product.product_name }}</h4>
-    <p class="meal-brand">{{ meal.product.brand }}</p>
-    
-    <div class="meal-tags">
-        <span>🔥 {{ meal.product.calories }} kcal</span>
-        <span>💪 {{ meal.product.protein }} g</span>
-    </div>
-    
-    <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
-    <div class="meal-rating">⭐ {{ meal.product.rating }}</div>
-    
-    <div class="meal-ai">
-        <i class="fa-solid fa-robot"></i>
-        Why AI Selected
-    </div>
-    
-    <div class="meal-reasons">
-        {% for reason in meal.ai_reasons %}
-        <span>{{ reason }}</span>
-        {% endfor %}
-    </div>
-</div>
-
-<div class="meal-right">
-    <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-    </a>
-    <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
-        <i class="fa-solid fa-heart"></i>
-    </a>
-    {% if meal.is_consumed %}
-        <span class="meal-consumed">✅ Consumed</span>
-    {% else %}
-        <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
-            ✔ Consume
-        </a>
-    {% endif %}
-</div>
-
-</div>
-
-{% endif %}
-{% empty %}
-<div class="empty-meal">
-    <i class="fa-solid fa-bowl-food"></i>
-    <p>No Snacks Generated</p>
-</div>
-{% endfor %}
-
-</div>
-
-</div>
-<div class="nutrition-summary">
-
-    <div class="summary-box">
-
-        <h4>Calories</h4>
-
-        <h2>{{ total_calories }}</h2>
-
-        <small>Target {{ health.daily_calories }}</small>
-
-    </div>
-
-    <div class="summary-box">
-
-        <h4>Protein</h4>
-
-        <h2>{{ total_protein }} g</h2>
-
-        <small>Target {{ health.protein_goal }} g</small>
-
-    </div>
-
-    <div class="summary-box">
-
-        <h4>Carbs</h4>
-
-        <h2>{{ total_carbs }} g</h2>
-
-        <small>Daily Intake</small>
-
-    </div>
-
-    <div class="summary-box">
-
-        <h4>Fat</h4>
-
-        <h2>{{ total_fat }} g</h2>
-
-        <small>Healthy Fats</small>
-
-    </div>
-
-</div>
-
-<div class="today-summary">
-
-    <h2>📅 Today's Activity</h2>
-
-    <div class="summary-grid">
-
-        <div>
-
-            <h3>{{ today_meals }}</h3>
-
-            <p>Meals Consumed</p>
-
+        <!-- Title -->
+        <div class="meal-header">
+            <h1>AI Meal Planner</h1>
+            <p>Smart, dynamically computed nutrition plans personalized for your body goal.</p>
         </div>
 
-        <div>
-
-            <h3>{{ calorie_progress }}%</h3>
-
-            <p>Calories Goal</p>
-
-        </div>
-
-        <div>
-
-            <h3>{{ protein_progress }}%</h3>
-
-            <p>Protein Goal</p>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="history-section">
-
-    <h2>
-        📈 Last 7 Days Nutrition
-    </h2>
-
-    {% for day in last_7_days %}
-
-    <div class="history-card">
-
-        <div class="history-left">
-
-            <h4>{{ day.day }}</h4>
-
-            <small>{{ day.calories }} kcal</small>
-
-        </div>
-
-        <div class="history-center">
-
-            <div class="history-bar">
-
-                <div
-                    class="history-fill"
-                    style="width:{% widthratio day.calories health.daily_calories 100 %}%;">
+        <!-- Hero Section: Score Ring + Goals -->
+        <div class="hero-dashboard">
+            <!-- Left: Health Score Card -->
+            <div class="glass-card">
+                <div class="health-score-widget">
+                    <div class="score-circle-container">
+                        <svg class="score-circle-svg" viewBox="0 0 140 140">
+                            <defs>
+                                <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#10b981" />
+                                    <stop offset="100%" stop-color="#6366f1" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="score-circle-bg" cx="70" cy="70" r="64" />
+                            <!-- dashoffset is 402 * (1 - score / 100) -->
+                            <circle class="score-circle-fill" cx="70" cy="70" r="64" 
+                                    style="stroke-dashoffset: calc(402 * (1 - {{ health_score|default:0 }} / 100));" />
+                        </svg>
+                        <div class="score-value">
+                            {{ health_score|default:0 }}
+                            <span>Score</span>
+                        </div>
+                    </div>
+                    
+                    <div class="score-info">
+                        <h2>FitFuel Health Score</h2>
+                        <p>Based on your meal consumption logs, macronutrient goals, and workout adherence.</p>
+                        <span class="status-pill">
+                            <i class="fa-solid fa-heart-pulse"></i> {{ health_status }}
+                        </span>
+                    </div>
                 </div>
 
+                <!-- AI Coach Feedback Block -->
+                <div class="ai-coach-block">
+                    <div class="ai-coach-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="ai-coach-content">
+                        <h4>FitFuel AI Coach Insight</h4>
+                        <p>{{ ai_feedback|default:"Generate a meal plan to allow AI Coaching to analyze your health profile." }}</p>
+                    </div>
+                </div>
             </div>
 
+            <!-- Right: Daily Targets Card -->
+            <div class="glass-card">
+                <div class="goals-widget">
+                    <!-- Daily Calories -->
+                    <div class="goal-row">
+                        <div class="goal-icon calories">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <div class="goal-details">
+                            <span>Daily Calories Goal</span>
+                            <strong>{{ health.daily_calories|default:0 }} kcal</strong>
+                        </div>
+                    </div>
+                    <!-- Protein Goal -->
+                    <div class="goal-row">
+                        <div class="goal-icon">
+                            <i class="fa-solid fa-dumbbell"></i>
+                        </div>
+                        <div class="goal-details">
+                            <span>Daily Protein Goal</span>
+                            <strong>{{ health.protein_goal|default:0 }} g</strong>
+                        </div>
+                    </div>
+                    <!-- Goal Type -->
+                    <div class="goal-row">
+                        <div class="goal-icon target">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="goal-details">
+                            <span>Target Objective</span>
+                            <strong>{{ health.goal|default:"N/A" }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="history-right">
+        <!-- Meals Grid Section -->
+        <div class="meal-grid">
+            
+            <!-- Breakfast Card -->
+            <div class="meal-card">
+                <h2>🍳 Breakfast</h2>
+                {% for meal in meal_plan %}
+                {% if meal.meal_type == "Breakfast" %}
+                <div class="meal-item">
+                    <div class="meal-left">
+                        <img src="{{ meal.product.picture.url }}" class="meal-image" alt="{{ meal.product.product_name }}">
+                    </div>
+                    <div class="meal-center">
+                        <h4>{{ meal.product.product_name }}</h4>
+                        <p class="meal-brand">{{ meal.product.brand }}</p>
+                        
+                        <div class="meal-tags">
+                            <span>🔥 {{ meal.product.calories }} kcal</span>
+                            <span>💪 {{ meal.product.protein }} g</span>
+                        </div>
+                        
+                        <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+                        <div class="meal-rating"><i class="fa-solid fa-star"></i> {{ meal.product.rating }}</div>
+                        
+                        <div class="meal-ai">
+                            <i class="fa-solid fa-robot"></i> Why AI Selected
+                        </div>
+                        <div class="meal-reasons">
+                            {% for reason in meal.ai_reasons %}
+                            <span>{{ reason }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="meal-right">
+                        <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
+                        {% if meal.is_consumed %}
+                            <span class="meal-consumed"><i class="fa-solid fa-check"></i> Consumed</span>
+                        {% else %}
+                            <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+                                <i class="fa-solid fa-plus"></i> Consume
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="empty-meal">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <p>No Breakfast Generated</p>
+                </div>
+                {% endfor %}
+            </div>
 
-            💪 {{ day.protein }} g
+            <!-- Lunch Card -->
+            <div class="meal-card">
+                <h2>🥗 Lunch</h2>
+                {% for meal in meal_plan %}
+                {% if meal.meal_type == "Lunch" %}
+                <div class="meal-item">
+                    <div class="meal-left">
+                        <img src="{{ meal.product.picture.url }}" class="meal-image" alt="{{ meal.product.product_name }}">
+                    </div>
+                    <div class="meal-center">
+                        <h4>{{ meal.product.product_name }}</h4>
+                        <p class="meal-brand">{{ meal.product.brand }}</p>
+                        
+                        <div class="meal-tags">
+                            <span>🔥 {{ meal.product.calories }} kcal</span>
+                            <span>💪 {{ meal.product.protein }} g</span>
+                        </div>
+                        
+                        <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+                        <div class="meal-rating"><i class="fa-solid fa-star"></i> {{ meal.product.rating }}</div>
+                        
+                        <div class="meal-ai">
+                            <i class="fa-solid fa-robot"></i> Why AI Selected
+                        </div>
+                        <div class="meal-reasons">
+                            {% for reason in meal.ai_reasons %}
+                            <span>{{ reason }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="meal-right">
+                        <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
+                        {% if meal.is_consumed %}
+                            <span class="meal-consumed"><i class="fa-solid fa-check"></i> Consumed</span>
+                        {% else %}
+                            <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+                                <i class="fa-solid fa-plus"></i> Consume
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="empty-meal">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <p>No Lunch Generated</p>
+                </div>
+                {% endfor %}
+            </div>
 
+            <!-- Dinner Card -->
+            <div class="meal-card">
+                <h2>🍛 Dinner</h2>
+                {% for meal in meal_plan %}
+                {% if meal.meal_type == "Dinner" %}
+                <div class="meal-item">
+                    <div class="meal-left">
+                        <img src="{{ meal.product.picture.url }}" class="meal-image" alt="{{ meal.product.product_name }}">
+                    </div>
+                    <div class="meal-center">
+                        <h4>{{ meal.product.product_name }}</h4>
+                        <p class="meal-brand">{{ meal.product.brand }}</p>
+                        
+                        <div class="meal-tags">
+                            <span>🔥 {{ meal.product.calories }} kcal</span>
+                            <span>💪 {{ meal.product.protein }} g</span>
+                        </div>
+                        
+                        <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+                        <div class="meal-rating"><i class="fa-solid fa-star"></i> {{ meal.product.rating }}</div>
+                        
+                        <div class="meal-ai">
+                            <i class="fa-solid fa-robot"></i> Why AI Selected
+                        </div>
+                        <div class="meal-reasons">
+                            {% for reason in meal.ai_reasons %}
+                            <span>{{ reason }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="meal-right">
+                        <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
+                        {% if meal.is_consumed %}
+                            <span class="meal-consumed"><i class="fa-solid fa-check"></i> Consumed</span>
+                        {% else %}
+                            <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+                                <i class="fa-solid fa-plus"></i> Consume
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="empty-meal">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <p>No Dinner Generated</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Snacks Card -->
+            <div class="meal-card">
+                <h2>🥜 Snacks</h2>
+                {% for meal in meal_plan %}
+                {% if meal.meal_type == "Snacks" %}
+                <div class="meal-item">
+                    <div class="meal-left">
+                        <img src="{{ meal.product.picture.url }}" class="meal-image" alt="{{ meal.product.product_name }}">
+                    </div>
+                    <div class="meal-center">
+                        <h4>{{ meal.product.product_name }}</h4>
+                        <p class="meal-brand">{{ meal.product.brand }}</p>
+                        
+                        <div class="meal-tags">
+                            <span>🔥 {{ meal.product.calories }} kcal</span>
+                            <span>💪 {{ meal.product.protein }} g</span>
+                        </div>
+                        
+                        <div class="ai-score">{{ meal.ai_score }}% AI Match</div>
+                        <div class="meal-rating"><i class="fa-solid fa-star"></i> {{ meal.product.rating }}</div>
+                        
+                        <div class="meal-ai">
+                            <i class="fa-solid fa-robot"></i> Why AI Selected
+                        </div>
+                        <div class="meal-reasons">
+                            {% for reason in meal.ai_reasons %}
+                            <span>{{ reason }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="meal-right">
+                        <a href="{% url 'add_to_cart' meal.product.id %}" class="meal-cart" title="Add to Cart">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        <a href="{% url 'add_to_wishlist' meal.product.id %}" class="meal-heart" title="Add to Wishlist">
+                            <i class="fa-solid fa-heart"></i>
+                        </a>
+                        {% if meal.is_consumed %}
+                            <span class="meal-consumed"><i class="fa-solid fa-check"></i> Consumed</span>
+                        {% else %}
+                            <a href="{% url 'add_daily_log' meal.product.id meal.meal_type %}" class="meal-consume">
+                                <i class="fa-solid fa-plus"></i> Consume
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% empty %}
+                <div class="empty-meal">
+                    <i class="fa-solid fa-bowl-food"></i>
+                    <p>No Snacks Generated</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Stats & Chart Section Split -->
+        <div class="stats-chart-section">
+            <!-- Left: Current Intake Stats -->
+            <div class="glass-card">
+                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 24px;">Today's Nutrition Intake</h2>
+                <div class="nutrition-grid">
+                    <!-- Calories -->
+                    <div class="stat-box">
+                        <div class="stat-head">
+                            <span class="stat-title">Calories</span>
+                            <span style="color: var(--primary); font-size: 12px; font-weight: 700;"><i class="fa-solid fa-chart-line"></i> {{ calorie_progress|default:0 }}%</span>
+                        </div>
+                        <div class="stat-amount">{{ total_calories|default:0 }}</div>
+                        <div class="stat-target">Target {{ health.daily_calories|default:0 }} kcal</div>
+                        <div class="bar-container">
+                            <div class="bar-fill calories" style="width: {{ calorie_progress|default:0 }}%;"></div>
+                        </div>
+                    </div>
+                    <!-- Protein -->
+                    <div class="stat-box">
+                        <div class="stat-head">
+                            <span class="stat-title">Protein</span>
+                            <span style="color: var(--secondary); font-size: 12px; font-weight: 700;"><i class="fa-solid fa-chart-line"></i> {{ protein_progress|default:0 }}%</span>
+                        </div>
+                        <div class="stat-amount">{{ total_protein|default:0 }} g</div>
+                        <div class="stat-target">Target {{ health.protein_goal|default:0 }} g</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: {{ protein_progress|default:0 }}%;"></div>
+                        </div>
+                    </div>
+                    <!-- Carbs -->
+                    <div class="stat-box">
+                        <div class="stat-head">
+                            <span class="stat-title">Carbs</span>
+                            <span style="color: var(--accent); font-size: 12px; font-weight: 700;">Intake</span>
+                        </div>
+                        <div class="stat-amount">{{ total_carbs|default:0 }} g</div>
+                        <div class="stat-target">Daily Intake</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 60%; background: linear-gradient(90deg, var(--accent) 0%, #c084fc 100%);"></div>
+                        </div>
+                    </div>
+                    <!-- Fat -->
+                    <div class="stat-box">
+                        <div class="stat-head">
+                            <span class="stat-title">Fat</span>
+                            <span style="color: var(--warning); font-size: 12px; font-weight: 700;">Healthy</span>
+                        </div>
+                        <div class="stat-amount">{{ total_fat|default:0 }} g</div>
+                        <div class="stat-target">Healthy Fats</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 45%; background: linear-gradient(90deg, var(--warning) 0%, #fbbf24 100%);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: 7 Days Charts -->
+            <div class="glass-card chart-card">
+                <h2>Last 7 Days Nutrition Log</h2>
+                <div class="chart-wrapper">
+                    {% for day in last_7_days %}
+                    <div class="chart-column">
+                        <div class="chart-bar-container" title="{{ day.calories }} kcal, {{ day.protein }}g protein">
+                            <!-- Calculate height percentage relative to target -->
+                            <div class="chart-bar-fill" 
+                                 style="height: {% widthratio day.calories health.daily_calories|default:2000 100 %}%;"></div>
+                        </div>
+                        <span class="chart-day">{{ day.day }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Horizontal Quick Stats Row -->
+        <div class="quick-stats-row">
+            <!-- Total Meals -->
+            <div class="quick-stat-card">
+                <div class="quick-stat-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="quick-stat-info">
+                    <span>Total Meals</span>
+                    <strong>{{ meal_plan|length }}</strong>
+                </div>
+            </div>
+            <!-- Diet Type -->
+            <div class="quick-stat-card">
+                <div class="quick-stat-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="quick-stat-info">
+                    <span>Diet Type</span>
+                    <strong>{{ health.diet_type|default:"Veg" }}</strong>
+                </div>
+            </div>
+            <!-- Fitness Goal -->
+            <div class="quick-stat-card">
+                <div class="quick-stat-icon">
+                    <i class="fa-solid fa-gauge-high"></i>
+                </div>
+                <div class="quick-stat-info">
+                    <span>Fitness Goal</span>
+                    <strong>{{ health.goal|default:"Weight Loss" }}</strong>
+                </div>
+            </div>
+            <!-- Water Goal -->
+            <div class="quick-stat-card">
+                <div class="quick-stat-icon water">
+                    <i class="fa-solid fa-glass-water"></i>
+                </div>
+                <div class="quick-stat-info">
+                    <span>Water Goal</span>
+                    <strong>{{ health.water_goal|default:0 }} L</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="action-footer">
+            {% if meal_plan %}
+            <a href="{% url 'generate_meal_plan' %}" class="btn-gradient">
+                <i class="fa-solid fa-rotate"></i>
+                Generate New AI Plan
+            </a>
+            <a href="{% url 'nutrition_report' %}" class="btn-secondary">
+                <i class="fa-solid fa-file-pdf"></i>
+                Download PDF Report
+            </a>
+            {% else %}
+            <a href="{% url 'generate_meal_plan' %}" class="btn-gradient">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                Generate AI Meal Plan
+            </a>
+            {% endif %}
         </div>
 
     </div>
-
-    {% endfor %}
-
-</div>
-
-<div class="progress-section">
-
-    <div class="progress-card">
-
-        <div class="progress-head">
-
-            <span>Calories Progress</span>
-
-            <strong>{{ calorie_progress }}%</strong>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div
-                class="progress-fill"
-                style="width:{{ calorie_progress }}%;">
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="progress-card">
-
-        <div class="progress-head">
-
-            <span>Protein Progress</span>
-
-            <strong>{{ protein_progress }}%</strong>
-
-        </div>
-
-        <div class="progress-bar">
-
-            <div
-                class="progress-fill protein"
-                style="width:{{ protein_progress }}%;">
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="meal-stats">
-
-<div class="stat-card">
-
-<h3>{{ meal_plan|length }}</h3>
-
-<p>Total Meals</p>
-
-</div>
-
-<div class="stat-card">
-
-<h3>{{ health.diet_type }}</h3>
-
-<p>Diet Type</p>
-
-</div>
-
-<div class="stat-card">
-
-<h3>{{ health.goal }}</h3>
-
-<p>Fitness Goal</p>
-
-</div>
-
-<div class="stat-card">
-
-<h3>{{ health.water_goal }} L</h3>
-
-<p>Water Goal</p>
-
-</div>
-
-</div>
-
-<div class="planner-actions">
-
-{% if meal_plan %}
-
-<a href="{% url 'generate_meal_plan' %}" class="generate-btn">
-
-    <i class="fa-solid fa-rotate"></i>
-
-    Generate New AI Plan
-
-</a>
-
-<a href="{% url 'nutrition_report' %}" class="download-btn">
-
-    <i class="fa-solid fa-file-pdf"></i>
-
-    Download Nutrition Report
-
-</a>
-
-{% else %}
-
-<a href="{% url 'generate_meal_plan' %}" class="generate-btn">
-
-    <i class="fa-solid fa-wand-magic-sparkles"></i>
-
-    Generate AI Meal Plan
-
-</a>
-
-{% endif %}
-
-</div>
-
-</div>
-
 </body>
-
 </html>

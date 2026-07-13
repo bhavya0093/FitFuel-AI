@@ -48,8 +48,12 @@
                         <span class="pcd-bdg" style="background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 20px; position: absolute; top: 10px; left: 10px;">
                             {{ p.ai_match }}% Match
                         </span>
-                        <a href="{% url 'add_to_wishlist' p.id %}" style="position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50px; background: #fff; display: flex; align-items: center; justify-content: center; color: var(--mist); text-decoration: none; border: 1px solid rgba(15, 23, 42, 0.06); transition: all 0.2s ease;">
+                        <a href="#" class="toggle-wishlist-btn" data-id="{{ p.id }}" style="position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50px; background: #fff; display: flex; align-items: center; justify-content: center; color: {% if p.id in wishlist_pids %}#ef4444{% else %}var(--mist){% endif %}; text-decoration: none; border: 1px solid rgba(15, 23, 42, 0.06); transition: all 0.2s ease;">
+                            {% if p.id in wishlist_pids %}
+                            <i class="fa-solid fa-heart"></i>
+                            {% else %}
                             <i class="fa-regular fa-heart"></i>
+                            {% endif %}
                         </a>
                     </div>
                     <div class="pcd-body" style="padding: 10px 15px 15px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
@@ -183,8 +187,12 @@
                     </span>
                     {% endif %}
                     
-                    <a href="{% url 'add_to_wishlist' p.id %}" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50px; background: #fff; display: flex; align-items: center; justify-content: center; color: var(--mist); text-decoration: none; border: 1px solid rgba(15, 23, 42, 0.06); transition: all 0.2s ease;">
+                    <a href="#" class="toggle-wishlist-btn" data-id="{{ p.id }}" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50px; background: #fff; display: flex; align-items: center; justify-content: center; color: {% if p.id in wishlist_pids %}#ef4444{% else %}var(--mist){% endif %}; text-decoration: none; border: 1px solid rgba(15, 23, 42, 0.06); transition: all 0.2s ease;">
+                        {% if p.id in wishlist_pids %}
+                        <i class="fa-solid fa-heart"></i>
+                        {% else %}
                         <i class="fa-regular fa-heart"></i>
+                        {% endif %}
                     </a>
                 </div>
                 

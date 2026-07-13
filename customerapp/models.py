@@ -33,7 +33,7 @@ class customer(models.Model):
 
     @property
     def wishlist_count(self):
-        return 6
+        return self.wishlist_set.count()
 
     @property
     def coupons_count(self):

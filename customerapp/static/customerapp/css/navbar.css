@@ -355,7 +355,8 @@ padding:0 28px;
     z-index: 1000;
 }
 
-.ff-profile:hover .ff-dropdown {
+.ff-profile:hover .ff-dropdown,
+.ff-notification-dropdown-wrapper:hover .ff-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

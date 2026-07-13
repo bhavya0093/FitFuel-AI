@@ -223,6 +223,9 @@ def customer_dashboard(request):
                                 customer=cid,
                                 is_read=False
                             ).count()
+        notifications = Notification.objects.filter(
+                            customer=cid
+                        ).order_by("-created_at")[:5]
 
         orders = Order.objects.filter(customer=cid).order_by("-order_date")
 
@@ -278,9 +281,13 @@ def customer_dashboard(request):
         chart_logs = list(ProgressLog.objects.filter(customer=cid).order_by("-created_at")[:7])
         chart_logs.reverse()
 
+        wishlist_pids = set(Wishlist.objects.filter(customer=cid).values_list("product_id", flat=True))
+
         context = {
             "uid": uid,
             "cid": cid,
+            "wishlist_pids": wishlist_pids,
+            "wishlist_count": cid.wishlist_count,
             "pid": pid,
             "progress_logs": progress_logs,
             "chart_logs": chart_logs,
@@ -310,6 +317,7 @@ def customer_dashboard(request):
             "protein": protein,
             "sort": sort,
             "unread_notifications": unread_notifications,
+            "notifications": notifications,
             "wallet": wallet,
             # Achievements & Leaderboard Context
             "achievements": achievements,
@@ -1226,6 +1234,30 @@ def add_to_wishlist(request, pk):
 
     return redirect(request.META.get("HTTP_REFERER", "customer_dashboard"))
 
+def toggle_wishlist(request, pk):
+
+    if "email" not in request.session:
+        return JsonResponse({"error": "Unauthorized"}, status=401)
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+    product_obj = get_object_or_404(product, id=pk)
+
+    wish_item = Wishlist.objects.filter(customer=cid, product=product_obj).first()
+    if wish_item:
+        wish_item.delete()
+        action = "removed"
+    else:
+        Wishlist.objects.create(customer=cid, product=product_obj)
+        action = "added"
+
+    wishlist_count = Wishlist.objects.filter(customer=cid).count()
+    return JsonResponse({
+        "success": True,
+        "action": action,
+        "wishlist_count": wishlist_count
+    })
+
 def remove_from_wishlist(request, pk):
 
     if "email" not in request.session:
@@ -1235,8 +1267,7 @@ def remove_from_wishlist(request, pk):
     cid = customer.objects.get(user_id=uid)
 
     Wishlist.objects.filter(
-        customer=cid,
-        product_id=pk
+        Q(customer=cid) & (Q(product_id=pk) | Q(id=pk))
     ).delete()
 
     messages.success(request, "Removed from Wishlist")
@@ -1337,6 +1368,8 @@ def buy_now(request, pk):
 def read_notification(request, pk):
 
     if "email" not in request.session:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.GET.get('ajax'):
+            return JsonResponse({"error": "Unauthorized"}, status=401)
         return redirect("login")
 
     uid = User.objects.get(email=request.session["email"])
@@ -1351,7 +1384,28 @@ def read_notification(request, pk):
     notification.is_read = True
     notification.save()
 
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.GET.get('ajax'):
+        unread_count = Notification.objects.filter(customer=cid, is_read=False).count()
+        return JsonResponse({"success": True, "unread_count": unread_count})
+
     return redirect("notifications")
+
+def mark_all_notifications_read(request):
+
+    if "email" not in request.session:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.GET.get('ajax'):
+            return JsonResponse({"error": "Unauthorized"}, status=401)
+        return redirect("login")
+
+    uid = User.objects.get(email=request.session["email"])
+    cid = customer.objects.get(user_id=uid)
+
+    Notification.objects.filter(customer=cid, is_read=False).update(is_read=True)
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.GET.get('ajax'):
+        return JsonResponse({"success": True, "unread_count": 0})
+
+    return redirect("customer_dashboard")
 
 def wallet(request):
 

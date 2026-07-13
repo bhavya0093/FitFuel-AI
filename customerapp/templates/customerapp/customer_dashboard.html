@@ -122,6 +122,143 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
     });
+
+    // Single Notification Click Handler
+    document.querySelectorAll(".mark-single-read").forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const notificationId = this.getAttribute("data-id");
+            const item = this.closest(".notification-item");
+            
+            fetch(`/notification/read/${notificationId}/?ajax=1`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Update badge
+                    const badge = document.getElementById("notification-badge");
+                    if (badge) {
+                        if (data.unread_count > 0) {
+                            badge.innerText = data.unread_count;
+                        } else {
+                            badge.remove();
+                        }
+                    }
+                    
+                    // Remove unread styling
+                    item.style.background = "#fff";
+                    const dot = item.querySelector(".unread-dot");
+                    if (dot) dot.style.display = "none";
+                    this.remove(); // Remove "Mark as read" link
+                }
+            })
+            .catch(err => console.error("Error marking notification read:", err));
+        });
+    });
+
+    // Mark All Notifications Read Handler
+    const markAllReadBtn = document.getElementById("mark-all-read-btn");
+    if (markAllReadBtn) {
+        markAllReadBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            fetch(`/notification/read-all/?ajax=1`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove badge
+                    const badge = document.getElementById("notification-badge");
+                    if (badge) badge.remove();
+                    
+                    // Update all items in list
+                    document.querySelectorAll(".notification-item").forEach(item => {
+                        item.style.background = "#fff";
+                        const dot = item.querySelector(".unread-dot");
+                        if (dot) dot.style.display = "none";
+                        const singleBtn = item.querySelector(".mark-single-read");
+                        if (singleBtn) singleBtn.remove();
+                    });
+                    
+                    // Remove the mark all read link
+                    this.remove();
+                }
+            })
+            .catch(err => console.error("Error marking all read:", err));
+        });
+    }
+
+    // Wishlist Toggle Handler
+    document.querySelectorAll(".toggle-wishlist-btn").forEach(btn => {
+        btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const productId = this.getAttribute("data-id");
+            const heartIcon = this.querySelector("i");
+            const self = this;
+            
+            fetch(`/wishlist/toggle/${productId}/`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Find wishlist-badge
+                    let badge = document.getElementById("wishlist-badge");
+                    
+                    if (data.action === "added") {
+                        // Change style to liked (red color, filled heart)
+                        self.style.color = "#ef4444";
+                        if (heartIcon) {
+                            heartIcon.className = "fa-solid fa-heart";
+                        }
+                        
+                        // Update badge
+                        if (!badge) {
+                            const wishlistLink = document.querySelector('a[href*="/wishlist/"]');
+                            if (wishlistLink) {
+                                badge = document.createElement("span");
+                                badge.id = "wishlist-badge";
+                                badge.className = "ff-badge";
+                                badge.style.background = "#10b981";
+                                badge.style.position = "absolute";
+                                badge.style.top = "2px";
+                                badge.style.right = "2px";
+                                wishlistLink.appendChild(badge);
+                            }
+                        }
+                        if (badge) {
+                            badge.innerText = data.wishlist_count;
+                            badge.style.display = "flex";
+                        }
+                    } else {
+                        // Change style to unliked (grey color, outlined heart)
+                        self.style.color = "var(--mist)";
+                        if (heartIcon) {
+                            heartIcon.className = "fa-regular fa-heart";
+                        }
+                        
+                        // Update badge
+                        if (badge) {
+                            if (data.wishlist_count > 0) {
+                                badge.innerText = data.wishlist_count;
+                            } else {
+                                badge.remove();
+                            }
+                        }
+                    }
+                }
+            })
+            .catch(err => console.error("Error toggling wishlist:", err));
+        });
+    });
 });
 </script>
 <script src="{% static 'customerapp/js/assessment.js' %}"></script>

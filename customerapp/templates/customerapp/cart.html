@@ -21,7 +21,11 @@
 <div class="cwrap">
 
   <div class="pgnav">
+    {% if is_standalone %}
     <a href="/customer-dashboard/" class="back-btn">&#8592; Continue Shopping</a>
+    {% else %}
+    <label for="nav-home" class="back-btn" style="cursor: pointer;"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</label>
+    {% endif %}
     <div class="pg-ttl">My Nutrition Cart 🥑</div>
   </div>
 

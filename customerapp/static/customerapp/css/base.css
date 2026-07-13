@@ -78,14 +78,15 @@
   #nav-store:checked ~ * #page-store,
   body:has(#nav-store:checked) #page-store { display:block; }
 
-  /* Layout expansion when any inner page is selected instead of home */
-  @media (min-width: 1201px) {
-    body:not(:has(#nav-home:checked)) .right-panel {
-        display: none !important;
-    }
-    body:not(:has(#nav-home:checked)) .dashboard-layout {
-        grid-template-columns: 260px minmax(0, 1fr) !important;
-    }
+  /* Layout expansion when any inner page is selected instead of home (matches meal planner view) */
+  body:not(:has(#nav-home:checked)) .sidebar {
+      display: none !important;
+  }
+  body:not(:has(#nav-home:checked)) .right-panel {
+      display: none !important;
+  }
+  body:not(:has(#nav-home:checked)) .dashboard-layout {
+      grid-template-columns: minmax(0, 1fr) !important;
   }
 
   /* ════════════════════════════════════════════

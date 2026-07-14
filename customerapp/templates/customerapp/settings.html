@@ -1,0 +1,367 @@
+<!-- SETTINGS PAGE -->
+<div id="page-settings" class="page">
+    <div class="iwrap" style="max-width: 900px; margin: 0 auto; padding: 20px;">
+        
+        <!-- Header -->
+        <div class="pgnav" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 16px;">
+            <label class="back-btn" for="nav-home" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #64748b; font-size: 0.95rem; transition: color 0.2s;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='#64748b'">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </label>
+            <div class="pg-ttl" style="font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: #0f172a;">Account Settings</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+            
+            <!-- Preferences Section -->
+            <div class="fc g1 s1" style="border-radius: 24px; padding: 24px; background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(15,23,42,0.06);">
+                <div class="fc-t" style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+                    <i class="fas fa-sliders-h" style="color: #10b981;"></i> Display & Preferences
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <!-- Dark Mode Toggle -->
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Dark Mode Theme</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Switch to a dark UI for low-light environments.</span>
+                        </div>
+                        <label class="switch-toggle" style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                            <input type="checkbox" id="pref-dark-mode" style="opacity: 0; width: 0; height: 0;">
+                            <span class="slider-toggle" style="position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px;"></span>
+                        </label>
+                    </div>
+
+                    <!-- Unit System Selection -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Unit System</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Specify units for weight, height, and water tracker.</span>
+                        </div>
+                        <select id="pref-units" class="finp" style="width: 160px; padding: 8px 12px; border-radius: 10px; border: 1.5px solid #cbd5e1; outline: none; background: #fff; font-size: 0.9rem; font-weight: 600; color: #1e293b;">
+                            <option value="metric">Metric (kg, cm, L)</option>
+                            <option value="imperial">Imperial (lbs, in, oz)</option>
+                        </select>
+                    </div>
+
+                    <!-- Calorie Tracking Mode -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Calorie Source priority</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Toggle priority source for daily health progress dashboard logs.</span>
+                        </div>
+                        <select id="pref-cal-source" class="finp" style="width: 160px; padding: 8px 12px; border-radius: 10px; border: 1.5px solid #cbd5e1; outline: none; background: #fff; font-size: 0.9rem; font-weight: 600; color: #1e293b;">
+                            <option value="hybrid">Logged + Consumed</option>
+                            <option value="cart">Cart items fallback</option>
+                            <option value="manual">Manual Logs only</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="fc g1 s1" style="border-radius: 24px; padding: 24px; background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(15,23,42,0.06);">
+                <div class="fc-t" style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+                    <i class="fas fa-bell" style="color: #10b981;"></i> Notification Alerts
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Email Notifications</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Receive weekly health reviews and goal summaries.</span>
+                        </div>
+                        <label class="switch-toggle" style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                            <input type="checkbox" id="pref-email-notif" checked style="opacity: 0; width: 0; height: 0;">
+                            <span class="slider-toggle" style="position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px;"></span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">AI Recommendation Alerts</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Notify when new matched products are added to store.</span>
+                        </div>
+                        <label class="switch-toggle" style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                            <input type="checkbox" id="pref-ai-notif" checked style="opacity: 0; width: 0; height: 0;">
+                            <span class="slider-toggle" style="position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px;"></span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Water Reminders</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Enable desktop reminders to log water intake.</span>
+                        </div>
+                        <label class="switch-toggle" style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                            <input type="checkbox" id="pref-water-notif" style="opacity: 0; width: 0; height: 0;">
+                            <span class="slider-toggle" style="position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px;"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Security & Privacy Section -->
+            <div class="fc g1 s1" style="border-radius: 24px; padding: 24px; background: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(15,23,42,0.06);">
+                <div class="fc-t" style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800; color: #0f172a; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+                    <i class="fas fa-lock" style="color: #10b981;"></i> Privacy & Security
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Public Leaderboard Visibility</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">Show your name and score to other users on the leaderboard.</span>
+                        </div>
+                        <label class="switch-toggle" style="position: relative; display: inline-block; width: 50px; height: 26px;">
+                            <input type="checkbox" id="pref-public-profile" checked style="opacity: 0; width: 0; height: 0;">
+                            <span class="slider-toggle" style="position: absolute; cursor: pointer; inset: 0; background-color: #cbd5e1; transition: .4s; border-radius: 34px;"></span>
+                        </label>
+                    </div>
+
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 18px;">
+                        <div>
+                            <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Security Credentials</strong>
+                            <span style="font-size: 0.8rem; color: #64748b;">To update your password or edit personal details, visit your profile.</span>
+                        </div>
+                        <label for="nav-edit" class="sbtn" style="padding: 8px 16px; font-size: 0.8rem; border-radius: 50px; cursor: pointer; background: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                            <i class="fas fa-user-cog"></i> Edit Profile
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Save preferences Trigger -->
+            <div style="display: flex; gap: 14px; align-items: center; margin-top: 10px;">
+                <button id="save-settings-btn" class="sbtn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; padding: 12px 30px; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(16,185,129,0.25); display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                    <i class="fas fa-save"></i> Save Preferences
+                </button>
+                <label for="nav-home" class="cbtn" style="background: rgba(0,0,0,0.05); color: #475569; padding: 12px 25px; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.1)'" onmouseout="this.style.background='rgba(0,0,0,0.05)'">
+                    Cancel
+                </label>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Custom Settings Page Styling for Toggle Slider -->
+<style>
+    /* Toggle switch slider styles */
+    .switch-toggle input:checked + .slider-toggle {
+        background-color: #10b981 !important;
+    }
+    .slider-toggle::before {
+        content: "";
+        position: absolute;
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .switch-toggle input:checked + .slider-toggle::before {
+        transform: translateX(24px);
+    }
+    
+    /* Dark Mode variables & overrides */
+    body.dark-theme-mode {
+        background: #0f172a !important;
+        color: #f1f5f9 !important;
+    }
+    body.dark-theme-mode .bg-layer {
+        background: radial-gradient(ellipse 100% 100% at 0% 0%, rgba(20, 184, 166, 0.15) 0%, transparent 60%),
+                    radial-gradient(ellipse 100% 100% at 100% 100%, rgba(99, 102, 241, 0.15) 0%, transparent 60%),
+                    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(15, 23, 42, 0.95) 0%, transparent 100%) !important;
+        background-color: #0f172a !important;
+    }
+    body.dark-theme-mode .g1,
+    body.dark-theme-mode .widget,
+    body.dark-theme-mode .featured-widget,
+    body.dark-theme-mode .glass-card,
+    body.dark-theme-mode .fc,
+    body.dark-theme-mode .psb {
+        background: rgba(30, 41, 59, 0.7) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        color: #f1f5f9 !important;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.3) !important;
+    }
+    body.dark-theme-mode .widget-title h4,
+    body.dark-theme-mode h4,
+    body.dark-theme-mode h3,
+    body.dark-theme-mode .stat-value,
+    body.dark-theme-mode .cat-name,
+    body.dark-theme-mode .promo-text h4,
+    body.dark-theme-mode .hero-content h1,
+    body.dark-theme-mode .fc-t,
+    body.dark-theme-mode .pg-ttl,
+    body.dark-theme-mode strong {
+        color: #f8fafc !important;
+    }
+    body.dark-theme-mode .stat-label,
+    body.dark-theme-mode .promo-text p,
+    body.dark-theme-mode .hero-content p,
+    body.dark-theme-mode span,
+    body.dark-theme-mode label {
+        color: #94a3b8 !important;
+    }
+    body.dark-theme-mode .cat-card {
+        background: rgba(30, 41, 59, 0.6) !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    body.dark-theme-mode .finp {
+        background: rgba(15, 23, 42, 0.6) !important;
+        border-color: rgba(255, 255, 255, 0.15) !important;
+        color: #f1f5f9 !important;
+    }
+    body.dark-theme-mode .ff-navbar,
+    body.dark-theme-mode .ff-profile {
+        background: rgba(30, 41, 59, 0.95) !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    body.dark-theme-mode .ff-user strong,
+    body.dark-theme-mode .ff-search input {
+        color: #f1f5f9 !important;
+        background: rgba(15, 23, 42, 0.4) !important;
+    }
+    body.dark-theme-mode .ff-dropdown {
+        background: #1e293b !important;
+        border-color: rgba(255,255,255,0.08) !important;
+    }
+    body.dark-theme-mode .ff-dropdown a,
+    body.dark-theme-mode .ff-dropdown label {
+        color: #cbd5e1 !important;
+    }
+    body.dark-theme-mode .ff-dropdown a:hover,
+    body.dark-theme-mode .ff-dropdown label:hover {
+        background: rgba(255,255,255,0.05) !important;
+        color: #10b981 !important;
+    }
+</style>
+
+<!-- Live Settings Handler -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Elements
+    const darkModeToggle = document.getElementById("pref-dark-mode");
+    const unitsSelect = document.getElementById("pref-units");
+    const calSourceSelect = document.getElementById("pref-cal-source");
+    const emailNotifToggle = document.getElementById("pref-email-notif");
+    const aiNotifToggle = document.getElementById("pref-ai-notif");
+    const waterNotifToggle = document.getElementById("pref-water-notif");
+    const publicProfileToggle = document.getElementById("pref-public-profile");
+    const saveBtn = document.getElementById("save-settings-btn");
+
+    // 2. Load settings from localStorage
+    function loadSavedSettings() {
+        // Dark Mode
+        const isDarkMode = localStorage.getItem("pref-dark-mode") === "true";
+        darkModeToggle.checked = isDarkMode;
+        if (isDarkMode) {
+            document.body.classList.add("dark-theme-mode");
+        }
+        
+        // Units
+        const savedUnits = localStorage.getItem("pref-units");
+        if (savedUnits) unitsSelect.value = savedUnits;
+
+        // Cal Source
+        const savedCalSource = localStorage.getItem("pref-cal-source");
+        if (savedCalSource) calSourceSelect.value = savedCalSource;
+
+        // Toggles
+        if (localStorage.getItem("pref-email-notif") !== null) {
+            emailNotifToggle.checked = localStorage.getItem("pref-email-notif") === "true";
+        }
+        if (localStorage.getItem("pref-ai-notif") !== null) {
+            aiNotifToggle.checked = localStorage.getItem("pref-ai-notif") === "true";
+        }
+        if (localStorage.getItem("pref-water-notif") !== null) {
+            waterNotifToggle.checked = localStorage.getItem("pref-water-notif") === "true";
+        }
+        if (localStorage.getItem("pref-public-profile") !== null) {
+            publicProfileToggle.checked = localStorage.getItem("pref-public-profile") === "true";
+        }
+    }
+
+    // Initialize on load
+    loadSavedSettings();
+
+    // 3. Instant Dark Mode Toggle behavior
+    darkModeToggle.addEventListener("change", function() {
+        if (this.checked) {
+            document.body.classList.add("dark-theme-mode");
+            localStorage.setItem("pref-dark-mode", "true");
+        } else {
+            document.body.classList.remove("dark-theme-mode");
+            localStorage.setItem("pref-dark-mode", "false");
+        }
+    });
+
+    // 4. Save preferences on click with a beautiful dynamic toast
+    saveBtn.addEventListener("click", function() {
+        // Persist preferences
+        localStorage.setItem("pref-units", unitsSelect.value);
+        localStorage.setItem("pref-cal-source", calSourceSelect.value);
+        localStorage.setItem("pref-email-notif", emailNotifToggle.checked);
+        localStorage.setItem("pref-ai-notif", aiNotifToggle.checked);
+        localStorage.setItem("pref-water-notif", waterNotifToggle.checked);
+        localStorage.setItem("pref-public-profile", publicProfileToggle.checked);
+
+        // Display success toast notification
+        showToastNotification("Settings saved successfully!");
+    });
+
+    // Toast Notification helper
+    function showToastNotification(message) {
+        let toast = document.getElementById("ff-settings-toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "ff-settings-toast";
+            toast.style.position = "fixed";
+            toast.style.bottom = "30px";
+            toast.style.right = "30px";
+            toast.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+            toast.style.color = "#ffffff";
+            toast.style.padding = "14px 28px";
+            toast.style.borderRadius = "50px";
+            toast.style.fontWeight = "700";
+            toast.style.fontSize = "0.95rem";
+            toast.style.boxShadow = "0 8px 24px rgba(16,185,129,0.35)";
+            toast.style.zIndex = "9999";
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(20px)";
+            toast.style.transition = "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+            toast.style.display = "flex";
+            toast.style.alignItems = "center";
+            toast.style.gap = "10px";
+            
+            // Checkmark icon
+            toast.innerHTML = `<i class="fas fa-check-circle" style="font-size: 1.15rem;"></i> <span id="toast-text">${message}</span>`;
+            document.body.appendChild(toast);
+        } else {
+            document.getElementById("toast-text").innerText = message;
+        }
+
+        // Trigger show animation
+        setTimeout(() => {
+            toast.style.opacity = "1";
+            toast.style.transform = "translateY(0)";
+        }, 50);
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(20px)";
+        }, 3000);
+    }
+});
+</script>

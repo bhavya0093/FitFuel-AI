@@ -78,6 +78,9 @@
   #nav-store:checked ~ * #page-store,
   body:has(#nav-store:checked) #page-store { display:block; }
 
+  #nav-settings:checked ~ * #page-settings,
+  body:has(#nav-settings:checked) #page-settings { display:block; }
+
   /* Layout expansion when any inner page is selected instead of home (matches meal planner view) */
   body:not(:has(#nav-home:checked)) .sidebar {
       display: none !important;

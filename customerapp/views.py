@@ -231,8 +231,36 @@ def customer_dashboard(request):
 
         total_amount = sum(i.product.product_price * i.qty for i in cart_items) if cart_items else 0
         discount = 65 if total_amount >= 100 else 0
-        net_amount = total_amount - discount
+
+        # Auto-apply FITFUEL10 if no coupon is set in session
+        coupon_id = request.session.get("coupon_id")
+        if not coupon_id:
+            try:
+                default_coupon = Coupon.objects.filter(code="FITFUEL10", is_active=True).first()
+                if default_coupon:
+                    request.session["coupon_id"] = default_coupon.id
+                    coupon_id = default_coupon.id
+            except Exception:
+                pass
+
+        coupon_discount = 0
+        coupon = None
+        if coupon_id:
+            try:
+                coupon = Coupon.objects.get(id=coupon_id, is_active=True)
+                if total_amount >= coupon.minimum_amount:
+                    coupon_discount = (total_amount * coupon.discount) // 100
+                    if coupon_discount > coupon.maximum_discount:
+                        coupon_discount = coupon.maximum_discount
+            except Coupon.DoesNotExist:
+                pass
+
+        net_amount = total_amount - discount - coupon_discount
         remaining_amount = 100 - total_amount if total_amount < 100 else 0
+
+        import datetime
+        tomorrow = timezone.now() + datetime.timedelta(days=1)
+        delivery_date = "Tomorrow, " + tomorrow.strftime("%d %b")
 
         # Achievements & Leaderboard Integration
         achievements = UserAchievement.objects.filter(
@@ -307,6 +335,9 @@ def customer_dashboard(request):
             "item": cart_items,
             "total_amount": total_amount,
             "discount": discount,
+            "coupon": coupon,
+            "coupon_discount": coupon_discount,
+            "delivery_date": delivery_date,
             "net_amount": net_amount,
             "remaining_amount": remaining_amount,
             "search": search,

@@ -112,23 +112,31 @@
     </div>
     <div class="stat-row">
         <span class="stat-label">Savings</span>
-        <span class="stat-value" style="color:#10b981;">₹120 (10%)</span>
+        {% if coupon_discount > 0 %}
+        <span class="stat-value text-success" style="color:#10b981;">₹{{ coupon_discount }} ({{ coupon.discount }}%)</span>
+        {% else %}
+        <span class="stat-value" style="color:#64748b;">₹0</span>
+        {% endif %}
     </div>
     
     <hr style="border:0;border-top:1px dashed #e2e8f0;margin:12px 0;">
     
     <div class="stat-row" style="margin-bottom:8px;">
         <span class="stat-label">Delivery by</span>
-        <span class="stat-value" style="color:#2563eb;font-size:0.8rem;">Tomorrow, 08 Jun</span>
+        <span class="stat-value" style="color:#2563eb;font-size:0.8rem;">{{ delivery_date }}</span>
     </div>
     <div class="stat-row">
         <span class="stat-label">Coupon Applied</span>
-        <span class="stat-value" style="color:#10b981;font-size:0.8rem;background:#ecfdf5;padding:2px 6px;border-radius:4px;"><i class="fa-solid fa-ticket"></i> FITFUEL10</span>
+        {% if coupon %}
+        <span class="stat-value" style="color:#10b981;font-size:0.8rem;background:#ecfdf5;padding:2px 6px;border-radius:4px;"><i class="fa-solid fa-ticket"></i> {{ coupon.code }}</span>
+        {% else %}
+        <span class="stat-value" style="color:#64748b;font-size:0.8rem;">None</span>
+        {% endif %}
     </div>
 
-    <a href="#" class="widget-btn" style="background:#10b981;box-shadow:0 4px 15px rgba(16,185,129,0.3);">
+    <label for="nav-cart" class="widget-btn" style="cursor: pointer;">
         Analyze Cart
-    </a>
+    </label>
 </div>
 
 <!-- =============================== -->

@@ -560,21 +560,93 @@ body {
     align-items:center;
     margin-top:10px;
 }
-.alert-success{
-    background:#d4f8df;
-    color:#0b7d35;
-    padding:14px 18px;
-    border-radius:12px;
-    margin-bottom:20px;
-    border-left:5px solid #18b856;
+.alert-success {
+    background: #ecfdf5;
+    border: 1.5px solid #a7f3d0;
+    border-left: 5px solid #10b981;
+    color: #065f46;
+    padding: 14px 44px 14px 20px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(16,185,129,0.06);
+    animation: fadeIn 0.3s ease;
+}
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:18px;
-    font-weight:700;
-    text-align:center;
+/* Premium Coupon Box Styling */
+.coupon-box {
+    margin: 18px 0;
+    padding: 16px;
+    background: #f8fafc;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 16px;
+}
+.coupon-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.coupon-input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+.coupon-input:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+.coupon-btn {
+    padding: 10px 20px;
+    background: #0f172a;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.coupon-btn:hover {
+    background: #10b981;
+}
+.coupon-status {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+.coupon-applied-text {
+    color: #065f46;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.remove-coupon-link {
+    color: #ef4444;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 11px;
+    transition: color 0.2s;
+}
+.remove-coupon-link:hover {
+    color: #b91c1c;
 }
 
 @keyframes fadeIn{

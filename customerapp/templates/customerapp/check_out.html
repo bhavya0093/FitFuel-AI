@@ -5,12 +5,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout — FitFuel AI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'customerapp/css/checkout.css' %}">
 </head>
 <body>
 
 
 <div class="cwrap">
+
+  {% if messages %}
+    <div class="messages-container" style="margin-bottom: 24px; display: flex; flex-direction: column; gap: 12px;">
+      {% for message in messages %}
+        <div class="alert-success">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-check-circle"></i>
+            {{ message }}
+          </span>
+          <button type="button" onclick="this.parentElement.style.display='none'" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 20px; font-weight: 700; color: #065f46; opacity: 0.6; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   <div class="pgnav">
     <a href="/view_cart/" class="back-btn">&#8592; Back to Cart</a>
@@ -38,17 +53,7 @@
 
           </div>
 
-              {% if messages %}
 
-                {% for message in messages %}
-
-                <div class="alert-success">
-                    {{ message }}
-                </div>
-
-                {% endfor %}
-
-                {% endif %}
 
           {% if addresses %}
 
@@ -197,41 +202,24 @@
           <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
           <hr class="summary-hr"/>
           <div class="coupon-box">
-
-<form method="POST" action="{% url 'apply_coupon' %}">
-
-    {% csrf_token %}
-
-    <input
-        type="text"
-        name="coupon_code"
-        placeholder="Enter Coupon Code">
-
-    <button type="submit">
-
-        Apply
-
-    </button>
-
-</form>
-{% if coupon %}
-
-<p style="color:green">
-
-Coupon Applied :
-<b>{{ coupon.code }}</b>
-
-</p>
-
-<a href="{% url 'remove_coupon' %}">
-
-Remove Coupon
-
-</a>
-
-{% endif %}
-
-</div>
+            <form method="POST" action="{% url 'apply_coupon' %}" class="coupon-form">
+              {% csrf_token %}
+              <input type="text" name="coupon_code" class="coupon-input" placeholder="Enter Coupon Code" {% if coupon %}value="{{ coupon.code }}" disabled style="background:#f1f5f9; color:#64748b;"{% endif %}>
+              {% if not coupon %}
+                <button type="submit" class="coupon-btn">Apply</button>
+              {% endif %}
+            </form>
+            {% if coupon %}
+            <div class="coupon-status">
+              <span class="coupon-applied-text">
+                <i class="fas fa-ticket-alt"></i> Applied: <strong>{{ coupon.code }}</strong> ({{ coupon.discount }}% Off)
+              </span>
+              <a href="{% url 'remove_coupon' %}" class="remove-coupon-link">
+                <i class="fas fa-trash-alt"></i> Remove
+              </a>
+            </div>
+            {% endif %}
+          </div>
           <div class="total-row"><span>Total</span><span>&#8377;{{net_amount}}</span></div>
 
           <!-- Proceed to Payment — form submit karega -->

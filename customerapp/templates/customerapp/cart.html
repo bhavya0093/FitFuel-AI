@@ -54,28 +54,43 @@
         <div class="summary-box">
           <div class="summary-title">Order Summary</div>
           <div class="summary-row"><span>Subtotal</span><span>₹{{total_amount}}</span></div>
+          {% if discount > 0 %}
           <div class="summary-row">
                 <span>
-                    Discount
-                    {% if discount > 0 %}
+                    Base Discount
                     <span class="disc-badge">WELCOME10</span>
-                    {% endif %}
                 </span>
-
                 <span class="green">
                     -₹{{discount}}
                 </span>
             </div>
+          {% endif %}
 
-              {% if discount > 0 %}
-              <div class="coupon-success">
-                  🎉 WELCOME10 Coupon Applied
-              </div>
-              {% else %}
-              <div class="coupon-msg">
-                  🎉 Spend ₹{{remaining_amount}} more & unlock WELCOME10
-              </div>
-              {% endif %}
+          {% if coupon_discount > 0 %}
+          <div class="summary-row">
+                <span>
+                    Coupon Discount
+                    <span class="disc-badge">{{ coupon.code }}</span>
+                </span>
+                <span class="green">
+                    -₹{{coupon_discount}}
+                </span>
+            </div>
+          {% endif %}
+
+          {% if coupon %}
+          <div class="coupon-success">
+              🎉 {{ coupon.code }} Coupon Applied ({{ coupon.discount }}% Off)
+          </div>
+          {% elif discount > 0 %}
+          <div class="coupon-success">
+              🎉 WELCOME10 Coupon Applied
+          </div>
+          {% else %}
+          <div class="coupon-msg">
+              🎉 Spend ₹{{remaining_amount}} more & unlock WELCOME10
+          </div>
+          {% endif %}
               <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
               <hr class="summary-hr"/>
               <div class="total-row"><span>Total</span><span>₹{{net_amount}}</span></div>

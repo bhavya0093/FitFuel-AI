@@ -112,10 +112,10 @@
             <h2>7 Day Streak</h2>
             <p>Log meals for 7 consecutive days.</p>
             <div class="progress">
-                <div class="progress-fill" style="width:45%;"></div>
+                <div class="progress-fill" style="width:{{ streak_pct }}%;"></div>
             </div>
             <small>
-                3 / 7 Days
+                {{ game.streak|default:"0" }} / 7 Days
             </small>
         </div>
     </div>

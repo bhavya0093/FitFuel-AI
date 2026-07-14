@@ -170,6 +170,24 @@ def customer_dashboard(request):
                     is_ai_recommended=True
                 )[:4]
         recommended_product = ai_products[0] if ai_products else None
+
+        # Get featured product
+        featured_product = product.objects.filter(is_featured=True).first()
+        if not featured_product:
+            featured_product = product.objects.order_by("-rating", "-product_price").first()
+
+        featured_tags = []
+        featured_original_price = 0
+        if featured_product:
+            if featured_product.ai_tags:
+                featured_tags = [tag.strip() for tag in featured_product.ai_tags.split(",") if tag.strip()]
+            else:
+                featured_tags = ["High Protein", "Low Sugar", "Fast Recovery"]
+            if featured_product.discount > 0:
+                featured_original_price = int(featured_product.product_price * 100 / (100 - featured_product.discount))
+            else:
+                featured_original_price = featured_product.product_price
+
         for p in ai_products:
 
             score = 50
@@ -329,6 +347,9 @@ def customer_dashboard(request):
             "health_profile": profile,
             "ai_products": ai_products,
             "recommended_product": recommended_product,
+            "featured_product": featured_product,
+            "featured_tags": featured_tags,
+            "featured_original_price": featured_original_price,
             "cart_count": cart_count,
             "cart_protein": round(cart_protein,1),
             "cart_calories": int(cart_calories),

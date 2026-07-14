@@ -150,7 +150,7 @@
 }
 
 .ai-rec-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
     display: flex;
@@ -209,7 +209,7 @@
 }
 
 .ai-rec-info h5 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     font-size: 1.05rem;
     font-weight: 800;
     color: #ffffff;

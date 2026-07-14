@@ -7,8 +7,17 @@
     <!-- DARK SIDEBAR -->
     <div class="psb">
       <div class="pav-wrap">
-        <div class="pav"><img src="{{cid.pic.url}}" alt=""></div>
-        <div class="pnm">{{cid.firstname}} {{cid.lastname}}</div>
+        <div class="pav {% if cid.subscription_plan == 'Pro' %}pro-border{% elif cid.subscription_plan == 'Elite' %}elite-border{% endif %}">
+            <img src="{{cid.pic.url}}" alt="">
+        </div>
+        <div class="pnm">
+            {{cid.firstname}} {{cid.lastname}}
+            {% if cid.subscription_plan == 'Pro' %}
+                <span class="pro-badge-navbar"><i class="fa-solid fa-star"></i> PRO</span>
+            {% elif cid.subscription_plan == 'Elite' %}
+                <span class="vip-badge-navbar"><i class="fa-solid fa-crown"></i> ELITE</span>
+            {% endif %}
+        </div>
         <div class="pem">{{uid.email}}</div>
       </div>
       <div class="pkpis">

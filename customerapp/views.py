@@ -71,7 +71,7 @@ def customer_dashboard(request):
         except UserHealthProfile.DoesNotExist:
             health = None
 
-        # Calculate dynamic goal status based on logged intake + cart items
+        # Calculate dynamic goal status based on logged intake + consumed meals + cart items
         import datetime
         from django.utils import timezone
         today = timezone.now().date()
@@ -80,8 +80,17 @@ def customer_dashboard(request):
         logged_protein = sum(log.protein for log in today_logs)
         logged_water = sum(log.water for log in today_logs)
 
-        current_calories = logged_calories if logged_calories > 0 else int(cart_calories)
-        current_protein = logged_protein if logged_protein > 0 else round(cart_protein, 1)
+        # Calculate consumed meals from the Meal Planner (DailyMealLog)
+        today_meals = DailyMealLog.objects.filter(customer=cid, log_date=today, consumed=True)
+        meal_calories = sum(m.calories for m in today_meals)
+        meal_protein = sum(m.protein for m in today_meals)
+
+        # Combine manually logged intake and consumed meals
+        actual_calories = logged_calories + meal_calories
+        actual_protein = logged_protein + meal_protein
+
+        current_calories = actual_calories if actual_calories > 0 else int(cart_calories)
+        current_protein = actual_protein if actual_protein > 0 else round(cart_protein, 1)
         current_water = logged_water
 
         goal_calories = health.daily_calories if health else 2000

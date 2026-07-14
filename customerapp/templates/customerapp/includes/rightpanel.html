@@ -134,9 +134,10 @@
     <div class="ai-rec-header">
 
         <div class="ai-rec-title">
-            <i class="fa-solid fa-robot"></i>
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
             AI Recommendation
         </div>
+        <span style="background: rgba(16, 185, 129, 0.2); border: 1.5px solid rgba(16, 185, 129, 0.4); color: #34d399; font-size: 8px; font-weight: 800; padding: 2px 8px; border-radius: 50px; letter-spacing: 0.5px; text-transform: uppercase;">Active</span>
 
     </div>
 
@@ -146,7 +147,7 @@
 
         <div class="ai-rec-product">
 
-            <div class="ai-rec-img">
+            <div class="ai-rec-img-wrapper">
 
                 <img
                     src="{{ recommended_product.picture.url }}"
@@ -171,9 +172,7 @@
 
                 <p>
 
-                    Perfect for your
-                    <strong>{{ health.goal }}</strong>
-                    goal.
+                    <i class="fas fa-check-circle" style="color: #34d399; margin-right: 4px;"></i> Perfect for your <strong>{{ health.goal|default:"Health" }}</strong> goal.
 
                 </p>
 
@@ -181,13 +180,13 @@
 
                     <span>
 
-                        +{{ recommended_product.protein }} g Protein
+                        <i class="fas fa-seedling" style="color: #10b981; margin-right: 4px;"></i> {{ recommended_product.diet_type }}
 
                     </span>
 
                     <span>
 
-                        {{ recommended_product.diet_type }}
+                        <i class="fas fa-dumbbell" style="color: #38bdf8; margin-right: 4px;"></i> +{{ recommended_product.protein }}g Protein
 
                     </span>
 
@@ -201,7 +200,7 @@
             href="{% url 'add_to_cart' recommended_product.id %}"
             class="ai-rec-btn">
 
-            Add to Cart
+            <i class="fas fa-shopping-basket"></i> Add to Cart
 
         </a>
 

@@ -202,12 +202,14 @@
           <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
           <hr class="summary-hr"/>
           <div class="coupon-box">
-            <form method="POST" action="{% url 'apply_coupon' %}" class="coupon-form">
+            <form method="POST" action="{% url 'apply_coupon' %}" class="coupon-form" id="couponForm">
               {% csrf_token %}
-              <input type="text" name="coupon_code" class="coupon-input" placeholder="Enter Coupon Code" {% if coupon %}value="{{ coupon.code }}" disabled style="background:#f1f5f9; color:#64748b;"{% endif %}>
-              {% if not coupon %}
-                <button type="submit" class="coupon-btn">Apply</button>
-              {% endif %}
+              <div class="coupon-input-group">
+                <input type="text" name="coupon_code" class="coupon-input" id="couponInput" placeholder="Enter Coupon Code" {% if coupon %}value="{{ coupon.code }}" disabled style="color:#64748b;"{% endif %}>
+                {% if not coupon %}
+                  <button type="submit" class="coupon-btn">Apply</button>
+                {% endif %}
+              </div>
             </form>
             {% if coupon %}
             <div class="coupon-status">
@@ -218,6 +220,33 @@
                 <i class="fas fa-trash-alt"></i> Remove
               </a>
             </div>
+            {% endif %}
+
+            <!-- Available Coupons recommendation -->
+            {% if available_coupons and not coupon %}
+            <div class="available-coupons-section" style="margin-top: 14px;">
+              <span style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">Available Coupons:</span>
+              <div class="coupons-list" style="display: flex; flex-direction: column; gap: 8px;">
+                {% for av_coupon in available_coupons %}
+                  <div class="coupon-recommendation" onclick="selectCoupon('{{ av_coupon.code }}')" style="background: rgba(16, 185, 129, 0.05); border: 1.5px dashed rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                      <span class="coupon-recommend-code" style="font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 800; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px;">{{ av_coupon.code }}</span>
+                      <span class="coupon-recommend-desc" style="font-size: 10px; color: #64748b; font-weight: 500;">{{ av_coupon.description }}</span>
+                    </div>
+                    <span class="coupon-recommend-badge" style="background: #eafcf5; border: 1px solid #10b981; color: #0a8a6a; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 50px;">{{ av_coupon.discount }}% Off</span>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            <script>
+              function selectCoupon(code) {
+                const input = document.getElementById('couponInput');
+                if (input) {
+                  input.value = code;
+                  document.getElementById('couponForm').submit();
+                }
+              }
+            </script>
             {% endif %}
           </div>
           <div class="total-row"><span>Total</span><span>&#8377;{{net_amount}}</span></div>

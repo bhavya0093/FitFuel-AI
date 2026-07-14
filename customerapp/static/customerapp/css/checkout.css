@@ -587,41 +587,51 @@ body {
     border-radius: 16px;
 }
 .coupon-form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
     width: 100%;
 }
-.coupon-input {
-    flex: 1;
-    min-width: 0;
-    width: 100%;
-    padding: 10px 14px;
+.coupon-input-group {
+    display: flex;
+    background: #fff;
     border: 1.5px solid #cbd5e1;
     border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    outline: none;
+    padding: 4px 4px 4px 14px;
+    align-items: center;
+    justify-content: space-between;
     transition: all 0.2s ease;
-    text-transform: uppercase;
+    width: 100%;
 }
-.coupon-input:focus {
+.coupon-input-group:focus-within {
     border-color: #10b981;
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
+.coupon-input {
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding: 8px 0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #0b3d4a !important;
+    text-transform: uppercase;
+}
 .coupon-btn {
-    padding: 10px 20px;
-    background: #0f172a;
-    color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
+    padding: 8px 18px !important;
+    background: #0f172a !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease !important;
+    margin-left: 8px;
+    flex-shrink: 0;
 }
 .coupon-btn:hover {
-    background: #10b981;
+    background: #10b981 !important;
 }
 .coupon-status {
     margin-top: 10px;
@@ -657,6 +667,14 @@ body {
 }
 .remove-coupon-link:hover {
     color: #b91c1c;
+}
+
+/* Coupon Recommendations */
+.coupon-recommendation:hover {
+    background: rgba(16, 185, 129, 0.08) !important;
+    border-color: #10b981 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.08);
 }
 
 @keyframes fadeIn{

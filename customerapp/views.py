@@ -629,6 +629,7 @@ def checkout(request):
                     pass
 
             net_amount = total_amount - discount - coupon_discount
+            available_coupons = Coupon.objects.all()
             
             context = {
                 'item' : item,
@@ -638,6 +639,7 @@ def checkout(request):
                 "addresses": addresses,
                 "coupon": coupon,
                 "coupon_discount": coupon_discount,
+                "available_coupons": available_coupons,
             }
         return render(request,"customerapp/check_out.html",context)
 

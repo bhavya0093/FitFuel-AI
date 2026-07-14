@@ -27,6 +27,11 @@
     </div>
   {% endif %}
 
+  <form method="POST" action="{% url 'apply_coupon' %}" id="couponForm">
+    {% csrf_token %}
+    <input type="hidden" name="coupon_code" id="hiddenCouponInput">
+  </form>
+
   <div class="pgnav">
     <a href="/view_cart/" class="back-btn">&#8592; Back to Cart</a>
     <div class="pg-ttl">Checkout 🥑</div>
@@ -181,36 +186,22 @@
           <div class="summary-row"><span>Subtotal</span><span>&#8377;{{total_amount}}</span></div>
           <div class="summary-row"><span>Discount <span class="disc-badge">WELCOME10</span></span><span class="green">-&#8377;{{ discount }}</span></div>
           {% if coupon %}
-
-<div class="summary-row">
-
-    <span>
-
-        Coupon ({{ coupon.code }})
-
-    </span>
-
-    <span>
-
-        -₹{{ coupon_discount }}
-
-    </span>
-
-</div>
-
-{% endif %}
+          <div class="summary-row">
+            <span>Coupon ({{ coupon.code }})</span>
+            <span class="green">-&#8377;{{ coupon_discount }}</span>
+          </div>
+          {% endif %}
           <div class="summary-row"><span>Delivery</span><span class="green">FREE</span></div>
           <hr class="summary-hr"/>
           <div class="coupon-box">
-            <form method="POST" action="{% url 'apply_coupon' %}" class="coupon-form" id="couponForm">
-              {% csrf_token %}
+            <div class="coupon-form-container">
               <div class="coupon-input-group">
-                <input type="text" name="coupon_code" class="coupon-input" id="couponInput" placeholder="Enter Coupon Code" {% if coupon %}value="{{ coupon.code }}" disabled style="color:#64748b;"{% endif %}>
+                <input type="text" class="coupon-input" id="couponInput" placeholder="Enter Coupon Code" {% if coupon %}value="{{ coupon.code }}" disabled style="color:#64748b;"{% endif %}>
                 {% if not coupon %}
-                  <button type="submit" class="coupon-btn">Apply</button>
+                  <button type="button" onclick="submitCouponForm()" class="coupon-btn">Apply</button>
                 {% endif %}
               </div>
-            </form>
+            </div>
             {% if coupon %}
             <div class="coupon-status">
               <span class="coupon-applied-text">
@@ -238,16 +229,31 @@
                 {% endfor %}
               </div>
             </div>
+            {% endif %}
             <script>
-              function selectCoupon(code) {
+              function submitCouponForm() {
                 const input = document.getElementById('couponInput');
-                if (input) {
-                  input.value = code;
+                const hidden = document.getElementById('hiddenCouponInput');
+                if (input && hidden) {
+                  hidden.value = input.value;
                   document.getElementById('couponForm').submit();
                 }
               }
+              function selectCoupon(code) {
+                const hidden = document.getElementById('hiddenCouponInput');
+                if (hidden) {
+                  hidden.value = code;
+                  document.getElementById('couponForm').submit();
+                }
+              }
+              // Allow pressing enter inside couponInput to submit couponForm
+              document.getElementById('couponInput')?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  submitCouponForm();
+                }
+              });
             </script>
-            {% endif %}
           </div>
           <div class="total-row"><span>Total</span><span>&#8377;{{net_amount}}</span></div>
 

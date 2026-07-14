@@ -417,6 +417,161 @@
             color: #ef4444 !important;
             font-weight: 700;
         }
+
+        /* Glassmorphism Payment Modal */
+        .payment-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        .payment-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .payment-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            padding: 30px;
+            width: 90%;
+            max-width: 440px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .payment-modal.show .payment-card {
+            transform: scale(1);
+        }
+        .payment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .payment-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .payment-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .payment-close:hover {
+            color: #ef4444;
+        }
+        .payment-summary {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+        .payment-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+        }
+        .payment-summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 8px;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 15px;
+            font-weight: 800;
+            color: #0f172a;
+        }
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .payment-method-btn {
+            border: 1.5px solid #cbd5e1;
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+        }
+        .payment-method-btn i {
+            font-size: 18px;
+        }
+        .payment-method-btn:hover {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.02);
+        }
+        .payment-method-btn.active {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+        .payment-details-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        .payment-details-input:focus {
+            border-color: #10b981;
+        }
+        .payment-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .payment-submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+        }
     </style>
 </head>
 <body>
@@ -585,13 +740,142 @@
         <span id="toast-message">Plan upgraded successfully!</span>
     </div>
 
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="payment-modal">
+        <div class="payment-card">
+            <div class="payment-header">
+                <h3>Upgrade Subscription</h3>
+                <button class="payment-close" onclick="closePaymentModal()">&times;</button>
+            </div>
+            
+            <div class="payment-summary">
+                <div class="payment-summary-row">
+                    <span>Plan Selected:</span>
+                    <span id="summary-plan-name" style="color: #0f172a; font-weight: 700;">FitFuel Pro</span>
+                </div>
+                <div class="payment-summary-row">
+                    <span>Duration:</span>
+                    <span id="summary-plan-period">Monthly</span>
+                </div>
+                <div class="payment-summary-row">
+                    <span>Total Amount:</span>
+                    <span id="summary-plan-price" style="color: #10b981; font-weight: 800;">₹499</span>
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 12px; font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">Select Payment Mode:</div>
+            <div class="payment-methods">
+                <div class="payment-method-btn active" id="method-card" onclick="setPaymentMethod('card')">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Card</span>
+                </div>
+                <div class="payment-method-btn" id="method-upi" onclick="setPaymentMethod('upi')">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>UPI / GPay</span>
+                </div>
+            </div>
+            
+            <!-- Dynamic Inputs -->
+            <div id="payment-fields-card">
+                <input type="text" class="payment-details-input" id="card-num" placeholder="Card Number (XXXX XXXX XXXX XXXX)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <input type="text" class="payment-details-input" id="card-exp" placeholder="MM/YY">
+                    <input type="password" class="payment-details-input" id="card-cvv" placeholder="CVV">
+                </div>
+            </div>
+            
+            <div id="payment-fields-upi" style="display: none;">
+                <input type="text" class="payment-details-input" id="upi-id" placeholder="Enter UPI ID (e.g. name@okhdfcbank)">
+            </div>
+            
+            <button class="payment-submit-btn" onclick="executePayment()">
+                <i class="fa-solid fa-lock"></i>
+                <span id="submit-btn-text">Pay & Activate Plan</span>
+            </button>
+        </div>
+    </div>
+
     <script>
+        let selectedPlanName = '';
+
         function selectPlan(planName) {
             // Prevent action if already current plan
             const card = document.querySelector(`.pricing-card[data-plan="${planName}"]`);
             const btn = card.querySelector('.plan-btn');
             if (btn.classList.contains('current')) return;
 
+            if (planName === 'Free') {
+                upgradeSubscription(planName);
+            } else {
+                openPaymentModal(planName);
+            }
+        }
+
+        function openPaymentModal(planName) {
+            selectedPlanName = planName;
+            document.getElementById('summary-plan-name').innerText = planName === 'Pro' ? 'FitFuel Pro' : 'FitFuel Elite';
+            document.getElementById('summary-plan-period').innerText = planName === 'Pro' ? 'Monthly' : 'Yearly';
+            document.getElementById('summary-plan-price').innerText = planName === 'Pro' ? '₹499' : '₹1,499';
+            
+            // Reset modal inputs & text
+            document.getElementById('card-num').value = '';
+            document.getElementById('card-exp').value = '';
+            document.getElementById('card-cvv').value = '';
+            document.getElementById('upi-id').value = '';
+            document.getElementById('submit-btn-text').innerText = 'Pay & Activate Plan';
+            
+            // Show card inputs by default
+            setPaymentMethod('card');
+            
+            document.getElementById('payment-modal').classList.add('show');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.remove('show');
+        }
+
+        function setPaymentMethod(method) {
+            document.querySelectorAll('.payment-method-btn').forEach(btn => btn.classList.remove('active'));
+            if (method === 'card') {
+                document.getElementById('method-card').classList.add('active');
+                document.getElementById('payment-fields-card').style.display = 'block';
+                document.getElementById('payment-fields-upi').style.display = 'none';
+            } else {
+                document.getElementById('method-upi').classList.add('active');
+                document.getElementById('payment-fields-card').style.display = 'none';
+                document.getElementById('payment-fields-upi').style.display = 'block';
+            }
+        }
+
+        function executePayment() {
+            const method = document.getElementById('method-card').classList.contains('active') ? 'card' : 'upi';
+            if (method === 'card') {
+                const cardNum = document.getElementById('card-num').value.trim();
+                const cardExp = document.getElementById('card-exp').value.trim();
+                const cardCvv = document.getElementById('card-cvv').value.trim();
+                if (!cardNum || !cardExp || !cardCvv) {
+                    alert('Please enter your card details.');
+                    return;
+                }
+            } else {
+                const upiId = document.getElementById('upi-id').value.trim();
+                if (!upiId) {
+                    alert('Please enter your UPI ID.');
+                    return;
+                }
+            }
+
+            // Simulate loading
+            const btnText = document.getElementById('submit-btn-text');
+            btnText.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+            
+            setTimeout(() => {
+                closePaymentModal();
+                upgradeSubscription(selectedPlanName);
+            }, 1200);
+        }
+
+        function upgradeSubscription(planName) {
             fetch(`/subscription/upgrade/?plan=${planName}`, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -615,13 +899,14 @@
                     });
 
                     // Set target button as current
+                    const card = document.querySelector(`.pricing-card[data-plan="${planName}"]`);
+                    const btn = card.querySelector('.plan-btn');
                     btn.classList.add('current');
                     btn.innerText = 'Current Plan';
 
                     // Update navbar dynamic subscriber badge
                     let profileNameContainer = document.querySelector('.ff-user strong');
                     if (profileNameContainer) {
-                        // Remove existing badges
                         let oldBadge = profileNameContainer.querySelector('.vip-badge-navbar, .pro-badge-navbar');
                         if (oldBadge) oldBadge.remove();
 

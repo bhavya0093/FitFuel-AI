@@ -70,6 +70,35 @@ def customer_dashboard(request):
             health = UserHealthProfile.objects.get(customer=cid)
         except UserHealthProfile.DoesNotExist:
             health = None
+
+        # Calculate dynamic goal status based on logged intake + cart items
+        import datetime
+        from django.utils import timezone
+        today = timezone.now().date()
+        today_logs = ProgressLog.objects.filter(customer=cid, created_at=today)
+        logged_calories = sum(log.calories for log in today_logs)
+        logged_protein = sum(log.protein for log in today_logs)
+        logged_water = sum(log.water for log in today_logs)
+
+        current_calories = logged_calories if logged_calories > 0 else int(cart_calories)
+        current_protein = logged_protein if logged_protein > 0 else round(cart_protein, 1)
+        current_water = logged_water
+
+        goal_calories = health.daily_calories if health else 2000
+        goal_protein = health.protein_goal if health else 150
+        goal_water = health.water_goal if health else 3.0
+
+        cal_pct = min(100, round((current_calories / goal_calories) * 100)) if goal_calories > 0 else 0
+        prot_pct = min(100, round((current_protein / goal_protein) * 100)) if goal_protein > 0 else 0
+        water_pct = min(100, round((current_water / goal_water) * 100)) if goal_water > 0 else 0
+        
+        try:
+            cal_dev = abs(current_calories - goal_calories) / goal_calories
+            prot_dev = abs(current_protein - goal_protein) / goal_protein
+            avg_dev = (cal_dev + prot_dev) / 2
+            match_score = max(0, min(100, round((1.0 - avg_dev) * 100)))
+        except Exception:
+            match_score = 99
         categories = Category.objects.all()
 
         selected_category = request.GET.get("category")
@@ -333,6 +362,13 @@ def customer_dashboard(request):
         context = {
             "game": game,
             "streak_pct": streak_pct,
+            "cal_pct": cal_pct,
+            "prot_pct": prot_pct,
+            "water_pct": water_pct,
+            "current_calories": current_calories,
+            "current_protein": current_protein,
+            "current_water": current_water,
+            "match_score": match_score,
             "total_users_count": 15000 + customer.objects.count(),
             "total_products_count": 240 + product.objects.count(),
             "total_meal_plans_count": 500 + customer.objects.count() * 10,

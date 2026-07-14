@@ -1,57 +1,45 @@
-<div class="widget">
+<div class="widget" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05); margin-bottom: 20px;">
 
-    <div class="widget-title">
-
-        <h4>Today's Goal</h4>
-
-        <i class="fa-solid fa-bullseye"></i>
-
+    <div class="widget-title" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;">
+        <h4 style="font-size: 1.1rem; font-weight: 800; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 8px;">
+            Today's Goal
+        </h4>
+        <span class="match-badge" style="background: #10b981; color: #ffffff; font-weight: 700; font-size: 11px; padding: 4px 10px; border-radius: 50px; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);">
+             {{ match_score }}% Match
+        </span>
     </div>
 
-    <div class="stat-row">
-
-        <span class="stat-label">Calories</span>
-
-        <span class="stat-value">{{ cart_calories }} / {{ health.daily_calories }} kcal</span>
-
+    <!-- CALORIES -->
+    <div style="margin-bottom: 18px;">
+        <div class="stat-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="stat-label" style="font-size: 0.9rem; font-weight: 500; color: #64748b;">Calories</span>
+            <span class="stat-value" style="font-size: 0.95rem; font-weight: 800; color: #0f172a;">{{ current_calories }} / {{ health.daily_calories|default:2000 }} kcal</span>
+        </div>
+        <div class="progress" style="height: 10px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 0;">
+            <span style="display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #10b981, #06b6d4); width: {{ cal_pct }}%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);"></span>
+        </div>
     </div>
 
-    <div class="progress">
-
-        <span style="width:66%"></span>
-
+    <!-- PROTEIN -->
+    <div style="margin-bottom: 18px;">
+        <div class="stat-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="stat-label" style="font-size: 0.9rem; font-weight: 500; color: #64748b;">Protein</span>
+            <span class="stat-value" style="font-size: 0.95rem; font-weight: 800; color: #0f172a;">{{ current_protein }} / {{ health.protein_goal|default:150 }} g</span>
+        </div>
+        <div class="progress" style="height: 10px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 0;">
+            <span style="display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #10b981, #06b6d4); width: {{ prot_pct }}%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);"></span>
+        </div>
     </div>
 
-    <br>
-
-    <div class="stat-row">
-
-        <span class="stat-label">Protein</span>
-
-        <span class="stat-value">{{ cart_protein }} / {{ health.protein_goal }} g</span>
-
-    </div>
-
-    <div class="progress">
-
-        <span style="width:61%"></span>
-
-    </div>
-
-    <br>
-
-    <div class="stat-row">
-
-        <span class="stat-label">Water</span>
-
-        <span class="stat-value">0 / {{ health.water_goal }} L</span>
-
-    </div>
-
-    <div class="progress">
-
-        <span style="width:65%"></span>
-
+    <!-- WATER -->
+    <div style="margin-bottom: 6px;">
+        <div class="stat-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="stat-label" style="font-size: 0.9rem; font-weight: 500; color: #64748b;">Water</span>
+            <span class="stat-value" style="font-size: 0.95rem; font-weight: 800; color: #0f172a;">{{ current_water }} / {{ health.water_goal|default:3.0 }} L</span>
+        </div>
+        <div class="progress" style="height: 10px; background: #e2e8f0; border-radius: 10px; overflow: hidden; margin-top: 0;">
+            <span style="display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #10b981, #06b6d4); width: {{ water_pct }}%; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);"></span>
+        </div>
     </div>
 
 </div>

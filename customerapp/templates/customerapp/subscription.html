@@ -317,6 +317,106 @@
             align-items: center;
             gap: 3px;
         }
+
+        /* Comparison Table Styles */
+        .comparison-section {
+            margin-top: 80px;
+            margin-bottom: 60px;
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .comparison-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+        }
+
+        .comparison-table-wrapper {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            backdrop-filter: blur(10px);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th {
+            font-weight: 700;
+            color: #0f172a;
+            background: #f8fafc;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table td {
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        .comparison-table th.highlight-pro {
+            color: #4f46e5;
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .comparison-table th.highlight-elite {
+            color: #d97706;
+            background: rgba(245, 158, 11, 0.05);
+        }
+
+        .comparison-table td:nth-child(3) {
+            background: rgba(99, 102, 241, 0.02);
+        }
+
+        .comparison-table td:nth-child(4) {
+            background: rgba(245, 158, 11, 0.02);
+        }
+
+        .feature-icon {
+            margin-right: 8px;
+            color: #0891b2;
+            width: 18px;
+            text-align: center;
+        }
+
+        .text-success {
+            color: #10b981 !important;
+            font-weight: 700;
+        }
+
+        .text-danger {
+            color: #ef4444 !important;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -400,6 +500,81 @@
                 <button class="plan-btn btn-elite {% if cid.subscription_plan == 'Elite' %}current{% endif %}" onclick="selectPlan('Elite')">
                     {% if cid.subscription_plan == 'Elite' %}Current Plan{% else %}Upgrade to Elite{% endif %}
                 </button>
+            </div>
+        </div>
+
+        <!-- Comparison Section -->
+        <div class="comparison-section">
+            <h2 class="comparison-title">Compare Plans & Features</h2>
+            <p class="comparison-subtitle">See a detailed breakdown of all features and find the plan that fits your goals.</p>
+            
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Features</th>
+                            <th>Starter / Free</th>
+                            <th class="highlight-pro">FitFuel Pro</th>
+                            <th class="highlight-elite">FitFuel Elite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fa-solid fa-store feature-icon"></i> Supplement Store Access</td>
+                            <td>Standard</td>
+                            <td>10% Extra Discount</td>
+                            <td>15% VIP Discount</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-chart-line feature-icon"></i> Progress Tracking & Logs</td>
+                            <td>Basic Logs Only</td>
+                            <td>Interactive Charts & Logs</td>
+                            <td>Interactive Charts & Logs</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-brain feature-icon"></i> AI Health Assessment</td>
+                            <td><span class="text-danger"><i class="fa-solid fa-lock"></i> Locked</span></td>
+                            <td><span class="text-success"><i class="fa-solid fa-circle-check"></i> Full Access</span></td>
+                            <td><span class="text-success"><i class="fa-solid fa-circle-check"></i> Full Access</span></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-utensils feature-icon"></i> AI Custom Meal Planner</td>
+                            <td><span class="text-danger"><i class="fa-solid fa-lock"></i> Locked</span></td>
+                            <td><span class="text-success"><i class="fa-solid fa-circle-check"></i> Custom Generation</span></td>
+                            <td><span class="text-success"><i class="fa-solid fa-circle-check"></i> Custom Generation</span></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-robot feature-icon"></i> Smart AI Product Match</td>
+                            <td>General Match Only</td>
+                            <td>99% Precise recommendations</td>
+                            <td>99% Precise recommendations</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-comments feature-icon"></i> Ask AI Coach</td>
+                            <td>Standard Response Rate</td>
+                            <td>Priority AI Coaching</td>
+                            <td>Instant VIP Response</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-user-tie feature-icon"></i> 1-on-1 Personalized Coach</td>
+                            <td><span class="text-danger"><i class="fa-solid fa-xmark"></i> Not Included</span></td>
+                            <td><span class="text-danger"><i class="fa-solid fa-xmark"></i> Not Included</span></td>
+                            <td><span class="text-success"><i class="fa-solid fa-circle-check"></i> Dedicated Human Coach</span></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-wallet feature-icon"></i> Wallet Cashback & Boosts</td>
+                            <td>Standard</td>
+                            <td>Standard</td>
+                            <td>VIP Priority Cashback</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-solid fa-headset feature-icon"></i> Customer Support</td>
+                            <td>Standard email</td>
+                            <td>Priority Support</td>
+                            <td>24/7 VIP Hotline & Chat</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

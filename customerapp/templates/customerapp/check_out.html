@@ -212,7 +212,7 @@
             {% if coupon %}
             <div class="coupon-status">
               <span class="coupon-applied-text">
-                <i class="fas fa-ticket-alt"></i> Applied: <strong>{{ coupon.code }}</strong> ({{ coupon.discount }}% Off)
+                <i class="fas fa-ticket"></i> Applied: <strong>{{ coupon.code }}</strong> ({{ coupon.discount }}% Off)
               </span>
               <a href="{% url 'remove_coupon' %}" class="remove-coupon-link">
                 <i class="fas fa-trash-alt"></i> Remove

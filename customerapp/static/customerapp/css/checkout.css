@@ -630,6 +630,8 @@ body {
     padding: 8px 12px;
     border-radius: 10px;
     font-size: 12px;
+    gap: 8px;
+    flex-wrap: nowrap;
 }
 .coupon-applied-text {
     color: #065f46;
@@ -637,6 +639,7 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
 }
 .remove-coupon-link {
     color: #ef4444;
@@ -644,6 +647,10 @@ body {
     font-weight: 700;
     font-size: 11px;
     transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
 }
 .remove-coupon-link:hover {
     color: #b91c1c;

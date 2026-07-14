@@ -7,7 +7,37 @@
     <label for="nav-home" style="position: absolute; top: 20px; right: 25px; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: 0.2s;">
         <i class="fa-solid fa-xmark"></i>
     </label>
+    {% if cid.subscription_plan == 'Free' %}
+    <div class="assessment-locked-card">
+        <div class="lock-icon-wrapper">
+            <i class="fa-solid fa-lock"></i>
+            <i class="fa-solid fa-crown"></i>
+        </div>
+        
+        <h1>AI Assessment is Locked</h1>
+        <p>
+            Unlock our intelligent, personalized AI Assessment to calculate your perfect daily calories, protein, carbs, and fat targets, and generate customized product recommendations tailored to your goals.
+        </p>
+        
+        <ul class="features-list">
+            <li><i class="fa-solid fa-gem"></i> Personalized AI Health & Nutrition Profiling</li>
+            <li><i class="fa-solid fa-chart-pie"></i> Dynamic Macro Target Calculator (Protein, Carbs, Fat)</li>
+            <li><i class="fa-solid fa-wand-magic-sparkles"></i> Tailored AI Product Matches from our Store</li>
+            <li><i class="fa-solid fa-crown"></i> Upgrade to Pro/Elite for Advanced AI features</li>
+        </ul>
 
+        <div class="locked-cta-wrapper">
+            <a href="{% url 'subscription_plans' %}" class="upgrade-btn">
+                <i class="fa-solid fa-crown"></i> Upgrade to FitFuel Pro / Elite
+            </a>
+            
+            <br>
+            <label for="nav-home" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Return to Dashboard
+            </label>
+        </div>
+    </div>
+    {% else %}
     <div class="assessment-header">
 
         <span class="ai-badge">
@@ -231,7 +261,7 @@
         </div>
 
     </form>
-
+    {% endif %}
 </div>
 
 </div>

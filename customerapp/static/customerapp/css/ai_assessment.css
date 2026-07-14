@@ -243,3 +243,123 @@ font-size:1.8rem;
 }
 
 }
+
+/* Premium Lock State Styling */
+.assessment-locked-card {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.assessment-locked-card .lock-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    color: #d97706;
+    font-size: 32px;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    position: relative;
+}
+
+.assessment-locked-card .lock-icon-wrapper .fa-crown {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 16px;
+    color: #f59e0b;
+    transform: rotate(15deg);
+}
+
+.assessment-locked-card h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+}
+
+.assessment-locked-card p {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 auto 30px;
+    max-width: 500px;
+}
+
+.assessment-locked-card .features-list {
+    text-align: left;
+    background: rgba(248, 250, 252, 0.6);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 0 auto 35px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 500px;
+}
+
+.assessment-locked-card .features-list li {
+    font-size: 14px;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+}
+
+.assessment-locked-card .features-list li i {
+    color: #d97706;
+    font-size: 16px;
+}
+
+.assessment-locked-card .locked-cta-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.assessment-locked-card .upgrade-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+    transition: all 0.25s ease;
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+}
+
+.assessment-locked-card .upgrade-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.assessment-locked-card .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.2s;
+    cursor: pointer;
+}
+
+.assessment-locked-card .back-link:hover {
+    color: #0f172a;
+}

@@ -1018,6 +1018,10 @@ def save_health_profile(request):
     uid = User.objects.get(email=request.session["email"])
     cid = customer.objects.get(user_id=uid)
 
+    if cid.subscription_plan == "Free":
+        messages.error(request, "AI Assessment is a premium feature. Please upgrade your plan to access it.")
+        return redirect("subscription_plans")
+
     if request.method == "POST":
 
         age = int(request.POST["age"])

@@ -9,9 +9,14 @@
             <i class="fa-solid fa-house"></i>
             <span>Dashboard</span>
         </label>
-        <label for="nav-assessment" class="sidebar-item" style="cursor: pointer;">
-            <i class="fa-solid fa-brain"></i>
-            <span>AI Assessment</span>
+        <label for="nav-assessment" class="sidebar-item" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <span style="display: flex; align-items: center; gap: 15px;">
+                <i class="fa-solid fa-brain"></i>
+                <span>AI Assessment</span>
+            </span>
+            {% if cid.subscription_plan == 'Free' %}
+            <i class="fa-solid fa-lock" style="font-size: 11px; opacity: 0.7; color: #f59e0b;"></i>
+            {% endif %}
         </label>
         <label for="nav-store" class="sidebar-item store-btn" style="cursor: pointer;">
             <i class="fa-solid fa-store"></i>
@@ -84,13 +89,17 @@
 
     </p>
 
-    <a href="#" class="ai-btn">
-
-        <i class="fa-solid fa-brain"></i>
-
-        Start Assessment
-
+    {% if cid.subscription_plan == 'Free' %}
+    <a href="{% url 'subscription_plans' %}" class="ai-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706); border: none; color: #fff;">
+        <i class="fa-solid fa-crown"></i>
+        Upgrade to Start
     </a>
+    {% else %}
+    <label for="nav-assessment" class="ai-btn" style="cursor: pointer;">
+        <i class="fa-solid fa-brain"></i>
+        Start Assessment
+    </label>
+    {% endif %}
 
 </div>
 

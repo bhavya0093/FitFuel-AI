@@ -237,10 +237,18 @@
         <i class="fa-solid fa-utensils"></i>
         Meal Plans
     </a>
-    <a href="{% url 'meal_planner' %}">
+    <label for="nav-progress" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-chart-line"></i>
         Progress
-    </a>
+    </label>
+    <label for="nav-achievements" class="mobile-item" style="cursor: pointer;">
+        <i class="fa-solid fa-trophy"></i>
+        Achievements
+    </label>
+    <label for="nav-leaderboard" class="mobile-item" style="cursor: pointer;">
+        <i class="fa-solid fa-ranking-star"></i>
+        Leaderboard
+    </label>
     <label for="nav-cart" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-cart-shopping"></i>
         My Cart
@@ -262,3 +270,44 @@
         Logout
     </a>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const toggleBtn = document.querySelector(".ff-mobile-toggle");
+    const mobileMenu = document.querySelector(".ff-mobile-menu");
+    if (toggleBtn && mobileMenu) {
+        toggleBtn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle("active");
+            
+            // Toggle hamburger icon to cross icon
+            const icon = toggleBtn.querySelector("i");
+            if (icon) {
+                if (mobileMenu.classList.contains("active")) {
+                    icon.className = "fa-solid fa-xmark";
+                } else {
+                    icon.className = "fa-solid fa-bars";
+                }
+            }
+        });
+        
+        // Close mobile menu when clicking outside of it
+        document.addEventListener("click", function(e) {
+            if (!mobileMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+                mobileMenu.classList.remove("active");
+                const icon = toggleBtn.querySelector("i");
+                if (icon) icon.className = "fa-solid fa-bars";
+            }
+        });
+
+        // Close mobile menu when clicking any item inside it
+        mobileMenu.querySelectorAll("a, label").forEach(item => {
+            item.addEventListener("click", function() {
+                mobileMenu.classList.remove("active");
+                const icon = toggleBtn.querySelector("i");
+                if (icon) icon.className = "fa-solid fa-bars";
+            });
+        });
+    }
+});
+</script>

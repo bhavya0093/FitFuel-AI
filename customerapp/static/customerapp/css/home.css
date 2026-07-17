@@ -339,7 +339,15 @@
     .cslide{height:240px;}
     .cslide-cnt{padding:24px;}
     .cslide-cnt h2{font-size:1.4rem;}
-    #page-home .oth,#page-home .orow{grid-template-columns:1.5fr 1fr 1fr;}
+    #page-home .oth,#page-home .orow{grid-template-columns:1.2fr 1.1fr 1fr 1.2fr;}
+    #page-home .oth span:nth-child(3),
+    #page-home .oth span:nth-child(4),
+    #page-home .oth span:nth-child(6),
+    #page-home .orow span:nth-child(3),
+    #page-home .orow span:nth-child(4),
+    #page-home .orow span:nth-child(6) {
+        display: none !important;
+    }
 }
 .cpill-icon{
     width:44px;

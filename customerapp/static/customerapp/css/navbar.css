@@ -331,9 +331,24 @@ padding:0 28px;
         border-radius:20px;
     }
 
-    .ff-profile .ff-user{
+    .ff-profile .ff-user,
+    .ff-profile .fa-chevron-down {
 
-        display:none;
+        display:none !important;
+    }
+
+    .ff-profile {
+        width: auto;
+        padding: 2px;
+        border-radius: 50%;
+        border-color: transparent;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .ff-profile img {
+        width: 38px;
+        height: 38px;
     }
 
 }

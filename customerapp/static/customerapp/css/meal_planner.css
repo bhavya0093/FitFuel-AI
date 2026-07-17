@@ -857,3 +857,49 @@ border-radius:40px;
 font-weight:bold;
 
 }
+
+/* Premium Responsiveness Media Queries */
+@media(max-width: 768px) {
+    .health-score-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+    .score-left h1 {
+        font-size: 36px;
+        margin: 8px 0;
+    }
+    .score-left p {
+        font-size: 15px;
+    }
+    .score-circle {
+        width: 100px;
+        height: 100px;
+        font-size: 24px;
+        margin: 0 auto;
+    }
+    .history-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+    .history-left {
+        width: 100%;
+        font-weight: 700;
+    }
+    .history-right {
+        width: 100%;
+        text-align: center;
+    }
+    .meal-container {
+        padding: 20px 15px;
+    }
+    .meal-header h1 {
+        font-size: 1.8rem;
+    }
+    .meal-header p {
+        font-size: 0.95rem;
+    }
+}

@@ -1,208 +1,473 @@
-<!-- PROFILE PAGE -->
+<!-- PROFILE PAGE REDESIGN -->
+{% load static %}
+<style>
+/* Bulletproof inline overrides to ensure the viewport is locked and scrolling works */
+body:has(#nav-profile:checked) {
+    overflow: hidden !important;
+}
+
+body:has(#nav-profile:checked) .dashboard-layout {
+    margin: 0 auto !important;
+    height: calc(100vh - 80px) !important;
+    padding-top: 15px !important;
+    box-sizing: border-box !important;
+    align-items: stretch !important;
+}
+
+body:has(#nav-profile:checked) .main-content {
+    min-height: 0 !important;
+    height: 100% !important;
+}
+
+body:has(#nav-profile:checked) #page-profile {
+    height: 100% !important;
+}
+
+body:has(#nav-profile:checked) #page-profile .iwrap {
+    height: 100% !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body:has(#nav-profile:checked) .pw {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 1 !important;
+}
+
+.pright {
+    flex: 1 !important;
+    background: #ffffff !important;
+    padding: 20px 20px 45px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    overflow-y: auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+}
+
+.profile-action-footer {
+    display: block !important;
+    clear: both !important;
+    padding: 20px 24px 45px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.profile-action-footer .epbtn {
+    margin: 0 !important;
+    display: inline-flex !important;
+}
+</style>
 <div id="page-profile" class="page">
 <div class="iwrap">
-  <div class="pgnav"><label class="back-btn" for="nav-home" style="cursor: pointer;"><i class="fas fa-arrow-left"></i> Back to Dashboard</label><div class="pg-ttl">My Profile</div></div>
-
+  
   <div class="pw">
     <!-- DARK SIDEBAR -->
     <div class="psb">
       <div class="pav-wrap">
         <div class="pav {% if cid.subscription_plan == 'Pro' %}pro-border{% elif cid.subscription_plan == 'Elite' %}elite-border{% endif %}">
-            <img src="{{cid.pic.url}}" alt="">
+          <img src="{{cid.pic.url}}" alt="Avatar">
         </div>
         <div class="pnm">
-            {{cid.firstname}} {{cid.lastname}}
-            {% if cid.subscription_plan == 'Pro' %}
-                <span class="pro-badge-navbar"><i class="fa-solid fa-star"></i> PRO</span>
-            {% elif cid.subscription_plan == 'Elite' %}
-                <span class="vip-badge-navbar"><i class="fa-solid fa-crown"></i> ELITE</span>
-            {% endif %}
+          {{cid.firstname}} {{cid.lastname}}
+          {% if cid.subscription_plan == 'Pro' %}
+            <span class="pro-badge-navbar"><i class="fa-solid fa-star"></i> PRO</span>
+          {% elif cid.subscription_plan == 'Elite' %}
+            <span class="vip-badge-navbar"><i class="fa-solid fa-crown"></i> ELITE</span>
+          {% endif %}
         </div>
         <div class="pem">{{uid.email}}</div>
+        
+        <!-- Compact Profile Completion Bar -->
+        <div class="completion-compact" style="margin-top: 15px; width: 100%; padding: 0 10px;">
+          <div class="comp-label" style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; color: #475569; margin-bottom: 6px;">
+            <span>Profile Complete</span>
+            <span id="profileCompletionText">0</span>%
+          </div>
+          <div class="comp-bar-bg" style="width: 100%; height: 6px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+            <div class="comp-bar-fill" id="profileCompletionBar" style="width: 0%; height: 100%; background: #10b981; border-radius: 4px; transition: width 0.8s ease-in-out;"></div>
+          </div>
+        </div>
       </div>
+      
       <div class="pkpis">
         <div class="kpi"><span class="kpi-v">{{ cid.total_orders }}</span><div class="kpi-l">Orders</div></div>
-        <div class="kpi"><span class="kpi-v">{{ cid.total_spent }}</span><div class="kpi-l">Spent</div></div>
+        <div class="kpi"><span class="kpi-v">₹{{ cid.total_spent }}</span><div class="kpi-l">Spent</div></div>
         <div class="kpi"><span class="kpi-v">{{ cid.wishlist_count }}</span><div class="kpi-l">Wishlist</div></div>
         <div class="kpi"><span class="kpi-v">{{ cid.coupons_count }}</span><div class="kpi-l">Coupons</div></div>
       </div>
+      
+      <!-- Interactive SPA Navigation Links -->
       <nav class="pnav">
-        <a href="#sec-info" class="pni on"><i class="fas fa-user"></i> Personal Info</a>
-        <label for="nav-edit" class="pni"><i class="fas fa-pen"></i> Edit Profile</label>
-        <a href="{% url 'orders' %}" class="pni"><i class="fas fa-box"></i> My Orders</a>
-        <a href="#sec-addresses" class="pni"><i class="fas fa-map-marker-alt"></i> Addresses</a>
-        <a href="{% url 'wishlist' %}" class="pni"><i class="fas fa-heart"></i> Wishlist</a>
-        <a href="{% url 'coupons' %}" class="pni">
-    <i class="fas fa-ticket-alt"></i>
-    Coupons
-</a>
-        <a href="{% url 'wallet' %}" class="pni">
-    <i class="fas fa-wallet"></i>
-    Wallet
-</a>
-<a href="{% url 'meal_planner' %}" class="pni">
-
-    <i class="fa-solid fa-utensils"></i>
-
-    Meal Planner
-
-</a>
-        <a href="{% url 'notifications' %}" class="pni">
-
-            <i class="fas fa-bell"></i>
-
-            Notifications
-
-            {% if unread_notifications %}
-
-            <span class="notify-count">
-
-                {{ unread_notifications }}
-
-            </span>
-
-            {% endif %}
-
+        <a href="javascript:void(0)" class="pni on" data-target="sec-info">
+          <i class="fas fa-user"></i> Personal Info
         </a>
-        <a href="{% url 'logout' %}" class="pni danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        <a href="javascript:void(0)" class="pni" data-target="sec-health">
+          <i class="fas fa-heartbeat"></i> Health Dashboard
+        </a>
+        <a href="javascript:void(0)" class="pni" data-target="sec-orders">
+          <i class="fas fa-box"></i> Recent Orders
+        </a>
+        <a href="javascript:void(0)" class="pni" data-target="sec-addresses">
+          <i class="fas fa-map-marker-alt"></i> Saved Addresses
+        </a>
+        <label for="nav-edit" class="pni">
+          <i class="fas fa-pen"></i> Edit Profile
+        </label>
+        <a href="{% url 'wishlist' %}" class="pni">
+          <i class="fas fa-heart"></i> My Wishlist
+        </a>
+        <a href="{% url 'coupons' %}" class="pni">
+          <i class="fas fa-ticket-alt"></i> Coupons
+        </a>
+        <a href="{% url 'wallet' %}" class="pni">
+          <i class="fas fa-wallet"></i> Wallet
+        </a>
+        <a href="{% url 'meal_planner' %}" class="pni">
+          <i class="fa-solid fa-utensils"></i> Meal Planner
+        </a>
+        <a href="{% url 'logout' %}" class="pni danger">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
       </nav>
     </div>
 
-    <!-- LIGHT CONTENT -->
+    <!-- LIGHT CONTENT TAB PANELS -->
     <div class="pright">
-      <div class="sec" id="sec-info">
-        <div class="sec-h"><i class="fas fa-user-circle"></i> <span>Personal Information</span></div>
-        <div class="info-g">
-          <div class="ifd"><label>First Name</label><div class="fv">{{cid.firstname}}</div></div>
-          <div class="ifd"><label>Last Name</label><div class="fv">{{cid.lastname}}</div></div>
-          <div class="ifd"><label>Email</label><div class="fv">{{uid.email}}</div></div>
-          <div class="ifd"><label>Phone</label><div class="fv">{{cid.contectno}}</div></div>
-        </div>
-        <label class="epbtn" for="nav-edit"><i class="fas fa-pen"></i> Edit Profile</label>
+      <!-- Header panel -->
+      <div class="pright-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 5px; flex-shrink: 0;">
+        <h2 class="pright-title" style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Profile & Fitness Settings</h2>
+        <a href="/customer-dashboard/" class="back-dashboard-compact" style="display: inline-flex; align-items: center; gap: 8px; color: #64748b; text-decoration: none; font-weight: 700; font-size: 0.8rem; border: 1px solid #cbd5e1; padding: 6px 14px; border-radius: 30px; background: #fff; transition: 0.2s;">
+          <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
       </div>
-<div class="sec" id="sec-health">
-
-    <div class="sec-h">
-        <i class="fas fa-heartbeat"></i>
-        <span>Health Profile</span>
-    </div>
-
-    {% if health %}
-
-    <div class="info-g">
-
-        <div class="ifd">
-            <label>Age</label>
-            <div class="fv">{{ health.age }}</div>
+      
+      <!-- Tab 1: Personal Info -->
+      <div class="sec tab-panel active" id="sec-info">
+        <div class="sec-h"><i class="fas fa-user-circle"></i> <span>Personal Information</span></div>
+        
+        <div class="profile-intro-row">
+          <div class="profile-card-art">
+            <div class="membership-card-face {% if cid.subscription_plan == 'Pro' %}pro-theme{% elif cid.subscription_plan == 'Elite' %}elite-theme{% endif %}">
+              <div class="card-brand"><i class="fa-solid fa-bolt"></i> FitFuel AI</div>
+              <div class="card-chip"></div>
+              <div class="card-user-info">
+                <div class="card-number">•••• •••• •••• {{ uid.id|default:"1337" }}</div>
+                <div class="card-holder">{{ cid.firstname }} {{ cid.lastname }}</div>
+              </div>
+              <div class="card-tier">{{ cid.subscription_plan }} Tier</div>
+            </div>
+          </div>
+          
+          <div class="quick-stats-info">
+            <h4>Account Status</h4>
+            <div class="status-indicator-pill active">
+              <span class="dot"></span> Online & Active
+            </div>
+            <p style="margin-top:10px; font-size:13px; color:#64748b;">Member since: <strong style="color:#334155;">{{ uid.date_joined|date:"M Y"|default:"Joined Recently" }}</strong></p>
+          </div>
         </div>
-
-        <div class="ifd">
-            <label>Gender</label>
-            <div class="fv">{{ health.gender }}</div>
-        </div>
-
-        <div class="ifd">
-            <label>Height</label>
-            <div class="fv">{{ health.height }} cm</div>
-        </div>
-
-        <div class="ifd">
-            <label>Weight</label>
-            <div class="fv">{{ health.weight }} kg</div>
-        </div>
-
-        <div class="ifd">
-            <label>BMI</label>
-            <div class="fv">{{ health.bmi }}</div>
-        </div>
-
-        <div class="ifd">
-            <label>Daily Calories</label>
-            <div class="fv">{{ health.daily_calories }} kcal</div>
-        </div>
-
-    </div>
-
-    {% else %}
-
-    <form method="POST" action="{% url 'save_health_profile' %}">
-
-        {% csrf_token %}
 
         <div class="info-g">
-
-            <div class="ifd">
-                <label>Age</label>
-                <input type="number" name="age" required>
+          <div class="ifd">
+            <label>First Name</label>
+            <div class="fv"><i class="fa-regular fa-user icon-field"></i> {{cid.firstname}}</div>
+          </div>
+          <div class="ifd">
+            <label>Last Name</label>
+            <div class="fv"><i class="fa-regular fa-user icon-field"></i> {{cid.lastname}}</div>
+          </div>
+          <div class="ifd">
+            <label>Email Address</label>
+            <div class="fv"><i class="fa-regular fa-envelope icon-field"></i> {{uid.email}}</div>
+          </div>
+          <div class="ifd">
+            <label>Phone Number</label>
+            <div class="fv"><i class="fa-solid fa-phone icon-field"></i> {{cid.contectno|default:"Not Provided"}}</div>
+          </div>
+        </div>
+        
+        <div class="profile-action-footer">
+          <label class="epbtn" for="nav-edit"><i class="fas fa-pen"></i> Edit Profile Information</label>
+        </div>
+      </div>
+      
+      <!-- Tab 2: Health Profile Dashboard -->
+      <div class="sec tab-panel" id="sec-health">
+        <div class="sec-h"><i class="fas fa-heartbeat"></i> <span>Health Dashboard</span></div>
+        
+        {% if health %}
+        <div class="health-dashboard-grid">
+          
+          <!-- Calories Circular SVG Card -->
+          <div class="health-metric-card calorie-card">
+            <div class="metric-header">
+              <i class="fa-solid fa-fire metric-icon text-red"></i>
+              <h4>Daily Calorie Target</h4>
             </div>
-
-            <div class="ifd">
-                <label>Gender</label>
-
-                <select name="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+            
+            <div class="radial-gauge-container">
+              <svg class="radial-ring" width="120" height="120">
+                <circle class="radial-ring__bg" stroke="#f1f5f9" stroke-width="8" fill="transparent" r="48" cx="60" cy="60"/>
+                <circle class="radial-ring__progress" stroke="url(#greenGrad)" stroke-width="8" stroke-linecap="round" fill="transparent" r="48" cx="60" cy="60" style="stroke-dasharray: 301.6; stroke-dashoffset: 75;"/>
+                <defs>
+                  <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#10b981"/>
+                    <stop offset="100%" stop-color="#06b6d4"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="radial-value">
+                <span class="value-num">{{ health.daily_calories }}</span>
+                <span class="value-unit">kcal</span>
+              </div>
             </div>
-
-            <div class="ifd">
-                <label>Height (cm)</label>
-                <input type="number" step="0.1" name="height" required>
+            <p class="metric-caption">AI Generated Intake Budget</p>
+          </div>
+          
+          <!-- BMI Advanced Slider Card -->
+          <div class="health-metric-card bmi-card">
+            <div class="metric-header">
+              <i class="fa-solid fa-weight-scale metric-icon text-blue"></i>
+              <h4>BMI Indicator</h4>
             </div>
-
-            <div class="ifd">
-                <label>Weight (kg)</label>
-                <input type="number" step="0.1" name="weight" required>
+            
+            <div class="bmi-value-display">
+              <div class="bmi-large-num">{{ health.bmi }}</div>
+              <div class="bmi-status-text text-green" id="bmiStatusText">Normal Weight</div>
             </div>
-
-            <div class="ifd">
-                <label>Activity Level</label>
-
-                <select name="activity_level">
-                    <option>Sedentary</option>
-                    <option>Light</option>
-                    <option>Moderate</option>
-                    <option>Active</option>
-                    <option>Very Active</option>
-                </select>
+            
+            <!-- Dynamic Linear Bar -->
+            <div class="bmi-scale-wrapper">
+              <div class="bmi-bar-scale">
+                <span class="scale-section underweight"></span>
+                <span class="scale-section normal"></span>
+                <span class="scale-section overweight"></span>
+                <span class="scale-section obese"></span>
+              </div>
+              <div class="bmi-marker-pin" id="bmiMarker"></div>
             </div>
-
-            <div class="ifd">
-                <label>Goal</label>
-
-                <select name="goal">
-                    <option>Weight Loss</option>
-                    <option>Muscle Gain</option>
-                    <option>Maintenance</option>
-                </select>
+            
+            <div class="bmi-labels-row">
+              <span>18.5</span>
+              <span>25.0</span>
+              <span>30.0</span>
             </div>
-
-            <div class="ifd">
-                <label>Diet Type</label>
-
-                <select name="diet_type">
-                    <option>Veg</option>
-                    <option>Vegan</option>
-                    <option>Non-Veg</option>
-                </select>
+          </div>
+          
+          <!-- Core Metrics Info Card -->
+          <div class="health-metric-card core-stats-card">
+            <div class="metric-header">
+              <i class="fa-solid fa-ruler-vertical metric-icon text-purple"></i>
+              <h4>Body Dimensions</h4>
             </div>
+            
+            <div class="dimension-row">
+              <div class="dim-box">
+                <span class="dim-label">Height</span>
+                <span class="dim-val">{{ health.height }} <small>cm</small></span>
+              </div>
+              <div class="dim-divider"></div>
+              <div class="dim-box">
+                <span class="dim-label">Weight</span>
+                <span class="dim-val">{{ health.weight }} <small>kg</small></span>
+              </div>
+            </div>
+            
+            <div class="dimension-sub-stats">
+              <div class="sub-item">
+                <span>Age:</span> <strong>{{ health.age }} yrs</strong>
+              </div>
+              <div class="sub-item">
+                <span>Gender:</span> <strong>{{ health.gender }}</strong>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Lifestyle & Plan Badge Card -->
+          <div class="health-metric-card lifestyle-card">
+            <div class="metric-header">
+              <i class="fa-solid fa-utensils metric-icon text-gold"></i>
+              <h4>Dietary Profile</h4>
+            </div>
+            
+            <div class="diet-details-list">
+              <div class="diet-item">
+                <span class="label">Primary Goal:</span>
+                <span class="pill-tag green-tag">{{ health.goal }}</span>
+              </div>
+              <div class="diet-item">
+                <span class="label">Activity Level:</span>
+                <span class="pill-tag blue-tag">{{ health.activity_level }}</span>
+              </div>
+              <div class="diet-item">
+                <span class="label">Dietary Choice:</span>
+                <span class="pill-tag purple-tag">{{ health.diet_type }}</span>
+              </div>
+            </div>
+          </div>
 
         </div>
+        
+        <div class="health-recalc-action">
+          <form method="POST" action="{% url 'save_health_profile' %}" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="recalculate" value="1">
+            <button class="epbtn recalc-btn" type="button" onclick="toggleRecalcForm()"><i class="fa-solid fa-arrows-rotate"></i> Recalculate Metrics</button>
+          </form>
+        </div>
+        
+        <!-- Recalculate Modal/Form Toggle -->
+        <div class="recalc-form-container" id="recalcForm" style="display:none; margin-top:20px;">
+          <div class="recalc-header">
+            <h4>Update Health & Activity Parameters</h4>
+            <button class="close-recalc-btn" onclick="toggleRecalcForm()">&times;</button>
+          </div>
+          <form method="POST" action="{% url 'save_health_profile' %}">
+            {% csrf_token %}
+            <div class="info-g">
+              <div class="ifd">
+                <label>Age</label>
+                <input type="number" name="age" value="{{ health.age }}" required>
+              </div>
+              <div class="ifd">
+                <label>Gender</label>
+                <select name="gender">
+                  <option value="Male" {% if health.gender == 'Male' %}selected{% endif %}>Male</option>
+                  <option value="Female" {% if health.gender == 'Female' %}selected{% endif %}>Female</option>
+                  <option value="Other" {% if health.gender == 'Other' %}selected{% endif %}>Other</option>
+                </select>
+              </div>
+              <div class="ifd">
+                <label>Height (cm)</label>
+                <input type="number" step="0.1" name="height" value="{{ health.height }}" required>
+              </div>
+              <div class="ifd">
+                <label>Weight (kg)</label>
+                <input type="number" step="0.1" name="weight" value="{{ health.weight }}" required>
+              </div>
+              <div class="ifd">
+                <label>Activity Level</label>
+                <select name="activity_level">
+                  <option {% if health.activity_level == 'Sedentary' %}selected{% endif %}>Sedentary</option>
+                  <option {% if health.activity_level == 'Light' %}selected{% endif %}>Light</option>
+                  <option {% if health.activity_level == 'Moderate' %}selected{% endif %}>Moderate</option>
+                  <option {% if health.activity_level == 'Active' %}selected{% endif %}>Active</option>
+                  <option {% if health.activity_level == 'Very Active' %}selected{% endif %}>Very Active</option>
+                </select>
+              </div>
+              <div class="ifd">
+                <label>Goal</label>
+                <select name="goal">
+                  <option {% if health.goal == 'Weight Loss' %}selected{% endif %}>Weight Loss</option>
+                  <option {% if health.goal == 'Muscle Gain' %}selected{% endif %}>Muscle Gain</option>
+                  <option {% if health.goal == 'Maintenance' %}selected{% endif %}>Maintenance</option>
+                </select>
+              </div>
+              <div class="ifd">
+                <label>Diet Type</label>
+                <select name="diet_type">
+                  <option {% if health.diet_type == 'Veg' %}selected{% endif %}>Veg</option>
+                  <option {% if health.diet_type == 'Vegan' %}selected{% endif %}>Vegan</option>
+                  <option {% if health.diet_type == 'Non-Veg' %}selected{% endif %}>Non-Veg</option>
+                </select>
+              </div>
+            </div>
+            <div class="recalc-submit-row">
+              <button class="epbtn submit-recalc-btn" type="submit">Update & Save Health Profile</button>
+            </div>
+          </form>
+        </div>
+        
+        {% else %}
+        <!-- Premium Onboarding/Wizard Step Form -->
+        <div class="health-wizard-container">
+          <div class="wizard-visual">
+            <i class="fa-solid fa-heart-pulse heartbeat-pulse"></i>
+            <h3>Establish Your FitFuel AI Health Profile</h3>
+            <p>FitFuel AI custom-calculates protein limits, carbohydrate targets, daily calories, and recommends supplements based on clinical metrics.</p>
+          </div>
+          
+          <form method="POST" action="{% url 'save_health_profile' %}">
+            {% csrf_token %}
+            <div class="info-g">
+              <div class="ifd">
+                <label>Age</label>
+                <input type="number" name="age" placeholder="e.g. 25" required>
+              </div>
+              <div class="ifd">
+                <label>Gender</label>
+                <select name="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="ifd">
+                <label>Height (cm)</label>
+                <input type="number" step="0.1" name="height" placeholder="e.g. 175" required>
+              </div>
+              <div class="ifd">
+                <label>Weight (kg)</label>
+                <input type="number" step="0.1" name="weight" placeholder="e.g. 70" required>
+              </div>
+              <div class="ifd">
+                <label>Activity Level</label>
+                <select name="activity_level">
+                  <option>Sedentary</option>
+                  <option>Light</option>
+                  <option>Moderate</option>
+                  <option>Active</option>
+                  <option>Very Active</option>
+                </select>
+              </div>
+              <div class="ifd">
+                <label>Goal</label>
+                <select name="goal">
+                  <option>Weight Loss</option>
+                  <option>Muscle Gain</option>
+                  <option>Maintenance</option>
+                </select>
+              </div>
+              <div class="ifd">
+                <label>Diet Type</label>
+                <select name="diet_type">
+                  <option>Veg</option>
+                  <option>Vegan</option>
+                  <option>Non-Veg</option>
+                </select>
+              </div>
+            </div>
+            
+            <button class="epbtn submit-wizard-btn" type="submit">
+              <i class="fa-solid fa-sparkles"></i> Generate AI Health Profile
+            </button>
+          </form>
+        </div>
+        {% endif %}
+      </div>
 
-        <button class="epbtn" type="submit">
-            Save Health Profile
-        </button>
+      <!-- Tab 3: Recent Orders -->
+      <div class="sec tab-panel" id="sec-orders">
+        <div class="sec-h"><i class="fas fa-box"></i> <span>Recent Orders History</span></div>
+        
+        <!-- Search & Info Bar -->
+        <div class="orders-action-bar">
+          <div class="search-box-orders">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="orderSearchField" placeholder="Filter orders by ID, Date or Status..." onkeyup="searchAndFilterOrders()">
+          </div>
+          <div class="orders-counter-label">
+            Showing <strong id="visibleOrdersCount">{{ orders|length }}</strong> orders
+          </div>
+        </div>
 
-    </form>
-
-    {% endif %}
-
-</div>
-
-      <div class="sec" id="sec-orders">
-        <div class="sec-h"><i class="fas fa-box"></i> <span>Recent Orders</span></div>
-        <div class="obox">
+        <div class="obox" style="max-height: 380px; overflow-y: auto;">
           <div class="oth">
             <span>Order ID</span>
             <span>Date</span>
@@ -213,12 +478,12 @@
           </div>
 
           {% for order in orders %}
-          <div class="orow">
+          <div class="orow order-record-row" data-search="{{ order.id }} {{ order.order_date|date:'d M Y' }} {{ order.payment_method }} {{ order.status }}">
             <span class="oid">#FF-{{ order.id }}</span>
             <span>{{ order.order_date|date:"d M Y" }}</span>
-            <span>{{ order.payment_method }}</span>
-            <span>₹{{ order.total_amount }}</span>
-            <span>{{ order.items.count }}</span>
+            <span class="pay-method-span"><i class="fa-solid fa-credit-card"></i> {{ order.payment_method }}</span>
+            <strong class="order-price-val">₹{{ order.total_amount }}</strong>
+            <span class="items-count-badge">{{ order.items.count }} items</span>
             <span class="sp {% if order.status == 'Delivered' %}s1{% elif order.status == 'In Transit' or order.status == 'Shipped' %}s2{% elif order.status == 'Pending' or order.status == 'Confirmed' %}s3{% elif order.status == 'Cancelled' %}s4{% elif order.status == 'Packed' %}s5{% endif %}">
               {% if order.status == "Delivered" %}
                 <i class="fas fa-check-circle"></i>
@@ -235,37 +500,45 @@
             </span>
           </div>
           {% empty %}
-          <div class="orow">
-              <span style="grid-column:1/7;text-align:center;padding:25px;font-size:0.85rem;color:#94a3b8;">
-                  No Orders Yet
-              </span>
+          <div class="empty-state-orders">
+            <i class="fa-solid fa-folder-open"></i>
+            <p>You haven't placed any orders yet. Visit the Supp Store to explore nutrition essentials!</p>
+            <label for="nav-store" class="epbtn" style="width:fit-content; margin: 15px auto 0;">Go to Nutrition Store</label>
           </div>
           {% endfor %}
+          
+          <!-- No Search Results Message -->
+          <div class="empty-state-orders" id="noSearchResults" style="display:none;">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+            <p>No orders matched your search criteria. Try a different query.</p>
+          </div>
         </div>
       </div>
 
-      <!-- Saved Addresses Section -->
-      <div class="sec" id="sec-addresses">
-        <div class="sec-h" style="display: flex; justify-content: space-between; align-items: center;">
+      <!-- Tab 4: Saved Addresses -->
+      <div class="sec tab-panel" id="sec-addresses">
+        <div class="sec-h" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 24px;">
           <div><i class="fas fa-map-marker-alt"></i> <span>Saved Addresses</span></div>
-          <a href="{% url 'add_address' %}?next=/customer-dashboard/%3Factive_page%3Dprofile%23sec-addresses" class="add-address-btn"><i class="fas fa-plus"></i> Add Address</a>
+          <a href="{% url 'add_address' %}?next=/customer-dashboard/%3Factive_page%3Dprofile%23sec-addresses" class="add-address-btn"><i class="fas fa-plus"></i> Add New Address</a>
         </div>
         
-        <div class="address-grid">
+        <div class="address-grid" style="max-height: 380px; overflow-y: auto;">
           {% for addr in cid.addresses.all %}
-          <div class="addr-card">
+          <div class="addr-card {% if addr.is_default %}default-active-card{% endif %}">
             <div class="addr-header">
               <span class="addr-title">{{ addr.fullname }}</span>
-              <span class="addr-type {{ addr.address_type|lower }}">{{ addr.address_type }}</span>
+              <span class="addr-type {{ addr.address_type|lower }}"><i class="fa-solid {% if addr.address_type == 'Home' %}fa-house-user{% elif addr.address_type == 'Work' %}fa-briefcase{% else %}fa-map-pin{% endif %}"></i> {{ addr.address_type }}</span>
               {% if addr.is_default %}
-              <span class="addr-default-badge">Default</span>
+              <span class="addr-default-badge"><i class="fa-solid fa-star"></i> Default</span>
               {% endif %}
             </div>
+            
             <div class="addr-meta"><i class="fas fa-phone-alt"></i> {{ addr.mobile }}</div>
+            
             <div class="addr-details">
               {{ addr.house_no }}, {{ addr.area }}<br>
-              {% if addr.landmark %}{{ addr.landmark }}<br>{% endif %}
-              {{ addr.city }}, {{ addr.state }} - {{ addr.pincode }}
+              {% if addr.landmark %}<small class="landmark-txt">Landmark: {{ addr.landmark }}</small><br>{% endif %}
+              <strong>{{ addr.city }}, {{ addr.state }} - {{ addr.pincode }}</strong>
             </div>
             
             <div class="addr-actions">
@@ -274,9 +547,10 @@
             </div>
           </div>
           {% empty %}
-          <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: #94a3b8; font-size: 0.85rem;">
-            <i class="fas fa-map-marked-alt" style="font-size: 2.2rem; margin-bottom: 10px; color: #cbd5e1; display: block;"></i>
-            <span>No addresses saved yet.</span>
+          <div style="grid-column: 1/-1; text-align: center; padding: 50px 20px; color: #94a3b8; font-size: 0.85rem;">
+            <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 12px; color: #cbd5e1; display: block;"></i>
+            <span style="font-weight:600; color:#64748b; font-size:14px;">No addresses saved yet.</span>
+            <p style="margin-top:5px; color:#94a3b8;">Save addresses to speed up checkout processes.</p>
           </div>
           {% endfor %}
         </div>
@@ -287,3 +561,151 @@
 
 </div>
 </div>
+
+<!-- ==============================================
+     Profile SPA Interactive Tab Switcher Scripts
+     ============================================== -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. SPA Tab switcher
+    const tabs = document.querySelectorAll(".pnav a[data-target]");
+    const panels = document.querySelectorAll(".pright .tab-panel");
+    
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Remove active classes
+            tabs.forEach(t => t.classList.remove("on"));
+            panels.forEach(p => p.classList.remove("active"));
+            
+            // Add active class
+            this.classList.add("on");
+            const targetId = this.getAttribute("data-target");
+            const targetPanel = document.getElementById(targetId);
+            if (targetPanel) {
+                targetPanel.classList.add("active");
+            }
+            
+            // Sync active hash or parameter if desired
+            const newUrl = window.location.pathname + "?active_page=profile&profile_tab=" + targetId.replace("sec-", "");
+            window.history.replaceState(null, "", newUrl);
+        });
+    });
+    
+    // Check URL parameter to restore correct tab on reload
+    const params = new URLSearchParams(window.location.search);
+    const activeSubTab = params.get("profile_tab");
+    if (activeSubTab) {
+        const targetBtn = document.querySelector(`.pnav a[data-target="sec-${activeSubTab}"]`);
+        if (targetBtn) {
+            targetBtn.click();
+        }
+    }
+
+    // 2. Profile Onboarding Progress Calculator
+    calculateProfileCompletion();
+
+    // 3. BMI Pin Positioner
+    positionBMIMarker();
+});
+
+// Profile Onboarding Calculator
+function calculateProfileCompletion() {
+    let completion = 15; // Base profile points
+    
+    const hasPhoto = {% if cid.pic %}true{% else %}false{% endif %};
+    const hasPhone = {% if cid.contectno %}true{% else %}false{% endif %};
+    const hasHealth = {% if health %}true{% else %}false{% endif %};
+    const hasAddress = {% if cid.addresses.all %}true{% else %}false{% endif %};
+    
+    if (hasPhoto) completion += 20;
+    if (hasPhone) completion += 20;
+    if (hasHealth) completion += 25;
+    if (hasAddress) completion += 20;
+    
+    const textNode = document.getElementById("profileCompletionText");
+    const barNode = document.getElementById("profileCompletionBar");
+    
+    if (textNode) {
+        textNode.innerText = completion;
+    }
+    
+    if (barNode) {
+        barNode.style.width = completion + "%";
+    }
+}
+
+// Position BMI gauge marker
+function positionBMIMarker() {
+    const marker = document.getElementById("bmiMarker");
+    const statusText = document.getElementById("bmiStatusText");
+    const bmiVal = parseFloat("{{ health.bmi|default:0 }}");
+    
+    if (!marker || !bmiVal) return;
+    
+    // Ranges from 15 to 35
+    let pct = ((bmiVal - 15) / (35 - 15)) * 100;
+    pct = Math.min(Math.max(pct, 0), 100);
+    marker.style.left = pct + "%";
+    
+    // Categorize BMI status text and styling
+    if (bmiVal < 18.5) {
+        statusText.innerText = "Underweight";
+        statusText.className = "bmi-status-text text-blue";
+    } else if (bmiVal >= 18.5 && bmiVal < 25) {
+        statusText.innerText = "Healthy Weight";
+        statusText.className = "bmi-status-text text-green";
+    } else if (bmiVal >= 25 && bmiVal < 30) {
+        statusText.innerText = "Overweight";
+        statusText.className = "bmi-status-text text-yellow";
+    } else {
+        statusText.innerText = "Obese Range";
+        statusText.className = "bmi-status-text text-red";
+    }
+}
+
+// Recalculate form display toggle
+function toggleRecalcForm() {
+    const form = document.getElementById("recalcForm");
+    if (form) {
+        if (form.style.display === "none") {
+            form.style.display = "block";
+            form.scrollIntoView({ behavior: "smooth" });
+        } else {
+            form.style.display = "none";
+        }
+    }
+}
+
+// Search and filter orders
+function searchAndFilterOrders() {
+    const query = document.getElementById("orderSearchField").value.toLowerCase();
+    const rows = document.querySelectorAll(".order-record-row");
+    const noResults = document.getElementById("noSearchResults");
+    let count = 0;
+    
+    rows.forEach(row => {
+        const searchText = row.getAttribute("data-search").toLowerCase();
+        if (searchText.includes(query)) {
+            row.style.display = "grid";
+            count++;
+        } else {
+            row.style.display = "none";
+        }
+    });
+    
+    const visibleCounter = document.getElementById("visibleOrdersCount");
+    if (visibleCounter) {
+        visibleCounter.innerText = count;
+    }
+    
+    if (noResults) {
+        if (count === 0 && query !== "") {
+            noResults.style.display = "block";
+        } else {
+            noResults.style.display = "none";
+        }
+    }
+}
+</script>

@@ -274,6 +274,9 @@ def customer_dashboard(request):
             p.ai_reasons = reasons[:4]
 
         active_page = request.GET.get("active_page") or "home"
+        if active_page == "assessment" and cid.subscription_plan == "Free":
+            return redirect("subscription_plans")
+
 
         unread_notifications = Notification.objects.filter(
                                 customer=cid,
@@ -1761,15 +1764,7 @@ def meal_planner(request):
     cid = customer.objects.get(user_id=uid)
 
     if cid.subscription_plan == "Free":
-        unread_notifications = Notification.objects.filter(customer=cid, is_read=False).count()
-        notifications = Notification.objects.filter(customer=cid).order_by("-created_at")[:5]
-        wishlist_count = cid.wishlist_count
-        return render(request, "customerapp/meal_planner_locked.html", {
-            "cid": cid,
-            "unread_notifications": unread_notifications,
-            "notifications": notifications,
-            "wishlist_count": wishlist_count
-        })
+        return redirect("subscription_plans")
 
     try:
         health = UserHealthProfile.objects.get(customer=cid)

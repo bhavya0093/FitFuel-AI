@@ -8,7 +8,11 @@
           <span class="hero-badge">AI POWERED NUTRITION PLATFORM</span>
           <h1>Your Path to<br><span>Better Health</span></h1>
           <p>See how FitFuel AI optimizes your<br>fitness journey step by step</p>
+          {% if cid.subscription_plan == 'Free' %}
+          <a href="{% url 'subscription_plans' %}" class="btn-primary" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;"><i class="fa-solid fa-rocket"></i> Start Your Journey Now</a>
+          {% else %}
           <label for="nav-assessment" class="btn-primary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 10px;"><i class="fa-solid fa-rocket"></i> Start Your Journey Now</label>
+          {% endif %}
       </div>
       <div class="hero-image">
           <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80" alt="Healthy Food Salad">
@@ -19,6 +23,18 @@
   <div class="hero-steps-container">
       <div class="hero-steps-line"></div>
       
+      {% if cid.subscription_plan == 'Free' %}
+      <a href="{% url 'subscription_plans' %}" class="hero-step" style="display: block; text-decoration: none; color: inherit;">
+          <div class="step-icon step-1"><i class="fa-solid fa-brain"></i></div>
+          <h3>1<br>AI Assessment</h3>
+          <p>Analyze your needs</p>
+      </a>
+      <a href="{% url 'subscription_plans' %}" class="hero-step" style="display: block; text-decoration: none; color: inherit;">
+          <div class="step-icon step-2"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>2<br>Custom Plan</h3>
+          <p>100% personalized</p>
+      </a>
+      {% else %}
       <label for="nav-assessment" class="hero-step" style="cursor: pointer; display: block; text-decoration: none; color: inherit;">
           <div class="step-icon step-1"><i class="fa-solid fa-brain"></i></div>
           <h3>1<br>AI Assessment</h3>
@@ -30,6 +46,7 @@
           <h3>2<br>Custom Plan</h3>
           <p>100% personalized</p>
       </label>
+      {% endif %}
       
       <label for="nav-store" class="hero-step" style="cursor: pointer; display: block; text-decoration: none; color: inherit;">
           <div class="step-icon step-3"><i class="fa-solid fa-bag-shopping"></i></div>

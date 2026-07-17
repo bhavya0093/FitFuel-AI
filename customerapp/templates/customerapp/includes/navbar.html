@@ -213,15 +213,22 @@
         <i class="fa-solid fa-house"></i>
         Dashboard
     </label>
+    {% if cid.subscription_plan == 'Free' %}
+    <a href="{% url 'subscription_plans' %}" class="mobile-item" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+        <span style="display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-brain"></i>
+            AI Assessment
+        </span>
+        <i class="fa-solid fa-lock" style="font-size: 11px; opacity: 0.7; color: #f59e0b;"></i>
+    </a>
+    {% else %}
     <label for="nav-assessment" class="mobile-item" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
         <span style="display: flex; align-items: center; gap: 10px;">
             <i class="fa-solid fa-brain"></i>
             AI Assessment
         </span>
-        {% if cid.subscription_plan == 'Free' %}
-        <i class="fa-solid fa-lock" style="font-size: 11px; opacity: 0.7; color: #f59e0b;"></i>
-        {% endif %}
     </label>
+    {% endif %}
     <label for="nav-store" class="mobile-item" style="cursor: pointer;">
         <i class="fa-solid fa-store"></i>
         Nutrition Store

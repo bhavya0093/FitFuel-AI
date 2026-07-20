@@ -105,7 +105,7 @@
 
                         {% for log in chart_logs %}
                             <div style="display: flex; flex-direction: column; align-items: center; flex: 1; gap: 10px; z-index: 1;">
-                                <div style="font-size: 11px; font-weight: 700; color: var(--navy);">{{ log.weight }} kg</div>
+                                <div class="weight-label" style="font-size: 11px; font-weight: 700;">{{ log.weight }} kg</div>
                                 <div style="width: 24px; background: linear-gradient(180deg, var(--secondary) 0%, var(--teal) 100%); border-radius: 6px; transition: height 0.5s ease; height: {% widthratio log.weight 120 120 %}px;"></div>
                                 <div style="font-size: 10px; font-weight: 600; color: var(--mist);">{{ log.created_at|date:"d M" }}</div>
                             </div>
@@ -139,7 +139,7 @@
                         {% for log in progress_logs %}
                             <tr>
                                 <td style="font-weight: 600;">{{ log.created_at }}</td>
-                                <td style="font-weight: 700; color: var(--navy);">{{ log.weight }} kg</td>
+                                <td style="font-weight: 700;">{{ log.weight }} kg</td>
                                 <td>
                                     <span class="bmi-badge 
                                         {% if log.bmi < 18.5 %}bmi-underweight

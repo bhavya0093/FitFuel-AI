@@ -59,7 +59,7 @@ body.dark-theme-mode {
   color: inherit;
 }
 
-.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link):not(.meal-consume):not(.btn-gradient) {
+.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link):not(.meal-consume):not(.btn-gradient):not(.shop-btn):not(.back-btn):not(.checkout-btn) {
   color: #38BDF8;
 }
 
@@ -1970,8 +1970,202 @@ body.dark-theme-mode .progress-table td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-.dark-theme-mode .progress-table tr:hover td,
-body.dark-theme-mode .progress-table tr:hover td {
-  background: rgba(30, 41, 59, 0.40) !important;
+.dark-theme-mode .bmi-badge,
+body.dark-theme-mode .bmi-badge {
+  font-weight: 800 !important;
+  padding: 4px 10px !important;
+  border-radius: 20px !important;
+}
+
+.dark-theme-mode .bmi-underweight,
+body.dark-theme-mode .bmi-underweight {
+  background: rgba(59, 130, 246, 0.20) !important;
+  color: #60A5FA !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+}
+
+.dark-theme-mode .bmi-normal,
+body.dark-theme-mode .bmi-normal {
+  background: rgba(16, 185, 129, 0.20) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+.dark-theme-mode .bmi-overweight,
+body.dark-theme-mode .bmi-overweight {
+  background: rgba(245, 158, 11, 0.20) !important;
+  color: #FBBF24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+
+.dark-theme-mode .bmi-obese,
+body.dark-theme-mode .bmi-obese {
+  background: rgba(239, 68, 68, 0.20) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+}
+
+.dark-theme-mode .weight-label,
+body.dark-theme-mode .weight-label {
+  color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   SECTION 15: NUTRITION CART PAGE DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Main Card Wrapper */
+.dark-theme-mode #page-cart .cwrap,
+.dark-theme-mode .cwrap,
+body.dark-theme-mode .cwrap {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 24px !important;
+}
+
+/* Nav & Header */
+.dark-theme-mode #page-cart .back-btn,
+.dark-theme-mode .back-btn,
+body.dark-theme-mode .back-btn {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark-theme-mode #page-cart .back-btn:hover,
+.dark-theme-mode .back-btn:hover,
+body.dark-theme-mode .back-btn:hover {
+  background: #10B981 !important;
+  color: #FFFFFF !important;
+  border-color: #10B981 !important;
+}
+
+.dark-theme-mode #page-cart .pg-ttl,
+.dark-theme-mode .pg-ttl,
+body.dark-theme-mode .pg-ttl {
+  color: #F8FAFC !important;
+}
+
+/* Empty Cart View */
+.dark-theme-mode .empty-cart h2,
+body.dark-theme-mode .empty-cart h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .empty-cart p,
+body.dark-theme-mode .empty-cart p {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .shop-btn,
+.dark-theme-mode #page-cart .shop-btn,
+body.dark-theme-mode .shop-btn {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+  border: none !important;
+}
+
+.dark-theme-mode .shop-btn:hover,
+body.dark-theme-mode .shop-btn:hover {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Cart Items Box & Summary Box */
+.dark-theme-mode .cart-items-box,
+.dark-theme-mode .summary-box,
+body.dark-theme-mode .cart-items-box,
+body.dark-theme-mode .summary-box {
+  background: rgba(30, 41, 59, 0.50) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+.dark-theme-mode .cart-item-name,
+.dark-theme-mode .summary-title,
+body.dark-theme-mode .cart-item-name,
+body.dark-theme-mode .summary-title {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .cart-item-unit,
+body.dark-theme-mode .cart-item-unit {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .cart-item-price,
+body.dark-theme-mode .cart-item-price {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .qty-ctrl,
+body.dark-theme-mode .qty-ctrl {
+  background: rgba(15, 23, 42, 0.80) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .qty-btn,
+body.dark-theme-mode .qty-btn {
+  background: rgba(30, 41, 59, 0.90) !important;
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .qty-num,
+body.dark-theme-mode .qty-num {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .summary-row,
+body.dark-theme-mode .summary-row {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .summary-row span:last-child,
+body.dark-theme-mode .summary-row span:last-child {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .total-row,
+body.dark-theme-mode .total-row {
+  background: rgba(15, 23, 42, 0.80) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .total-row span:last-child,
+body.dark-theme-mode .total-row span:last-child {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .checkout-btn,
+body.dark-theme-mode .checkout-btn {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.40) !important;
+}
+
+.dark-theme-mode .free-del-note,
+body.dark-theme-mode .free-del-note {
+  background: rgba(16, 185, 129, 0.10) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .ai-nutrition-analyzer,
+body.dark-theme-mode .ai-nutrition-analyzer {
+  background: rgba(16, 185, 129, 0.10) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode .ai-nutrition-analyzer p,
+.dark-theme-mode .ai-nutrition-analyzer span,
+body.dark-theme-mode .ai-nutrition-analyzer p,
+body.dark-theme-mode .ai-nutrition-analyzer span {
+  color: #94A3B8 !important;
 }
 

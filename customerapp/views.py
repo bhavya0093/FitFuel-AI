@@ -367,6 +367,21 @@ def customer_dashboard(request):
                 break
 
         progress_logs = ProgressLog.objects.filter(customer=cid).order_by("-created_at")
+        try:
+            hp = getattr(cid, 'health_profile', None)
+            if hp and hp.height:
+                h_m = float(hp.height) / 100.0 if float(hp.height) > 3 else float(hp.height)
+                if h_m > 0:
+                    for log in progress_logs:
+                        if log.bmi > 100 or log.bmi == 0:
+                            log.bmi = round(log.weight / (h_m * h_m), 1)
+                            log.save()
+                    if hp.bmi > 100 or hp.bmi == 0:
+                        hp.bmi = round(hp.weight / (h_m * h_m), 1)
+                        hp.save()
+        except Exception:
+            pass
+
         chart_logs = list(ProgressLog.objects.filter(customer=cid).order_by("-created_at")[:7])
         chart_logs.reverse()
 

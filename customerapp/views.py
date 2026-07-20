@@ -2740,7 +2740,8 @@ def add_progress_log(request):
             bmi = 0
             try:
                 hp = cid.health_profile
-                height_m = hp.height / 100.0
+                height_val = float(hp.height)
+                height_m = height_val / 100.0 if height_val > 3 else height_val
                 if height_m > 0:
                     bmi = round(weight / (height_m * height_m), 1)
             except Exception:

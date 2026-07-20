@@ -1831,3 +1831,147 @@ body.dark-theme-mode .btn-secondary:hover {
   border-color: rgba(255, 255, 255, 0.14) !important;
 }
 
+/* ==========================================================================
+   SECTION 14: PROGRESS TRACKING PAGE DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Page Header Title */
+.dark-theme-mode #page-progress label[for="nav-home"],
+body.dark-theme-mode #page-progress label[for="nav-home"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.dark-theme-mode #page-progress .progress-header h1,
+body.dark-theme-mode .progress-header h1 {
+  color: #F8FAFC !important;
+  background: linear-gradient(135deg, #F8FAFC 30%, #10B981 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.dark-theme-mode #page-progress .progress-header p,
+body.dark-theme-mode .progress-header p {
+  color: #94A3B8 !important;
+}
+
+/* Top 3 Stat Cards (Current Weight, BMI, Level) */
+.dark-theme-mode .progress-stat-card,
+.dark-theme-mode #page-progress .progress-stat-card,
+body.dark-theme-mode .progress-stat-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.40) !important;
+  border-radius: 20px !important;
+}
+
+.dark-theme-mode .progress-stat-icon,
+body.dark-theme-mode .progress-stat-icon {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #10B981 !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode .progress-stat-icon.bmi,
+body.dark-theme-mode .progress-stat-icon.bmi {
+  color: #06B6D4 !important;
+  border-color: rgba(6, 182, 212, 0.25) !important;
+}
+
+.dark-theme-mode .progress-stat-icon.streak,
+body.dark-theme-mode .progress-stat-icon.streak {
+  color: #F59E0B !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+.dark-theme-mode .progress-stat-info span,
+body.dark-theme-mode .progress-stat-info span {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .progress-stat-info strong,
+body.dark-theme-mode .progress-stat-info strong {
+  color: #F8FAFC !important;
+}
+
+/* Form Card & Chart Card Containers */
+.dark-theme-mode .progress-form-card,
+.dark-theme-mode #page-progress .progress-form-card,
+body.dark-theme-mode .progress-form-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 24px !important;
+  padding: 24px !important;
+}
+
+.dark-theme-mode .progress-form-card h2,
+body.dark-theme-mode .progress-form-card h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .form-group label,
+body.dark-theme-mode .form-group label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .form-group input,
+body.dark-theme-mode .form-group input {
+  background: rgba(8, 12, 20, 0.85) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 12px !important;
+}
+
+.dark-theme-mode .form-group input:focus,
+body.dark-theme-mode .form-group input:focus {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode .btn-submit-progress,
+body.dark-theme-mode .btn-submit-progress {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+  border-radius: 14px !important;
+}
+
+/* History Log Card & Table */
+.dark-theme-mode .progress-history-card,
+.dark-theme-mode #page-progress .progress-history-card,
+body.dark-theme-mode .progress-history-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 24px !important;
+  padding: 24px !important;
+  margin-top: 30px !important;
+}
+
+.dark-theme-mode .progress-history-card h2,
+body.dark-theme-mode .progress-history-card h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .progress-table th,
+body.dark-theme-mode .progress-table th {
+  background: rgba(30, 41, 59, 0.60) !important;
+  color: #94A3B8 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .progress-table td,
+body.dark-theme-mode .progress-table td {
+  color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-theme-mode .progress-table tr:hover td,
+body.dark-theme-mode .progress-table tr:hover td {
+  background: rgba(30, 41, 59, 0.40) !important;
+}
+

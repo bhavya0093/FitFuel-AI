@@ -229,10 +229,13 @@ body.dark-theme-mode .vip-badge-navbar {
 }
 
 .dark-theme-mode .ff-dropdown,
-body.dark-theme-mode .ff-dropdown {
-  background: #0F172A !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
-  color: #F8FAFC !important;
+.dark-theme-mode .notification-list,
+body.dark-theme-mode .ff-dropdown,
+body.dark-theme-mode .notification-list {
+  background: rgba(15, 23, 42, 0.96) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(20px) !important;
 }
 
 .dark-theme-mode .ff-dropdown a,
@@ -247,14 +250,65 @@ body.dark-theme-mode .ff-dropdown a:hover {
   color: #10B981 !important;
 }
 
+/* Notification Header & Items */
+.dark-theme-mode .ff-dropdown > div:first-child,
+body.dark-theme-mode .ff-dropdown > div:first-child {
+  background: rgba(30, 41, 59, 0.90) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .ff-dropdown > div:first-child strong,
+body.dark-theme-mode .ff-dropdown > div:first-child strong {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #mark-all-read-btn,
+body.dark-theme-mode #mark-all-read-btn {
+  color: #34D399 !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode #mark-all-read-btn:hover,
+body.dark-theme-mode #mark-all-read-btn:hover {
+  color: #6EE7B7 !important;
+}
+
 .dark-theme-mode .notification-item,
 body.dark-theme-mode .notification-item {
-  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .notification-item:hover,
+body.dark-theme-mode .notification-item:hover {
+  background: rgba(30, 41, 59, 0.60) !important;
 }
 
 .dark-theme-mode .notification-item.unread,
 body.dark-theme-mode .notification-item.unread {
   background: rgba(16, 185, 129, 0.10) !important;
+}
+
+.dark-theme-mode .notification-item span,
+body.dark-theme-mode .notification-item span {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .notification-item div > span:last-child,
+body.dark-theme-mode .notification-item div > span:last-child {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .notification-item p,
+body.dark-theme-mode .notification-item p {
+  color: #CBD5E1 !important;
+  font-weight: 500 !important;
+}
+
+.dark-theme-mode .mark-single-read,
+body.dark-theme-mode .mark-single-read {
+  color: #34D399 !important;
+  font-weight: 700 !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -2683,5 +2737,110 @@ body.dark-theme-mode .payment-details-input {
   background: rgba(8, 12, 20, 0.85) !important;
   border-color: rgba(255, 255, 255, 0.14) !important;
   color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   SECTION 19: FITFUEL LEADERBOARD PAGE DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Main Container */
+.dark-theme-mode #page-leaderboard .container,
+body.dark-theme-mode #page-leaderboard .container {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.50) !important;
+  backdrop-filter: blur(24px) !important;
+  border-radius: 24px !important;
+}
+
+/* Header & Back Button */
+.dark-theme-mode #page-leaderboard h1,
+body.dark-theme-mode #page-leaderboard h1 {
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
+}
+
+.dark-theme-mode #page-leaderboard label[for="nav-achievements"],
+body.dark-theme-mode #page-leaderboard label[for="nav-achievements"] {
+  background: rgba(30, 41, 59, 0.90) !important;
+  color: #38BDF8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.dark-theme-mode #page-leaderboard label[for="nav-achievements"]:hover,
+body.dark-theme-mode #page-leaderboard label[for="nav-achievements"]:hover {
+  background: rgba(56, 189, 248, 0.15) !important;
+  color: #7DD3FC !important;
+}
+
+/* Leaderboard User Cards */
+.dark-theme-mode .user-card,
+body.dark-theme-mode .user-card {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dark-theme-mode .user-card.me,
+body.dark-theme-mode .user-card.me {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.90) 100%) !important;
+  border: 2px solid #10B981 !important;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode .user-card .rank,
+body.dark-theme-mode .user-card .rank {
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
+}
+
+.dark-theme-mode .user-card .info h3,
+body.dark-theme-mode .user-card .info h3 {
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode .user-card .info p,
+body.dark-theme-mode .user-card .info p {
+  color: #94A3B8 !important;
+  margin-top: 4px !important;
+}
+
+.dark-theme-mode .user-card .xp,
+body.dark-theme-mode .user-card .xp {
+  color: #34D399 !important;
+  font-weight: 800 !important;
+}
+
+/* My Rank Card at Bottom */
+.dark-theme-mode .my-rank,
+body.dark-theme-mode .my-rank {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.40) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 20px !important;
+}
+
+.dark-theme-mode .my-rank h2,
+body.dark-theme-mode .my-rank h2 {
+  color: #94A3B8 !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode .my-rank h1,
+body.dark-theme-mode .my-rank h1 {
+  color: #34D399 !important;
+  font-size: 2.5rem !important;
+  font-weight: 900 !important;
+  margin: 10px 0 !important;
+}
+
+.dark-theme-mode .my-rank p,
+body.dark-theme-mode .my-rank p {
+  color: #CBD5E1 !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
 }
 

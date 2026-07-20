@@ -116,13 +116,13 @@
     <div class="stat-row">
         <span class="stat-label">Coupon Applied</span>
         {% if coupon %}
-        <span class="stat-value" style="color:#10b981;font-size:0.8rem;background:#ecfdf5;padding:2px 6px;border-radius:4px;"><i class="fa-solid fa-ticket"></i> {{ coupon.code }}</span>
+        <span class="stat-value" style="color:#34d399 !important;font-size:0.75rem;background:rgba(16, 185, 129, 0.20) !important;border:1px solid rgba(16, 185, 129, 0.40);padding:4px 10px;border-radius:20px;font-weight:800;"><i class="fa-solid fa-ticket" style="color:#34d399 !important;"></i> {{ coupon.code }}</span>
         {% else %}
         <span class="stat-value" style="color:#64748b;font-size:0.8rem;">None</span>
         {% endif %}
     </div>
 
-    <label for="nav-cart" class="widget-btn" style="cursor: pointer;">
+    <label for="nav-cart" class="widget-btn btn-primary" style="cursor: pointer; display: block; text-align: center; color: #ffffff !important; font-weight: 800; padding: 12px; border-radius: 50px; margin-top: 14px;">
         Analyze Cart
     </label>
 </div>
@@ -198,9 +198,10 @@
 
         <a
             href="{% url 'add_to_cart' recommended_product.id %}"
-            class="ai-rec-btn">
+            class="ai-rec-btn btn-primary"
+            style="display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; padding: 12px; border-radius: 14px; font-weight: 800; color: #ffffff !important;">
 
-            <i class="fas fa-shopping-basket"></i> Add to Cart
+            <i class="fas fa-shopping-basket" style="color: #ffffff !important;"></i> Add to Cart
 
         </a>
 

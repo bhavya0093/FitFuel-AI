@@ -233,9 +233,9 @@
         <i class="fa-solid fa-star" style="color: #f59e0b;"></i>
     </div>
     <div class="featured-content">
-        <div class="feat-img" style="width: 76px; height: 76px; overflow: hidden; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border: 1px solid #e2e8f0; flex-shrink: 0;">
+        <div class="feat-img" style="width: 76px; height: 76px; overflow: hidden; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
             {% if featured_product.picture %}
-            <img src="{{ featured_product.picture.url }}" alt="{{ featured_product.product_name }}" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="{{ featured_product.picture.url }}" alt="{{ featured_product.product_name }}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
             {% else %}
             <i class="fa-solid fa-jar" style="font-size: 32px; color: #cbd5e1;"></i>
             {% endif %}
@@ -244,16 +244,16 @@
             <h5>{{ featured_product.product_name }}</h5>
             <div class="feat-rating" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px;">
                 <i class="fa-solid fa-star" style="color: #f59e0b; font-size: 11px;"></i>
-                <span style="font-size: 11px; color: #64748b; font-weight: 600;">({{ featured_product.rating|default:"0.0" }})</span>
+                <span style="font-size: 11px; font-weight: 600;">({{ featured_product.rating|default:"0.0" }})</span>
             </div>
             <div style="display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap;">
                 {% for tag in featured_tags %}
                     {% if forloop.counter == 1 %}
-                    <span style="font-size:0.65rem; color:#0ea5e9; background:#e0f2fe; padding:2px 8px; border-radius:12px; font-weight:600;">{{ tag }}</span>
+                    <span class="feat-tag-1" style="font-size:0.65rem; padding:2px 8px; border-radius:12px; font-weight:700;">{{ tag }}</span>
                     {% elif forloop.counter == 2 %}
-                    <span style="font-size:0.65rem; color:#10b981; background:#d1fae5; padding:2px 8px; border-radius:12px; font-weight:600;">{{ tag }}</span>
+                    <span class="feat-tag-2" style="font-size:0.65rem; padding:2px 8px; border-radius:12px; font-weight:700;">{{ tag }}</span>
                     {% else %}
-                    <span style="font-size:0.65rem; color:#8b5cf6; background:#ede9fe; padding:2px 8px; border-radius:12px; font-weight:600;">{{ tag }}</span>
+                    <span class="feat-tag-3" style="font-size:0.65rem; padding:2px 8px; border-radius:12px; font-weight:700;">{{ tag }}</span>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -266,6 +266,6 @@
             </div>
         </div>
     </div>
-    <a href="{% url 'product_details' featured_product.id %}" class="feat-btn">View Product</a>
+    <a href="{% url 'product_details' featured_product.id %}" class="feat-btn btn-primary" style="display: block; text-align: center; text-decoration: none; padding: 10px; border-radius: 14px; font-weight: 800; color: #ffffff !important; margin-top: 14px;">View Product</a>
 </div>
 {% endif %}

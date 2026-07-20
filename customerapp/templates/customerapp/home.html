@@ -9,9 +9,9 @@
           <h1>Your Path to<br><span>Better Health</span></h1>
           <p>See how FitFuel AI optimizes your<br>fitness journey step by step</p>
           {% if cid.subscription_plan == 'Free' %}
-          <a href="{% url 'subscription_plans' %}" class="btn-primary" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none;"><i class="fa-solid fa-rocket"></i> Start Your Journey Now</a>
+          <a href="{% url 'subscription_plans' %}" class="btn-primary" style="display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: #ffffff !important; font-weight: 800;"><i class="fa-solid fa-rocket" style="color: #ffffff !important;"></i> Start Your Journey Now</a>
           {% else %}
-          <label for="nav-assessment" class="btn-primary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 10px;"><i class="fa-solid fa-rocket"></i> Start Your Journey Now</label>
+          <label for="nav-assessment" class="btn-primary" style="cursor: pointer; display: inline-flex; align-items: center; gap: 10px; color: #ffffff !important; font-weight: 800;"><i class="fa-solid fa-rocket" style="color: #ffffff !important;"></i> Start Your Journey Now</label>
           {% endif %}
       </div>
       <div class="hero-image">
@@ -351,8 +351,8 @@
         <h4 style="font-size:1.1rem;font-weight:700;color:#0f172a;margin-bottom:8px;">No Orders Yet</h4>
         <p style="color:#64748b;font-size:0.9rem;margin-bottom:24px;">Looks like you haven't placed any orders.</p>
         <div style="display:flex;gap:16px;justify-content:center;">
-            <label for="nav-store" style="background:#10b981;color:#fff;padding:10px 24px;border-radius:50px;cursor:pointer;font-weight:700;font-size:0.9rem;display:inline-block;">Browse Nutrition Store</label>
-            <label for="nav-store" style="background:#f8fafc;color:#0f172a;border:1px solid #e2e8f0;padding:10px 24px;border-radius:50px;cursor:pointer;font-weight:700;font-size:0.9rem;display:inline-block;">Start Shopping</label>
+            <label for="nav-store" class="btn-primary" style="padding:10px 24px;border-radius:50px;cursor:pointer;font-weight:800;font-size:0.9rem;display:inline-block;color:#ffffff !important;">Browse Nutrition Store</label>
+            <label for="nav-store" style="background:rgba(255,255,255,0.10);color:#F8FAFC !important;border:1px solid rgba(255,255,255,0.20);padding:10px 24px;border-radius:50px;cursor:pointer;font-weight:700;font-size:0.9rem;display:inline-block;">Start Shopping</label>
         </div>
     </div>
 

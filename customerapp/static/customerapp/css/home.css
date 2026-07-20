@@ -121,7 +121,8 @@
     position:relative;
     height:160px;
     overflow:hidden;
-    background:linear-gradient(135deg,#f0fdf4,#f8fafc);
+    background:rgba(248, 250, 252, 0.05);
+    border-radius: 14px;
 }
 
 .pcd-img img{
@@ -129,7 +130,7 @@
     height:100%;
     padding:10px 12px 13px;
     object-fit:contain;
-    background:#ffffff;
+    background:transparent;
     transition:transform 0.4s;
 }
 

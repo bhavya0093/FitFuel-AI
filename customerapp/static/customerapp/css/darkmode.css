@@ -59,8 +59,15 @@ body.dark-theme-mode {
   color: inherit;
 }
 
-.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn) {
+.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link) {
   color: #38BDF8;
+}
+
+.dark-theme-mode .ff-logo-icon,
+.dark-theme-mode .ff-logo-icon i,
+.dark-theme-mode .ff-logo-link .ff-logo-icon,
+.dark-theme-mode .ff-logo-link .ff-logo-icon i {
+  color: #FFFFFF !important;
 }
 
 /* Master Button & Action Overrides */
@@ -566,6 +573,27 @@ body.dark-theme-mode:has(#nav-store:checked) .sidebar-nav label[for="nav-store"]
 
 .dark-theme-mode .progress {
   background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .goal-match-score-pill.match-low {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #94A3B8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: none !important;
+}
+
+.dark-theme-mode .goal-match-score-pill.match-mid {
+  background: linear-gradient(135deg, #06B6D4, #0284C7) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.20) !important;
+  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.35) !important;
+}
+
+.dark-theme-mode .goal-match-score-pill.match-high {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.20) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35) !important;
 }
 
 /* AI Recommendation Widget */

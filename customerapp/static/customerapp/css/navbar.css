@@ -58,24 +58,19 @@
 }
 
 .ff-logo-icon{
-
     width:56px;
-
     height:56px;
-
     border-radius:18px;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     background:linear-gradient(135deg,#10B981,#06B6D4);
-
-    color:#fff;
-
+    color:#fff !important;
     font-size:24px;
+}
+
+.ff-logo-icon i {
+    color: #ffffff !important;
 }
 
 .ff-logo-text h2{

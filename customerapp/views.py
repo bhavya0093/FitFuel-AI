@@ -102,12 +102,9 @@ def customer_dashboard(request):
         water_pct = min(100, round((current_water / goal_water) * 100)) if goal_water > 0 else 0
         
         try:
-            cal_dev = abs(current_calories - goal_calories) / goal_calories
-            prot_dev = abs(current_protein - goal_protein) / goal_protein
-            avg_dev = (cal_dev + prot_dev) / 2
-            match_score = max(0, min(100, round((1.0 - avg_dev) * 100)))
+            match_score = min(100, round((cal_pct + prot_pct + water_pct) / 3))
         except Exception:
-            match_score = 99
+            match_score = 0
         categories = Category.objects.all()
 
         selected_category = request.GET.get("category")

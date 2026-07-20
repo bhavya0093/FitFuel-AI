@@ -59,7 +59,7 @@ body.dark-theme-mode {
   color: inherit;
 }
 
-.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link):not(.meal-consume):not(.btn-gradient):not(.shop-btn):not(.back-btn):not(.checkout-btn) {
+.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link):not(.meal-consume):not(.btn-gradient):not(.shop-btn):not(.back-btn):not(.checkout-btn):not(.view-btn):not(.leaderboard-btn) {
   color: #38BDF8;
 }
 
@@ -2167,5 +2167,249 @@ body.dark-theme-mode .ai-nutrition-analyzer {
 body.dark-theme-mode .ai-nutrition-analyzer p,
 body.dark-theme-mode .ai-nutrition-analyzer span {
   color: #94A3B8 !important;
+}
+
+/* ==========================================================================
+   SECTION 16: MY ORDERS PAGE DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Page Title & Back Button */
+.dark-theme-mode .page-title,
+body.dark-theme-mode .page-title {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .empty-order,
+body.dark-theme-mode .empty-order,
+.dark-theme-mode .order-card,
+body.dark-theme-mode .order-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 20px !important;
+}
+
+.dark-theme-mode .empty-order h3,
+body.dark-theme-mode .empty-order h3 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .empty-order a,
+body.dark-theme-mode .empty-order a {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+  border: none !important;
+}
+
+.dark-theme-mode .empty-order a:hover,
+body.dark-theme-mode .empty-order a:hover {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  color: #FFFFFF !important;
+}
+
+/* Order Cards Details */
+.dark-theme-mode .order-top h3,
+.dark-theme-mode .product-row h4,
+.dark-theme-mode .total,
+body.dark-theme-mode .order-top h3,
+body.dark-theme-mode .product-row h4,
+body.dark-theme-mode .total {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .total span,
+body.dark-theme-mode .total span {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .order-top p,
+.dark-theme-mode .product-row p,
+body.dark-theme-mode .order-top p,
+body.dark-theme-mode .product-row p {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .product-row img,
+body.dark-theme-mode .product-row img {
+  background: #FFFFFF !important;
+  border-radius: 12px !important;
+  padding: 4px !important;
+}
+
+.dark-theme-mode .product-row strong,
+body.dark-theme-mode .product-row strong {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .view-btn,
+body.dark-theme-mode .view-btn {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+}
+
+.dark-theme-mode hr,
+body.dark-theme-mode hr {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ==========================================================================
+   SECTION 17: ACHIEVEMENTS / GAMIFICATION DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Main Container */
+.dark-theme-mode #page-achievements .container,
+body.dark-theme-mode #page-achievements .container {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 24px !important;
+}
+
+/* Back Button & Page Titles */
+.dark-theme-mode #page-achievements label[for="nav-home"],
+body.dark-theme-mode #page-achievements label[for="nav-home"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.dark-theme-mode #page-achievements h1,
+.dark-theme-mode #page-achievements h2,
+body.dark-theme-mode #page-achievements h1,
+body.dark-theme-mode #page-achievements h2 {
+  color: #F8FAFC !important;
+}
+
+/* Level Card */
+.dark-theme-mode .level-card,
+body.dark-theme-mode .level-card {
+  background: rgba(30, 41, 59, 0.60) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 20px !important;
+}
+
+.dark-theme-mode .level-top h2,
+body.dark-theme-mode .level-top h2 {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .level-top span,
+.dark-theme-mode .level-card small,
+body.dark-theme-mode .level-top span,
+body.dark-theme-mode .level-card small {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .leaderboard-btn,
+.dark-theme-mode label[for="nav-leaderboard"],
+body.dark-theme-mode .leaderboard-btn,
+body.dark-theme-mode label[for="nav-leaderboard"] {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+  border: none !important;
+}
+
+.dark-theme-mode .progress,
+body.dark-theme-mode .progress {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Achievement Cards (Unlocked & Locked) */
+.dark-theme-mode .achievement-card,
+body.dark-theme-mode .achievement-card {
+  background: rgba(30, 41, 59, 0.50) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.30) !important;
+  border-radius: 18px !important;
+}
+
+.dark-theme-mode .achievement-card h2,
+body.dark-theme-mode .achievement-card h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .achievement-card p,
+.dark-theme-mode .achievement-card small,
+body.dark-theme-mode .achievement-card p,
+body.dark-theme-mode .achievement-card small {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .badge-icon,
+body.dark-theme-mode .badge-icon {
+  background: rgba(15, 23, 42, 0.80) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Challenge Card & Reward Box */
+.dark-theme-mode .challenge-card,
+body.dark-theme-mode .challenge-card {
+  background: linear-gradient(135deg, rgba(15, 118, 110, 0.90) 0%, rgba(6, 95, 70, 0.90) 100%) !important;
+  border: 1px solid rgba(52, 211, 153, 0.30) !important;
+  box-shadow: 0 12px 35px rgba(15, 118, 110, 0.40) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+.dark-theme-mode .challenge-badge,
+body.dark-theme-mode .challenge-badge {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(255, 255, 255, 0.30) !important;
+  letter-spacing: 0.3px !important;
+}
+
+.dark-theme-mode .challenge-left h2,
+.dark-theme-mode .challenge-left p,
+body.dark-theme-mode .challenge-left h2,
+body.dark-theme-mode .challenge-left p {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .reward-box,
+body.dark-theme-mode .reward-box {
+  background: rgba(15, 23, 42, 0.85) !important;
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
+  border: 1.5px solid rgba(52, 211, 153, 0.40) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.30) !important;
+}
+
+.dark-theme-mode .challenge-btn,
+body.dark-theme-mode .challenge-btn {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.40) !important;
+}
+
+.dark-theme-mode .challenge-btn:hover,
+body.dark-theme-mode .challenge-btn:hover {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Streak Card */
+.dark-theme-mode .streak-card,
+body.dark-theme-mode .streak-card {
+  background: linear-gradient(135deg, #EA580C 0%, #C2410C 100%) !important;
+  box-shadow: 0 12px 35px rgba(234, 88, 12, 0.40) !important;
+}
+
+.dark-theme-mode .streak-card h2,
+.dark-theme-mode .streak-card h1,
+body.dark-theme-mode .streak-card h2,
+body.dark-theme-mode .streak-card h1 {
+  color: #FFFFFF !important;
 }
 

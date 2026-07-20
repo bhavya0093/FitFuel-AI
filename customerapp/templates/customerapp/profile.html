@@ -40,7 +40,6 @@ body:has(#nav-profile:checked) .pw {
 
 .pright {
     flex: 1 !important;
-    background: #ffffff !important;
     padding: 20px 20px 45px 20px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -140,9 +139,9 @@ body:has(#nav-profile:checked) .pw {
     <!-- LIGHT CONTENT TAB PANELS -->
     <div class="pright">
       <!-- Header panel -->
-      <div class="pright-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 5px; flex-shrink: 0;">
-        <h2 class="pright-title" style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Profile & Fitness Settings</h2>
-        <a href="/customer-dashboard/" class="back-dashboard-compact" style="display: inline-flex; align-items: center; gap: 8px; color: #64748b; text-decoration: none; font-weight: 700; font-size: 0.8rem; border: 1px solid #cbd5e1; padding: 6px 14px; border-radius: 30px; background: #fff; transition: 0.2s;">
+      <div class="pright-header">
+        <h2 class="pright-title">Profile & Fitness Settings</h2>
+        <a href="/customer-dashboard/" class="back-dashboard-compact">
           <i class="fas fa-arrow-left"></i> Back to Dashboard
         </a>
       </div>
@@ -169,7 +168,7 @@ body:has(#nav-profile:checked) .pw {
             <div class="status-indicator-pill active">
               <span class="dot"></span> Online & Active
             </div>
-            <p style="margin-top:10px; font-size:13px; color:#64748b;">Member since: <strong style="color:#334155;">{{ uid.date_joined|date:"M Y"|default:"Joined Recently" }}</strong></p>
+            <p class="member-since-txt">Member since: <strong>{{ uid.date_joined|date:"M Y"|default:"Joined Recently" }}</strong></p>
           </div>
         </div>
 

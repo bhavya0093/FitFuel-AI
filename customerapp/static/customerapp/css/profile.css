@@ -89,11 +89,14 @@
 }
 
 .pem {
-    font-size: 0.75rem;
+    font-size: 0.73rem;
     color: #64748b;
     margin-top: 4px;
     text-align: center;
-    word-break: break-all;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 230px;
+    line-height: 1.35;
 }
 
 /* KPI Dashboard Widgets */
@@ -209,7 +212,7 @@
 /* ── RIGHT PANEL CONTENT ── */
 .pright {
     flex: 1 !important;
-    background: #ffffff !important;
+    background: #ffffff;
     padding: 20px 20px 35px 20px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -217,6 +220,54 @@
     overflow-y: auto !important;
     min-height: 0 !important;
     height: 100% !important;
+}
+
+.pright-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+    flex-shrink: 0;
+}
+
+.pright-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+}
+
+.back-dashboard-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border: 1px solid #cbd5e1;
+    padding: 6px 14px;
+    border-radius: 30px;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.back-dashboard-compact:hover {
+    background: #f8fafc;
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.member-since-txt {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+.member-since-txt strong {
+    color: #334155;
 }
 
 .sec {

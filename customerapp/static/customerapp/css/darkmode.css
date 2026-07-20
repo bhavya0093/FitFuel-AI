@@ -828,3 +828,434 @@ body.dark-theme-mode:has(#nav-store:checked) .sidebar-nav label[for="nav-store"]
 .dark-theme-mode .assessment-wrapper label[for="nav-home"]:hover {
   color: #EF4444 !important;
 }
+
+/* --------------------------------------------------------------------------
+   17. Profile & Fitness Settings Page (Ultra Glass Dark Mode Redesign)
+   -------------------------------------------------------------------------- */
+.dark-theme-mode #page-profile {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #page-profile .iwrap {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+.dark-theme-mode #page-profile .pw {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Profile Left Sidebar */
+.dark-theme-mode .psb {
+  background: rgba(8, 12, 20, 0.95) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .pav-wrap {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.12) 0%, rgba(8, 12, 20, 0) 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .pnm {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .pem {
+  color: #CBD5E1 !important;
+}
+
+/* Compact Profile Completion Bar */
+.dark-theme-mode .comp-label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .comp-bar-bg {
+  background: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Profile KPI Grid */
+.dark-theme-mode .pkpis {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .kpi {
+  background: rgba(15, 23, 42, 0.92) !important;
+}
+
+.dark-theme-mode .kpi:hover {
+  background: rgba(30, 41, 59, 0.95) !important;
+}
+
+.dark-theme-mode .kpi-l {
+  color: #CBD5E1 !important;
+}
+
+/* Profile Sidebar Navigation Items */
+.dark-theme-mode .pnav .pni {
+  color: #CBD5E1 !important;
+  background: transparent !important;
+}
+
+.dark-theme-mode .pnav .pni i {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .pnav .pni:hover {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #10B981 !important;
+}
+
+.dark-theme-mode .pnav .pni:hover i {
+  color: #10B981 !important;
+}
+
+/* Active Navigation Item (Vibrant Emerald/Cyan Pill with White Text) */
+.dark-theme-mode .pnav .pni.on {
+  background: linear-gradient(135deg, #0D9488 0%, #06B6D4 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.40) !important;
+}
+
+.dark-theme-mode .pnav .pni.on i {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .pnav .pni.danger {
+  color: #EF4444 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .pnav .pni.danger i {
+  color: #EF4444 !important;
+}
+
+.dark-theme-mode .pnav .pni.danger:hover {
+  background: rgba(239, 68, 68, 0.18) !important;
+  color: #F87171 !important;
+}
+
+/* Profile Right Content Container */
+.dark-theme-mode .pright {
+  background: rgba(15, 23, 42, 0.88) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .pright-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .pright-title {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .back-dashboard-compact {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .back-dashboard-compact:hover {
+  background: rgba(16, 185, 129, 0.20) !important;
+  color: #34D399 !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+}
+
+/* Profile Section Cards */
+.dark-theme-mode #page-profile .sec {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dark-theme-mode #page-profile .sec-h {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode #page-profile .sec-h span {
+  color: #FFFFFF !important;
+}
+
+/* Personal Info Tab */
+.dark-theme-mode .profile-intro-row {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .quick-stats-info h4 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .member-since-txt,
+.dark-theme-mode .member-since-txt strong,
+.dark-theme-mode .quick-stats-info p,
+.dark-theme-mode .quick-stats-info p strong {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .status-indicator-pill {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+.dark-theme-mode .status-indicator-pill .dot {
+  background: #34D399 !important;
+  box-shadow: 0 0 10px #34D399 !important;
+}
+
+.dark-theme-mode .info-g label,
+.dark-theme-mode .ifd label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .ifd .fv {
+  background: rgba(8, 12, 20, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .epbtn {
+  border: 1.5px solid #10B981 !important;
+  color: #34D399 !important;
+  background: transparent !important;
+}
+
+.dark-theme-mode .epbtn:hover {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.40) !important;
+}
+
+/* Health Dashboard Tab in Profile */
+.dark-theme-mode .health-metric-card {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .radial-ring__bg {
+  stroke: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .radial-value .value-num {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .radial-value .value-unit {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .bmi-large-num {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .bmi-marker-pin {
+  border-color: #0F172A !important;
+  background: #FFFFFF !important;
+}
+
+.dark-theme-mode .bmi-labels-row span {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .dimension-row {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .dim-label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .dim-val {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .dim-val small {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .dim-divider {
+  background: rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark-theme-mode .dimension-sub-stats {
+  border-top-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .sub-item {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .sub-item strong {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .diet-item .label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .recalc-form-container {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.dark-theme-mode .recalc-header {
+  border-bottom-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .recalc-header h4 {
+  color: #FFFFFF !important;
+}
+
+/* Orders History Tab */
+.dark-theme-mode .orders-action-bar {
+  border-bottom-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .search-box-orders input {
+  background: rgba(8, 12, 20, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .orders-counter-label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .orders-counter-label strong {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode #page-profile .oth {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode #page-profile .orow {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #page-profile .orow:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-theme-mode .pay-method-span {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .order-price-val {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .items-count-badge {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode #page-profile .sp.s1 { background: rgba(16, 185, 129, 0.20) !important; color: #34D399 !important; }
+.dark-theme-mode #page-profile .sp.s2 { background: rgba(59, 130, 246, 0.20) !important; color: #60A5FA !important; }
+.dark-theme-mode #page-profile .sp.s3 { background: rgba(245, 158, 11, 0.20) !important; color: #FBBF24 !important; }
+.dark-theme-mode #page-profile .sp.s4 { background: rgba(239, 68, 68, 0.20) !important; color: #F87171 !important; }
+.dark-theme-mode #page-profile .sp.s5 { background: rgba(168, 85, 247, 0.20) !important; color: #C084FC !important; }
+
+/* Saved Addresses Tab */
+.dark-theme-mode #page-profile .addr-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode #page-profile .addr-card:hover {
+  border-color: #10B981 !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode #page-profile .default-active-card {
+  border-color: #10B981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+}
+
+.dark-theme-mode #page-profile .addr-title {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode #page-profile .addr-meta,
+.dark-theme-mode #page-profile .addr-details,
+.dark-theme-mode #page-profile .landmark-txt {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode #page-profile .addr-type.home { background: rgba(139, 92, 246, 0.20) !important; color: #C084FC !important; }
+.dark-theme-mode #page-profile .addr-type.work { background: rgba(59, 130, 246, 0.20) !important; color: #60A5FA !important; }
+.dark-theme-mode #page-profile .addr-type.other { background: rgba(255, 255, 255, 0.10) !important; color: #CBD5E1 !important; }
+.dark-theme-mode #page-profile .addr-default-badge { background: rgba(16, 185, 129, 0.20) !important; color: #34D399 !important; }
+
+.dark-theme-mode #page-profile .addr-actions {
+  border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Edit Profile Page Dark Mode Overrides */
+.dark-theme-mode #page-edit .egrid {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .egrid > div:first-child {
+  background: rgba(8, 12, 20, 0.95) !important;
+  border-right-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .egrid > div:first-child .fc {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .egrid > div:first-child .fc [style*="font-family:'Syne'"] {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .egrid > div:last-child {
+  background: rgba(15, 23, 42, 0.88) !important;
+}
+
+.dark-theme-mode #page-edit .fc {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode #page-edit .fc-t {
+  color: #FFFFFF !important;
+  border-bottom-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode #page-edit .fgrp label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode #page-edit .finp {
+  background: rgba(8, 12, 20, 0.88) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode #page-edit .dzone {
+  background: rgba(239, 68, 68, 0.12) !important;
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+.dark-theme-mode #page-edit .dzone h4 {
+  color: #F87171 !important;
+}
+
+.dark-theme-mode #page-edit .dzone p {
+  color: #CBD5E1 !important;
+}
+

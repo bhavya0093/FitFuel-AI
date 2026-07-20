@@ -1390,3 +1390,195 @@ body.dark-theme-mode:has(#nav-store:checked) .sidebar-nav label[for="nav-store"]
   color: #CBD5E1 !important;
 }
 
+/* --------------------------------------------------------------------------
+   12. Nutrition Store Dark Mode Overrides
+   -------------------------------------------------------------------------- */
+.dark-theme-mode #page-store h1 {
+  background: linear-gradient(135deg, #F8FAFC 30%, #10B981 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.dark-theme-mode .store-back-btn,
+.dark-theme-mode #page-store .store-back-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .store-cart-btn,
+.dark-theme-mode #page-store .store-cart-btn,
+body.dark-theme-mode .store-cart-btn {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #34D399 !important;
+  border: 1.5px solid rgba(16, 185, 129, 0.40) !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode .store-cart-btn i,
+.dark-theme-mode .store-cart-btn span,
+.dark-theme-mode #page-store .store-cart-btn i,
+.dark-theme-mode #page-store .store-cart-btn span,
+body.dark-theme-mode .store-cart-btn span {
+  color: #34D399 !important;
+  font-weight: 800 !important;
+}
+
+.dark-theme-mode #page-store .ai-recommend-section {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.94) 0%, rgba(30, 41, 59, 0.90) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45) !important;
+  border-top: 2px solid #10B981 !important;
+}
+
+.dark-theme-mode #page-store .ai-badge {
+  background: rgba(139, 92, 246, 0.18) !important;
+  color: #A78BFA !important;
+  border-color: rgba(139, 92, 246, 0.35) !important;
+}
+
+.dark-theme-mode .store-filter-card,
+.dark-theme-mode #page-store .store-filter-card,
+body.dark-theme-mode .store-filter-card {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+  padding: 24px !important;
+  border-radius: 24px !important;
+}
+
+.dark-theme-mode #page-store .master-search-bar,
+body.dark-theme-mode .master-search-bar {
+  background: rgba(8, 12, 20, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.dark-theme-mode #page-store .master-search-bar input,
+body.dark-theme-mode .master-search-bar input {
+  background: transparent !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #page-store .master-search-bar input::placeholder,
+body.dark-theme-mode .master-search-bar input::placeholder {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode #page-store .ff-select,
+body.dark-theme-mode .ff-select {
+  background: rgba(8, 12, 20, 0.85) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.dark-theme-mode #page-store .ff-select option,
+body.dark-theme-mode .ff-select option {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #page-store .store-apply-btn,
+body.dark-theme-mode .store-apply-btn {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
+}
+
+.dark-theme-mode .store-reset-btn,
+.dark-theme-mode #page-store .store-reset-btn,
+body.dark-theme-mode .store-reset-btn {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.30) !important;
+}
+
+.dark-theme-mode #page-store .cat-card,
+.dark-theme-mode .cat-card,
+body.dark-theme-mode .cat-card {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark-theme-mode #page-store .cat-card span,
+.dark-theme-mode .cat-card span,
+body.dark-theme-mode .cat-card span {
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode #page-store .cat-card.active,
+.dark-theme-mode .cat-card.active,
+body.dark-theme-mode .cat-card.active {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45) !important;
+}
+
+.dark-theme-mode #page-store .cat-card.active span,
+.dark-theme-mode .cat-card.active span,
+body.dark-theme-mode .cat-card.active span {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+}
+
+.dark-theme-mode .pcd-bdg,
+.dark-theme-mode #page-store .pcd-bdg,
+body.dark-theme-mode .pcd-bdg {
+  background: linear-gradient(135deg, #0EA5E9, #06B6D4) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.5px !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  z-index: 10 !important;
+}
+
+.dark-theme-mode #page-store .pcd,
+.dark-theme-mode .pcd,
+body.dark-theme-mode .pcd {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.40) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+
+.dark-theme-mode #page-store .pcd-img,
+.dark-theme-mode .pcd-img,
+body.dark-theme-mode .pcd-img {
+  background: rgba(30, 41, 59, 0.45) !important;
+  border-radius: 14px !important;
+  margin: 10px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode #page-store .pcd-img img,
+.dark-theme-mode .pcd-img img,
+body.dark-theme-mode .pcd-img img {
+  mix-blend-mode: normal !important;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6)) !important;
+}
+
+.dark-theme-mode #page-store .pcd-name {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #page-store .pcd-now {
+  color: #10B981 !important;
+}
+
+.dark-theme-mode #page-store .pcd-foot {
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode #page-store .toggle-wishlist-btn {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+

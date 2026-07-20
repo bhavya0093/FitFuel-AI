@@ -4,7 +4,7 @@
     <div class="container" style="position: relative; width: 100%;">
         
         <!-- Back to Dashboard -->
-        <label for="nav-home" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px; background: rgba(15, 23, 42, 0.05); color: var(--navy); padding: 10px 22px; border-radius: 50px; font-weight: 700; transition: all 0.3s ease; margin-bottom: 20px; font-size: 13px;">
+        <label for="nav-home" class="store-back-btn" style="cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 50px; font-weight: 700; transition: all 0.3s ease; margin-bottom: 20px; font-size: 13px;">
             <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
         </label>
         
@@ -19,9 +19,9 @@
                 </div>
                 
                 <!-- Quick Cart Link -->
-                <label for="nav-cart" style="cursor: pointer; display: flex; align-items: center; gap: 10px; background: rgba(16, 185, 129, 0.1); color: var(--teal); padding: 12px 24px; border-radius: 50px; font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.2); transition: all 0.3s ease;">
+                <label for="nav-cart" class="store-cart-btn" style="cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 12px 24px; border-radius: 50px; font-weight: 700; transition: all 0.3s ease;">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Cart ({{ cart_count }})</span>
+                    <span style="color: inherit; font-weight: 800;">Cart ({{ cart_count }})</span>
                 </label>
             </div>
         </div>
@@ -38,14 +38,14 @@
                 </div>
             </div>
             
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
                 {% for p in ai_products %}
                 <div class="pcd" style="display: flex; flex-direction: column; height: 100%;">
-                    <div class="pcd-img" style="height: 140px; border-radius: 12px; margin: 10px; overflow: hidden; position: relative;">
-                        <a href="{% url 'product_details' p.id %}">
-                            <img src="{{ p.picture.url }}" alt="{{ p.product_name }}" style="width: 100%; height: 100%; object-fit: contain; padding: 10px;">
+                    <div class="pcd-img" style="height: 150px; position: relative; display: flex; align-items: center; justify-content: center;">
+                        <a href="{% url 'product_details' p.id %}" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                            <img src="{{ p.picture.url }}" alt="{{ p.product_name }}" style="max-width: 90%; max-height: 90%; object-fit: contain;">
                         </a>
-                        <span class="pcd-bdg" style="background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 20px; position: absolute; top: 10px; left: 10px;">
+                        <span class="pcd-bdg" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%); color: #ffffff !important; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; position: absolute; top: 10px; left: 10px; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4); text-transform: uppercase; letter-spacing: 0.5px; z-index: 10;">
                             {{ p.ai_match }}% Match
                         </span>
                         <a href="#" class="toggle-wishlist-btn" data-id="{{ p.id }}" style="position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50px; background: #fff; display: flex; align-items: center; justify-content: center; color: {% if p.id in wishlist_pids %}#ef4444{% else %}var(--mist){% endif %}; text-decoration: none; border: 1px solid rgba(15, 23, 42, 0.06); transition: all 0.2s ease;">
@@ -81,7 +81,7 @@
         {% endif %}
 
         <!-- Filter Form panel -->
-        <div class="glass-card" style="padding: 24px; margin-bottom: 30px; border-radius: 20px;">
+        <div class="store-filter-card" style="padding: 24px; border-radius: 24px; margin-bottom: 35px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(15, 23, 42, 0.08); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);">
             <form method="GET" action="{% url 'customer_dashboard' %}" class="master-filter-form" style="display: flex; flex-direction: column; gap: 16px;">
                 <!-- Hidden active page tag to stay on store tab -->
                 <input type="hidden" name="active_page" value="store">
@@ -90,13 +90,13 @@
                 <div class="master-search-bar" style="display: flex; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 16px; padding: 6px 12px; align-items: center;">
                     <i class="fa-solid fa-magnifying-glass search-icon" style="color: var(--mist); margin-right: 10px;"></i>
                     <input type="text" name="search" placeholder="Search premium proteins, amino acids, healthy foods..." value="{{ search|default_if_none:'' }}" style="border: none; flex: 1; outline: none; font-size: 14px; font-family: inherit;">
-                    <button type="submit" class="search-btn" style="background: var(--teal); color: #fff; border: none; padding: 8px 20px; border-radius: 12px; font-weight: 700; cursor: pointer;">Search</button>
+                    <button type="submit" class="search-btn" style="background: var(--teal); color: #fff; border: none; padding: 10px 22px; border-radius: 12px; font-weight: 700; cursor: pointer;">Search</button>
                 </div>
 
-                <!-- Dropdown filters -->
-                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; align-items: center;">
+                <!-- Dropdown filters & Actions -->
+                <div class="filter-controls-grid" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
                     <!-- Diet -->
-                    <select name="diet" class="ff-select" style="border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
+                    <select name="diet" class="ff-select" style="flex: 1 1 130px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
                         <option value="">Diet Type</option>
                         <option value="Veg" {% if diet == "Veg" %}selected{% endif %}>Veg</option>
                         <option value="Vegan" {% if diet == "Vegan" %}selected{% endif %}>Vegan</option>
@@ -104,7 +104,7 @@
                     </select>
                     
                     <!-- Goal -->
-                    <select name="goal" class="ff-select" style="border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
+                    <select name="goal" class="ff-select" style="flex: 1 1 130px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
                         <option value="">Fitness Goal</option>
                         <option value="Weight Loss" {% if goal == "Weight Loss" %}selected{% endif %}>Weight Loss</option>
                         <option value="Muscle Gain" {% if goal == "Muscle Gain" %}selected{% endif %}>Muscle Gain</option>
@@ -112,7 +112,7 @@
                     </select>
 
                     <!-- Price -->
-                    <select name="price" class="ff-select" style="border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
+                    <select name="price" class="ff-select" style="flex: 1 1 130px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
                         <option value="">Price Limit</option>
                         <option value="500" {% if price == "500" %}selected{% endif %}>Under ₹500</option>
                         <option value="1000" {% if price == "1000" %}selected{% endif %}>Under ₹1000</option>
@@ -121,7 +121,7 @@
                     </select>
 
                     <!-- Protein -->
-                    <select name="protein" class="ff-select" style="border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
+                    <select name="protein" class="ff-select" style="flex: 1 1 130px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
                         <option value="">Protein (min)</option>
                         <option value="10" {% if protein == "10" %}selected{% endif %}>10g+</option>
                         <option value="20" {% if protein == "20" %}selected{% endif %}>20g+</option>
@@ -129,7 +129,7 @@
                     </select>
 
                     <!-- Sort -->
-                    <select name="sort" class="ff-select" style="border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
+                    <select name="sort" class="ff-select" style="flex: 1 1 130px; border: 1px solid rgba(15, 23, 42, 0.08); border-radius: 12px; padding: 10px 14px; font-size: 13px; font-family: inherit; outline: none;">
                         <option value="">Sort By</option>
                         <option value="latest" {% if sort == "latest" %}selected{% endif %}>Newest</option>
                         <option value="low" {% if sort == "low" %}selected{% endif %}>Price: Low → High</option>
@@ -140,16 +140,16 @@
                     </select>
 
                     <!-- Filter action buttons -->
-                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
-                        <button type="submit" style="flex: 1; background: var(--navy); color: #fff; border: none; padding: 10px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">Apply</button>
-                        <a href="{% url 'customer_dashboard' %}?active_page=store" style="background: rgba(15, 23, 42, 0.05); color: var(--navy); border: none; padding: 10px 14px; border-radius: 12px; font-size: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">Reset</a>
+                    <div style="display: flex; gap: 8px; align-items: center; margin-left: auto;">
+                        <button type="submit" class="store-apply-btn" style="background: #10b981; color: #ffffff !important; border: none; padding: 10px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">Apply</button>
+                        <a href="{% url 'customer_dashboard' %}?active_page=store" class="store-reset-btn" style="padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 700; text-decoration: none; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; white-space: nowrap;">Reset</a>
                     </div>
                 </div>
             </form>
         </div>
 
         <!-- Categories Shelf -->
-        <div class="sh" style="margin-bottom: 20px;">
+        <div class="sh" style="margin-top: 45px; margin-bottom: 20px;">
             <div class="sh-t" style="font-size: 1.4rem;">Browse <span style="color:#10b981;">Categories</span></div>
         </div>
 

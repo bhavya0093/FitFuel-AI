@@ -189,21 +189,25 @@ def customer_dashboard(request):
 
         try:
             hp = cid.health_profile
-
-            ai_products = product.objects.filter(
+            matched_qs = product.objects.filter(
                 diet_type=hp.diet_type,
                 goal_type=hp.goal
-            ).order_by(
-                "-protein",
-                "product_price"
-            )[:4]
+            ).order_by("-protein", "product_price")
+            ai_products = list(matched_qs[:4])
+
+            if len(ai_products) < 4:
+                existing_ids = [p.id for p in ai_products]
+                fill_products = list(product.objects.exclude(id__in=existing_ids).order_by("-rating", "-protein")[:(4 - len(ai_products))])
+                ai_products.extend(fill_products)
 
         except UserHealthProfile.DoesNotExist:
-                hp = None
+            hp = None
+            ai_products = list(product.objects.filter(is_ai_recommended=True)[:4])
+            if len(ai_products) < 4:
+                existing_ids = [p.id for p in ai_products]
+                fill_products = list(product.objects.exclude(id__in=existing_ids).order_by("-rating", "-protein")[:(4 - len(ai_products))])
+                ai_products.extend(fill_products)
 
-                ai_products = product.objects.filter(
-                    is_ai_recommended=True
-                )[:4]
         recommended_product = ai_products[0] if ai_products else None
 
         # Get featured product

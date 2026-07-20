@@ -25,14 +25,8 @@
 <link rel="stylesheet" href="{% static 'customerapp/css/achievements.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/leaderboard.css' %}">
 <link rel="stylesheet" href="{% static 'customerapp/css/progress.css' %}">
-<script>
-  if (localStorage.getItem("pref-dark-mode") === "true") {
-      document.documentElement.classList.add("dark-theme-mode");
-      document.addEventListener("DOMContentLoaded", function() {
-          document.body.classList.add("dark-theme-mode");
-      });
-  }
-</script>
+<link rel="stylesheet" href="{% static 'customerapp/css/darkmode.css' %}?v={% now 'U' %}">
+<script src="{% static 'customerapp/js/theme.js' %}"></script>
 </head>
 <body>
 <div class="bg-layer"></div>

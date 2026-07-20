@@ -1,0 +1,581 @@
+/* ==========================================================================
+   FitFuel AI - Ultra-Premium Master Dark Mode Design System
+   File: darkmode.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Root CSS Variables Overrides
+   -------------------------------------------------------------------------- */
+:root.dark-theme-mode,
+body.dark-theme-mode,
+html.dark-theme-mode {
+  --dark-bg: #080C14;
+  --dark-surface: #0F172A;
+  --dark-card-bg: rgba(15, 23, 42, 0.85);
+  --dark-card-hover: rgba(30, 41, 59, 0.90);
+  --dark-border: rgba(255, 255, 255, 0.10);
+  --dark-border-glow: rgba(16, 185, 129, 0.35);
+
+  --text-main: #F8FAFC;
+  --text-muted: #CBD5E1;
+  --navy: #F8FAFC !important;
+  --mist: #CBD5E1 !important;
+  --slate: #E2E8F0 !important;
+
+  --neon-emerald: #10B981;
+  --neon-cyan: #06B6D4;
+  --neon-purple: #8B5CF6;
+  --neon-amber: #F59E0B;
+}
+
+/* --------------------------------------------------------------------------
+   2. Global Body & Backgrounds
+   -------------------------------------------------------------------------- */
+html.dark-theme-mode,
+body.dark-theme-mode {
+  background-color: #080C14 !important;
+  background-image: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+                    radial-gradient(at 50% 0%, rgba(6, 182, 212, 0.10) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 50%) !important;
+  color: #F8FAFC !important;
+}
+
+/* Typography Overrides */
+.dark-theme-mode h1,
+.dark-theme-mode h2,
+.dark-theme-mode h3,
+.dark-theme-mode h4,
+.dark-theme-mode h5,
+.dark-theme-mode h6,
+.dark-theme-mode strong,
+.dark-theme-mode b {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode p,
+.dark-theme-mode span,
+.dark-theme-mode label,
+.dark-theme-mode div {
+  color: inherit;
+}
+
+.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn) {
+  color: #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   3. Smart Inline Style Attribute Overrides
+   -------------------------------------------------------------------------- */
+.dark-theme-mode [style*="background: rgba(255, 255, 255"],
+.dark-theme-mode [style*="background:rgba(255, 255, 255"],
+.dark-theme-mode [style*="background: rgba(255,255,255"],
+.dark-theme-mode [style*="background:rgba(255,255,255"],
+.dark-theme-mode [style*="background: #fff"],
+.dark-theme-mode [style*="background:#fff"],
+.dark-theme-mode [style*="background: #ffffff"],
+.dark-theme-mode [style*="background:#ffffff"],
+.dark-theme-mode [style*="background: #f8fafc"],
+.dark-theme-mode [style*="background:#f8fafc"] {
+  background: rgba(15, 23, 42, 0.85) !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode [style*="color: #0f172a"],
+.dark-theme-mode [style*="color:#0f172a"],
+.dark-theme-mode [style*="color: var(--navy)"],
+.dark-theme-mode [style*="color:#1e293b"],
+.dark-theme-mode [style*="color: #1e293b"],
+.dark-theme-mode [style*="color: #334155"],
+.dark-theme-mode [style*="color: #475569"] {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode [style*="color: var(--mist)"],
+.dark-theme-mode [style*="color: #64748b"],
+.dark-theme-mode [style*="color: #94a3b8"] {
+  color: #CBD5E1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Navbar & Mobile Menu
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .ff-navbar {
+  background: rgba(8, 12, 20, 0.92) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(20px) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-theme-mode .ff-brand-title {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .ff-search-input {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .ff-search-input::placeholder {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .ff-icon {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .ff-icon:hover {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #10B981 !important;
+}
+
+.dark-theme-mode .ff-dropdown,
+.dark-theme-mode .ff-dropdown div,
+.dark-theme-mode .notification-list {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .notification-item {
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-theme-mode .notification-item.unread {
+  background: rgba(16, 185, 129, 0.08) !important;
+}
+
+.dark-theme-mode .ff-mobile-menu {
+  background: #0F172A !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme-mode .ff-mobile-menu a,
+.dark-theme-mode .ff-mobile-menu label {
+  color: #E2E8F0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Sidebar Navigation & Cards
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .sidebar-card,
+.dark-theme-mode .sidebar {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 24px;
+}
+
+.dark-theme-mode .sidebar-user h3 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .sidebar-user p {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .sidebar-nav a,
+.dark-theme-mode .sidebar-nav label {
+  color: #E2E8F0 !important;
+}
+
+.dark-theme-mode .sidebar-nav a i,
+.dark-theme-mode .sidebar-nav label i {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .sidebar-nav a:hover,
+.dark-theme-mode .sidebar-nav label:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+  color: #10B981 !important;
+}
+
+.dark-theme-mode .sidebar-nav a:hover i,
+.dark-theme-mode .sidebar-nav label:hover i {
+  color: #10B981 !important;
+}
+
+.dark-theme-mode .sidebar-divider {
+  border-top-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Hero Light Banner & Step Cards
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .hero-light-banner {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dark-theme-mode .hero-content h1 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .hero-content p {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .hero-badge {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+.dark-theme-mode .hero-step {
+  background: rgba(15, 23, 42, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .hero-step h3 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .hero-step p {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .hero-steps-line {
+  border-top: 2px dashed rgba(255, 255, 255, 0.15) !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Stat Cards & Icons
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .stat-card {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+}
+
+.dark-theme-mode .stat-info h3 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .stat-info > span {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .stat-info small {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .stat-icon.green {
+  background: rgba(16, 185, 129, 0.20) !important;
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .stat-icon.blue {
+  background: rgba(59, 130, 246, 0.20) !important;
+  color: #60A5FA !important;
+}
+
+.dark-theme-mode .stat-icon.purple {
+  background: rgba(139, 92, 246, 0.20) !important;
+  color: #A78BFA !important;
+}
+
+.dark-theme-mode .stat-icon.orange {
+  background: rgba(249, 115, 22, 0.20) !important;
+  color: #FB923C !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. AI Powered Recommendation Cards ("Recommended For You")
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .ai-recommend-section {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 24px !important;
+  padding: 28px !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+.dark-theme-mode .ai-product-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .ai-product-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2) !important;
+}
+
+.dark-theme-mode .ai-product-card img {
+  background: rgba(30, 41, 59, 0.60) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .ai-product-card h3 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .ai-product-card .brand {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .ai-product-card .nutrition,
+.dark-theme-mode .ai-product-card .nutrition span {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .ai-reason-list li {
+  color: #CBD5E1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Category Pills & Promo Cards
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .cat-card {
+  background: rgba(15, 23, 42, 0.80) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #E2E8F0 !important;
+}
+
+.dark-theme-mode .cat-card:hover {
+  background: rgba(30, 41, 59, 0.95) !important;
+  border-color: #06B6D4 !important;
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .cat-card.active {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .cat-img-wrapper {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark-theme-mode .cat-card .cat-name {
+  color: #E2E8F0 !important;
+}
+
+.dark-theme-mode .promo-tile {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .promo-icon {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #10B981 !important;
+}
+
+.dark-theme-mode .promo-text h4 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .promo-text p {
+  color: #CBD5E1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. Product Cards (Nutrition Store Grid)
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .pcd {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dark-theme-mode .pcd:hover {
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2) !important;
+}
+
+.dark-theme-mode .pcd-img {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9)) !important;
+}
+
+.dark-theme-mode .pcd-img img {
+  background: transparent !important;
+}
+
+.dark-theme-mode .pcd-name {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .pcd-qty {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .pcd-now {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .pcd-fav {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Right Panel Widgets
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .right-panel .widget,
+.dark-theme-mode .widget {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dark-theme-mode .widget-title h4 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .stat-label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .stat-value {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .progress {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .featured-widget {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .featured-header h4 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .feat-details h5 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .feat-details p {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .feat-price strong {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .feat-img {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .feat-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #FFFFFF !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. Home Orders Table & Empty State
+   -------------------------------------------------------------------------- */
+.dark-theme-mode #page-home .obox {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode #page-home .oth {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #CBD5E1 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode #page-home .orow {
+  color: #E2E8F0 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-theme-mode #page-home .orow:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-theme-mode .empty-orders-state h4 {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .empty-orders-state p {
+  color: #CBD5E1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Glass Cards & Section Headers
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .sh-t {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .glass-card,
+.dark-theme-mode .card,
+.dark-theme-mode .section-card,
+.dark-theme-mode .profile-card,
+.dark-theme-mode .order-card,
+.dark-theme-mode .wishlist-card,
+.dark-theme-mode .transaction-card,
+.dark-theme-mode .summary-box,
+.dark-theme-mode .info-card,
+.dark-theme-mode .nutrition-card,
+.dark-theme-mode .review-card,
+.dark-theme-mode .pricing-card {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   14. Form Controls & Dropdowns
+   -------------------------------------------------------------------------- */
+.dark-theme-mode input[type="text"],
+.dark-theme-mode input[type="email"],
+.dark-theme-mode input[type="password"],
+.dark-theme-mode input[type="number"],
+.dark-theme-mode input[type="tel"],
+.dark-theme-mode input[type="date"],
+.dark-theme-mode select,
+.dark-theme-mode textarea,
+.dark-theme-mode .form-input,
+.dark-theme-mode .form-control,
+.dark-theme-mode .ff-select {
+  background-color: rgba(15, 23, 42, 0.90) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.14) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode input:focus,
+.dark-theme-mode select:focus,
+.dark-theme-mode textarea:focus {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3) !important;
+  outline: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   15. Custom Dark Scrollbars
+   -------------------------------------------------------------------------- */
+.dark-theme-mode ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark-theme-mode ::-webkit-scrollbar-track {
+  background: #080C14;
+}
+
+.dark-theme-mode ::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme-mode ::-webkit-scrollbar-thumb:hover {
+  background: #10B981;
+}

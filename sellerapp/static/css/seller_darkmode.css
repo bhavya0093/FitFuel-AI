@@ -1,0 +1,369 @@
+/* ==========================================================================
+   FitFuel AI Seller Portal - Premium Glassmorphic Dark Mode Stylesheet
+   File: seller_darkmode.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Canvas & Global Layout Dark Overrides
+   -------------------------------------------------------------------------- */
+.dark-theme-mode,
+body.dark-theme-mode {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  background-image: 
+    radial-gradient(ellipse 100% 100% at 0% 0%, rgba(20, 184, 166, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 100% 100%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, rgba(15, 23, 42, 0.95) 0%, transparent 100%) !important;
+  background-attachment: fixed !important;
+}
+
+.dark-theme-mode .container,
+body.dark-theme-mode .container {
+  background: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Sidebar Navigation
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .sidebar,
+body.dark-theme-mode .sidebar {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 4px 0 25px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.dark-theme-mode .sidebar-header,
+body.dark-theme-mode .sidebar-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .sidebar-header h2,
+body.dark-theme-mode .sidebar-header h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .sidebar-header p,
+body.dark-theme-mode .sidebar-header p {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .nav-link,
+.dark-theme-mode .submenu-link,
+body.dark-theme-mode .nav-link,
+body.dark-theme-mode .submenu-link {
+  color: #CBD5E1 !important;
+  background: transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+.dark-theme-mode .nav-link:hover,
+.dark-theme-mode .submenu-link:hover,
+body.dark-theme-mode .nav-link:hover,
+body.dark-theme-mode .submenu-link:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #10B981 !important;
+}
+
+.dark-theme-mode .nav-link.active,
+.dark-theme-mode .submenu-link.active,
+body.dark-theme-mode .nav-link.active,
+body.dark-theme-mode .submenu-link.active {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Top Navigation Bar & Search
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .top-bar,
+body.dark-theme-mode .top-bar {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+.dark-theme-mode .search-bar input,
+body.dark-theme-mode .search-bar input {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .search-bar input::placeholder,
+body.dark-theme-mode .search-bar input::placeholder {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .search-bar i,
+body.dark-theme-mode .search-bar i {
+  color: #94A3B8 !important;
+}
+
+/* Admin Profile Wrap in Topbar */
+.dark-theme-mode .admin-name p,
+body.dark-theme-mode .admin-name p {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .admin-sub,
+body.dark-theme-mode .admin-sub {
+  color: #38BDF8 !important;
+}
+
+/* Notification & Profile Dropdowns */
+.dark-theme-mode .notification-dropdown,
+.dark-theme-mode .profile-dropdown,
+body.dark-theme-mode .notification-dropdown,
+body.dark-theme-mode .profile-dropdown {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.55) !important;
+  backdrop-filter: blur(20px) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .notification-dropdown h4,
+body.dark-theme-mode .notification-dropdown h4 {
+  color: #F8FAFC !important;
+  border-bottom-color: rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .notify-item,
+body.dark-theme-mode .notify-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .notify-item:hover,
+body.dark-theme-mode .notify-item:hover {
+  background: rgba(30, 41, 59, 0.60) !important;
+}
+
+.dark-theme-mode .profile-dropdown a,
+.dark-theme-mode .profile-dropdown label,
+body.dark-theme-mode .profile-dropdown a,
+body.dark-theme-mode .profile-dropdown label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .profile-dropdown a:hover,
+.dark-theme-mode .profile-dropdown label:hover,
+body.dark-theme-mode .profile-dropdown a:hover,
+body.dark-theme-mode .profile-dropdown label:hover {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #10B981 !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Dashboard Cards & Stat Widgets
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .card,
+.dark-theme-mode .stat-card,
+.dark-theme-mode .widget,
+.dark-theme-mode .analytics-card,
+.dark-theme-mode .info-card,
+.dark-theme-mode .dashboard-section,
+body.dark-theme-mode .card,
+body.dark-theme-mode .stat-card,
+body.dark-theme-mode .widget,
+body.dark-theme-mode .analytics-card,
+body.dark-theme-mode .info-card,
+body.dark-theme-mode .dashboard-section {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode h1,
+.dark-theme-mode h2,
+.dark-theme-mode h3,
+.dark-theme-mode h4,
+.dark-theme-mode h5,
+.dark-theme-mode h6,
+body.dark-theme-mode h1,
+body.dark-theme-mode h2,
+body.dark-theme-mode h3,
+body.dark-theme-mode h4,
+body.dark-theme-mode h5,
+body.dark-theme-mode h6 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode p,
+.dark-theme-mode span,
+.dark-theme-mode label,
+body.dark-theme-mode p,
+body.dark-theme-mode span,
+body.dark-theme-mode label {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode small,
+body.dark-theme-mode small {
+  color: #94A3B8 !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Data Tables (Products, Orders, Users, Payments)
+   -------------------------------------------------------------------------- */
+.dark-theme-mode table,
+.dark-theme-mode .table,
+.dark-theme-mode .admin-table,
+body.dark-theme-mode table,
+body.dark-theme-mode .table,
+body.dark-theme-mode .admin-table {
+  background: rgba(15, 23, 42, 0.60) !important;
+  color: #F8FAFC !important;
+  border-collapse: separate !important;
+}
+
+.dark-theme-mode th,
+.dark-theme-mode .table th,
+body.dark-theme-mode th,
+body.dark-theme-mode .table th {
+  background: rgba(30, 41, 59, 0.90) !important;
+  color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode td,
+.dark-theme-mode .table td,
+body.dark-theme-mode td,
+body.dark-theme-mode .table td {
+  color: #CBD5E1 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: transparent !important;
+}
+
+.dark-theme-mode tr:hover td,
+body.dark-theme-mode tr:hover td {
+  background: rgba(30, 41, 59, 0.50) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Form Controls & Inputs
+   -------------------------------------------------------------------------- */
+.dark-theme-mode input[type="text"],
+.dark-theme-mode input[type="password"],
+.dark-theme-mode input[type="email"],
+.dark-theme-mode input[type="number"],
+.dark-theme-mode select,
+.dark-theme-mode textarea,
+.dark-theme-mode .form-control,
+body.dark-theme-mode input[type="text"],
+body.dark-theme-mode input[type="password"],
+body.dark-theme-mode input[type="email"],
+body.dark-theme-mode input[type="number"],
+body.dark-theme-mode select,
+body.dark-theme-mode textarea,
+body.dark-theme-mode .form-control {
+  background: rgba(8, 12, 20, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  color: #F8FAFC !important;
+  border-radius: 10px !important;
+}
+
+.dark-theme-mode input:focus,
+.dark-theme-mode select:focus,
+.dark-theme-mode textarea:focus,
+body.dark-theme-mode input:focus,
+body.dark-theme-mode select:focus,
+body.dark-theme-mode textarea:focus {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+  outline: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. Auth Pages (Login, Register, Reset Password)
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .login-card,
+.dark-theme-mode .register-card,
+.dark-theme-mode .auth-card,
+.dark-theme-mode .form-box,
+body.dark-theme-mode .login-card,
+body.dark-theme-mode .register-card,
+body.dark-theme-mode .auth-card,
+body.dark-theme-mode .form-box {
+  background: rgba(30, 41, 59, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.50) !important;
+  backdrop-filter: blur(24px) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .login-title,
+.dark-theme-mode .form-header h2,
+body.dark-theme-mode .login-title,
+body.dark-theme-mode .form-header h2 {
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
+}
+
+.dark-theme-mode .login-card div,
+.dark-theme-mode .register-card div,
+body.dark-theme-mode .login-card div,
+body.dark-theme-mode .register-card div {
+  color: #F8FAFC;
+}
+
+.dark-theme-mode .login-sub,
+.dark-theme-mode .register-hint,
+.dark-theme-mode .login-hint,
+body.dark-theme-mode .login-sub,
+body.dark-theme-mode .register-hint,
+body.dark-theme-mode .login-hint {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .register-hint a,
+.dark-theme-mode .login-hint a,
+.dark-theme-mode .forgot-link,
+body.dark-theme-mode .register-hint a,
+body.dark-theme-mode .login-hint a,
+body.dark-theme-mode .forgot-link {
+  color: #38BDF8 !important;
+  font-weight: 600 !important;
+}
+
+.dark-theme-mode .input-field label,
+.dark-theme-mode .remember-label,
+body.dark-theme-mode .input-field label,
+body.dark-theme-mode .remember-label {
+  color: #CBD5E1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. Seller Header Theme Switcher Button
+   -------------------------------------------------------------------------- */
+#seller-theme-toggle-btn {
+  background: rgba(30, 41, 59, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #64748B;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#seller-theme-toggle-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.dark-theme-mode #seller-theme-toggle-btn {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(255, 255, 255, 0.20);
+  color: #FBBF24 !important;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.30);
+}

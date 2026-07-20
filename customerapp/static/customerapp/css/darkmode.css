@@ -59,7 +59,7 @@ body.dark-theme-mode {
   color: inherit;
 }
 
-.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link) {
+.dark-theme-mode a:not(.btn):not(.btn-primary):not(.pcd-add):not(.ai-rec-btn):not(.widget-btn):not(.cat-card):not(.nav-link):not(.add-btn):not(.ff-logo-link):not(.meal-consume):not(.btn-gradient) {
   color: #38BDF8;
 }
 
@@ -1571,6 +1571,255 @@ body.dark-theme-mode .pcd-img img {
 
 .dark-theme-mode #page-store .pcd-now {
   color: #10B981 !important;
+}
+
+/* ==========================================================================
+   SECTION 13: AI MEAL PLANNER DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Main Header & Titles */
+.dark-theme-mode .meal-header h1,
+body.dark-theme-mode .meal-header h1 {
+  color: #F8FAFC !important;
+  background: linear-gradient(135deg, #F8FAFC 30%, #10B981 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.dark-theme-mode .meal-header p,
+body.dark-theme-mode .meal-header p {
+  color: #94A3B8 !important;
+}
+
+/* Glass Cards in Hero Dashboard & Main Sections */
+.dark-theme-mode .glass-card,
+body.dark-theme-mode .glass-card,
+.dark-theme-mode .chart-card,
+body.dark-theme-mode .chart-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+.dark-theme-mode .health-score-widget h2,
+.dark-theme-mode .ai-coach-content h4,
+.dark-theme-mode .goal-details strong,
+.dark-theme-mode .glass-card h2,
+.dark-theme-mode .chart-card h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .health-score-widget p,
+.dark-theme-mode .ai-coach-content p,
+.dark-theme-mode .goal-details span {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .ai-coach-block,
+body.dark-theme-mode .ai-coach-block {
+  background: rgba(30, 41, 59, 0.50) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 4 Meal Cards (Breakfast, Lunch, Dinner, Snacks) */
+.dark-theme-mode .meal-card,
+body.dark-theme-mode .meal-card {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.40) !important;
+  border-radius: 24px !important;
+}
+
+.dark-theme-mode .meal-card h2,
+body.dark-theme-mode .meal-card h2 {
+  color: #F8FAFC !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .meal-left,
+body.dark-theme-mode .meal-left {
+  background: #FFFFFF !important;
+  border-radius: 16px !important;
+  padding: 10px !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.dark-theme-mode .meal-image,
+body.dark-theme-mode .meal-image {
+  mix-blend-mode: normal !important;
+  filter: none !important;
+}
+
+.dark-theme-mode .meal-center h4,
+body.dark-theme-mode .meal-center h4 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .meal-brand,
+body.dark-theme-mode .meal-brand {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .meal-tags span,
+body.dark-theme-mode .meal-tags span {
+  background: rgba(99, 102, 241, 0.18) !important;
+  color: #818CF8 !important;
+  border: 1px solid rgba(99, 102, 241, 0.30) !important;
+}
+
+.dark-theme-mode .ai-score,
+body.dark-theme-mode .ai-score {
+  background: rgba(168, 85, 247, 0.18) !important;
+  color: #C084FC !important;
+  border: 1px solid rgba(168, 85, 247, 0.30) !important;
+}
+
+.dark-theme-mode .meal-ai,
+body.dark-theme-mode .meal-ai {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .meal-reasons span,
+body.dark-theme-mode .meal-reasons span {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.28) !important;
+}
+
+.dark-theme-mode .meal-cart,
+.dark-theme-mode .meal-heart,
+body.dark-theme-mode .meal-cart,
+body.dark-theme-mode .meal-heart {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #CBD5E1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .meal-cart:hover,
+body.dark-theme-mode .meal-cart:hover {
+  background: #10B981 !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .meal-heart:hover,
+body.dark-theme-mode .meal-heart:hover {
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .empty-meal,
+body.dark-theme-mode .empty-meal {
+  background: rgba(30, 41, 59, 0.30) !important;
+  border: 1px dashed rgba(255, 255, 255, 0.15) !important;
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .empty-meal i,
+body.dark-theme-mode .empty-meal i {
+  color: #64748B !important;
+}
+
+/* Nutrition Intake Stat Boxes */
+.dark-theme-mode .stat-box,
+body.dark-theme-mode .stat-box {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .stat-title,
+.dark-theme-mode .stat-target,
+body.dark-theme-mode .stat-title,
+body.dark-theme-mode .stat-target {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .stat-amount,
+body.dark-theme-mode .stat-amount {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .bar-container,
+.dark-theme-mode .chart-bar-container,
+body.dark-theme-mode .bar-container,
+body.dark-theme-mode .chart-bar-container {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .chart-day,
+body.dark-theme-mode .chart-day {
+  color: #94A3B8 !important;
+}
+
+/* 4 Quick Stat Badges at Bottom */
+.dark-theme-mode .quick-stat-card,
+body.dark-theme-mode .quick-stat-card {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.30) !important;
+}
+
+.dark-theme-mode .quick-stat-icon,
+body.dark-theme-mode .quick-stat-icon {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .quick-stat-info span,
+body.dark-theme-mode .quick-stat-info span {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .quick-stat-info strong,
+body.dark-theme-mode .quick-stat-info strong {
+  color: #F8FAFC !important;
+}
+
+/* Bottom Action Buttons */
+.dark-theme-mode .btn-gradient,
+.dark-theme-mode #page-meal-plan .btn-gradient,
+body.dark-theme-mode .btn-gradient {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.40) !important;
+}
+
+.dark-theme-mode .btn-gradient i,
+.dark-theme-mode .btn-gradient span,
+body.dark-theme-mode .btn-gradient i,
+body.dark-theme-mode .btn-gradient span {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .meal-consume,
+.dark-theme-mode #page-meal-plan .meal-consume,
+body.dark-theme-mode .meal-consume {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+  border: none !important;
+}
+
+.dark-theme-mode .meal-consume i,
+.dark-theme-mode .meal-consume span,
+body.dark-theme-mode .meal-consume i,
+body.dark-theme-mode .meal-consume span {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .btn-secondary,
+body.dark-theme-mode .btn-secondary {
+  background: rgba(15, 23, 42, 0.85) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark-theme-mode .btn-secondary:hover,
+body.dark-theme-mode .btn-secondary:hover {
+  background: rgba(30, 41, 59, 0.95) !important;
+  border-color: rgba(255, 255, 255, 0.30) !important;
 }
 
 .dark-theme-mode #page-store .pcd-foot {

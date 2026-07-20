@@ -2453,9 +2453,9 @@ body.dark-theme-mode .level-card small {
 }
 
 .dark-theme-mode .leaderboard-btn,
-.dark-theme-mode label[for="nav-leaderboard"],
+.dark-theme-mode .level-card label[for="nav-leaderboard"],
 body.dark-theme-mode .leaderboard-btn,
-body.dark-theme-mode label[for="nav-leaderboard"] {
+body.dark-theme-mode .level-card label[for="nav-leaderboard"] {
   background: linear-gradient(135deg, #10B981, #059669) !important;
   color: #FFFFFF !important;
   font-weight: 800 !important;
@@ -2760,16 +2760,20 @@ body.dark-theme-mode #page-leaderboard h1 {
   font-weight: 800 !important;
 }
 
-.dark-theme-mode #page-leaderboard label[for="nav-achievements"],
-body.dark-theme-mode #page-leaderboard label[for="nav-achievements"] {
+.dark-theme-mode #page-leaderboard label[for="nav-home"],
+.dark-theme-mode #page-leaderboard .back-dashboard-btn,
+body.dark-theme-mode #page-leaderboard label[for="nav-home"],
+body.dark-theme-mode #page-leaderboard .back-dashboard-btn {
   background: rgba(30, 41, 59, 0.90) !important;
   color: #38BDF8 !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
 }
 
-.dark-theme-mode #page-leaderboard label[for="nav-achievements"]:hover,
-body.dark-theme-mode #page-leaderboard label[for="nav-achievements"]:hover {
+.dark-theme-mode #page-leaderboard label[for="nav-home"]:hover,
+.dark-theme-mode #page-leaderboard .back-dashboard-btn:hover,
+body.dark-theme-mode #page-leaderboard label[for="nav-home"]:hover,
+body.dark-theme-mode #page-leaderboard .back-dashboard-btn:hover {
   background: rgba(56, 189, 248, 0.15) !important;
   color: #7DD3FC !important;
 }
@@ -2842,5 +2846,133 @@ body.dark-theme-mode .my-rank p {
   color: #CBD5E1 !important;
   font-size: 0.95rem !important;
   font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   SECTION 20: MY WALLET PAGE DARK MODE OVERRIDES
+   ========================================================================== */
+
+/* Main Container & Back Button */
+.dark-theme-mode .wallet-container,
+body.dark-theme-mode .wallet-container {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .wallet-container .back-btn,
+body.dark-theme-mode .wallet-container .back-btn {
+  background: rgba(30, 41, 59, 0.90) !important;
+  color: #38BDF8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  padding: 10px 22px !important;
+  border-radius: 50px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+.dark-theme-mode .wallet-container .back-btn:hover,
+body.dark-theme-mode .wallet-container .back-btn:hover {
+  background: rgba(56, 189, 248, 0.15) !important;
+  color: #7DD3FC !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Wallet Main Balance Card */
+.dark-theme-mode .wallet-card,
+body.dark-theme-mode .wallet-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.90) 0%, rgba(5, 150, 105, 0.95) 100%) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 20px 45px rgba(16, 185, 129, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  border-radius: 24px !important;
+}
+
+.dark-theme-mode .wallet-card h2,
+.dark-theme-mode .wallet-card h2 i,
+.dark-theme-mode .wallet-balance,
+.dark-theme-mode .wallet-card p,
+body.dark-theme-mode .wallet-card h2,
+body.dark-theme-mode .wallet-card h2 i,
+body.dark-theme-mode .wallet-balance,
+body.dark-theme-mode .wallet-card p {
+  color: #FFFFFF !important;
+}
+
+.dark-theme-mode .wallet-note,
+body.dark-theme-mode .wallet-note {
+  color: #34D399 !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+}
+
+.dark-theme-mode .wallet-note i,
+body.dark-theme-mode .wallet-note i {
+  color: #FBBF24 !important;
+}
+
+/* Headings */
+.dark-theme-mode .wallet-container h3,
+body.dark-theme-mode .wallet-container h3 {
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
+  margin-top: 30px !important;
+}
+
+/* Transaction Cards */
+.dark-theme-mode .transaction-card,
+body.dark-theme-mode .transaction-card {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 18px !important;
+}
+
+.dark-theme-mode .transaction-card strong,
+body.dark-theme-mode .transaction-card strong {
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode .transaction-card small,
+body.dark-theme-mode .transaction-card small {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .transaction-card .credit,
+body.dark-theme-mode .transaction-card .credit {
+  color: #34D399 !important;
+}
+
+.dark-theme-mode .transaction-card .debit,
+body.dark-theme-mode .transaction-card .debit {
+  color: #F87171 !important;
+}
+
+/* Empty State Container */
+.dark-theme-mode .empty-wallet,
+body.dark-theme-mode .empty-wallet {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 20px !important;
+}
+
+.dark-theme-mode .empty-wallet i,
+body.dark-theme-mode .empty-wallet i {
+  color: #38BDF8 !important;
+  opacity: 0.85 !important;
+}
+
+.dark-theme-mode .empty-wallet h2,
+body.dark-theme-mode .empty-wallet h2 {
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
+}
+
+.dark-theme-mode .empty-wallet p,
+body.dark-theme-mode .empty-wallet p {
+  color: #94A3B8 !important;
+  font-weight: 500 !important;
 }
 

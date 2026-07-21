@@ -1073,3 +1073,282 @@ body.dark-theme-mode .search-bar input:focus {
   background: transparent !important;
   background-color: transparent !important;
 }
+
+/* ==========================================================================
+   10. ANALYTICS DASHBOARD DARK MODE OVERRIDES (FitFuel Premium Glass)
+   ========================================================================== */
+
+.dark-theme-mode #analytics-section,
+body.dark-theme-mode #analytics-section {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .analytics-title-icon,
+body.dark-theme-mode .analytics-title-icon {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .analytics-title-text,
+body.dark-theme-mode .analytics-title-text {
+  background: linear-gradient(135deg, #60A5FA 0%, #38BDF8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.dark-theme-mode .analytics-subtitle,
+body.dark-theme-mode .analytics-subtitle {
+  color: #94A3B8 !important;
+}
+
+/* Header Buttons */
+.dark-theme-mode .btn-refresh,
+body.dark-theme-mode .btn-refresh {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark-theme-mode .btn-refresh:hover,
+body.dark-theme-mode .btn-refresh:hover {
+  background: rgba(51, 65, 85, 0.90) !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.40) !important;
+}
+
+/* Stat Cards Glow & Border */
+.dark-theme-mode .stat-card,
+body.dark-theme-mode .stat-card {
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dark-theme-mode .stat-card:hover,
+body.dark-theme-mode .stat-card:hover {
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.60) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* AI Business Insights Section */
+.dark-theme-mode .business-insights-section,
+body.dark-theme-mode .business-insights-section {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.40) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+.dark-theme-mode .section-title,
+body.dark-theme-mode .section-title {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .business-insight-card,
+body.dark-theme-mode .business-insight-card {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dark-theme-mode .business-insight-card:hover,
+body.dark-theme-mode .business-insight-card:hover {
+  border-color: rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.50) !important;
+}
+
+.dark-theme-mode .insight-title-text,
+body.dark-theme-mode .insight-title-text {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .insight-desc-text,
+body.dark-theme-mode .insight-desc-text {
+  color: #CBD5E1 !important;
+}
+
+.dark-theme-mode .insight-footer,
+body.dark-theme-mode .insight-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .no-insights-card,
+body.dark-theme-mode .no-insights-card {
+  background: rgba(15, 23, 42, 0.60) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #94A3B8 !important;
+}
+
+/* AI Intelligence Insights Section */
+.dark-theme-mode .insights-section,
+body.dark-theme-mode .insights-section {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.40) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+.dark-theme-mode .insight-card,
+body.dark-theme-mode .insight-card {
+  background: rgba(15, 23, 42, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .insight-card:hover,
+body.dark-theme-mode .insight-card:hover {
+  background: rgba(30, 41, 59, 0.90) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.40) !important;
+}
+
+.dark-theme-mode .insight-content h4,
+body.dark-theme-mode .insight-content h4 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .insight-content p,
+body.dark-theme-mode .insight-content p {
+  color: #94A3B8 !important;
+}
+
+/* Charts Grid */
+.dark-theme-mode .chart-box,
+body.dark-theme-mode .chart-box {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.40) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+.dark-theme-mode .chart-box:hover,
+body.dark-theme-mode .chart-box:hover {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55) !important;
+}
+
+.dark-theme-mode .chart-box h3,
+body.dark-theme-mode .chart-box h3 {
+  color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* Tables Section */
+.dark-theme-mode .table-card,
+body.dark-theme-mode .table-card {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.40) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+.dark-theme-mode .table-card-header h3,
+body.dark-theme-mode .table-card-header h3 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .dashboard-table th,
+body.dark-theme-mode .dashboard-table th {
+  color: #93C5FD !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.14) !important;
+}
+
+.dark-theme-mode .dashboard-table td,
+body.dark-theme-mode .dashboard-table td {
+  color: #E2E8F0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .dashboard-table tbody tr:hover,
+body.dark-theme-mode .dashboard-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark-theme-mode .product-name-txt,
+.dark-theme-mode .customer-name,
+.dark-theme-mode .customer-name-text,
+body.dark-theme-mode .product-name-txt,
+body.dark-theme-mode .customer-name,
+body.dark-theme-mode .customer-name-text {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .customer-email,
+.dark-theme-mode .customer-email-text,
+body.dark-theme-mode .customer-email,
+body.dark-theme-mode .customer-email-text {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .product-thumb,
+body.dark-theme-mode .product-thumb {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark-theme-mode .customer-avatar,
+body.dark-theme-mode .customer-avatar {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.dark-theme-mode .payment-method-badge,
+body.dark-theme-mode .payment-method-badge {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #E2E8F0 !important;
+}
+
+/* Recent Orders Filter & Controls */
+.dark-theme-mode #order-search-input,
+body.dark-theme-mode #order-search-input {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode #order-search-input:focus,
+body.dark-theme-mode #order-search-input:focus {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-color: #38BDF8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25) !important;
+}
+
+.dark-theme-mode .search-icon,
+body.dark-theme-mode .search-icon {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .filter-dropdown,
+body.dark-theme-mode .filter-dropdown {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.20) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .filter-dropdown option,
+body.dark-theme-mode .filter-dropdown option {
+  background: #0F172A !important;
+  color: #F8FAFC !important;
+}
+
+/* Pagination */
+.dark-theme-mode .table-pagination,
+body.dark-theme-mode .table-pagination {
+  border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .pagination-info,
+body.dark-theme-mode .pagination-info {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .btn-pagination,
+body.dark-theme-mode .btn-pagination {
+  background: rgba(30, 41, 59, 0.80) !important;
+  color: #F8FAFC !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.dark-theme-mode .btn-pagination:hover:not(:disabled),
+body.dark-theme-mode .btn-pagination:hover:not(:disabled) {
+  background: rgba(51, 65, 85, 0.90) !important;
+  color: #FFFFFF !important;
+}

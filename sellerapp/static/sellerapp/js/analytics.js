@@ -108,10 +108,14 @@ function initCharts() {
     }
 
     // Default Chart Config Options
+    const isDarkMode = document.body.classList.contains('dark-theme-mode');
     const defaultFontFamily = "'Plus Jakarta Sans', sans-serif";
     Chart.defaults.font.family = defaultFontFamily;
-    Chart.defaults.color = "#475569";
+    Chart.defaults.color = isDarkMode ? "#cbd5e1" : "#475569";
     Chart.defaults.plugins.legend.labels.boxWidth = 12;
+
+    const gridColor = isDarkMode ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.05)";
+    const chartBorderColor = isDarkMode ? "rgba(30, 41, 59, 0.9)" : "#ffffff";
 
     // 1. Monthly Revenue Chart (Line)
     const revCtx = document.getElementById('chart-monthly-revenue');
@@ -124,7 +128,7 @@ function initCharts() {
                     label: 'Revenue (₹)',
                     data: data.monthly_revenue || [],
                     borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    backgroundColor: isDarkMode ? 'rgba(59, 130, 246, 0.2)' : 'rgba(59, 130, 246, 0.1)',
                     borderWidth: 3.5,
                     fill: true,
                     tension: 0.35,
@@ -144,7 +148,7 @@ function initCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        grid: { color: 'rgba(0,0,0,0.05)' }
+                        grid: { color: gridColor }
                     },
                     x: {
                         grid: { display: false }
@@ -179,7 +183,7 @@ function initCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        grid: { color: 'rgba(0,0,0,0.05)' }
+                        grid: { color: gridColor }
                     },
                     x: {
                         grid: { display: false }
@@ -200,7 +204,7 @@ function initCharts() {
                     data: data.category_sales || [],
                     backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'],
                     borderWidth: 3,
-                    borderColor: '#ffffff'
+                    borderColor: chartBorderColor
                 }]
             },
             options: {
@@ -225,7 +229,7 @@ function initCharts() {
                     data: data.payment_counts || [],
                     backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#a855f7'],
                     borderWidth: 2,
-                    borderColor: '#ffffff'
+                    borderColor: chartBorderColor
                 }]
             },
             options: {
@@ -256,7 +260,7 @@ function initCharts() {
                         'rgba(239, 68, 68, 0.7)'    // Cancelled
                     ],
                     borderWidth: 1,
-                    borderColor: '#ffffff'
+                    borderColor: chartBorderColor
                 }]
             },
             options: {
@@ -267,7 +271,7 @@ function initCharts() {
                 },
                 scales: {
                     r: {
-                        grid: { color: 'rgba(0,0,0,0.06)' },
+                        grid: { color: gridColor },
                         ticks: { display: false }
                     }
                 }
@@ -299,7 +303,7 @@ function initCharts() {
                 scales: {
                     x: {
                         beginAtZero: true,
-                        grid: { color: 'rgba(0,0,0,0.05)' }
+                        grid: { color: gridColor }
                     },
                     y: {
                         grid: { display: false }

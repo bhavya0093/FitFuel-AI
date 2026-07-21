@@ -80,16 +80,48 @@ body.dark-theme-mode .submenu-link.active {
    -------------------------------------------------------------------------- */
 .dark-theme-mode .top-bar,
 body.dark-theme-mode .top-bar {
-  background: rgba(15, 23, 42, 0.90) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
-  backdrop-filter: blur(20px) !important;
+  background: rgba(15, 23, 42, 0.92) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(24px) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.40) !important;
+}
+
+/* Glassmorphic Search Bar Input Container */
+.dark-theme-mode .search-bar,
+body.dark-theme-mode .search-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 30px !important;
+  padding: 8px 18px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .search-bar:focus-within,
+body.dark-theme-mode .search-bar:focus-within {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.30) !important;
+}
+
+.dark-theme-mode .search-bar i,
+body.dark-theme-mode .search-bar i {
+  color: #38BDF8 !important;
+  font-size: 0.95rem !important;
 }
 
 .dark-theme-mode .search-bar input,
 body.dark-theme-mode .search-bar input {
-  background: rgba(30, 41, 59, 0.70) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   color: #F8FAFC !important;
+  font-size: 0.9rem !important;
+  width: 100% !important;
+  padding: 0 !important;
 }
 
 .dark-theme-mode .search-bar input::placeholder,
@@ -97,20 +129,119 @@ body.dark-theme-mode .search-bar input::placeholder {
   color: #94A3B8 !important;
 }
 
-.dark-theme-mode .search-bar i,
-body.dark-theme-mode .search-bar i {
-  color: #94A3B8 !important;
+/* Theme Switcher Button Symmetrical Styling */
+#seller-theme-toggle-btn,
+.dark-theme-mode #seller-theme-toggle-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #FBBF24 !important;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.30) !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
-/* Admin Profile Wrap in Topbar */
+#seller-theme-toggle-btn:hover {
+  transform: scale(1.1) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Circular Symmetrical Notification Bell Icon */
+.dark-theme-mode .notification,
+body.dark-theme-mode .notification {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #38BDF8 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35) !important;
+  cursor: pointer !important;
+  position: relative !important;
+  padding: 0 !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .notification:hover,
+body.dark-theme-mode .notification:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #10B981 !important;
+  transform: scale(1.05) !important;
+}
+
+/* Floating Red Badge Count */
+.dark-theme-mode .notification span,
+body.dark-theme-mode .notification span {
+  position: absolute !important;
+  top: -4px !important;
+  right: -4px !important;
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%) !important;
+  color: #FFFFFF !important;
+  font-size: 0.65rem !important;
+  font-weight: 800 !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 2px solid #0F172A !important;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* Admin Profile Glass Pill in Topbar */
+.dark-theme-mode .admin-profile,
+body.dark-theme-mode .admin-profile {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 30px !important;
+  padding: 5px 16px 5px 6px !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .admin-profile:hover,
+body.dark-theme-mode .admin-profile:hover {
+  border-color: #10B981 !important;
+  background: rgba(30, 41, 59, 0.95) !important;
+}
+
+.dark-theme-mode .top-profile-img,
+body.dark-theme-mode .top-profile-img {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 2px solid #10B981 !important;
+}
+
 .dark-theme-mode .admin-name p,
 body.dark-theme-mode .admin-name p {
   color: #F8FAFC !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
 }
 
 .dark-theme-mode .admin-sub,
 body.dark-theme-mode .admin-sub {
   color: #38BDF8 !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
 }
 
 /* Notification & Profile Dropdowns */
@@ -158,24 +289,170 @@ body.dark-theme-mode .profile-dropdown label:hover {
 }
 
 /* --------------------------------------------------------------------------
-   4. Dashboard Cards & Stat Widgets
+   4. Dashboard Containers & Cards (General)
    -------------------------------------------------------------------------- */
+.dark-theme-mode .form-container,
+.dark-theme-mode .card-section,
 .dark-theme-mode .card,
-.dark-theme-mode .stat-card,
 .dark-theme-mode .widget,
 .dark-theme-mode .analytics-card,
 .dark-theme-mode .info-card,
 .dark-theme-mode .dashboard-section,
+body.dark-theme-mode .form-container,
+body.dark-theme-mode .card-section,
 body.dark-theme-mode .card,
-body.dark-theme-mode .stat-card,
 body.dark-theme-mode .widget,
 body.dark-theme-mode .analytics-card,
 body.dark-theme-mode .info-card,
 body.dark-theme-mode .dashboard-section {
-  background: rgba(30, 41, 59, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.10) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35) !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
   color: #F8FAFC !important;
+}
+
+/* --------------------------------------------------------------------------
+   4b. Stat Cards Grid - 8 Dynamic Glassmorphic Neon Gradients
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .stat-card,
+body.dark-theme-mode .stat-card {
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(20px) !important;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45) !important;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.dark-theme-mode .stat-card:hover,
+body.dark-theme-mode .stat-card:hover {
+  transform: translateY(-6px) scale(1.025) !important;
+}
+
+/* Card 1: Total Products (Blue / Cyan) */
+.dark-theme-mode .stat-card:nth-child(1),
+.dark-theme-mode .stats-grid .stat-card:nth-child(1),
+body.dark-theme-mode .stat-card:nth-child(1),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(1) {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.85) 0%, rgba(14, 165, 233, 0.75) 100%) !important;
+  border-color: rgba(96, 165, 250, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(37, 99, 235, 0.40) !important;
+}
+
+/* Card 2: Categories (Teal / Cyan) */
+.dark-theme-mode .stat-card:nth-child(2),
+.dark-theme-mode .stats-grid .stat-card:nth-child(2),
+body.dark-theme-mode .stat-card:nth-child(2),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(2) {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.85) 0%, rgba(34, 211, 238, 0.75) 100%) !important;
+  border-color: rgba(103, 232, 249, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(14, 165, 233, 0.40) !important;
+}
+
+/* Card 3: Total Orders (Indigo / Royal Blue) */
+.dark-theme-mode .stat-card:nth-child(3),
+.dark-theme-mode .stats-grid .stat-card:nth-child(3),
+body.dark-theme-mode .stat-card:nth-child(3),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(3) {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.85) 0%, rgba(59, 130, 246, 0.75) 100%) !important;
+  border-color: rgba(165, 180, 252, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(99, 102, 241, 0.40) !important;
+}
+
+/* Card 4: Total Customers (Cyan / Emerald) */
+.dark-theme-mode .stat-card:nth-child(4),
+.dark-theme-mode .stats-grid .stat-card:nth-child(4),
+body.dark-theme-mode .stat-card:nth-child(4),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(4) {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.85) 0%, rgba(16, 185, 129, 0.75) 100%) !important;
+  border-color: rgba(110, 231, 183, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(34, 211, 238, 0.40) !important;
+}
+
+/* Card 5: Total Revenue (Amber / Orange) */
+.dark-theme-mode .stat-card:nth-child(5),
+.dark-theme-mode .stats-grid .stat-card:nth-child(5),
+body.dark-theme-mode .stat-card:nth-child(5),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(5) {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.85) 0%, rgba(249, 115, 22, 0.75) 100%) !important;
+  border-color: rgba(253, 186, 116, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(245, 158, 11, 0.40) !important;
+}
+
+/* Card 6: Pending Orders (Purple / Indigo) */
+.dark-theme-mode .stat-card:nth-child(6),
+.dark-theme-mode .stats-grid .stat-card:nth-child(6),
+body.dark-theme-mode .stat-card:nth-child(6),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(6) {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.85) 0%, rgba(99, 102, 241, 0.75) 100%) !important;
+  border-color: rgba(196, 181, 253, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(139, 92, 246, 0.40) !important;
+}
+
+/* Card 7: Cancelled Orders (Red / Rose) */
+.dark-theme-mode .stat-card:nth-child(7),
+.dark-theme-mode .stats-grid .stat-card:nth-child(7),
+body.dark-theme-mode .stat-card:nth-child(7),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(7) {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.85) 0%, rgba(249, 115, 22, 0.75) 100%) !important;
+  border-color: rgba(252, 165, 165, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(239, 68, 68, 0.40) !important;
+}
+
+/* Card 8: Total Payments (Sky Blue / Cyan) */
+.dark-theme-mode .stat-card:nth-child(8),
+.dark-theme-mode .stats-grid .stat-card:nth-child(8),
+body.dark-theme-mode .stat-card:nth-child(8),
+body.dark-theme-mode .stats-grid .stat-card:nth-child(8) {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.85) 0%, rgba(6, 182, 212, 0.75) 100%) !important;
+  border-color: rgba(125, 211, 252, 0.45) !important;
+  box-shadow: 0 12px 36px rgba(14, 165, 233, 0.40) !important;
+}
+
+/* Stat Icon Glass Box */
+.dark-theme-mode .stat-icon,
+body.dark-theme-mode .stat-icon {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.40) !important;
+  color: #FFFFFF !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.20) !important;
+}
+
+/* Stat Info Text Styling */
+.dark-theme-mode .stat-info h3,
+body.dark-theme-mode .stat-info h3 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.25) !important;
+  font-weight: 900 !important;
+}
+
+.dark-theme-mode .stat-info p,
+body.dark-theme-mode .stat-info p {
+  color: rgba(255, 255, 255, 0.90) !important;
+  font-weight: 700 !important;
+}
+
+.dark-theme-mode .form-container::before,
+.dark-theme-mode .card-section::before,
+body.dark-theme-mode .form-container::before,
+body.dark-theme-mode .card-section::before {
+  background: linear-gradient(90deg, transparent, #10B981 30%, #06B6D4 70%, transparent) !important;
+  opacity: 0.9 !important;
+}
+
+.dark-theme-mode .form-title,
+body.dark-theme-mode .form-title {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .form-title h2,
+.dark-theme-mode .form-title h3,
+.dark-theme-mode .form-title h4,
+body.dark-theme-mode .form-title h2,
+body.dark-theme-mode .form-title h3,
+body.dark-theme-mode .form-title h4 {
+  color: #F8FAFC !important;
+  font-weight: 800 !important;
 }
 
 .dark-theme-mode h1,
@@ -207,25 +484,68 @@ body.dark-theme-mode small {
   color: #94A3B8 !important;
 }
 
+/* Status Badges & User Roles */
+.dark-theme-mode .user-role,
+body.dark-theme-mode .user-role {
+  background: rgba(56, 189, 248, 0.18) !important;
+  color: #38BDF8 !important;
+  border: 1px solid rgba(56, 189, 248, 0.35) !important;
+}
+
+.dark-theme-mode .status-active,
+.dark-theme-mode .status-delivered,
+.dark-theme-mode .status-paid,
+body.dark-theme-mode .status-active,
+body.dark-theme-mode .status-delivered,
+body.dark-theme-mode .status-paid {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #34D399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
+}
+
+.dark-theme-mode .status-pending,
+.dark-theme-mode .status-processing,
+body.dark-theme-mode .status-pending,
+body.dark-theme-mode .status-processing {
+  background: rgba(245, 158, 11, 0.18) !important;
+  color: #FBBF24 !important;
+  border: 1px solid rgba(245, 158, 11, 0.35) !important;
+}
+
+.dark-theme-mode .status-cancelled,
+.dark-theme-mode .status-failed,
+.dark-theme-mode .status-unpaid,
+body.dark-theme-mode .status-cancelled,
+body.dark-theme-mode .status-failed,
+body.dark-theme-mode .status-unpaid {
+  background: rgba(239, 68, 68, 0.18) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+}
+
 /* --------------------------------------------------------------------------
    5. Data Tables (Products, Orders, Users, Payments)
    -------------------------------------------------------------------------- */
 .dark-theme-mode table,
 .dark-theme-mode .table,
 .dark-theme-mode .admin-table,
+.dark-theme-mode .table-responsive table,
 body.dark-theme-mode table,
 body.dark-theme-mode .table,
-body.dark-theme-mode .admin-table {
-  background: rgba(15, 23, 42, 0.60) !important;
+body.dark-theme-mode .admin-table,
+body.dark-theme-mode .table-responsive table {
+  background: rgba(15, 23, 42, 0.40) !important;
   color: #F8FAFC !important;
   border-collapse: separate !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
 }
 
 .dark-theme-mode th,
 .dark-theme-mode .table th,
 body.dark-theme-mode th,
 body.dark-theme-mode .table th {
-  background: rgba(30, 41, 59, 0.90) !important;
+  background: rgba(15, 23, 42, 0.85) !important;
   color: #F8FAFC !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
   font-weight: 700 !important;
@@ -242,20 +562,20 @@ body.dark-theme-mode .table td {
 
 .dark-theme-mode tr:hover td,
 body.dark-theme-mode tr:hover td {
-  background: rgba(30, 41, 59, 0.50) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* --------------------------------------------------------------------------
    6. Form Controls & Inputs
    -------------------------------------------------------------------------- */
-.dark-theme-mode input[type="text"],
+.dark-theme-mode input[type="text"]:not(.search-bar input),
 .dark-theme-mode input[type="password"],
 .dark-theme-mode input[type="email"],
 .dark-theme-mode input[type="number"],
 .dark-theme-mode select,
 .dark-theme-mode textarea,
 .dark-theme-mode .form-control,
-body.dark-theme-mode input[type="text"],
+body.dark-theme-mode input[type="text"]:not(.search-bar input),
 body.dark-theme-mode input[type="password"],
 body.dark-theme-mode input[type="email"],
 body.dark-theme-mode input[type="number"],
@@ -268,10 +588,10 @@ body.dark-theme-mode .form-control {
   border-radius: 10px !important;
 }
 
-.dark-theme-mode input:focus,
+.dark-theme-mode input:not(.search-bar input):focus,
 .dark-theme-mode select:focus,
 .dark-theme-mode textarea:focus,
-body.dark-theme-mode input:focus,
+body.dark-theme-mode input:not(.search-bar input):focus,
 body.dark-theme-mode select:focus,
 body.dark-theme-mode textarea:focus {
   border-color: #10B981 !important;
@@ -366,4 +686,37 @@ body.dark-theme-mode .remember-label {
   border-color: rgba(255, 255, 255, 0.20);
   color: #FBBF24 !important;
   box-shadow: 0 0 12px rgba(251, 191, 36, 0.30);
+}
+
+/* --------------------------------------------------------------------------
+   9. Strict Search Input Transparency Override (Prevents Inner Pill Boxes)
+   -------------------------------------------------------------------------- */
+.search-bar input,
+.search-bar input[type="text"],
+.dark-theme-mode .search-bar input,
+body.dark-theme-mode .search-bar input,
+.dark-theme-mode .search-bar input[type="text"],
+body.dark-theme-mode .search-bar input[type="text"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-style: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: #F8FAFC !important;
+  font-size: 0.9rem !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.search-bar input:focus,
+.dark-theme-mode .search-bar input:focus,
+body.dark-theme-mode .search-bar input:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
 }

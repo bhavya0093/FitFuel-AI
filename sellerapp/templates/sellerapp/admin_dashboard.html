@@ -312,37 +312,78 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
-            const salesCanvas = document.getElementById("salesChart");
+            (function() {
+                const isDark = document.documentElement.classList.contains("dark-theme-mode") || document.body.classList.contains("dark-theme-mode");
+                const textColor = isDark ? "#CBD5E1" : "#475569";
+                const gridColor = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.06)";
 
-            if (salesCanvas) {
-                new Chart(salesCanvas, {
-                    type: "line",
-                    data: {
-                        labels: ["Jan","Feb","Mar","Apr","May","Jun"],
-                        datasets: [{
-                            label: "Revenue",
-                            data: {{ sales_data|safe }},
-                            borderColor: "#10b981",
-                            backgroundColor: "rgba(16,185,129,.2)",
-                            fill: true,
-                            tension: 0.4
-                        }]
-                    }
-                });
-            }
+                if (typeof Chart !== "undefined") {
+                    Chart.defaults.color = textColor;
+                    Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+                }
 
-            const statusCanvas = document.getElementById("statusChart");
+                const salesCanvas = document.getElementById("salesChart");
+                if (salesCanvas) {
+                    new Chart(salesCanvas, {
+                        type: "line",
+                        data: {
+                            labels: ["Jan","Feb","Mar","Apr","May","Jun"],
+                            datasets: [{
+                                label: "Revenue",
+                                data: {{ sales_data|safe }},
+                                borderColor: "#10b981",
+                                backgroundColor: "rgba(16,185,129,.2)",
+                                fill: true,
+                                tension: 0.4,
+                                pointBackgroundColor: "#10b981",
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: textColor }
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: { color: gridColor },
+                                    ticks: { color: textColor }
+                                },
+                                y: {
+                                    grid: { color: gridColor },
+                                    ticks: { color: textColor }
+                                }
+                            }
+                        }
+                    });
+                }
 
-            if (statusCanvas) {
-                new Chart(statusCanvas, {
-                    type: "doughnut",
-                    data: {
-                        labels: ["Pending","Cancelled","Delivered"],
-                        datasets: [{
-                            data: {{ status_data|safe }},
-                            backgroundColor: ["#f59e0b","#ef4444","#22c55e"]
-                        }]
-                    }
-                });
-            }
-</script>
+                const statusCanvas = document.getElementById("statusChart");
+                if (statusCanvas) {
+                    new Chart(statusCanvas, {
+                        type: "doughnut",
+                        data: {
+                            labels: ["Pending","Cancelled","Delivered"],
+                            datasets: [{
+                                data: {{ status_data|safe }},
+                                backgroundColor: ["#f59e0b","#ef4444","#22c55e"],
+                                borderWidth: 2,
+                                borderColor: isDark ? "#1e293b" : "#ffffff"
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    labels: { color: textColor }
+                                }
+                            }
+                        }
+                    });
+                }
+            })();
+        </script>

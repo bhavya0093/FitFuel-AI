@@ -432,6 +432,252 @@ body.dark-theme-mode .stat-info p {
   font-weight: 700 !important;
 }
 
+/* --------------------------------------------------------------------------
+   4c. View Products Filter Bar & Product Cards (View, Edit, Add)
+   -------------------------------------------------------------------------- */
+.dark-theme-mode .filter-navbar,
+.dark-theme-mode .filter-box,
+body.dark-theme-mode .filter-navbar,
+body.dark-theme-mode .filter-box {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 14px !important;
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  border-radius: 18px !important;
+  padding: 14px 22px !important;
+  color: #F8FAFC !important;
+}
+
+/* Category Select Dropdown */
+.dark-theme-mode .filter-box select,
+body.dark-theme-mode .filter-box select {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+  color: #F8FAFC !important;
+  border-radius: 12px !important;
+  padding: 9px 16px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  outline: none !important;
+  cursor: pointer !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .filter-box select:focus,
+body.dark-theme-mode .filter-box select:focus {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.30) !important;
+}
+
+/* Min & Max Price Inputs */
+.dark-theme-mode .filter-box input[type="number"],
+body.dark-theme-mode .filter-box input[type="number"] {
+  background: rgba(15, 23, 42, 0.90) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+  color: #F8FAFC !important;
+  border-radius: 12px !important;
+  padding: 9px 16px !important;
+  width: 125px !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  outline: none !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .filter-box input[type="number"]::placeholder,
+body.dark-theme-mode .filter-box input[type="number"]::placeholder {
+  color: #94A3B8 !important;
+  font-weight: 500 !important;
+}
+
+.dark-theme-mode .filter-box input[type="number"]:focus,
+body.dark-theme-mode .filter-box input[type="number"]:focus {
+  border-color: #10B981 !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.30) !important;
+}
+
+/* Checkbox Labels ("Latest", "Popular") */
+.dark-theme-mode .filter-box label,
+body.dark-theme-mode .filter-box label {
+  color: #F8FAFC !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+.dark-theme-mode .filter-box input[type="checkbox"],
+body.dark-theme-mode .filter-box input[type="checkbox"] {
+  accent-color: #10B981 !important;
+  width: 17px !important;
+  height: 17px !important;
+  cursor: pointer !important;
+  border-radius: 4px !important;
+}
+
+/* Buttons ("Apply Filter" & "Reset") */
+.dark-theme-mode .filter-btn,
+body.dark-theme-mode .filter-btn {
+  background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 9px 20px !important;
+  border-radius: 12px !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.40) !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .filter-btn:hover,
+body.dark-theme-mode .filter-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.55) !important;
+}
+
+.dark-theme-mode .reset-btn,
+body.dark-theme-mode .reset-btn {
+  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  padding: 9px 20px !important;
+  border-radius: 12px !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.40) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.25s ease !important;
+}
+
+.dark-theme-mode .reset-btn:hover,
+body.dark-theme-mode .reset-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.55) !important;
+}
+
+.dark-theme-mode .product-card-all,
+body.dark-theme-mode .product-card-all {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.dark-theme-mode .product-card-all:hover,
+body.dark-theme-mode .product-card-all:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(16, 185, 129, 0.50) !important;
+  box-shadow: 0 20px 45px rgba(16, 185, 129, 0.25) !important;
+}
+
+.dark-theme-mode .product-card-all img,
+body.dark-theme-mode .product-card-all img {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+  padding: 10px !important;
+  object-fit: contain !important;
+}
+
+.dark-theme-mode .product-info-all,
+body.dark-theme-mode .product-info-all {
+  background: transparent !important;
+  color: #F8FAFC !important;
+  padding: 16px !important;
+}
+
+.dark-theme-mode .product-info-all h4,
+body.dark-theme-mode .product-info-all h4 {
+  color: #F8FAFC !important;
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 6px !important;
+}
+
+.dark-theme-mode .brand-name,
+body.dark-theme-mode .brand-name {
+  color: #10B981 !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 8px !important;
+}
+
+.dark-theme-mode .product-price-all,
+body.dark-theme-mode .product-price-all {
+  color: #34D399 !important;
+  font-size: 1.25rem !important;
+  font-weight: 900 !important;
+  margin-bottom: 6px !important;
+}
+
+.dark-theme-mode .image-upload-card,
+.dark-theme-mode .pd-layout,
+.dark-theme-mode .ep-layout,
+body.dark-theme-mode .image-upload-card,
+body.dark-theme-mode .pd-layout,
+body.dark-theme-mode .ep-layout {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(24px) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .pd-left,
+.dark-theme-mode .ep-left,
+body.dark-theme-mode .pd-left,
+body.dark-theme-mode .ep-left {
+  background: rgba(15, 23, 42, 0.70) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .pd-right,
+.dark-theme-mode .ep-right,
+body.dark-theme-mode .pd-right,
+body.dark-theme-mode .ep-right {
+  background: transparent !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .detail-mini,
+.dark-theme-mode .detail-desc-box,
+.dark-theme-mode .image-preview-box,
+body.dark-theme-mode .detail-mini,
+body.dark-theme-mode .detail-desc-box,
+body.dark-theme-mode .image-preview-box {
+  background: rgba(15, 23, 42, 0.60) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .detail-mini-val,
+body.dark-theme-mode .detail-mini-val {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .ep-input,
+body.dark-theme-mode .ep-input {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+  color: #F8FAFC !important;
+}
+
 .dark-theme-mode .form-container::before,
 .dark-theme-mode .card-section::before,
 body.dark-theme-mode .form-container::before,

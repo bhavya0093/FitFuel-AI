@@ -302,7 +302,8 @@ def admin_panel(request):
             ).annotate(
                 month=TruncMonth('order_date')
             ).values('month').annotate(
-                revenue=Sum('final_amount')
+                revenue=Sum('final_amount'),
+                count=Count('id')
             ).order_by('month')
             
             monthly_labels = []
@@ -312,8 +313,7 @@ def admin_panel(request):
                 if s['month']:
                     monthly_labels.append(s['month'].strftime('%b %Y'))
                     monthly_revenue.append(float(s['revenue'] or 0))
-                    cnt = Order.objects.filter(order_date__year=s['month'].year, order_date__month=s['month'].month).count()
-                    monthly_orders.append(cnt)
+                    monthly_orders.append(s['count'])
 
             if not monthly_labels:
                 for i in range(5, -1, -1):
@@ -1248,16 +1248,16 @@ def analytics(request):
 
     # 4. Top Customers Table
     from django.db.models import Sum as DbSum
-    top_customers_query = customer.objects.annotate(
-        order_count=Count('order'),
-        spent=DbSum('order__final_amount')
+    top_customers_query = customer.objects.select_related('user_id', 'wallet').annotate(
+        order_count=Count('order', distinct=True),
+        spent=DbSum('order__final_amount'),
+        ach_count=Count('userachievement', distinct=True)
     ).order_by('-spent')[:6]
     
     top_customers_data = []
     for c in top_customers_query:
         wallet_obj = getattr(c, 'wallet', None)
         wallet_bal = float(wallet_obj.balance) if wallet_obj else 0.0
-        ach_count = UserAchievement.objects.filter(customer=c).count()
         top_customers_data.append({
             "firstname": c.firstname,
             "lastname": c.lastname,
@@ -1266,7 +1266,7 @@ def analytics(request):
             "order_count": c.order_count,
             "spent": float(c.spent or 0),
             "wallet": wallet_bal,
-            "achievements": ach_count
+            "achievements": c.ach_count
         })
 
     # 5. Recent Orders Table

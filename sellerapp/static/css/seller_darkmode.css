@@ -1574,3 +1574,38 @@ body.dark-theme-mode .view-details-btn:hover {
   background: linear-gradient(135deg, #10B981, #06B6D4) !important;
   box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45) !important;
 }
+
+/* ── Left Sidebar Panels Dark Mode Overrides ── */
+.dark-theme-mode .pgc-left,
+body.dark-theme-mode .pgc-left,
+.dark-theme-mode .pd-left,
+body.dark-theme-mode .pd-left,
+.dark-theme-mode .ep-left,
+body.dark-theme-mode .ep-left {
+  background: linear-gradient(165deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .pgc-left::before,
+body.dark-theme-mode .pgc-left::before,
+.dark-theme-mode .pgc-left::after,
+body.dark-theme-mode .pgc-left::after {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.dark-theme-mode .pgc-pill,
+body.dark-theme-mode .pgc-pill {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .pgc-pill:hover,
+body.dark-theme-mode .pgc-pill:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.dark-theme-mode .pgc-left-role,
+body.dark-theme-mode .pgc-left-role {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}

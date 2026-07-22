@@ -987,59 +987,47 @@ margin-top:18px;
 }
 
 .edit-btn{
-
-flex:1;
-
-padding:10px;
-
-border-radius:12px;
-
-background:#10B981;
-
-color:#fff;
-
-font-weight:700;
-
-cursor:pointer;
-
-text-align:center;
-
-transition:.25s;
-
+  flex:1;
+  height:38px;
+  border-radius:10px;
+  background:#10B981;
+  color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.80rem;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  transition:.25s;
+  border:none;
 }
 
 .edit-btn:hover{
-
-background:#059669;
-
+  background:#059669;
 }
 
 .delete-btn{
-
-flex:1;
-
-padding:10px;
-
-border-radius:12px;
-
-background:#EF4444;
-
-color:#fff;
-
-font-weight:700;
-
-text-decoration:none;
-
-text-align:center;
-
-transition:.25s;
-
+  flex:1;
+  height:38px;
+  border-radius:10px;
+  background:#EF4444;
+  color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.80rem;
+  font-weight:700;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  transition:.25s;
+  border:none;
 }
 
 .delete-btn:hover{
-
-background:#DC2626;
-
+  background:#DC2626;
 }
 
 .add-product-layout{

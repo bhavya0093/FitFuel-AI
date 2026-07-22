@@ -1118,7 +1118,8 @@ body.dark-theme-mode:has(#nav-store:checked) .sidebar-nav label[for="nav-store"]
   backdrop-filter: blur(24px) !important;
 }
 
-.dark-theme-mode #page-profile .pw {
+.dark-theme-mode #page-profile .pw,
+.dark-theme-mode #page-edit .pw {
   background: rgba(15, 23, 42, 0.88) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
@@ -1494,30 +1495,8 @@ body.dark-theme-mode .edit-profile-settings-btn:hover {
   border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
 }
 
+
 /* Edit Profile Page Dark Mode Overrides */
-.dark-theme-mode #page-edit .egrid {
-  background: rgba(15, 23, 42, 0.85) !important;
-  border-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-.dark-theme-mode .egrid > div:first-child {
-  background: rgba(8, 12, 20, 0.95) !important;
-  border-right-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-.dark-theme-mode .egrid > div:first-child .fc {
-  background: rgba(15, 23, 42, 0.90) !important;
-  border-bottom-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-.dark-theme-mode .egrid > div:first-child .fc [style*="font-family:'Syne'"] {
-  color: #FFFFFF !important;
-}
-
-.dark-theme-mode .egrid > div:last-child {
-  background: rgba(15, 23, 42, 0.88) !important;
-}
-
 .dark-theme-mode #page-edit .fc {
   background: rgba(15, 23, 42, 0.92) !important;
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -1529,13 +1508,19 @@ body.dark-theme-mode .edit-profile-settings-btn:hover {
 }
 
 .dark-theme-mode #page-edit .fgrp label {
-  color: #CBD5E1 !important;
+  color: #34D399 !important; /* Premium brand green */
 }
 
 .dark-theme-mode #page-edit .finp {
   background: rgba(8, 12, 20, 0.88) !important;
   border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
   color: #FFFFFF !important;
+}
+
+.dark-theme-mode #page-edit .finp:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25) !important;
+  background: rgba(8, 12, 20, 0.95) !important;
 }
 
 .dark-theme-mode #page-edit .dzone {

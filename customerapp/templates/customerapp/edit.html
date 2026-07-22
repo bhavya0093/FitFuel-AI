@@ -1,155 +1,294 @@
 <!-- EDIT PAGE -->
+{% load static %}
+<style>
+/* Lock viewport and scrolling for Edit Profile page */
+body:has(#nav-edit:checked) {
+    overflow: hidden !important;
+}
+
+body:has(#nav-edit:checked) .dashboard-layout {
+    margin: 0 auto !important;
+    height: calc(100vh - 80px) !important;
+    padding-top: 15px !important;
+    box-sizing: border-box !important;
+    align-items: stretch !important;
+}
+
+body:has(#nav-edit:checked) .main-content {
+    min-height: 0 !important;
+    height: 100% !important;
+}
+
+body:has(#nav-edit:checked) #page-edit {
+    height: 100% !important;
+}
+
+body:has(#nav-edit:checked) #page-edit .iwrap {
+    height: 100% !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+body:has(#nav-edit:checked) .pw {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 1 !important;
+}
+
+.pright {
+    flex: 1 !important;
+    padding: 20px 20px 45px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    overflow-y: auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+}
+</style>
+
 <div id="page-edit" class="page">
 <div class="iwrap">
-  <div class="pgnav"><label class="back-btn" for="nav-profile" style="cursor: pointer;"><i class="fas fa-arrow-left"></i> Back to Profile</label><div class="pg-ttl">Edit Profile</div></div>
-  <div class="egrid">
-    <div>
-      <div class="fc g1 s1" style="text-align:center;">
-        <div style="width:88px;height:88px;border-radius:50%;margin:0 auto 14px;overflow:hidden;border:3px solid rgba(255,255,255,.88);box-shadow:0 8px 22px rgba(8,145,178,.25);"><img src="{{cid.pic.url}}" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div style="font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:4px;">{{cid.firstname}}</div>
-        <div style="font-size:.7rem;color:var(--mist);margin-bottom:14px;">Tap to change photo</div>
-        <label class="change-photo-btn" for="photo-upload" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.72);border:1.5px solid rgba(255,255,255,.92);color:var(--mist);padding:8px 18px;border-radius:50px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;"><i class="fas fa-camera"></i> Change Photo</label>
-  
-      </div>
-      <div class="psb g1 s1" style="border-radius:var(--rl);">
-        <div class="pnav" style="padding:14px;">
-          <label for="nav-profile" class="pni"><i class="fas fa-user"></i> Personal Info</label>
-          <a href="#" class="pni on"><i class="fas fa-pen"></i> Edit Profile</a>
-          <a href="#" class="pni"><i class="fas fa-box"></i> My Orders</a>
-          <a href="#" class="pni"><i class="fas fa-map-marker-alt"></i> Addresses</a>
-          <a href="#" class="pni"><i class="fas fa-wallet"></i> Wallet</a>
-          <a href="#" class="pni"><i class="fas fa-shield-alt"></i> Security</a>
+  <div class="pgnav">
+    <label class="back-btn" for="nav-profile" style="cursor: pointer;"><i class="fas fa-arrow-left"></i> Back to Profile</label>
+    <div class="pg-ttl">Edit Profile</div>
+  </div>
+
+  <div class="pw">
+    <!-- SIDEBAR -->
+    <div class="psb">
+      <div class="pav-wrap">
+        <div class="pav {% if cid.subscription_plan == 'Pro' %}pro-border{% elif cid.subscription_plan == 'Elite' %}elite-border{% endif %}">
+          <img src="{{cid.pic.url}}" alt="Avatar">
         </div>
+        <div class="pnm">
+          {{cid.firstname}} {{cid.lastname}}
+          {% if cid.subscription_plan == 'Pro' %}
+            <span class="pro-badge-navbar"><i class="fa-solid fa-star"></i> PRO</span>
+          {% elif cid.subscription_plan == 'Elite' %}
+            <span class="vip-badge-navbar"><i class="fa-solid fa-crown"></i> ELITE</span>
+          {% endif %}
+        </div>
+        <div class="pem">{{uid.email}}</div>
+        
+        <!-- Change photo label button -->
+        <label class="change-photo-btn" for="photo-upload" style="margin-top: 15px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; cursor: pointer; font-family: 'Plus Jakarta Sans', sans-serif;">
+          <i class="fas fa-camera"></i> Change Photo
+        </label>
       </div>
+
+      <!-- Navigation Links -->
+      <nav class="pnav" style="flex: 1;">
+        <label for="nav-profile" class="pni" onclick="switchProfileSubTab('sec-info')">
+          <i class="fas fa-user"></i> Personal Info
+        </label>
+        <label for="nav-profile" class="pni" onclick="switchProfileSubTab('sec-health')">
+          <i class="fas fa-heartbeat"></i> Health Dashboard
+        </label>
+        <label for="nav-profile" class="pni" onclick="switchProfileSubTab('sec-orders')">
+          <i class="fas fa-box"></i> Recent Orders
+        </label>
+        <label for="nav-profile" class="pni" onclick="switchProfileSubTab('sec-addresses')">
+          <i class="fas fa-map-marker-alt"></i> Saved Addresses
+        </label>
+        <a href="javascript:void(0)" class="pni on" id="edit-tab-profile-btn" onclick="switchEditTab('profile')">
+          <i class="fas fa-pen"></i> Edit Profile
+        </a>
+        <a href="javascript:void(0)" class="pni" id="edit-tab-security-btn" onclick="switchEditTab('security')">
+          <i class="fas fa-shield-alt"></i> Security Settings
+        </a>
+        <a href="{% url 'wallet' %}" class="pni">
+          <i class="fas fa-wallet"></i> Wallet
+        </a>
+        <a href="{% url 'logout' %}" class="pni danger">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </nav>
     </div>
-    <div>
-      <div class="fc g1 s1" id="security-card">
-        <div class="fc-t"><i class="fas fa-shield-alt"></i> Security - Change Password</div>
 
-        {% if pwd_e_msg %}
-          <p style="color:#e53935;font-weight:600;margin:6px 0 12px;">{{pwd_e_msg}}</p>
-        {% endif %}
-        {% if pwd_s_msg %}
-          <p style="color:#21a366;font-weight:600;margin:6px 0 12px;">{{pwd_s_msg}}</p>
-        {% endif %}
-
-        <form action="{% url 'change_password' %}" method="POST">
+    <!-- RIGHT CONTENT PANEL -->
+    <div class="pright">
+      
+      <!-- Sub-Tab 1: Edit Profile (Personal Details) -->
+      <div class="edit-tab-panel active" id="edit-sec-profile">
+        <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
           {% csrf_token %}
-<div class="fg">
-            <div class="fgrp sp2">
-              <label>Current Password</label>
-              <div class="pwd-wrap">
-                <input class="finp" type="password" name="current_password" required>
-                <i class="fas fa-eye pwd-eye" onclick="togglePwd(this)"></i>
+          <input type="file" name="pic" id="photo-upload" accept="image/*" style="display:none;">
+
+          <div class="fc">
+            <div class="fc-t"><i class="fas fa-user"></i> Personal Details</div>
+            <div class="fg">
+              <div class="fgrp">
+                <label>First Name *</label>
+                <input class="finp" name="firstname" value="{{cid.firstname}}" required>
+              </div>
+              <div class="fgrp">
+                <label>Last Name *</label>
+                <input class="finp" name="lastname" value="{{cid.lastname}}" required>
+              </div>
+              <div class="fgrp">
+                <label>Email *</label>
+                <input class="finp" type="email" name="email" value="{{uid.email}}" readonly>
+              </div>
+              <div class="fgrp">
+                <label>Phone *</label>
+                <input class="finp" type="tel" name="contectno" value="{{cid.contectno}}" required>
               </div>
             </div>
-            <div class="fgrp">
-              <label>New Password</label>
-              <div class="pwd-wrap">
-                <input class="finp" type="password" name="new_password" required>
-                <i class="fas fa-eye pwd-eye" onclick="togglePwd(this)"></i>
-              </div>
-            </div>
-            <div class="fgrp">
-              <label>Confirm New Password</label>
-              <div class="pwd-wrap">
-                <input class="finp" type="password" name="confirm_password" required>
-                <i class="fas fa-eye pwd-eye" onclick="togglePwd(this)"></i>
-              </div>
+
+            <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
+              <button class="sbtn save-trigger" type="submit">
+                <i class="fas fa-check"></i> Save Changes
+              </button>
+              <label class="cbtn" for="nav-profile">
+                <i class="fas fa-times"></i> Cancel
+              </label>
             </div>
           </div>
-          <button class="sbtn save-trigger" type="submit" style="margin-top:16px;">
-            <i class="fas fa-key"></i> Update Password
-          </button>
         </form>
       </div>
-      <script>
-      function togglePwd(icon) {
-          var input = icon.previousElementSibling;
-          if (input.type === "password") {
-              input.type = "text";
-              icon.classList.remove("fa-eye");
-              icon.classList.add("fa-eye-slash");
-          } else {
-              input.type = "password";
-              icon.classList.remove("fa-eye-slash");
-              icon.classList.add("fa-eye");
-          }
-      }
-      </script>
-      <form method="POST" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
-{% csrf_token %}
 
-<input type="file" name="pic" id="photo-upload" accept="image/*" style="display:none;">
+      <!-- Sub-Tab 2: Security (Change Password + Danger Zone) -->
+      <div class="edit-tab-panel" id="edit-sec-security" style="display: none;">
+        <div class="fc" id="security-card">
+          <div class="fc-t"><i class="fas fa-shield-alt"></i> Security - Change Password</div>
 
-<script>
-document.getElementById('photo-upload').addEventListener('change', function(event) {
-    if(event.target.files.length > 0){
-        var src = URL.createObjectURL(event.target.files[0]);
-        // Find the image element above
-        var img = document.querySelector('.fc.g1.s1 img');
-        if(img){
-            img.src = src;
-        }
-    }
-});
-</script>
+          {% if pwd_e_msg %}
+            <p style="color:#e53935;font-weight:600;margin:6px 0 12px;">{{pwd_e_msg}}</p>
+          {% endif %}
+          {% if pwd_s_msg %}
+            <p style="color:#21a366;font-weight:600;margin:6px 0 12px;">{{pwd_s_msg}}</p>
+          {% endif %}
 
-<div class="fc g1 s1">
-  <div class="fc-t">
-    <i class="fas fa-user"></i> Personal Details
-  </div>
+          <form action="{% url 'change_password' %}" method="POST">
+            {% csrf_token %}
+            <div class="fg">
+              <div class="fgrp sp2">
+                <label>Current Password</label>
+                <div class="pwd-wrap">
+                  <input class="finp" type="password" name="current_password" required>
+                  <i class="fas fa-eye pwd-eye" onclick="togglePwd(this)"></i>
+                </div>
+              </div>
+              <div class="fgrp">
+                <label>New Password</label>
+                <div class="pwd-wrap">
+                  <input class="finp" type="password" name="new_password" required>
+                  <i class="fas fa-eye pwd-eye" onclick="togglePwd(this)"></i>
+                </div>
+              </div>
+              <div class="fgrp">
+                <label>Confirm New Password</label>
+                <div class="pwd-wrap">
+                  <input class="finp" type="password" name="confirm_password" required>
+                  <i class="fas fa-eye pwd-eye" onclick="togglePwd(this)"></i>
+                </div>
+              </div>
+            </div>
+            <button class="sbtn save-trigger" type="submit" style="margin-top:16px;">
+              <i class="fas fa-key"></i> Update Password
+            </button>
+          </form>
+        </div>
 
-  <div class="fg">
-
-    <div class="fgrp">
-      <label>First Name *</label>
-      <input class="finp" name="firstname" value="{{cid.firstname}}">
-    </div>
-
-    <div class="fgrp">
-      <label>Last Name *</label>
-      <input class="finp" name="lastname" value="{{cid.lastname}}">
-    </div>
-
-    <div class="fgrp">
-      <label>Email *</label>
-      <input class="finp" type="email" name="email" value="{{uid.email}}" readonly>
-    </div>
-
-    <div class="fgrp">
-      <label>Phone *</label>
-      <input class="finp" type="tel" name="contectno" value="{{cid.contectno}}">
-    </div>
-  </div>
-
-  <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
-
-    <button class="sbtn save-trigger" type="submit">
-      <i class="fas fa-check"></i> Save Changes
-    </button>
-
-    <label class="cbtn" for="nav-profile">
-      <i class="fas fa-times"></i> Cancel
-    </label>
-
-  </div>
-
-</div>
-
-</form>
-      <div class="fc g1 s1"><div class="fc-t"><i class="fas fa-map-marker-alt"></i> Home Address</div>
-        <div class="fg">
-          <div class="fgrp sp2"><label>Flat / Building *</label><input class="finp" value="B-204, Sunshine Apartments"></div>
-          <div class="fgrp sp2"><label>Street / Area</label><input class="finp" value="Navrangpura"></div>
-          <div class="fgrp"><label>City *</label><input class="finp" value="Ahmedabad"></div>
-          <div class="fgrp"><label>State *</label><select class="finp"><option>Gujarat</option><option>Maharashtra</option><option>Delhi</option><option>Rajasthan</option></select></div>
-          <div class="fgrp"><label>PIN Code *</label><input class="finp" value="380009"></div>
-          <div class="fgrp"><label>Landmark</label><input class="finp" placeholder="Near City Mall"></div>
+        <div class="dzone" style="margin-top: 20px;">
+          <h4><i class="fas fa-triangle-exclamation"></i> Danger Zone</h4>
+          <p>Deleting your account will permanently remove all your orders, addresses, wishlist and wallet balance. This cannot be undone.</p>
+          <button class="delbtn"><i class="fas fa-trash-alt"></i> Delete My Account</button>
         </div>
       </div>
-      <div class="dzone" style="margin-bottom:18px;"><h4><i class="fas fa-triangle-exclamation"></i> Danger Zone</h4><p>Deleting your account will permanently remove all your orders, addresses, wishlist and wallet balance. This cannot be undone.</p><button class="delbtn"><i class="fas fa-trash-alt"></i> Delete My Account</button></div>
+
     </div>
   </div>
 </div>
 </div>
+
+<script>
+function switchEditTab(tabName) {
+    // Hide all edit tab panels
+    const panels = document.querySelectorAll(".edit-tab-panel");
+    panels.forEach(p => p.style.display = "none");
+    
+    // Show target edit tab panel
+    const targetPanel = document.getElementById("edit-sec-" + tabName);
+    if (targetPanel) {
+        targetPanel.style.display = "block";
+    }
+    
+    // Remove "on" class from active sidebar items in edit page
+    const editProfileBtn = document.getElementById("edit-tab-profile-btn");
+    const editSecurityBtn = document.getElementById("edit-tab-security-btn");
+    if (editProfileBtn) editProfileBtn.classList.remove("on");
+    if (editSecurityBtn) editSecurityBtn.classList.remove("on");
+    
+    // Add "on" class to target tab button
+    const targetBtn = document.getElementById("edit-tab-" + tabName + "-btn");
+    if (targetBtn) {
+        targetBtn.classList.add("on");
+    }
+    
+    // Sync URL parameter
+    const newUrl = window.location.pathname + "?active_page=edit&edit_tab=" + tabName;
+    window.history.replaceState(null, "", newUrl);
+}
+
+function switchProfileSubTab(subTabId) {
+    // Check radio for profile first to switch back to profile page
+    const profileRadio = document.getElementById("nav-profile");
+    if (profileRadio) {
+        profileRadio.checked = true;
+    }
+    
+    // Switch to target subtab in profile.html by triggering click
+    const targetBtn = document.querySelector(`#page-profile .pnav a[data-target="${subTabId}"]`);
+    if (targetBtn) {
+        targetBtn.click();
+    }
+}
+
+function togglePwd(icon) {
+    var input = icon.previousElementSibling;
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Photo preview upload listener
+    const photoUploadInput = document.getElementById('photo-upload');
+    if (photoUploadInput) {
+        photoUploadInput.addEventListener('change', function(event) {
+            if(event.target.files.length > 0){
+                var src = URL.createObjectURL(event.target.files[0]);
+                var img = document.querySelector('#page-edit .pav img');
+                if(img){
+                    img.src = src;
+                }
+            }
+        });
+    }
+
+    // Switch tab based on URL param or messages on reload
+    const params = new URLSearchParams(window.location.search);
+    const activeEditTab = params.get("edit_tab");
+    
+    {% if pwd_e_msg or pwd_s_msg %}
+        switchEditTab('security');
+    {% else %}
+        if (activeEditTab) {
+            switchEditTab(activeEditTab);
+        } else {
+            switchEditTab('profile');
+        }
+    {% endif %}
+});
+</script>

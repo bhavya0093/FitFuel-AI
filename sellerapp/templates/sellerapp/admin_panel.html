@@ -278,13 +278,20 @@
                 targetRadio.checked = true;
                 localStorage.setItem('sellerActiveTab', radioId);
             }
+        } else if (window.location.pathname.includes('/analytics')) {
+            const targetRadio = document.getElementById('nav-analytics');
+            if (targetRadio) {
+                targetRadio.checked = true;
+                localStorage.setItem('sellerActiveTab', 'nav-analytics');
+            }
         } else {
             const savedTab = localStorage.getItem('sellerActiveTab');
             if (savedTab) {
-                const targetRadio = document.getElementById(savedTab);
+                const activeRadioId = savedTab === 'nav-analytics' ? 'nav-dashboard' : savedTab;
+                const targetRadio = document.getElementById(activeRadioId);
                 if (targetRadio) {
                     targetRadio.checked = true;
-                    const tabName = savedTab.replace('nav-', '');
+                    const tabName = activeRadioId.replace('nav-', '');
                     const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?tab=' + tabName;
                     window.history.replaceState({ path: newUrl }, '', newUrl);
                 }

@@ -77,18 +77,29 @@ body::after {
 
 /* ===== CARD ===== */
 .login-card {
-    background: var(--card-bg);
-    border: 1.5px solid var(--border);
-    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+    border-radius: 24px;
     padding: 40px 34px 36px;
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
     box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.9),
-        0 4px 6px rgba(16, 185, 129, 0.04),
-        0 20px 48px rgba(16, 185, 129, 0.1);
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+        0 10px 30px rgba(16, 185, 129, 0.04),
+        0 30px 60px rgba(16, 185, 129, 0.12),
+        0 1px 3px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.login-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.35);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+        0 12px 35px rgba(16, 185, 129, 0.06),
+        0 35px 70px rgba(16, 185, 129, 0.18),
+        0 1px 3px rgba(0, 0, 0, 0.05);
 }
 .login-card::before {
     content: '';
@@ -179,35 +190,68 @@ body::after {
 }
 .input-field label i { font-size: 11px; }
 
-.input-wrap { position: relative; }
-
-.input-icon {
-    position: absolute;
-    left: 15px; top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-dim);
-    font-size: 13px;
-    pointer-events: none;
+.input-wrap {
+    position: relative;
 }
 
 .input-field input {
     width: 100%;
-    height: 50px;
-    padding: 0 16px 0 44px;
-    background: var(--input-bg);
-    border: 1.5px solid var(--border);
-    border-radius: 13px;
+    height: 52px;
+    padding: 0 46px 0 44px;
+    background: rgba(240, 253, 244, 0.6);
+    border: 1.5px solid rgba(16, 185, 129, 0.16);
+    border-radius: 14px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 14px;
+    font-size: 0.92rem;
+    font-weight: 500;
     color: var(--navy);
-    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-}
-.input-field input::placeholder { color: var(--text-dim); }
-.input-field input:focus {
     outline: none;
-    border-color: var(--sky);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-field input::placeholder {
+    color: var(--text-dim);
+}
+
+.input-field input:focus {
     background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    border-color: #10b981;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12), 0 4px 12px rgba(16, 185, 129, 0.05);
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 13px;
+    pointer-events: none;
+    transition: color 0.25s ease;
+}
+
+.input-field input:focus ~ .input-icon {
+    color: #10b981;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 14px;
+    transition: color 0.25s ease;
+    z-index: 10;
+}
+
+.toggle-password:hover {
+    color: #10b981;
+}
+
+.input-field input:focus ~ .toggle-password {
+    color: #10b981;
 }
 
 /* ===== META ROW ===== */
@@ -242,23 +286,22 @@ body::after {
 /* ===== BUTTON ===== */
 .login-btn {
     width: 100%;
-    height: 50px;
+    height: 52px;
     border: none;
-    border-radius: 13px;
-    background: linear-gradient(135deg, #34d399, #10b981 50%, #059669);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
     color: #fff;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 15px;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     cursor: pointer;
-    box-shadow:
-        0 8px 20px rgba(16, 185, 129, 0.25),
-        0 2px 4px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .login-btn::before {
     content: '';
     position: absolute;
@@ -266,11 +309,77 @@ body::after {
     background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent 60%);
     pointer-events: none;
 }
+
 .login-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(16, 185, 129, 0.35);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.40);
+    background: linear-gradient(135deg, #059669, #0891b2);
 }
-.login-btn:active { transform: translateY(0); }
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== BRANDING ===== */
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    transition: all 0.3s ease;
+}
+
+.brand-logo:hover .logo-icon {
+    transform: rotate(5deg) scale(1.05);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.40);
+}
+
+.logo-icon i {
+    animation: heartbeat-anim 1.8s ease-in-out infinite;
+}
+
+@keyframes heartbeat-anim {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    40% { transform: scale(1.05); }
+    55% { transform: scale(1.15); }
+    70% { transform: scale(1); }
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+}
+
+.logo-subtitle-text {
+    font-size: 0.68rem;
+    color: var(--text-mid);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+}
 
 /* ===== FOOTER ===== */
 .register-hint {

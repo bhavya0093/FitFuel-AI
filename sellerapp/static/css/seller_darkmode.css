@@ -278,6 +278,7 @@ body.dark-theme-mode .notify-item:hover {
 body.dark-theme-mode .profile-dropdown a,
 body.dark-theme-mode .profile-dropdown label {
   color: #CBD5E1 !important;
+  background: transparent !important;
 }
 
 .dark-theme-mode .profile-dropdown a:hover,
@@ -286,6 +287,20 @@ body.dark-theme-mode .profile-dropdown a:hover,
 body.dark-theme-mode .profile-dropdown label:hover {
   background: rgba(30, 41, 59, 0.80) !important;
   color: #10B981 !important;
+}
+
+/* Logout button specific style */
+.dark-theme-mode .profile-dropdown .logout-btn,
+body.dark-theme-mode .profile-dropdown .logout-btn {
+  background: rgba(225, 29, 72, 0.15) !important;
+  color: #FB7185 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .profile-dropdown .logout-btn:hover,
+body.dark-theme-mode .profile-dropdown .logout-btn:hover {
+  background: #E11D48 !important;
+  color: #FFFFFF !important;
 }
 
 /* --------------------------------------------------------------------------

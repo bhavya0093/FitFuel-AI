@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     
                     // Remove unread styling
-                    item.style.background = "#fff";
+                    item.style.background = "";
                     const dot = item.querySelector(".unread-dot");
                     if (dot) dot.style.display = "none";
                     this.remove(); // Remove "Mark as read" link
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     
                     // Update all items in list
                     document.querySelectorAll(".notification-item").forEach(item => {
-                        item.style.background = "#fff";
+                        item.style.background = "";
                         const dot = item.querySelector(".unread-dot");
                         if (dot) dot.style.display = "none";
                         const singleBtn = item.querySelector(".mark-single-read");

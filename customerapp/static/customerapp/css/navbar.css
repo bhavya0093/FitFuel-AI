@@ -374,7 +374,8 @@ padding:0 28px;
     transform: translateY(0);
 }
 
-.ff-dropdown a {
+.ff-dropdown a,
+.ff-dropdown label {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -384,14 +385,20 @@ padding:0 28px;
     font-size: 14px;
     font-weight: 600;
     transition: 0.2s;
+    cursor: pointer;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.ff-dropdown a i {
+.ff-dropdown a i,
+.ff-dropdown label i {
     width: 20px;
     text-align: center;
 }
 
-.ff-dropdown a:hover {
+.ff-dropdown a:hover,
+.ff-dropdown label:hover {
     background: #f8fafc;
     color: #10B981;
 }

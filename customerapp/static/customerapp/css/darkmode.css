@@ -239,15 +239,31 @@ body.dark-theme-mode .notification-list {
 }
 
 .dark-theme-mode .ff-dropdown a,
-body.dark-theme-mode .ff-dropdown a {
+.dark-theme-mode .ff-dropdown label,
+body.dark-theme-mode .ff-dropdown a,
+body.dark-theme-mode .ff-dropdown label {
   background: transparent !important;
   color: #CBD5E1 !important;
 }
 
 .dark-theme-mode .ff-dropdown a:hover,
-body.dark-theme-mode .ff-dropdown a:hover {
+.dark-theme-mode .ff-dropdown label:hover,
+body.dark-theme-mode .ff-dropdown a:hover,
+body.dark-theme-mode .ff-dropdown label:hover {
   background: rgba(30, 41, 59, 0.80) !important;
   color: #10B981 !important;
+}
+
+/* Logout link overrides */
+.dark-theme-mode .ff-dropdown a.logout,
+body.dark-theme-mode .ff-dropdown a.logout {
+  color: #FB7185 !important;
+}
+
+.dark-theme-mode .ff-dropdown a.logout:hover,
+body.dark-theme-mode .ff-dropdown a.logout:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #F87171 !important;
 }
 
 /* Notification Header & Items */

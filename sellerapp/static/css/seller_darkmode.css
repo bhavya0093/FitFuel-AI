@@ -451,137 +451,171 @@ body.dark-theme-mode .stat-info p {
    4c. View Products Filter Bar & Product Cards (View, Edit, Add)
    -------------------------------------------------------------------------- */
 .dark-theme-mode .filter-navbar,
+body.dark-theme-mode .filter-navbar {
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(30, 41, 59, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 16px !important;
+  padding: 12px 20px !important;
+  color: #F8FAFC !important;
+  margin: 10px 0 24px !important;
+}
+
 .dark-theme-mode .filter-box,
-body.dark-theme-mode .filter-navbar,
 body.dark-theme-mode .filter-box {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
-  gap: 14px !important;
-  background: rgba(30, 41, 59, 0.85) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45) !important;
-  backdrop-filter: blur(24px) !important;
-  border-radius: 18px !important;
-  padding: 14px 22px !important;
-  color: #F8FAFC !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
 }
 
-/* Category Select Dropdown */
+/* Category Select Dropdown & Price Inputs */
 .dark-theme-mode .filter-box select,
-body.dark-theme-mode .filter-box select {
-  background: rgba(15, 23, 42, 0.90) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+body.dark-theme-mode .filter-box select,
+.dark-theme-mode .filter-box input[type="number"],
+body.dark-theme-mode .filter-box input[type="number"] {
+  background: rgba(15, 23, 42, 0.60) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.10) !important;
   color: #F8FAFC !important;
-  border-radius: 12px !important;
-  padding: 9px 16px !important;
-  font-size: 0.88rem !important;
+  border-radius: 10px !important;
+  padding: 0 16px !important;
+  height: 38px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.82rem !important;
   font-weight: 600 !important;
   outline: none !important;
   cursor: pointer !important;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
-  transition: all 0.25s ease !important;
+  transition: all 0.2s ease !important;
 }
 
 .dark-theme-mode .filter-box select:focus,
-body.dark-theme-mode .filter-box select:focus {
-  border-color: #10B981 !important;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.30) !important;
-}
-
-/* Min & Max Price Inputs */
-.dark-theme-mode .filter-box input[type="number"],
-body.dark-theme-mode .filter-box input[type="number"] {
-  background: rgba(15, 23, 42, 0.90) !important;
-  border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
-  color: #F8FAFC !important;
-  border-radius: 12px !important;
-  padding: 9px 16px !important;
-  width: 125px !important;
-  font-size: 0.88rem !important;
-  font-weight: 600 !important;
-  outline: none !important;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
-  transition: all 0.25s ease !important;
-}
-
-.dark-theme-mode .filter-box input[type="number"]::placeholder,
-body.dark-theme-mode .filter-box input[type="number"]::placeholder {
-  color: #94A3B8 !important;
-  font-weight: 500 !important;
-}
-
+body.dark-theme-mode .filter-box select:focus,
 .dark-theme-mode .filter-box input[type="number"]:focus,
 body.dark-theme-mode .filter-box input[type="number"]:focus {
   border-color: #10B981 !important;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.30) !important;
+  background: rgba(15, 23, 42, 0.80) !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15) !important;
 }
 
 /* Checkbox Labels ("Latest", "Popular") */
 .dark-theme-mode .filter-box label,
 body.dark-theme-mode .filter-box label {
-  color: #F8FAFC !important;
-  font-weight: 700 !important;
-  font-size: 0.88rem !important;
+  color: #CBD5E1 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
   cursor: pointer !important;
   user-select: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.dark-theme-mode .filter-box label:hover,
+body.dark-theme-mode .filter-box label:hover {
+  color: #F8FAFC !important;
 }
 
 .dark-theme-mode .filter-box input[type="checkbox"],
 body.dark-theme-mode .filter-box input[type="checkbox"] {
-  accent-color: #10B981 !important;
-  width: 17px !important;
-  height: 17px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 18px !important;
+  height: 18px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.20) !important;
+  border-radius: 5px !important;
+  background: rgba(15, 23, 42, 0.60) !important;
   cursor: pointer !important;
-  border-radius: 4px !important;
+  position: relative !important;
+  transition: all 0.2s ease !important;
+}
+
+.dark-theme-mode .filter-box input[type="checkbox"]:checked,
+body.dark-theme-mode .filter-box input[type="checkbox"]:checked {
+  background: #10B981 !important;
+  border-color: #10B981 !important;
+}
+
+.dark-theme-mode .filter-box input[type="checkbox"]:checked::after,
+body.dark-theme-mode .filter-box input[type="checkbox"]:checked::after {
+  content: "\f00c" !important;
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+  color: #FFFFFF !important;
+  font-size: 10px !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
 }
 
 /* Buttons ("Apply Filter" & "Reset") */
 .dark-theme-mode .filter-btn,
 body.dark-theme-mode .filter-btn {
-  background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%) !important;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
   color: #FFFFFF !important;
   border: none !important;
-  padding: 9px 20px !important;
-  border-radius: 12px !important;
-  font-size: 0.88rem !important;
-  font-weight: 800 !important;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.40) !important;
+  height: 38px !important;
+  width: 130px !important;
+  border-radius: 10px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.20) !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
   transition: all 0.25s ease !important;
 }
 
 .dark-theme-mode .filter-btn:hover,
 body.dark-theme-mode .filter-btn:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.55) !important;
 }
 
 .dark-theme-mode .reset-btn,
 body.dark-theme-mode .reset-btn {
-  background: linear-gradient(135deg, #EF4444 0%, #F97316 100%) !important;
-  color: #FFFFFF !important;
-  border: none !important;
-  padding: 9px 20px !important;
-  border-radius: 12px !important;
-  font-size: 0.88rem !important;
-  font-weight: 800 !important;
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.40) !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #F87171 !important;
+  border: 1px solid rgba(239, 68, 68, 0.30) !important;
+  height: 38px !important;
+  width: 100px !important;
+  border-radius: 10px !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   cursor: pointer !important;
-  text-decoration: none !important;
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 6px !important;
   transition: all 0.25s ease !important;
+  text-decoration: none !important;
 }
 
 .dark-theme-mode .reset-btn:hover,
 body.dark-theme-mode .reset-btn:hover {
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.35) !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.55) !important;
 }
 
 .dark-theme-mode .product-card-all,

@@ -1367,3 +1367,164 @@ body.dark-theme-mode .btn-pagination:hover:not(:disabled) {
   background: rgba(51, 65, 85, 0.90) !important;
   color: #FFFFFF !important;
 }
+
+/* ── Login/Register/Forgot/Reset Password Dark Mode Overrides ── */
+body.dark-theme-mode {
+  --navy: #F8FAFC !important;
+  --text-mid: #94A3B8 !important;
+  --text-dim: #64748B !important;
+  --border: rgba(255, 255, 255, 0.12) !important;
+  --input-bg: rgba(15, 23, 42, 0.6) !important;
+  --card-bg: rgba(30, 41, 59, 0.85) !important;
+}
+
+body.dark-theme-mode .login-card,
+body.dark-theme-mode .register-card {
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 4px 6px rgba(0, 0, 0, 0.2),
+    0 20px 48px rgba(0, 0, 0, 0.45) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-theme-mode .input-field label,
+body.dark-theme-mode .role-label,
+body.dark-theme-mode .remember-label {
+  color: #38BDF8 !important;
+}
+
+body.dark-theme-mode .input-field input:focus,
+body.dark-theme-mode .role-select:focus {
+  background: rgba(15, 23, 42, 0.95) !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2) !important;
+}
+
+body.dark-theme-mode .form-header h2 {
+  color: #F8FAFC !important;
+}
+
+body.dark-theme-mode .header-text h2 {
+  color: #F8FAFC !important;
+}
+
+body.dark-theme-mode .badge-secure {
+  color: #34D399 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+body.dark-theme-mode .register-hint,
+body.dark-theme-mode .login-hint {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-theme-mode .error-msg {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-left-color: #EF4444 !important;
+  color: #F87171 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ── Admin Profile & Edit Profile Dark Mode Overrides ── */
+.dark-theme-mode .pgc-page-header h2,
+body.dark-theme-mode .pgc-page-header h2 {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .pgc-back-btn,
+body.dark-theme-mode .pgc-back-btn {
+  background: rgba(30, 41, 59, 0.85) !important;
+  color: #38BDF8 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.dark-theme-mode .pgc-back-btn:hover,
+body.dark-theme-mode .pgc-back-btn:hover {
+  background: rgba(56, 189, 248, 0.15) !important;
+  color: #7DD3FC !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.dark-theme-mode .pgc-card,
+body.dark-theme-mode .pgc-card {
+  background: rgba(30, 41, 59, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important;
+}
+
+.dark-theme-mode .pgc-right,
+body.dark-theme-mode .pgc-right {
+  background: rgba(15, 23, 42, 0.65) !important;
+}
+
+.dark-theme-mode .pgc-right-top,
+body.dark-theme-mode .pgc-right-top {
+  background: rgba(15, 23, 42, 0.35) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark-theme-mode .pgc-right-title,
+body.dark-theme-mode .pgc-right-title {
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .pgc-right-sub,
+body.dark-theme-mode .pgc-right-sub {
+  color: #94A3B8 !important;
+}
+
+.dark-theme-mode .pgc-detail-card,
+body.dark-theme-mode .pgc-detail-card {
+  background: rgba(30, 41, 59, 0.70) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+.dark-theme-mode .pgc-detail-card:hover,
+body.dark-theme-mode .pgc-detail-card:hover {
+  background: rgba(30, 41, 59, 0.90) !important;
+  border-color: #10B981 !important;
+  transform: translateY(-2px) !important;
+}
+
+.dark-theme-mode .pgc-detail-card-label,
+body.dark-theme-mode .pgc-detail-card-label {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .pgc-detail-card-val,
+body.dark-theme-mode .pgc-detail-card-val {
+  color: #F8FAFC !important;
+}
+
+/* Edit Profile Form overrides */
+.dark-theme-mode .pgc-fg label,
+body.dark-theme-mode .pgc-fg label {
+  color: #38BDF8 !important;
+}
+
+.dark-theme-mode .pgc-fg input,
+body.dark-theme-mode .pgc-fg input {
+  background: rgba(15, 23, 42, 0.60) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+.dark-theme-mode .pgc-fg input:focus,
+body.dark-theme-mode .pgc-fg input:focus {
+  border-color: #10B981 !important;
+  background: rgba(15, 23, 42, 0.85) !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.20) !important;
+}
+
+.dark-theme-mode .pgc-fg input[readonly],
+body.dark-theme-mode .pgc-fg input[readonly] {
+  opacity: 0.50 !important;
+}
+
+.dark-theme-mode .pgc-fg input[type="file"],
+body.dark-theme-mode .pgc-fg input[type="file"] {
+  color: #38BDF8 !important;
+}

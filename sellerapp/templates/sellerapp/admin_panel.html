@@ -265,5 +265,43 @@
 </div>
 <script src="{% static 'sellerapp/js/ai_product.js' %}"></script>
 <script src="{% static 'sellerapp/js/analytics.js' %}?v=1.0.4"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const navRadios = document.querySelectorAll('.nav-radio');
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+        
+        if (tabParam) {
+            const radioId = 'nav-' + tabParam;
+            const targetRadio = document.getElementById(radioId);
+            if (targetRadio) {
+                targetRadio.checked = true;
+                localStorage.setItem('sellerActiveTab', radioId);
+            }
+        } else {
+            const savedTab = localStorage.getItem('sellerActiveTab');
+            if (savedTab) {
+                const targetRadio = document.getElementById(savedTab);
+                if (targetRadio) {
+                    targetRadio.checked = true;
+                    const tabName = savedTab.replace('nav-', '');
+                    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?tab=' + tabName;
+                    window.history.replaceState({ path: newUrl }, '', newUrl);
+                }
+            }
+        }
+
+        navRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('sellerActiveTab', this.id);
+                    const tabName = this.id.replace('nav-', '');
+                    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?tab=' + tabName;
+                    window.history.replaceState({ path: newUrl }, '', newUrl);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
